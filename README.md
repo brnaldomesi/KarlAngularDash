@@ -11,7 +11,7 @@ This project contains:
 
 ## About KARL
 
-For more information, see http://www.karl.limo
+For more information, see https://www.karldash.com and https://karl.limo
 
 ## About Dashboard
 

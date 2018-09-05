@@ -1,0 +1,91 @@
+<!--Created by pham 3/16/2018 -->
+
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="28"></karl-header-menu>
+    <!-- content -->
+    <div class="btn-add" ng-click="onEditButtonClick(0)" style="cursor:pointer;z-index: 990;" title="{{'coupons.h5Add_Coupon' | translate}}"><i
+            class="fa fa-plus"></i></div>
+    <div class="title-block main-padding navbar-collapse">
+        <div class="main-title ">
+            <span class="fw main-title-text">{{'coupons.h5all_coupons' | translate}}</span>
+        </div>
+        <div class="pull-right main-title">
+            <div class="navbar-form navbar-form-sm navbar-left shift" data-target=".navbar-collapse" role="search">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" ng-model="input.searchText"
+                               class="form-control input-sm bg-light no-border rounded padder search-bg"
+                               placeholder="{{'comment.h5search' | translate}}">
+                        <span class="input-group-btn">
+                            <button ng-show="input.searchText"
+                                    ng-click="onCancelSearchButtonClick()"
+                                    class="btn btn-sm bg-dark2 rounded input-search">
+                                <i class="fa fa-close fw"></i>
+                            </button>
+                            <button class="btn btn-sm bg-dark2 rounded input-search">
+                                <i class="fa fa-search fw"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pos-rlt navbar-collapse main-padding card-fix pd-b-xl">
+        <div class="coupon-card-area" ng-repeat="coupon in listData">
+            <div class="coupon-del-panel gen-panel">
+                <span class="coupon-del-info fw">{{'coupons.h5delete_coupon' | translate}}?</span>
+                <div>
+                    <span class="fgray coupon-del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                    <span class="fred dopoint"
+                          ng-click="onDeleteButtonClick(coupon.id)">{{'comment.h5delete' | translate}}</span>
+                </div>
+            </div>
+
+            <div class="coupon-del-panel genState_panel">
+                <span class="coupon-del-info fw">{{'coupons.h5turn_state' | translate}}?</span>
+                <div>
+                    <span class="fgray coupon-del-cancel dopoint genState_cancel">{{'comment.h5cancel' | translate}}</span>
+                    <span class="fred dopoint"
+                          ng-click="onChange_state(coupon.id, coupon.turn_state); $event.stopPropagation();">{{'comment.h5OK' | translate}}</span>
+                </div>
+            </div>
+            
+            <a type="button" class="card-more"><i class="fa fa-ellipsis-v fd fa-close"></i></a>
+            <a type="button" class="card-del gen" title="{{'comment.h5delete'|translate}}"><i class="fa fa-trash fd"></i></a>
+            <div class="fw f-s" style="position:absolute;text-align: left;width: 100%;top:5px;left:15px; font-size:20px;"> {{coupon.title}}
+            </div>
+   
+            <div class="coupon-card-block" ng-click="onEditButtonClick(coupon.id)">
+                <div class="row">
+                    <div class="col-md-7 col-sm-7 col-xs-7 fw coupon-name padding-left-30">{{coupon.code}}</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 fw coupon-name padding-left-30" ng-if="coupon.discount_type == 1">{{coupon.discount_amount}}%</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 fw coupon-name padding-left-30" ng-if="coupon.discount_type == 0">
+                       {{coupon.discount_amount | princeTranslateFilters:false:false:companyCurrency}}
+                    </div>
+                </div>
+                <div class="coupon-line"></div>
+
+                <div>
+                    <div class="fw padding-left-30">{{'coupons.h5validate_from' | translate}} : {{coupon.starting_date}}</div>
+                    <div class="fw padding-left-30" ng-if="coupon.is_permanent != 1">{{'coupons.h5until' | translate}} : {{coupon.end_date}}</div>
+                    <div class="fw padding-left-30" ng-if="coupon.is_permanent == 1">{{'coupons.h5until' | translate}} : </div>
+                    <div ng-if="coupon.is_onetime == 1">
+                        <div class="fw col-md-10 col-sm-10 col-xs-10 padding-left-30">{{'coupons.h5oneTime_use_per_customer' | translate}}</div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 genState" ng-click="$event.stopPropagation()" ng-if="coupon.turn_state == 1" style="color:#6ccb00;"><i class="fa fa-power-off" style="font-size: 30px;"></i></div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 genState" ng-click="$event.stopPropagation()" ng-if="coupon.turn_state != 1" style="color:grey;"><i class="fa fa-power-off" style="font-size: 30px;"></i></div>
+                    </div>
+                    <div ng-if="coupon.is_onetime != 1">
+                        <div class="fw col-md-10 col-sm-10 col-xs-10 padding-left-30"></div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 genState" ng-click="$event.stopPropagation()" ng-if="coupon.turn_state == 1" style="color:#6ccb00;"><i class="fa fa-power-off" style="font-size: 30px;"></i></div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 genState" ng-click="$event.stopPropagation()" ng-if="coupon.turn_state != 1" style="color:grey"><i class="fa fa-power-off" style="font-size: 30px;"></i></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="cl pd-b-xl"></div>
+        <!-- /content -->
+    </div>
+</div>
+<google-analytics analytics-page='/coupons.html'></google-analytics>

@@ -1,0 +1,97 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish' ]
+2 info using npm@3.3.12
+3 info using node@v5.4.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: 'D:\\sites\\localhost\\date.format',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory C:\Users\iandriyenko\AppData\Roaming\npm-cache\date-format\0.1.1\package.tgz not in flight; packing
+9 info lifecycle date-format@0.1.1~prepublish: date-format@0.1.1
+10 silly lifecycle date-format@0.1.1~prepublish: no script for prepublish, continuing
+11 verbose tar pack [ 'C:\\Users\\iandriyenko\\AppData\\Roaming\\npm-cache\\date-format\\0.1.1\\package.tgz',
+11 verbose tar pack   'D:\\sites\\localhost\\date.format' ]
+12 verbose tarball C:\Users\iandriyenko\AppData\Roaming\npm-cache\date-format\0.1.1\package.tgz
+13 verbose folder D:\sites\localhost\date.format
+14 verbose addLocalTarball adding from inside cache C:\Users\iandriyenko\AppData\Roaming\npm-cache\date-format\0.1.1\package.tgz
+15 silly cache afterAdd date-format@0.1.1
+16 verbose afterAdd C:\Users\iandriyenko\AppData\Roaming\npm-cache\date-format\0.1.1\package\package.json not in flight; writing
+17 verbose afterAdd C:\Users\iandriyenko\AppData\Roaming\npm-cache\date-format\0.1.1\package\package.json written
+18 silly publish { name: 'date-format',
+18 silly publish   version: '0.1.1',
+18 silly publish   description: 'PHP-like date formatting for JS',
+18 silly publish   main: 'dist/date-format.js',
+18 silly publish   repository:
+18 silly publish    { type: 'git',
+18 silly publish      url: 'git+https://github.com/andrienko/date-format.git' },
+18 silly publish   keywords: [ 'date', 'format', 'tiny', 'php', 'format' ],
+18 silly publish   author: { name: 'andrienko', email: 'ilia@andrienko.org' },
+18 silly publish   license: 'MIT',
+18 silly publish   bugs: { url: 'https://github.com/andrienko/date-format/issues' },
+18 silly publish   homepage: 'https://github.com/andrienko/date-format#readme',
+18 silly publish   dependencies: { 'uglify-js': '^2.6.1' },
+18 silly publish   scripts: { minify: 'uglifyjs ./dist/date-format.js -o ./dist/date-format.min.js' },
+18 silly publish   readme: 'date-format\r\n===\r\n\r\n** Warning! This is not released yet. Use at your own risk et cetera. **\r\n\r\nA lightweight (~1 kb) function fo format date "like in PHP".\r\n\r\nAlso, not all of the php patterns are available (say, timezone-specific ones aren\'t!). If you need more complex\r\nimplementation you should probably use [this](http://phpjs.org/functions/date/) or\r\n[this](https://github.com/jacwright/date.format) or probably something else (there\'s a plenty around, actually)\r\n\r\nI needed a tiny date function to use with JS templates. Also I needed practice. So I wrote this.\r\n\r\nNote that all the pattern values are calculated on execution. It\'s pretty quick as it is mostly just text manipulation,\r\nbut I thought you should probably be aware. Also the patterns are compiled into an ugly regex, which is then replaced with\r\nvalues.\r\n\r\nInstalling\r\n---\r\n\r\nInstall using bower:\r\n\r\n    bower install date-format --save\r\n\r\nAnd then add dateformat.js file to your page:\r\n\r\n    <script type="text/javascript" src="bower_components/date-format/date-format.js">\r\n\r\nUsage\r\n---\r\n\r\nThere\'s a function called date_format in global scope (in browser). It accepts 2 parameters - the date object and the format string:\r\n\r\n    var date = new Date(\'Feb 2, 2015 03:24:13\');\r\n    date_format(date, \'M j-S, Y\'); // February 2-nd, 2015\r\n\r\n### Date.format\r\n\r\nThe library can extend the Date.prototype with new method - format, which accepts a string of format. It is no longer happening because serious people insist that extending prototypes is for dummies and should be optional, and who am I to argue? :D\r\n\r\nTo extend the Date.prototype with format method - use `date_format.extendPrototype` function. Sure, you can call this multiple times, but better call it once :P\r\n\r\n    date_format.extendPrototype();\r\n    new Date(\'Feb 2, 2015 03:24:13\').format(\'M j-S, Y\');            \r\n    new Date(\'Feb 2, 2015 03:24:13\').format(\'j-S F of Y, g:i A\');   //2-nd February of 2015, 3:24 AM\r\n\r\nSupported identifiers\r\n---\r\n\r\n### Day\r\n\r\n - `d` - day of month with leading zeros (01 to 31)\r\n - `j` - day of month without leading zeros (1 to 31)\r\n - `S` - day month suffix. (th, st, nd or rd)\r\n - `z` - day of year (1 to 365)\r\n\r\n### Week\r\n\r\n - `D` - three-symbol week day name (Mon to Sun)\r\n - `l` - full week day name (Monday to Sunday)\r\n - `w` - week day (1 to 7)\r\n - `W` - number of week. Weeks starting from monday. (1 to 53)\r\n\r\n### Month \r\n\r\n - `m` - Month number with leading zeros (01 to 12)\r\n - `M` - Three-symbol month name (Jan to Dec)\r\n - `F` - Full month name (January to December)\r\n\r\n### Year\r\n\r\n - `Y` - Full year number (for example, 2015)\r\n - `y` - Last two digits of year (for example, 15)\r\n\r\n### Time\r\n\r\n - `g` - Hours in 12-hour format (1 to 12)\r\n - `G` - Hours in 12-hour format with leading zeros (01 to 12)\r\n - `h` - Hours in 24-hour format (0 to 23)\r\n - `H` - Hours in 24-hour format with leading zeros (01 to 23)\r\n - `i` - Minutes with leading zeros (00 to 59)\r\n - `s` - Seconds with leading zeros (00 to 59)\r\n - `a` - ante/post meridem (am or pm)\r\n - `A` - uppercase ante/post meridem (AM or PM)\r\n - `U` - Unix timestamp in seconds (for example, 1325294640)\r\n - `c` - Iso time format (for example, 2011-12-31T01:24:00.000Z)\r\n\r\nEscaping\r\n---\r\n\r\nYou can escape characters by adding a backslash to them. In string literals, of course, that would be double backslash:\r\n\r\n    var date = new Date(\'Feb 2, 2015 03:24:00\');\r\n    console.log(date_format(date, \'To\\\\d\\\\a\\\\y \\\\i\\\\s jS M, Y\'));\r\n    // Today is 2nd Feb, 2015\r\n    \r\nIf you need a backslash itself in a pattern... I feel sorry for you. Not in this version. Actually you should not pass\r\nhuge strings as format, so I believe it is fine.\r\n\r\nNo-conflict\r\n---\r\n\r\nYou can get rid of the lib from global scope. In case something else called date_format should be there, maybe. Or just\r\nif you are pedantic, whatever. You can call the date_format.noConflict() function, which fill remove the date_format\r\nfrom global scope, restore previous value (if any) and return the library itself so you can assign it to whatever you\r\nwant.\r\n\r\nCustomizing\r\n---\r\n\r\nYeah, that is pretty stupid, but you can add own localization or something. Like this:\r\n\r\n    date_format.days = [\'Sunday\', \'Monday\', \'Tuesday\', \'Wednesday\', \'Thursday\', \'Friday\', \'Saturday\'];\r\n    date_format.months = [\r\n      \'January\', \'February\', \'March\', \'April\', \'May\', \'June\', \'Jule\',\'August\', \'September\', \'October\',\r\n      \'November\', \'December\'\r\n    ];\r\n    date_format.ordinalSuffix = function (n) {\r\n      return ["th", "st", "nd", "rd"][(n = ~~ (n < 0 ? -n : n) % 100) > 10 && n < 14 || (n %= 10) > 3 ? 0 : n];\r\n    };\r\n\r\nordinalSuffix is a function used for month day suffix (`S` identifier). Currently the one written by Dave Furfero from\r\n[here](https://gist.github.com/furf/986113#file-annotated-js) is used, but you can replace it with your own.\r\n\r\n    date_format.days = [\'Воскресенье\',\' Понедельник\', \'Вторник\', \'Среда\',\'Четверг\',\'Пятница\', \'Суббота\'];\r\n    date_format.months = [\r\n      \'Январь\', \'Февраль\', \'Март\', \'Апрель\', \'Май\', \'Июнь\', \'Июль\',\'Август\', \'Сентябрь\', \'Оттябрь\',\r\n      \'Ноябрь\', \'Декабрь\'\r\n    ];\r\n    dafe_format.ordinalSuffix = function(){\r\n    \r\n    }\r\n\r\nNode.js\r\n---\r\nIn Node you use it like this:\r\n\r\n    var date_format = require(\'date-format\');\r\n\r\n(After installing via NPM, of course)',
+18 silly publish   readmeFilename: 'README.md',
+18 silly publish   gitHead: 'f37412fede90ed7df840c6881814cd754e3c77c9',
+18 silly publish   _id: 'date-format@0.1.1',
+18 silly publish   _shasum: '9c340e07c7b7d1b86544908057d120a5b68a1aca',
+18 silly publish   _from: '.' }
+19 verbose getPublishConfig undefined
+20 silly mapToRegistry name date-format
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry uri https://registry.npmjs.org/date-format
+24 verbose publish registryBase https://registry.npmjs.org/
+25 silly publish uploading C:\Users\iandriyenko\AppData\Roaming\npm-cache\date-format\0.1.1\package.tgz
+26 verbose request uri https://registry.npmjs.org/date-format
+27 verbose request sending authorization for write operation
+28 info attempt registry request try #1 at 6:35:53 PM
+29 verbose request using bearer token for auth
+30 verbose request id 9a3be9c8a735b432
+31 http request PUT https://registry.npmjs.org/date-format
+32 http 403 https://registry.npmjs.org/date-format
+33 verbose headers { 'content-type': 'application/json',
+33 verbose headers   'cache-control': 'max-age=300',
+33 verbose headers   'content-length': '103',
+33 verbose headers   'accept-ranges': 'bytes',
+33 verbose headers   date: 'Thu, 11 Feb 2016 16:35:54 GMT',
+33 verbose headers   via: '1.1 varnish',
+33 verbose headers   connection: 'keep-alive',
+33 verbose headers   'x-served-by': 'cache-fra1225-FRA',
+33 verbose headers   'x-cache': 'MISS',
+33 verbose headers   'x-cache-hits': '0',
+33 verbose headers   'x-timer': 'S1455208553.378372,VS0,VE694' }
+34 verbose request invalidating C:\Users\iandriyenko\AppData\Roaming\npm-cache\registry.npmjs.org\date-format on PUT
+35 error publish Failed PUT 403
+36 verbose stack Error: You do not have permission to publish 'date-format'. Are you logged in as the correct user? : date-format
+36 verbose stack     at makeError (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:264:12)
+36 verbose stack     at CachingRegistryClient.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:252:14)
+36 verbose stack     at Request._callback (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:172:14)
+36 verbose stack     at Request.self.callback (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:198:22)
+36 verbose stack     at emitTwo (events.js:87:13)
+36 verbose stack     at Request.emit (events.js:172:7)
+36 verbose stack     at Request.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1082:10)
+36 verbose stack     at emitOne (events.js:82:20)
+36 verbose stack     at Request.emit (events.js:169:7)
+36 verbose stack     at IncomingMessage.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1009:12)
+37 verbose statusCode 403
+38 verbose pkgid date-format
+39 verbose cwd D:\sites\localhost\date.format
+40 error Windows_NT 6.3.9600
+41 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "publish"
+42 error node v5.4.1
+43 error npm  v3.3.12
+44 error code E403
+45 error You do not have permission to publish 'date-format'. Are you logged in as the correct user? : date-format
+46 error If you need help, you may report this error at:
+46 error     <https://github.com/npm/npm/issues>
+47 verbose exit [ 1, true ]

@@ -1,0 +1,392 @@
+.btn-brown {
+    width: 200px;
+    height: 34px;
+    background: #3b76c9;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+}
+
+.register-li-position{
+    position: absolute;
+    right: 50px;
+    bottom: 70px;
+    font-size: 17px;
+    color: #2b7cca;
+    cursor: pointer
+}
+
+@media screen and (max-width: 768px)  {
+    .bookButton{
+        margin-top:0px!important;
+    }
+
+    .layout-half {
+        width: 96%;
+        margin-right: auto;
+        margin-left: 7px;
+    }
+
+    .message-float{
+        float: none !important;
+        width: 95% !important;
+    }
+
+}
+@media screen and (max-width: 991px) {
+    /*小于767 mobile */
+    .location-bg {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border-radius: 100%;
+        padding: 2px;
+        font-size: 14px;
+        text-align: center;
+        font-weight: bold;
+        margin-left: 10px;
+        color: #fff;
+    }
+
+    .location-bg2 {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border-radius: 100%;
+        padding: 2px;
+        font-size: 14px;
+        text-align: center;
+        font-weight: bold;
+        /*margin-left: 10px;*/
+        color: #fff;
+    }
+
+
+    .bg-red1 {
+        background: #3d81de;
+    }
+
+    .bg-red2 {
+        background: #2e4364;
+    }
+
+    .evcard-area {
+        width: 98%;
+        height: 160px;
+        position: relative;
+        float: left;
+        margin: 7px;
+    }
+
+    .evcard-block {
+        cursor: pointer;
+        width: 98%;
+        height: 160px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+    }
+
+    .evhead {
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        background: #222 url(../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+        margin-right: 10px;
+
+    }
+
+    .evname {
+        font-size: 20px
+    }
+
+    .evpass {
+        width: 50%;
+        float: left;;
+        margin-top: 10px;
+        font-size: 15px
+    }
+
+    .evbags {
+        float: right;
+        margin-top: 10px;
+        text-align: right;
+        font-size: 15px;
+    }
+
+    /*.layout-half {*/
+        /*width: 96%;*/
+        /*margin-right: auto;*/
+        /*margin-left: 7px;*/
+    /*}*/
+
+    .book-trip-card {
+        width: 98%;
+        /*height: 430px;*/
+        /*background: #272b4a;*/
+        border-radius: 8px;
+        padding: 10px 15px;
+        margin: 10px 0;
+    }
+    /*.edit-any{*/
+        /*position: absolute;*/
+        /*right: 20px;*/
+        /*top:10px;*/
+        /*cursor: pointer;*/
+    /*}*/
+    .edit-any{
+       margin-left: 6px;
+        display: inline-block;
+        cursor: pointer;
+    }
+    .edit-any i{
+        font-size: 16px;
+    }
+
+    .book-trip-up {
+        font-size: 17px;
+        font-weight: bold;
+        height: 35px;
+        color: #f2f2f2;
+        padding-bottom: 36px;
+        border-bottom: #555555 solid 1px;
+    }
+
+    /*.book-trip-up span {*/
+        /*!*display: block;*!*/
+        /*!*background: #f2f2f2;*!*/
+        /*color: #272b4a;*/
+        /*border-radius: 4px;*/
+        /*margin: 5px;*/
+        /*padding: 0 8px;*/
+
+    /*}*/
+    .flow-time{
+        /*display: block;*/
+        /*background: #f2f2f2;*/
+        color: #272b4a;
+        border-radius: 4px;
+        margin: 0 5px;
+        padding: 0 8px;
+    }
+
+    .book-trip-down {
+        clear: both;
+    }
+
+    .book-trip-down > div {
+        display: block;
+        margin: 5px;
+        margin-right: 5%;
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+    /*大于992  pc */
+    .location-bg {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border-radius: 100%;
+        padding: 2px;
+        font-size: 14px;
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+    }
+
+
+    .bg-red1 {
+        background: #3d81de;
+    }
+
+    .bg-red2 {
+        background: #2e4364;
+    }
+
+    .evcard-area {
+        width: 300px;
+        height: 160px;
+        position: relative;
+        float: left;
+        margin: 7px;
+    }
+
+    .evcard-block {
+        cursor: pointer;
+        width: 300px;
+        height: 160px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+    }
+
+    .evhead {
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        background: #222 url(../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+        margin-right: 10px;
+
+    }
+
+    .evname {
+        font-size: 20px
+    }
+
+    .evpass {
+        width: 50%;
+        float: left;;
+        margin-top: 10px;
+        font-size: 15px
+    }
+
+    .evbags {
+        float: right;
+        margin-top: 10px;
+        text-align: right;
+        font-size: 15px;
+    }
+
+    .layout-half {
+        width: 42%;
+        margin-right: 5%;
+    }
+
+    .book-trip-card {
+        width: 100%;
+        /*height: 130px;*/
+        /*background: #272b4a;*/
+        border-radius: 8px;
+        padding: 10px 15px;
+        margin: 10px 0;
+    }
+    .edit-any{
+        position: relative;
+        display: inline-block;
+        margin-left: 6px;
+        cursor: pointer;
+    }
+    .edit-any i{
+        font-size: 16px;
+    }
+
+
+    .book-trip-up {
+        font-size: 18px;
+        font-weight: bold;
+        height: 35px;
+        color: #f2f2f2;
+        padding-bottom: 36px;
+        border-bottom: #555555 solid 1px;
+    }
+
+    /*.book-trip-up span {*/
+        /*display: inline-block;*/
+        /*!*background: #f2f2f2;*!*/
+        /*color: #272b4a;*/
+        /*border-radius: 4px;*/
+        /*!*margin: 5px;*!*/
+        /*padding: 0 8px;*/
+
+    /*}*/
+
+    .book-trip-down > div {
+        margin: 5px;
+        margin-right: 3%;
+    }
+
+    /*.book-trip-down .inline>div{*/
+        /*color:white;*/
+    /*}*/
+
+
+    /*.book-trip-down .book-trip-block {*/
+        /*height: 40px;*/
+        /*width: 130px;*/
+        /*display: -webkit-box;*/
+        /*-webkit-line-clamp: 2;*/
+        /*-webkit-box-orient: vertical;*/
+        /*overflow: hidden;*/
+        /*text-overflow:ellipsis;*/
+    /*}*/
+
+    .book-trip-down .book-trip-blocks {
+        /*height: 40px;*/
+        width: 85%;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow:ellipsis;
+    }
+
+}
+
+@media screen and (max-width: 991px){
+    .book-trip-down .book-trip-blocks {
+        width: 75%;
+    }
+}
+
+@media  screen and (min-width: 650px){
+    .nav-justified>li {
+        display: table-cell;
+        width: 1%;
+    }
+}
+
+
+@media  screen and (max-width: 992px){
+    .flow-air-message{
+        margin-left: 11px !important;
+    }
+}
+
+@media  screen and (max-width: 550px){
+    /*.book-trip-up{*/
+      /*height: inherit;*/
+        /*padding: 0;*/
+    /*}*/
+    .flow-time{
+        display: block;
+        width: 70%;
+    }
+    .flow-time-edit{
+        display: block;
+    }
+}
+
+@media  screen and (max-width: 750px){
+    .book-trip-up{
+        height: inherit;
+        padding: 0 0 10px 0;
+    }
+    .flow-prince{
+        margin-top: 5px;
+        float: none !important;
+    }
+}
+
+@media  screen and (max-width: 320px){
+    .register-li-position{
+        bottom: 95px;
+    }
+}
+@media  screen and (max-width: 414px){
+    .b-v-e-opp-float{
+        float: none !important;
+    }
+}
+@media  screen and (max-width: 700px){
+    .register-li-position{
+        right: 17px;
+    }
+}

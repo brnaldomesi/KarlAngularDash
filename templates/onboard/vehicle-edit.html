@@ -1,0 +1,53 @@
+<div class="container" style="height: 800px;">
+    <div class="dashboard-wrapper">
+
+        <div class="K-obmain poisR">
+                <div class="k-ob-back"><span ng-click="backEvent()" style="cursor: pointer">{{'board_vehicle.h5back' | translate}}</span></div>
+            <div class="autoclose">
+                <button type="button" ng-click="closeWindow()" class="close" data-dismiss="modal" aria-label="Close"
+                        style="color: red;opacity: 1;font-size: 30px;text-shadow: none;outline:none;"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="row">
+                <img src="img/onboard/home-logo-s.png" class="center-block k-logo-s"/>
+            </div>
+
+            <div class="k-addcompany home-mg3">
+                <div style="padding-left: 40px ; padding-right: 40px">
+                    <span style="font-size: 24px">{{'board_edit_vehicle.h5edit_vehicle' | translate}}</span>
+                    <a class="pull-right" style="font-size: small;cursor: pointer" ng-click="skipToFinal()">{{'board_vehicle.h5or_skip_go_to_dashboard' | translate}}</a>
+                </div>
+
+                <div class="k-addcompanyinfo">
+                    <form>
+                        <input class="myinput" type="text" placeholder="{{'board_add_vehicle.h5vehicle_year' | translate}}" ng-model="car.year"/>
+                        <select class="myinput selectpicker myselect" style="text-indent: 0;background: #000"
+                                ng-model="car.brand_id"
+                                ng-change="selectCarBrands()"
+                                ng-options="brand.car_brand_id as brand.car_brand_name for brand in brands">
+                        </select>
+                        <select class="myinput selectpicker myselect" style="text-indent: 0;background: #000"
+                                ng-model="car.model_id"
+                                ng-change="selectCarBrandModels()"
+                                ng-options="model.car_model_id as model.car_model_name for model in brandModels">
+                        </select>
+                        <input class="myinput" type="text" placeholder="{{'board_vehicle.h5color' | translate}}" ng-model="car.color"/>
+                        <input class="myinput" type="text" placeholder="{{'board_vehicle.h5license_plate' | translate}}" ng-model="car.license"/>
+                    </form>
+                    <br/>
+                    <br/>
+                    <div class="row home-mg">
+                        <button class="fblue" ng-click="deleteCar()" style="outline: none;">{{'board_comment.h5Delete' | translate}}</button>
+                        <button class="k-save pull-right" ng-click="updateCarInfo()">{{'board_comment.h5SAVE' | translate}}</button>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

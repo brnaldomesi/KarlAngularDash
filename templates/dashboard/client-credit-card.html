@@ -1,0 +1,19 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4>{{'comment.h5payment_detail' | translate}}</h4>
+    <div class="c-block ">
+        <input class="myinput" type="text" ng-disabled="true"  ng-model="card.cardTypeName" placeholder="{{'comment.h5cardholder_name' | translate}}" />
+    </div>
+    <div class="c-block ">
+        <input class="myinput" type="text" ng-disabled="true" ng-model="card.card_number" placeholder="{{'comment.h5card_number' | translate}}" />
+    </div>
+    <h5>{{'client_credit_card.h5expiration' | translate}}</h5>
+    <div class="row">
+        <div class="c-block">
+            <input class="myinput myinputhalf2" ng-disabled="true" type="text" ng-model="card.expire_month" placeholder="MM" />
+            <span>/</span>
+            <input class="myinput myinputhalf2" ng-disabled="true" type="text" ng-model="card.expire_year"  placeholder="YY" />
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/client-credit-card.html'></google-analytics>

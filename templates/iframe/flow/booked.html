@@ -1,0 +1,212 @@
+<face-book-pixel pixel-page='booked'></face-book-pixel>
+<div class="client-detail " style="margin-top: -20px">
+    <div class="carsMessages" style="width: 50%;margin: auto;background: #1a1a1a;padding: 20px">
+        <h1 class="booked" style="text-align: center;font-size:45px;font-weight: bold;color: white;margin: 15px 0">{{'booked.h5reservation' | translate}}
+            <br>{{'booked.h5complete' | translate}}</h1>
+        <!--<p style="font-size: 15px;color: #949494;text-align: center">Thank you for choosing {{allData.company_infor.name}} for your transportation needs.-->
+        <!--We are grateful for the oppotunity to serve you. If you have any questions or-->
+         <!--need to make changes please don't hesitate to call us at {{allData.company_infor.phone1}}-->
+         <!--or email {{allData.company_infor.email}}.</p>-->
+        <p style="font-size: 15px;color: #949494;text-align: center">
+            {{'booked.h5thank_chose' | translate:({name:allData.company_infor.name,phone:allData.company_infor.phone1,email:allData.company_infor.email})}}
+        </p>
+        <div class="" >
+            <div class="lside"
+                 style="color: white">
+                <p class="timeMessages" style="font-size: 20px;margin: 30px 0 0 0;padding-bottom: 35px;border-bottom: 1px solid #393939">{{'booked.h5trip_on' | translate}} <span class="shadow" style="background: #f2f2f2;display: inline-block;padding:4px;border-radius: 7px;color:#2b2b2b;box-shadow: 1px 4px 10px black !important">{{allData.params.appointed_time*1000 | dateFormatter:'shortDate' }}</span>
+                    {{'booked.h5at' | translate}}
+                    <span class="shadow"
+                          style="background: #f2f2f2;display: inline-block;padding:4px;border-radius: 7px;color:#2b2b2b;box-shadow: 1px 4px 10px black !important">{{allData.params.appointed_time*1000 | dateFormatter:'shortTime'}}</span>
+                </p>
+            </div>
+
+            <div class="book-trip-down" style="margin-top: 15px;">
+                <div>
+                    <div class="message-float" style="float: left;width: 50%">
+                        <div class="explain-font" style="font-size: 10px;line-height: 25px">{{'booked.h5pick_address' | translate}}</div>
+                        <div class="location-bg2 v-top inline" style="line-height:25px"><i class="fa fa-dot-circle-o" style="color: green;font-size: 15px"></i></div>
+                        <div class="inline book-trip-blocks">
+                            <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.d_address.d_final_address[0]}}</div>
+                            <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.d_address.d_final_address[1]}}</div>
+                        </div>
+                    </div>
+                    <div style="float: left;margin-left: 10px">
+                        <div ng-show="allData.params.d_airline" style="color:darkgray;font-size: 10px;line-height: 25px">{{'booked.h5airline' | translate}}</div>
+                        <div ng-show="allData.params.d_airline" style="color: #ffffff;font-size: 15px;line-height: 25px">{{allData.params.d_airline}}</div>
+                    </div>
+                    <div style="float: left;margin-left: 10px">
+                        <div ng-show="allData.params.d_flight" style="color:darkgray;font-size: 10px;line-height: 25px">{{'booked.h5flight' | translate}}</div>
+                        <div ng-show="allData.params.d_flight" style="color: #ffffff;font-size: 15px;line-height: 25px">{{allData.params.d_flight}}</div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <div ng-show="allData.bookType == 1">
+                    <div class="message-float" style="float: left;width: 50%">
+                        <div class="explain-font" style="font-size: 10px;line-height: 25px">{{'booked.h5drop_address' | translate}}</div>
+                        <div class="location-bg2 v-top inline" style="line-height: 25px"><i class="fa fa-dot-circle-o" style="color: red;font-size: 15px"></i></div>
+                        <div class="inline book-trip-blocks">
+                            <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.a_address.a_final_address[0]}}</div>
+                            <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.a_address.a_final_address[1]}}</div>
+                        </div>
+                    </div>
+                    <div style="float: left;margin-left: 10px">
+                        <div ng-show="allData.params.a_airline" style="color:darkgray;font-size: 10px;line-height: 25px">{{'booked.h5airline' | translate}}</div>
+                        <div ng-show="allData.params.a_airline" style="color: #ffffff;font-size: 15px;line-height: 25px">{{allData.params.a_airline}}</div>
+                    </div>
+                    <div style="float: left;margin-left: 10px">
+                        <div ng-show="allData.params.a_flight" style="color:darkgray;font-size: 10px;line-height: 25px">{{'booked.h5flight' | translate}}</div>
+                        <div ng-show="allData.params.a_flight" style="color: #ffffff;font-size: 15px;line-height: 25px">{{allData.params.a_flight}}</div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+
+                <h4 class="fw titleFont" style="margin:15px 0 10px 0 !important;color: white">{{'booked.h5vehicle' | translate}}</h4>
+                <div class="carsmessage"
+                     style="background: #3b76c9;width: 70%">
+                    <div style="border-bottom: 1px solid dimgray;background: #f2f2f2">
+                        <div style="padding: 12px;text-align: center">
+                            <img class="carspic" src="{{allData.params.car.img}}" width="100%"/>
+                        </div>
+                    </div>
+                    <div class="carName" style="background: #3968ab;padding: 5px 12px">
+                        <div>
+                            <p style="margin: 0;text-align: left;float: left">{{allData.params.car.model}}</p>
+                            <div class="carsListFont" style="float: right">
+                                <i class="fa fa-user" style="color:white"></i> <span
+                                    class="explain-font">{{allData.params.car.seats_max}}</span>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                        <div>
+                            <p style="margin: 0;text-align: left;float: left">{{allData.params.car.brand}}</p>
+                            <div class="carsListFont" style="float: right">
+                                <i class="fa fa-suitcase" style="color:white"></i> <span class="explain-font">{{allData.params.car.bags_max}}</span>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                    <!--<div class="carsbgt"-->
+                         <!--style="text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">-->
+                        <!--<div style="padding:15px;color: #fff">selected-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+
+                <div ng-show="allData.reParams">
+                    <h4 class="fw titleFont" style="border-top: 1px solid #393939;padding-top: 10px">{{'booked.h5return_services' | translate}}</h4>
+                    <div>
+                        <div class="message-float" style="float: left;width: 50%">
+                            <div class="explain-font" style="font-size: 10px;line-height: 25px">{{'booked.h5pick_address' | translate}}</div>
+                            <div class="location-bg2 v-top inline" style="line-height: 25px">
+                                <i class="fa fa-dot-circle-o" style="color: green;font-size: 15px"></i>
+                            </div>
+                            <div class="inline book-trip-blocks">
+                                <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.a_address.a_final_address[0]}}</div>
+                                <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.a_address.a_final_address[1]}}</div>
+                            </div>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+
+                    <div>
+                        <div class="message-float" style="float: left;width: 50%">
+                            <div class="explain-font" style="font-size: 10px;line-height: 25px">{{'booked.h5drop_address' | translate}}</div>
+                            <div class="location-bg2 v-top inline" style="line-height: 25px">
+                                <i class="fa fa-dot-circle-o" style="color: red;font-size: 15px"></i>
+                            </div>
+                            <div class="inline book-trip-blocks">
+                                <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.d_address.d_final_address[0]}}</div>
+                                <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.d_address.d_final_address[1]}}</div>
+                            </div>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+
+                    <h4 class="fw titleFont" style="margin:15px 0 10px 0 !important;color: white">{{'booked.h5vehicle' | translate}}</h4>
+                    <div class="carsmessage"
+                         style="background: #3b76c9;width: 70%">
+                        <div style="border-bottom: 1px solid dimgray;background: #f2f2f2">
+                            <div style="padding: 12px;text-align: center">
+                                <img class="carspic" src="{{allData.reParams.car.img}}" width="100%"/>
+                            </div>
+                        </div>
+                        <div class="carName" style="background: #3968ab;padding: 5px 12px">
+                            <div>
+                                <p style="margin: 0;text-align: left;float: left">{{allData.reParams.car.model}}</p>
+                                <div class="carsListFont" style="float: right">
+                                    <i class="fa fa-user" style="color:white"></i> <span
+                                        class="explain-font">{{allData.reParams.car.seats_max}}</span>
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                            <div>
+                                <p style="margin: 0;text-align: left;float: left">{{allData.reParams.car.brand}}</p>
+                                <div class="carsListFont" style="float: right">
+                                    <i class="fa fa-suitcase" style="color:white"></i> <span class="explain-font">{{allData.reParams.car.bags_max}}</span>
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                        </div>
+                        <!--<div class="carsbgt"-->
+                             <!--style="text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">-->
+                            <!--<div style="padding:15px;color: #fff">selected-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+
+                <h4 class="fw titleFont" style="margin:20px 0 10px 0!important;color: white">{{'booked.h5total' | translate}}</h4>
+                <div style="width: 95%;margin: auto">
+                <div class="block-balance-top2" style="margin: 0"></div>
+                <div class="block-balance2" style="padding: 10px 0 10px 0;margin: 0">
+                    <div style="padding: 0 10px 10px">
+                        <div style="float: left;">
+                            <span class="d-s-b fw f-s" style="color: #c7c7c7">{{'booked.h5item_des' | translate}}</span>
+                            <span class="d-s-b fw f-s" style="color: #f5f5f5">{{'booked.h5amount_paid' | translate}}</span>
+                            <span class="d-s-b fw f-s" style="color: #919191">{{allData.params.appointed_time*1000 | dateFormatter:'langsDate'}}</span>
+                        </div>
+                        <div style="float: right">
+                            <span class="d-s-b fw f-s" style="color: #c7c7c7;text-align: right">{{'booked.h5cost' | translate}}</span>
+                            <span ng-show="!rsoffer" class="d-s-b fblue f-s" style="color:#ff2728">+{{preCost | PriceFormatFilter:true:false:offer.ccy}}</span>
+                            <span ng-show="rsoffer&&rsoffer.ccy==offer.ccy" class="d-s-b fblue f-s" style="color:#ff2728">+{{preCost+rePreCost | PriceFormatFilter:true:false:offer.ccy}}</span>
+                            <span ng-show="rsoffer&&rsoffer.ccy!=offer.ccy" class="d-s-b fblue f-s" style="color:#ff2728">+{{preCost | PriceFormatFilter:true:false:offer.ccy}}+{{rePreCost | PriceFormatFilter:true:false:rsoffer.ccy}}</span>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                    <div style="padding: 10px;background: #28293b;text-align: right">
+                        <span class="fw f-s" style="color: #b6b6b6;font-size: 15px;margin-right: 15px">{{'booked.h5total' | translate}}</span>
+                        <span ng-show="!rsoffer" class="fw f-s" style="color: #ffffff;font-size: 25px;font-weight: 600">{{cost | PriceFormatFilter:true:false:offer.ccy}}</span>
+                        <span ng-show="rsoffer&&rsoffer.ccy==offer.ccy" class="fw f-s" style="color: #ffffff;font-size: 25px;font-weight: 600">{{cost+reCost | PriceFormatFilter:true:false:offer.ccy}}</span>
+                        <span ng-show="rsoffer&&rsoffer.ccy!=offer.ccy" class="fw f-s" style="color: #ffffff;font-size: 25px;font-weight: 600">{{cost | PriceFormatFilter:true:false:offer.ccy}}+{{reCost | PriceFormatFilter:true:false:rsoffer.ccy}}</span>
+                    </div>
+                    <div style="height: 15px;"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div style="text-align: center;margin-top: 25px" class="logButton">
+            <button ng-click="goButtonClick($event)"
+                    class="btn-blue center-block home-mg2 btn ladda-button "
+                    data-style="expand-right" id="buynow"
+                    style="outline: none;display: block;margin:auto" data-dismiss="modal">
+                <span class="ladda-label">{{'booked.h5done' | translate}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="flow-app-float" style="">
+        <h3 class="app-text" style="color: #fff;font-size: 15px;text-align: center">{{'booked.h5downloaded_app' | translate:({companyName:companyInfor.name})}}</h3>
+        <div style="text-align: center">
+            <div style="display: inline-block;margin-right: 5px">
+                <a ng-href="{{getCompanyIosApp}}" target="view_window"><img
+                        ng-src="{{iosAppImgLink}}" height="30"
+                        width="100"/></a>
+            </div>
+            <div style="display: inline-block;margin-left: 5px">
+                <a ng-href="{{getCompanyGoogleApp}}" target="view_window"><img
+                        ng-src="{{androidAppImgLink}}" height="30" width="100"/></a>
+            </div>
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/booked.html'></google-analytics>

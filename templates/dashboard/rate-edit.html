@@ -1,0 +1,574 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <div>
+        <span class="fgray main-title-text-l" style="font-size: 32px">{{'rate_edit.h5Rate_Details' | translate}}</span>
+    </div>
+    <!--<div class="chead-edit"><i class="fa fa-pencil fw"></i></div>-->
+
+    <div id="tabs">
+        <ul class="nav-slider ">
+            <li style="width:50%;" class="act-tab"><a ng-click="changeTabs(0)"
+                                                      style="color: #fff;font-size: 22px;font-weight: 300">{{'comment.h5rate' | translate}}</a>
+            </li>
+            <li style="width:50%;"><a ng-click="changeTabs(1)" style="color: #fff;font-size: 22px;font-weight: 300">{{'comment.h5vehicle' | translate}}</a>
+            </li>
+            <li class="slider" style="width:50%;"></li>
+        </ul>
+        <form id="rateForm"
+              role="form"
+              name="rateForm"
+              data-toggle="validator"
+              novalidate>
+            <div ng-show="!showVehicles">
+
+                <div class="rates-option">
+            <span ng-click="onTypeChanged(RateType.LONG)" class="dopoint"><i
+                    ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[type == 1]"></i>{{'rates.h5long_haul_distance' | translate}}</span>
+                    <span ng-click="onTypeChanged(RateType.TRAN)" class="dopoint"><i
+                            ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[type == 3]"></i>{{'comment.h5transfers' | translate}}</span>
+                    <br/>
+                    <br/>
+                    <span ng-click="onTypeChanged(RateType.HOUR)" class="dopoint"><i
+                            ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[type == 2]"></i>{{'comment.h5hourly' | translate}}</span>
+                </div>
+                <div class="c-block2  pos-rlt mg-t-s">
+                    <div class="form-group">
+                        <h6 class="fw">{{'rate_add.h5name_rate' | translate}}</h6>
+                        <input class="myinput2" type="text" ng-model="title" placeholder="{{'rate_add.h5enter_rate_name' | translate}}" required/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt mg-t-s">
+                    <div class="form-group">
+                        <h6 class="fw">{{'rate_add.h5pickup_location' | translate}}</h6>
+                        <input class="myinput2 myinput2-map"
+                               ng-model="pickupLocation.formatted_address"
+                               type="text" placeholder="{{'rate_add.h5enter_pickup_address' | translate}}"
+                               autocomplete="off"
+                               uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                               typeahead-loading="loadingLocations1" typeahead-no-results="noResults1"
+                               typeahead-on-select="onSearchSelect($item, 1)"/>
+                        <i class="fa fa-map-marker fb f-m dopoint" ng-click="selectLocationOnMap(1)"></i>
+                        <i ng-show="loadingLocations1" class="glyphicon glyphicon-refresh"></i>
+                        <div ng-show="noResults1">
+                            <i class="glyphicon glyphicon-remove"></i> {{'comment.h5no_results_found' | translate}}
+                        </div>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div>
+                        <div class="f-s pull-left f-w-300 fw rates-set" style="cursor: pointer"
+                             ng-click="onSetPickupRadius()">
+                            <i ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[setPickupRadius]"></i>
+                            {{'rate_add.h5set_radius' | translate}}
+                        </div>
+                        <div class="form-group pull-right pos-rlt mg-t-m rates-half" ng-if="setPickupRadius">
+                            <div class="rates-half-miles" ng-show="distanceUnit==1">{{'comment.h5miles' | translate}}</div>
+                            <div class="rates-half-miles" ng-show="distanceUnit==2">{{'comment.h5km' | translate}}</div>
+                            <input type="number"
+                                   step="1"
+                                   min="1"
+                                   class="rates-half-input"
+                                   ng-model="pickupSlider.value"
+                                   max="1000" required/>
+                            <div class="help-block with-errors pull-right"></div>
+                        </div>
+                        <div class="cl"></div>
+
+                    </div>
+                </div>
+
+                <div ng-if="type == 1">
+                    <div class="c-block2  pos-rlt">
+                        <h6 class="fw">{{'rate_add.h5dropoff_location' | translate}}</h6>
+                        <div class="form-group">
+                            <input class="myinput2 myinput2-map"
+                                   ng-model="dropoffLocation.formatted_address"
+                                   type="text" placeholder="{{'rate_add.h5enter_dropoff_address' | translate}}"
+                                   autocomplete="off"
+                                   uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                                   typeahead-loading="loadingLocations2" typeahead-no-results="noResults2"
+                                   typeahead-on-select="onSearchSelect($item, 2)"/>
+                            <i class="fa fa-map-marker fb f-m dopoint" ng-click="selectLocationOnMap(2)"></i>
+                            <i ng-show="loadingLocations2" class="glyphicon glyphicon-refresh"></i>
+                            <div ng-show="noResults2">
+                                <i class="glyphicon glyphicon-remove"></i> {{'comment.h5no_results_found' | translate}}
+                            </div>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div>
+
+                            <div class="f-s pull-left f-w-300 fw rates-set" style="cursor: pointer"
+                                 ng-click="onSetDropoffRadius()">
+                                <i ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[setDropoffRadius]"></i>
+                                {{'rate_add.h5set_radius' | translate}}
+                            </div>
+
+                            <div class="form-group pull-right pos-rlt mg-t-m rates-half" ng-if="setDropoffRadius">
+                                <div class="rates-half-miles" ng-show="distanceUnit==1">{{'comment.h5miles' | translate}}</div>
+                                <div class="rates-half-miles" ng-show="distanceUnit==2">{{'comment.h5km' | translate}}</div>
+                                <input type="number"
+                                       step="1"
+                                       min="1"
+                                       class="rates-half-input"
+                                       ng-model="dropoffSlider.value"
+                                       max="1000" required/>
+                                <div class="help-block with-errors pull-right"></div>
+                            </div>
+
+
+                            <div class="cl"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'rate_add.h5airport_fee' | translate}}</h6>
+
+                    <div class="f-s pull-left f-w-300 fw rates-set-airport" style="cursor: pointer ; margin-top: 10px"
+                         ng-click="dPort.is_port=!dPort.is_port">
+                        <i ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[dPort.is_port]"></i>
+                        {{'rate_add.h5Pick_Up_Fee' | translate}}
+                    </div>
+
+                    <div class="form-group pull-right pos-rlt rates-half-airport" ng-if="dPort.is_port"
+                         style="margin-top: 10px">
+                        <div class="rates-half-dollars">
+                            <span ng-show="companyCurrency=='usd'">{{'comment.h5dollars' | translate}}</span>
+                            <span ng-show="companyCurrency=='eur'">{{'comment.h5euros' | translate}}</span>
+                            <span ng-show="companyCurrency=='gbp'">{{'comment.h5pounds' | translate}}</span>
+                            <span ng-show="companyCurrency=='aud'">{{'comment.h5aud' | translate}}</span>
+                            <span ng-show="companyCurrency=='dkk'">{{'comment.h5dkk' | translate}}</span>
+                            <span ng-show="companyCurrency=='cad'">{{'comment.h5cad' | translate}}</span>
+                            <span ng-show="companyCurrency=='hkd'">{{'comment.h5hkd' | translate}}</span>
+                            <span ng-show="companyCurrency=='jpy'">{{'comment.h5jpy' | translate}}</span>
+                            <span ng-show="companyCurrency=='nzd'">{{'comment.h5nzd' | translate}}</span>
+                            <span ng-show="companyCurrency=='nok'">{{'comment.h5nok' | translate}}</span>
+                            <span ng-show="companyCurrency=='sgd'">{{'comment.h5sgd' | translate}}</span>
+                            <span ng-show="companyCurrency=='sek'">{{'comment.h5sek' | translate}}</span>
+                            <span ng-show="companyCurrency=='chf'">{{'comment.h5chf' | translate}}</span>
+                        </div>
+                        <input type="number"
+                               step="0.01"
+                               min="0"
+                               class="rates-airport-input"
+                               ng-model="dPort.price"
+                               max="1000" required/>
+                        <div class="help-block with-errors pull-right"></div>
+                    </div>
+                    <div class="cl"></div>
+                    <div ng-show="type != 2">
+                        <div class="f-s pull-left f-w-300 fw rates-set-airport" style="cursor: pointer"
+                             ng-click="aPort.is_port=!aPort.is_port">
+                            <i ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[aPort.is_port]"></i>
+                            {{'rate_add.h5Drop_Off_Fee' | translate}}
+                        </div>
+                        <div class="form-group pull-right pos-rlt rates-half-airport" ng-if="aPort.is_port">
+                            <div class="rates-half-dollars">
+                                <span ng-show="companyCurrency=='usd'">{{'comment.h5dollars' | translate}}</span>
+                                <span ng-show="companyCurrency=='eur'">{{'comment.h5euros' | translate}}</span>
+                                <span ng-show="companyCurrency=='gbp'">{{'comment.h5pounds' | translate}}</span>
+                                <span ng-show="companyCurrency=='aud'">{{'comment.h5aud' | translate}}</span>
+                                <span ng-show="companyCurrency=='dkk'">{{'comment.h5dkk' | translate}}</span>
+                                <span ng-show="companyCurrency=='cad'">{{'comment.h5cad' | translate}}</span>
+                                <span ng-show="companyCurrency=='hkd'">{{'comment.h5hkd' | translate}}</span>
+                                <span ng-show="companyCurrency=='jpy'">{{'comment.h5jpy' | translate}}</span>
+                                <span ng-show="companyCurrency=='nzd'">{{'comment.h5nzd' | translate}}</span>
+                                <span ng-show="companyCurrency=='nok'">{{'comment.h5nok' | translate}}</span>
+                                <span ng-show="companyCurrency=='sgd'">{{'comment.h5sgd' | translate}}</span>
+                                <span ng-show="companyCurrency=='sek'">{{'comment.h5sek' | translate}}</span>
+                                <span ng-show="companyCurrency=='chf'">{{'comment.h5chf' | translate}}</span>
+                            </div>
+                            <input type="number"
+                                   step="0.01"
+                                   min="0"
+                                   class="rates-airport-input"
+                                   ng-model="aPort.price"
+                                   max="1000" required/>
+                            <div class="help-block with-errors pull-right"></div>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="c-block2  pos-rlt" ng-if="type==1 || type==3">
+                    <div class="form-group">
+                        <h6 class="fw">{{'rate_add.h5minimum_distance' | translate}}</h6>
+                        <input class="myinput2 addon-main"
+                               type="number"
+                               step="0.01"
+                               min="0"
+                               ng-model="distanceMinSlider.value"
+                               placeholder=""
+                               max="1000" required/>
+                        <span class="myinput2 addon-sub" ng-show="distanceUnit==1">{{'comment.h5miles' | translate}}</span>
+                        <span class="myinput2 addon-sub" ng-show="distanceUnit==2">{{'comment.h5km' | translate}}</span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+
+                <!--<div class="c-block2  pos-rlt" ng-if="type == 1">-->
+                    <!--<div class="form-group">-->
+                        <!--<h6 class="fw">{{'rate_add.h5maximum_distance' | translate}}</h6>-->
+                        <!--<input class="myinput2 addon-main"-->
+                               <!--type="number"-->
+                               <!--step="1"-->
+                               <!--min="1"-->
+                               <!--ng-model="distanceMaxSlider.value"-->
+                               <!--placeholder=""-->
+                               <!--max="1000" required/>-->
+                        <!--<span class="myinput2 addon-sub">{{'comment.h5miles' | translate}}</span>-->
+                        <!--<div class="help-block with-errors"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="c-block2  pos-rlt" ng-show="type == 3">
+                    <div class="mg-t-s" ng-repeat="zone in priceZones">
+                        <span ng-if="$index == 0" class="f-s fgray">{{'rate_add.h5up_to' | translate}}</span>
+                        <span ng-if="$index > 0" class="f-s fgray">{{'rate_add.h5then' | translate}}</span>
+                        <div>
+                            <div class="unit-mi" ng-class="{true:'en',false:'un'}[distanceUnit==1]">
+                                <input class="unit-input"
+                                       step="0.000001"
+                                       min="0"
+                                       ng-model="zone.zoneValue"
+                                       max="distanceMaxSlider.value"
+                                       type="number"/>
+                            </div>
+                            <span class="f-s fw" style="margin: 0 10px;">{{'comment.h5at' | translate}}</span>
+                            <div class="unit-mi-dollar"
+                                 ng-class="{'eur-dollar':companyCurrency=='eur','gbp-dollar':companyCurrency=='gbp','aud-dollar':companyCurrency=='aud','dkk-dollar':companyCurrency=='dkk'
+                                 ,'cad-dollar':companyCurrency=='cad','hkd-dollar':companyCurrency=='hkd','jpy-dollar':companyCurrency=='jpy','nzd-dollar':companyCurrency=='nzd','nok-dollar':companyCurrency=='nok'
+                                 ,'sgd-dollar':companyCurrency=='sgd','sek-dollar':companyCurrency=='sek','chf-dollar':companyCurrency=='chf','dollar':companyCurrency=='usd','en-after':distanceUnit==1,'un-after':distanceUnit!=1}">
+                                <input class="unit-input"
+                                       step="0.01"
+                                       min="0"
+                                       ng-model="zone.priceValue"
+                                       type="number"/>
+                            </div>
+                            <i ng-show="$index > 0" ng-click="removeZone($index)"
+                               class="fa fa-trash fw2 f-s dopoint rates-trash"></i>
+                        </div>
+                    </div>
+                    <div ng-show="priceZones.length < 5" class="mg-t-s f-s fb dopoint" ng-click="addZone()">
+                        <i class="fa fa-times-circle-o" style="transform:rotate(45deg);margin-right: 6px;"></i>{{'rate_add.h5add_another_zone' | translate}}
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt" ng-if="type == 2">
+                    <div class="form-group">
+                        <h6 class="fw">{{'rate_add.h5minimum_time' | translate}}</h6>
+                        <input class="myinput2 addon-main"
+                               type="number"
+                               step="1"
+                               min="1"
+                               ng-model="time.minTime"
+                               placeholder=""
+                               max="1000" required/>
+                        <span class="myinput2 addon-sub">{{'comment.h5hours' | translate}}</span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt" ng-if="type == 2">
+                    <div class="form-group">
+                        <h6 class="fw">{{'rate_add.h5maximum_time' | translate}}</h6>
+                        <input class="myinput2 addon-main"
+                               type="number"
+                               step="1"
+                               min="1"
+                               ng-model="time.maxTime"
+                               placeholder=""
+                               max="1000" required/>
+                        <span class="myinput2 addon-sub">{{'comment.h5hours' | translate}}</span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <div class="c-block2  pos-rlt" ng-show="type != 1">  <!-- type == 3   04/05/2018 chan -->
+                    <div class="form-group">
+                        <h6 class="fw">{{'rate_add.h5Minimum_Price' | translate}}</h6>
+                        <input class="myinput2 addon-main"
+                               type="number"
+                               step="0.01"
+                               min="0"
+                               ng-model="costMin"
+                               max="10000"
+                               required/>
+                        <span class="myinput2 addon-sub">
+                            <span ng-show="companyCurrency=='usd'">{{'comment.h5dollars' | translate}}</span>
+                            <span ng-show="companyCurrency=='eur'">{{'comment.h5euros' | translate}}</span>
+                            <span ng-show="companyCurrency=='gbp'">{{'comment.h5pounds' | translate}}</span>
+                            <span ng-show="companyCurrency=='aud'">{{'comment.h5aud' | translate}}</span>
+                            <span ng-show="companyCurrency=='dkk'">{{'comment.h5dkk' | translate}}</span>
+                            <span ng-show="companyCurrency=='cad'">{{'comment.h5cad' | translate}}</span>
+                            <span ng-show="companyCurrency=='hkd'">{{'comment.h5hkd' | translate}}</span>
+                            <span ng-show="companyCurrency=='jpy'">{{'comment.h5jpy' | translate}}</span>
+                            <span ng-show="companyCurrency=='nzd'">{{'comment.h5nzd' | translate}}</span>
+                            <span ng-show="companyCurrency=='nok'">{{'comment.h5nok' | translate}}</span>
+                            <span ng-show="companyCurrency=='sgd'">{{'comment.h5sgd' | translate}}</span>
+                            <span ng-show="companyCurrency=='sek'">{{'comment.h5sek' | translate}}</span>
+                            <span ng-show="companyCurrency=='chf'">{{'comment.h5chf' | translate}}</span>
+                        </span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt" ng-show="type != 3">
+                    <div class="form-group">
+                        <h6 class="fw">{{'rate_add.h5calculation_method' | translate}}</h6>
+                        <input class="myinput2 addon-main"
+                               type="number"
+                               step="0.01"
+                               min="0"
+                               ng-model="price"
+                               max="10000"
+                               placeholder="{{'rate_add.h5unit_price' | translate}}"
+                               required/>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='usd'" class="myinput2 addon-sub">{{'comment.h5dollars_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='eur'" class="myinput2 addon-sub">{{'comment.h5Euros_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='gbp'" class="myinput2 addon-sub">{{'comment.h5Pounds_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='aud'" class="myinput2 addon-sub">{{'comment.h5aud_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='dkk'" class="myinput2 addon-sub">{{'comment.h5dkk_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='cad'" class="myinput2 addon-sub">{{'comment.h5cad_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='hkd'" class="myinput2 addon-sub">{{'comment.h5hkd_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='jpy'" class="myinput2 addon-sub">{{'comment.h5jpy_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='nzd'" class="myinput2 addon-sub">{{'comment.h5nzd_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='nok'" class="myinput2 addon-sub">{{'comment.h5nok_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='sgd'" class="myinput2 addon-sub">{{'comment.h5sgd_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='sek'" class="myinput2 addon-sub">{{'comment.h5sek_mi' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==1&&companyCurrency=='chf'" class="myinput2 addon-sub">{{'comment.h5chf_mi' | translate}}</span>
+                        
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='usd'" class="myinput2 addon-sub">{{'comment.h5dollars_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='eur'" class="myinput2 addon-sub">{{'comment.h5Euros_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='gbp'" class="myinput2 addon-sub">{{'comment.h5Pounds_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='aud'" class="myinput2 addon-sub">{{'comment.h5aud_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='dkk'" class="myinput2 addon-sub">{{'comment.h5dkk_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='cad'" class="myinput2 addon-sub">{{'comment.h5cad_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='hkd'" class="myinput2 addon-sub">{{'comment.h5hkd_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='jpy'" class="myinput2 addon-sub">{{'comment.h5jpy_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='nzd'" class="myinput2 addon-sub">{{'comment.h5nzd_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='nok'" class="myinput2 addon-sub">{{'comment.h5nok_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='sgd'" class="myinput2 addon-sub">{{'comment.h5sgd_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='sek'" class="myinput2 addon-sub">{{'comment.h5sek_km' | translate}}</span>
+                        <span ng-show="type == 1&&distanceUnit==2&&companyCurrency=='chf'" class="myinput2 addon-sub">{{'comment.h5chf_km' | translate}}</span>
+
+                        <span ng-show="type == 2&&companyCurrency=='usd'" class="myinput2 addon-sub">{{'comment.h5dollars_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='eur'" class="myinput2 addon-sub">{{'comment.h5Euros_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='gbp'" class="myinput2 addon-sub">{{'comment.h5Pounds_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='aud'" class="myinput2 addon-sub">{{'comment.h5aud_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='dkk'" class="myinput2 addon-sub">{{'comment.h5dkk_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='cad'" class="myinput2 addon-sub">{{'comment.h5cad_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='hkd'" class="myinput2 addon-sub">{{'comment.h5hkd_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='jpy'" class="myinput2 addon-sub">{{'comment.h5jpy_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='nzd'" class="myinput2 addon-sub">{{'comment.h5nzd_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='nok'" class="myinput2 addon-sub">{{'comment.h5nok_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='sgd'" class="myinput2 addon-sub">{{'comment.h5sgd_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='sek'" class="myinput2 addon-sub">{{'comment.h5sek_min' | translate}}</span>
+                        <span ng-show="type == 2&&companyCurrency=='chf'" class="myinput2 addon-sub">{{'comment.h5chf_min' | translate}}</span>
+
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <div class="form-group">
+                        <h6 class="fw">{{'rate_add.h5tax_rate' | translate}}</h6>
+                        <input class="myinput2 addon-main"
+                               type="number"
+                               step="0.01"
+                               min="0"
+                               ng-model="tva"
+                               max="100"
+                               placeholder="{{'rate_add.h5enter_tax' | translate}}"
+                               required/>
+                        <span class="myinput2 addon-sub">%</span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'comment.h5add-Ons' | translate}}</h6>
+                    <div class="mg-t-s">
+                        <div ng-repeat="option in options">
+                            <label class="pull-left dopoint"><input type="checkbox" value="{{option.id}}"
+                                                                    ng-model="option.isSelect"
+                                                                    style="cursor: pointer;"/><span
+                                    class="rates-ap-tag">{{option.title}}<span
+                                    class="fblack"><b>{{option.price|princeTranslateFilters:false:false:companyCurrency}}</b></span></span>
+                            </label>
+                            <div class="cl"></div>
+                        </div>
+                        <div class="mg-l-m">
+                            <span class="fb f-s text-uline dopoint" ng-click="onCreateAddOn()">{{'rate_add.h5create_add-On' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'rate_add.h5rate_schedule' | translate}}</h6>
+                    <div class="rates-option mg-t-s">
+                <span ng-click="onRoutineWeekChange(0)" class="dopoint">
+                    <i ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[!routine[0].work
+                    && routine[1].work
+                    && routine[2].work
+                    && routine[3].work
+                    && routine[4].work
+                    && routine[5].work
+                    && !routine[6].work]"></i>
+                    {{'comment.h5week_days' | translate}}
+                </span>
+                        <span ng-click="onRoutineWeekChange(1)" class="dopoint">
+                    <i ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[routine[0].work
+                    && !routine[1].work
+                    && !routine[2].work
+                    && !routine[3].work
+                    && !routine[4].work
+                    && !routine[5].work
+                    && routine[6].work]"></i>
+                    {{'comment.h5weekends' | translate}}
+                </span>
+                        <span ng-click="onRoutineWeekChange(2)" class="dopoint">
+                    <i ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[routine[0].work
+                    && routine[1].work
+                    && routine[2].work
+                    && routine[3].work
+                    && routine[4].work
+                    && routine[5].work
+                    && routine[6].work]"></i>
+                    {{'comment.h5all_week' | translate}}</span>
+                    </div>
+                    <div class="row rates-week">
+                        <ul>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[0].work]"
+                                ng-click="checkDayChanged(0)" class="dopoint">{{'comment.h5Sun' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[1].work]"
+                                ng-click="checkDayChanged(1)" class="dopoint">{{'comment.h5Mon' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[2].work]"
+                                ng-click="checkDayChanged(2)" class="dopoint">{{'comment.h5Tue' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[3].work]"
+                                ng-click="checkDayChanged(3)" class="dopoint">{{'comment.h5Wen' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[4].work]"
+                                ng-click="checkDayChanged(4)" class="dopoint">{{'comment.h5Thu' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[5].work]"
+                                ng-click="checkDayChanged(5)" class="dopoint">{{'comment.h5Fri' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[6].work]"
+                                ng-click="checkDayChanged(6)" class="dopoint">{{'comment.h5Sat' | translate}}
+                            </li>
+                        </ul>
+                    </div>
+                    <table style="width: 98%" class="mg-t-s">
+                        <tr ng-show="hasRoutine">
+                            <td width="10%" height="20"></td>
+                            <td class="fgray" width="45%" align="center">{{'comment.h5start' | translate}}</td>
+                            <td class="fgray" width="45%" align="center">{{'comment.h5end' | translate}}</td>
+                        </tr>
+                        <tr ng-repeat="item in routine track by $index" ng-show="item.work">
+                            <td class="fw" height="40" style="vertical-align: middle"><b>{{item.name | translate}}</b></td>
+                            <td class="fblue">
+                                <select class="myselect myinput"
+                                        ng-model="routine[$index].start"
+                                        ng-change="selectWorkHour($index,true)"
+                                        ng-options="clock.index_id as clock.time for clock in timeClock">
+                                </select>
+                            </td>
+                            <td class="fblue">
+                                <select class="myselect myinput"
+                                        ng-model="routine[$index].end"
+                                        ng-change="selectWorkHour($index,false)"
+                                        ng-options="clock.index_id as clock.time for clock in timeClock">
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'rate_add.h5rate_description' | translate}}</h6>
+                    <div contenteditable="true" class="contenteditable"
+                         ng-model="description.txt"
+                         style="width: 98% ; margin: 2px"
+                         ng-maxlength="140"
+                         placeholder="{{'rate_add.h5char_exceed_warning' | translate}}"></div>
+                </div>
+                <div class="mg-t-xxl">
+                    <button type="submit" ng-click="onSubmitButtonClick(rateForm.$valid, $event)"
+                            class="btn-blue btn center-block mg-t-xl">
+                        <span>{{'comment.h5SAVE' | translate}}</span>
+                    </button>
+                </div>
+            </div>
+
+            <div ng-show="showVehicles">
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw"  style="font-size: 19px">{{'driver_edit.h5select_vehicles' | translate}}</h6>
+                    <!--main according-->
+                    <div id="rates-vehicle-accordion" class="basic-accordion" style="margin-left: 0">
+                        <div ng-repeat="category in categories">
+                            <h3 class="rates-select">
+                                <i ng-click="onCategorySelect(category);$event.stopPropagation()"
+                                   ng-class="{true:'fa fa-check-square-o dispop',false:'fa fa-square-o dispop'}[category.selectedCount == category.cars.length]"></i>
+                                <span>{{category.category}} </span>
+                                <span class="fred">({{category.selectedCount}} {{'comment.h5selected' | translate}})</span>
+                                <span class="fb">{{category.cars.length}} {{'comment.h5total' | translate}}</span>
+                            </h3>
+                            <div class="cl-block hid">
+                                <!--sub according-->
+                                <div class="basic-accordion rates-sub-accordion" style="margin-left: 0">
+                                    <div ng-repeat="car in category.cars">
+                                        <input type="checkbox" value="car.car_id" ng-click="onCarSelect(category,car)"
+                                               ng-model="car.isSelect" class="chbox pull-right dopoint"
+                                               style="margin-top: 15px;margin-right: 10px;height: 14px;width: 14px">
+                                        <div class="rates-sub dopoint">
+                                            <div class="rates-sub-img pull-left"
+                                                 style="background:#fff url({{car.img}}) no-repeat 50% 50%;background-size: contain"></div>
+                                            <div style="width: 58%;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis" class="pull-left mg-l-s">
+                                                <span class="fw"><b>{{car.model}}</b></span> <span
+                                                    class="fblack"><b>{{car.brand}}</b></span>
+                                                <br/>
+                                                <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 50%"
+                                                      class="fw2">{{car.license_plate}}</span>
+                                                <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 50%"
+                                                      class="fblack">{{car.color}}</span>
+                                                <div style="clear: both"></div>
+                                            </div>
+                                            <i class="fa fa-angle-down pull-right"></i>
+                                        </div>
+                                        <div class="cl-block rates-sub-cont">
+                                            <ul>
+                                                <li ng-repeat="driver in car.drivers" ng-show="driver.canShow">
+                                                    <input ng-disabled="!car.isSelect"
+                                                           ng-click="onDriverSelect(car, driver)" type="checkbox"
+                                                           value="checkbox" ng-model="driver.isSelect"
+                                                           style="float: left"
+                                                           class="chbox dopoint">
+                                                    <span style="max-width:45%;float: left;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap" class="fw"><b>{{driver.first_name}} {{driver.last_name}}</b></span>
+                                                    <span style="max-width:40%;float: left;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap" class="fblack"><b>{{driver.mobile | phoneNumFormatter:country}}</b></span>
+                                               <div style="clear: both"></div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- / sub according-->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / main according-->
+                </div>
+
+                <div class="mg-t-xxl">
+                    <button type="submit" ng-click="onSubmitButtonClick(rateForm.$valid, $event)"
+                            class="btn-blue btn center-block mg-t-xl">
+                        <span>{{'comment.h5SAVE' | translate}}</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<google-analytics analytics-page='/rate-edit.html'></google-analytics>

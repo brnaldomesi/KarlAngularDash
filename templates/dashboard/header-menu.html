@@ -1,0 +1,382 @@
+<!-- navbar -->
+<div id="info">
+    <p ng-show="activeIndex != 20&&activeIndex != 25" class="f-m">{{'header_menu.h5how' | translate}} <span>{{viewTitles[activeIndex] | translate}}</span>.</p>
+    <p ng-show="activeIndex == 20" class="f-m">{{'header_menu.h5how' | translate}} <span>{{salesRepInfo.first_name}} {{salesRepInfo.last_name}}</span>.</p>
+    <p ng-show="activeIndex == 25" class="f-m">{{'header_menu.h5how' | translate}} <span>{{salesAssisInfo.first_name}} {{salesAssisInfo.last_name}}</span>.</p>
+    <div ng-show="activeIndex != 20&&activeIndex != 25" class="fblack">{{'header_menu.h5watch_video' | translate}} {{viewTitles[activeIndex] | translate}}  {{'header_menu.h5features' | translate}}.</div>
+    <div ng-show="activeIndex == 20" class="fblack">{{'header_menu.h5watch_video' | translate}} {{salesRepInfo.first_name}} {{salesRepInfo.last_name}}  {{'header_menu.h5features' | translate}}.</div>
+    <div ng-show="activeIndex == 25" class="fblack">{{'header_menu.h5watch_video' | translate}} {{salesAssisInfo.first_name}} {{salesAssisInfo.last_name}}  {{'header_menu.h5features' | translate}}.</div>
+    <div class="iwatch" ng-click="openYoutubeVideo(0)">{{'header_menu.h5watch' | translate}}</div>
+</div>
+
+<div id="info2">
+    <p ng-show="activeIndex != 20&&activeIndex != 25" class="f-m">{{'header_menu.h5how' | translate}} <span>{{viewTitles[activeIndex] | translate}}</span>.</p>
+    <p ng-show="activeIndex == 20" class="f-m">{{'header_menu.h5how' | translate}} <span>{{salesRepInfo.first_name}} {{salesRepInfo.last_name}}</span>.</p>
+    <p ng-show="activeIndex == 25" class="f-m">{{'header_menu.h5how' | translate}} <span>{{salesAssisInfo.first_name}} {{salesAssisInfo.last_name}}</span>.</p>
+    <div ng-show="activeIndex != 20&&activeIndex != 25" class="fblack">{{'header_menu.h5watch_video' | translate}} {{viewTitles[activeIndex] | translate}}  {{'header_menu.h5features' | translate}}.</div>
+    <div ng-show="activeIndex == 20" class="fblack">{{'header_menu.h5watch_video' | translate}} {{salesRepInfo.first_name}} {{salesRepInfo.last_name}} {{'header_menu.h5features' | translate}}.</div>
+    <div ng-show="activeIndex == 25" class="fblack">{{'header_menu.h5watch_video' | translate}} {{salesAssisInfo.first_name}} {{salesAssisInfo.last_name}} {{'header_menu.h5features' | translate}}.</div>
+    <a href="{{videoUrl}}" ><div class="iwatch2">{{'header_menu.h5watch' | translate}}</div></a>
+</div>
+
+
+<div id="mask" style="position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 0;
+    z-index: 4003;
+    display: none;
+    overflow: hidden"></div>
+
+<div class="app-header navbar">
+    <!-- navbar header -->
+    <div class="navbar-header bg-dark">
+        <button class="pull-right visible-xs dk" data-toggle="class:show" data-target=".navbar-collapse">
+            <i class="glyphicon glyphicon-cog"></i>
+        </button>
+        <!--video button-->
+        <!--<button class="pull-right visible-xs" id="dot-anchor2">-->
+            <!--<i class="fa fa-info-circle"></i>-->
+        <!--</button>-->
+        <button class="visible-xs" data-toggle="class:off-screen" data-target=".app-aside" ui-scroll="app">
+            <i class="glyphicon glyphicon-align-justify"></i>
+        </button>
+
+        <!-- 左上菜单 -->
+        <div class="nav navbar-nav hidden-xs">
+            <a class="btn no-shadow navbar-btn" ng-click="setMenuState()" data-toggle="class:app-aside-folded" data-target=".app">
+                <i class="glyphicon glyphicon-align-justify" style="margin-left:8px;"></i>
+            </a>
+        </div>
+        <!-- / 左上菜单 -->
+    </div>
+    <!-- / navbar header -->
+    <!-- navbar collapse -->
+    <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only" style="background: #f2f2f2;">
+        <!--navbar left-->
+                     <span class="hidden-xs">
+                         <span ng-show="activeIndex != 20&&activeIndex != 25" class="navtitle">{{viewTitles[activeIndex] | translate}}</span>
+                         <span ng-show="activeIndex == 20" class="navtitle">{{salesRepInfo.first_name}} {{salesRepInfo.last_name}}</span>
+                         <span ng-show="activeIndex == 25" class="navtitle">{{salesAssisInfo.first_name}} {{salesAssisInfo.last_name}}</span>
+                    </span>
+        <!--video button-->
+                    <!--<span id="dot-anchor" class="hidden-xs"><i class="fa fa-info-circle dopoint" style="margin-left: 8px;font-size: 20px;color:#888;"></i>-->
+                    <!--</span>-->
+
+
+        <!-- / navbar left-->
+        <!-- navbar right -->
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a ng-click="logout()" title="{{'header_menu.h5log_out' | translate}}">
+                    <i class="fa fa-sign-out fa-fw top-fa pull-left"></i>
+                    <span class="fw visible-xs">{{'header_menu.h5log_out' | translate}}</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" ng-show="menuPermission.setting">
+            <li>
+                <a href="#/setting" title="{{'header_menu.h5Setting' | translate}}">
+                    <i class="fa fa-cog fa-fw top-fa pull-left"></i>
+                    <span class="fw visible-xs">{{'header_menu.h5Setting' | translate}}</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" ng-show="menuPermission.profile">
+            <li>
+                <a href="#/profile" title="{{'header_menu.h5Profile' | translate}}">
+                    <i class="fa fa-user fa-fw top-fa pull-left"></i>
+                    <span class="fw visible-xs">{{'header_menu.h5admin_profile' | translate}}</span>
+                </a>
+            </li>
+        </ul>
+         <!--/ navbar right-->
+        <ul class="nav navbar-nav navbar-right"  ng-show="menuPermission.profile||menuPermission.salesRepHome||menuPermission.salesAssistantHome">
+            <li>
+                <a ng-click="switching(cur_lang)" title="{{ 'header_menu.h5LanguageNotice'|translate}}"
+                >
+                    <i class="fa fa-fw top-fa pull-left">{{'header_menu.h5LanguageSort'+cur_lang | translate}}</i>
+                    <span class="fw visible-xs">{{'header_menu.h5Language'+cur_lang | translate}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- / navbar collapse -->
+</div>
+<!-- / navbar -->
+
+<!-- menu -->
+<div class="app-aside hidden-xs bg-dark height-menu" style="position:fixed">
+    <div class="aside-wrap">
+        <div class="navi-wrap">
+            <!-- nav -->
+            <nav class="navi" ui-nav>
+                <ul class="nav">
+                    <li ui-sref-active="active" class="ng-class:activeIndex==0?'active':''"
+                        ng-show="menuPermission.home">
+                        <a href="#/home">
+                            <i class="glyphicon glyphicon-home icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5home' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==1?'active':''"
+                        ng-show="menuPermission.book">
+                        <a href="#/book">
+                            <i class="glyphicon glyphicon-book icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5easy_book' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==2?'active':''"
+                        ng-show="menuPermission.calendar">
+                        <a href="#/calendar">
+                            <i class="glyphicon glyphicon-calendar icon text-info-lter"></i>
+                            <span class="font-bold">{{'header_menu.h5calendar' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==3?'active':''"
+                        ng-show="menuPermission.vehicles">
+                        <a href="#/vehicles">
+                            <i class="fa fa-car icon"></i>
+                            <span class="font-bold">{{'header_menu.h5vehicles' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==4?'active':''"
+                        ng-show="menuPermission.drivers">
+                        <a href="#/drivers">
+                            <i class="glyphicon glyphicon-user icon"></i>
+                            <span class="font-bold">{{'header_menu.h5drivers' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==5?'active':''"
+                        ng-show="menuPermission.option">
+                        <a href="#/option">
+                            <i class="fa fa-tags icon"></i>
+                            <span class="font-bold">{{'header_menu.h5add-Ons' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==6?'active':''"
+                        ng-show="menuPermission.stats">
+                        <a href="#/stats">
+                            <i class="fa fa-pie-chart icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5stats' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==7?'active':''"
+                        ng-show="menuPermission.clients">
+                        <a href="#/clients">
+                            <i class="fa fa-users icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5Clients' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==8?'active':''"
+                        ng-show="menuPermission.affiliate">
+                        <a href="#/affiliate-network">
+                            <i class="fa fa-podcast icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5affiliate_network' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==9?'active':''"
+                        ng-show="menuPermission.rates">
+                        <a href="#/rates">
+                            <i class="fa fa-dollar icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5rates' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==10?'active':''"
+                        ng-show="menuPermission.finance">
+                        <a href="#/finance">
+                            <i class="fa fa-bar-chart icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5finance' | translate}}</span>
+                        </a>
+                    </li>
+
+                    <!-- created by Pham 2018/3/17-->
+                    <li ui-sref-active="active" class="ng-class:activeIndex==28?'active':''"
+                        ng-show="menuPermission.coupon">
+                        <a href="#/coupon">
+                            <i class="fa fa-archive icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5coupon' | translate}}</span>
+                        </a>
+                    </li>
+
+                    <li ui-sref-active="active" class="ng-class:activeIndex==11?'active':''"
+                        ng-show="menuPermission.companies">
+                        <a href="#/companies">
+                            <i class="fa fa-bank icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5companies' | translate}}</span>
+                        </a>
+                    </li>
+
+                    
+
+                    <!--<li ui-sref-active="active" class="ng-class:activeIndex==12?'active':''"-->
+                        <!--ng-show="menuPermission.carModel">-->
+                        <!--<a href="#/car-models">-->
+                            <!--<i class="fa fa-dollar icon text-info-dker"></i>-->
+                            <!--<span class="font-bold">CarModel</span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <li ui-sref-active="active" class="ng-class:activeIndex==14?'active':''"
+                        ng-show="menuPermission.vehicleCategory">
+                        <a href="#/vehicle-category">
+                            <i class="fa fa-car icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5vehicle_category' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==15?'active':''"
+                        ng-show="menuPermission.vehicleMaker">
+                        <a href="#/super-vehicle-maker">
+                            <i class="fa fa-flag-checkered icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5vehicle_maker' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==16?'active':''"
+                        ng-show="menuPermission.vehicleModel">
+                        <a href="#/super-vehicle-model">
+                            <i class="fa fa-bus icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5vehicle_model' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==23?'active':''"
+                        ng-show="menuPermission.superRate">
+                        <a href="#/super-rate-rule">
+                            <i class="fa fa-cc icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5RateRule' | translate}}</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active" class="ng-class:activeIndex==17?'active':''"
+                        ng-show="menuPermission.superStats">
+                        <a href="#/super-stats">
+                            <i class="fa fa-pie-chart icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5super_stats' | translate}}</span>
+                        </a>
+                    </li>
+
+                    <li ui-sref-active="active" class="ng-class:activeIndex==19?'active':''"
+                        ng-show="menuPermission.SalesRep">
+                        <a href="#/sales-rep">
+                            <i class="fa fa-user-circle icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5salesRep' | translate}}</span>
+                        </a>
+                    </li>
+
+                    <li ui-sref-active="active" class="ng-class:activeIndex==24?'active':''"
+                        ng-show="menuPermission.superSalesAssistant">
+                        <a href="#/sales-assistant">
+                            <i class="fa fa-users icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5salesAssistant' | translate}}</span>
+                        </a>
+                    </li>
+
+                    <li ui-sref-active="active" class="ng-class:activeIndex==20?'active':''"
+                        ng-show="menuPermission.salesRepHome">
+                        <a href="#/sales-rep-home">
+                            <i class="glyphicon glyphicon-home icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5home' | translate}}</span>
+                        </a>
+                    </li>
+
+
+                    <li ui-sref-active="active" class="ng-class:activeIndex==21?'active':''"
+                        ng-show="menuPermission.salesRepTotals">
+                        <a href="#/sales-rep-totals">
+                            <i class="fa fa-pie-chart icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5Sales_Rep_totals' | translate}}</span>
+                        </a>
+                    </li>
+
+
+                    <li ui-sref-active="active" class="ng-class:activeIndex==22?'active':''"
+                        ng-show="menuPermission.salesRepCompanies">
+                        <a href="#/sales-rep-companies">
+                            <i class="fa fa-bar-chart icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5companies' | translate}}</span>
+                        </a>
+                    </li>
+
+                    <li ui-sref-active="active" class="ng-class:activeIndex==25?'active':''"
+                        ng-show="menuPermission.salesAssistantHome">
+                        <a href="#/sales-assistant-home">
+                            <i class="glyphicon glyphicon-home icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5home' | translate}}</span>
+                        </a>
+                    </li>
+
+                    <li ui-sref-active="active" class="ng-class:activeIndex==26?'active':''"
+                        ng-show="menuPermission.salesAssistantCompanies">
+                        <a href="#/sales-assistant-companies">
+                            <i class="fa fa-bar-chart icon text-info-dker"></i>
+                            <span class="font-bold">{{'header_menu.h5companies' | translate}}</span>
+                        </a>
+                    </li>
+
+
+                    <li ui-sref-active="active" class="ng-class:activeIndex==27?'active':''"
+                        ng-show="menuPermission.superGodView">
+                        <a href="#/super-god-view">
+                            <p class="gv-tital">GV</p>
+                            <span class="font-bold" style="margin-left: 33px;top: 12px">god view</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- nav -->
+
+
+        </div>
+    </div>
+</div>
+<!-- / menu -->
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#dot-anchor").click(function () {
+            $('#mask').css('display', 'block');
+            $('#info').css('display', 'block');
+            $('#mask').height($(window).height());
+            var x = $('#dot-anchor').offset().left;
+            var y = $('#dot-anchor').offset().top;
+            $('#info').css({'top': 50 ,'left': x - 120});
+
+        });
+
+        $("#mask").click(function () {
+            $('#mask').css('display', 'none');
+            $('#info').css('display', 'none');
+
+        });
+
+        $(".iwatch").click(function () {
+            $('#mask').css('display', 'none');
+            $('#info').css('display', 'none');
+
+        });
+    });
+
+    $(document).ready(function () {
+        $("#dot-anchor2").click(function () {
+            $('#mask').css('display', 'block');
+            $('#info2').css('display', 'block');
+            $('#mask').height($(window).height());
+
+
+        });
+
+        $("#mask").click(function () {
+            $('#mask').css('display', 'none');
+            $('#info2').css('display', 'none');
+
+        });
+
+        $(".iwatch2").click(function () {
+            $('#mask').css('display', 'none');
+            $('#info2').css('display', 'none');
+
+        });
+    });
+</script>

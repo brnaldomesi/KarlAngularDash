@@ -1,0 +1,33 @@
+{
+  "name": "karl-dashboard",
+  "description": "KARL Dashboard",
+  "main": "",
+  "license": "UNLICENSED",
+  "moduleType": [],
+  "homepage": "",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-ui-router": "^0.3.0",
+    "angular-bootstrap": "^1.3.2",
+    "angular-loading-bar": "^0.9.0",
+    "ngSweetAlert": "angular-sweetalert#^1.1.0",
+    "ng-file-upload": "^12.0.4",
+    "strformat": "^0.0.7",
+    "angular-ui-calendar": "^1.0.1",
+    "angularjs-slider": "^2.13.0",
+    "ladda": "^1.0.0",
+    "pnotify": "^3.0.0",
+    "bootstrap": "^3.3.6",
+    "GoogleNexusWebsiteMenu": "*",
+    "scrollup": "^2.4.1",
+    "datetimepicker": "^2.5.4",
+    "bootstrap-fileinput": "^4.3.1",
+    "date-format": "*",
+    "bootstrap-switch": "^3.3.2",
+    "font-awesome": "^4.6.3",
+    "bootstrap-validator": "^0.10.2",
+    "angular-stripe": "^4.2.12",
+    "angular-medium-editor": "^1.2.1"
+  },
+  "devDependencies": {}
+}

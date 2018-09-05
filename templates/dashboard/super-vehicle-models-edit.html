@@ -1,0 +1,73 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4><span class="fgray">{{'super_vehicle_models_edit.h5edit_vehicle_model' | translate}}</span></h4>
+    <form id="addCategoryForm" name="numberTypeForm"
+          data-toggle="validator" novalidate>
+        <div class="c-block2  pos-rlt">
+            <h6>{{'super_vehicle_models_add.h5vehicle_brand' | translate}}</h6>
+            <div class="form-group">
+                <select class="myselect myinput2"
+                        ng-model="brandId"
+                        ng-options="brand.id as brand.name for brand in brands">
+                </select>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <h6>{{'super_vehicle_models_add.h5vehicle_category' | translate}}</h6>
+            <div class="form-group">
+                <select class="myselect myinput2"
+                        ng-model="categoryId"
+                        ng-options="category.id as category.name for category in categories">
+                </select>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <h6>{{'super_vehicle_models_add.h5vehicle_model' | translate}}</h6>
+            <div class="form-group">
+                <input class="myinput"
+                       type="text"
+                       maxlength="33"
+                       ng-model="carModelName"
+                       placeholder="{{'super_vehicle_models_add.h5vehicle_model_name' | translate}}" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <h6>{{'comment.h5max_bags' | translate}}</h6>
+            <div class="form-group">
+                <input class="myinput"
+                       type="number"
+                       min="0"
+                       step="1"
+                       ng-model="maxBags"
+                       placeholder="{{'comment.h5max_bags' | translate}}" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <h6>{{'super_vehicle_models_add.h5max_seats' | translate}}</h6>
+            <div class="form-group">
+                <input class="myinput"
+                       type="number"
+                       min="0"
+                       step="1"
+                       ng-model="maxSeats"
+                       placeholder="{{'super_vehicle_models_add.h5max_seats' | translate}}" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="row mg-t-xl center-block area-bot">
+            <button type="submit" class="btn-blue btn center-block" ng-click="save()">
+                <span>{{'comment.h5Save' | translate}}</span>
+            </button>
+        </div>
+    </form>
+</div>
+<google-analytics analytics-page='/super-vehicle-models-edit.html'></google-analytics>

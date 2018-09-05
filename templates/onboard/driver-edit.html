@@ -1,0 +1,186 @@
+<div class="container">
+    <div class="dashboard-wrapper">
+        <div class="K-obmain poisR">
+            <div class="k-ob-back" style="top:3%;">
+                <span ng-click="backEvent()" style="cursor: pointer">{{'board_comment.h5back' | translate}}</span>
+            </div>
+            <div class="autoclose">
+                <button type="button"
+                        ng-click="closeWindow()"
+                        class="close" data-dismiss="modal" aria-label="Close"
+                        style="color: red;opacity: 1;font-size: 30px;text-shadow: none;outline:none;"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="row">
+                <img src="img/onboard/home-logo-s.png" class="center-block k-logo-s"/>
+            </div>
+
+            <div class="k-addcompany home-mg2">
+                <div style="padding-left: 40px ; padding-right: 40px">
+                    <span style="font-size: 24px">{{'board_edit_driver.h5Edit_a_driver' | translate}}</span>
+                    <a class="pull-right" style="font-size: small;cursor: pointer" ng-click="skipToFinal()">{{'board_vehicle.h5or_skip_go_to_dashboard' | translate}}</a>
+                </div>
+                <div class="k-addcompanyinfo">
+                    <form role="form" name="editDriverForm" id="editDriverForm" data-toggle="validator" novalidate>
+                        <h2>{{'board_edit_driver.h5Driver_details' | translate}}</h2>
+                        <div class="form-group" style="margin: 0">
+                            <input class="myinput" type="text" placeholder="{{'board_add_driver.h5First_Name' | translate}}" ng-disabled="editDisable"
+                                   ng-model="driver.firstName" required/>
+                            <div class="help-block with-errors" style="margin: 0"></div>
+                        </div>
+                        <div class="form-group" style="margin: 0">
+                            <input class="myinput" type="text" placeholder="{{'board_add_driver.h5Last_Name' | translate}}" ng-disabled="editDisable"
+                                   ng-model="driver.lastName" required/>
+                            <div class="help-block with-errors" style="margin: 0"></div>
+                        </div>
+                        <div class="form-group" style="margin: 0">
+                            <input class="myinput sign-mail" type="text" placeholder="{{'board_add_driver.h5Email' | translate}}" ng-disabled="editDisable"
+                                   ng-model="driver.email"
+                                   pattern="^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$"
+                                   required/>
+                            <div class="help-block with-errors" style="margin: 0"></div>
+                        </div>
+                        <div class="form-group" style="margin: 0">
+                            <input class="myinput sign-mobile" type="text" placeholder="{{'board_add_driver.h5Mobile' | translate}}"
+                                   ng-disabled="editDisable"
+                                   ng-model="driver.mobile" required/>
+                            <div class="help-block with-errors" style="margin: 0"></div>
+                        </div>
+                        <h2>{{'board_add_driver.h5Accessible_Vehicles' | translate}}</h2>
+                        <select class="myinput selectpicker form-control" style="text-indent: 0;background: #000"
+                                ng-change="selectCarId()"
+                                ng-model="car_select_id"
+                                ng-options="car.car_id as  car.model_name  +' '+ car.license for car in driver.unselectedCars">
+                        </select>
+                    </form>
+                    <h3>{{'board_add_driver.h5Vehicle_added' | translate}}</h3>
+                    <div class="k-addcompanyinfo">
+                        <div class="row">
+                            <div class="vehiclelist-static">
+                                <ul>
+                                    <li ng-repeat="item in driver.selectedCars track by $index">
+                                        <span>{{item.model_name}}</span><span>{{item.brand_name}}</span><span>{{item.license}}</span><span><i
+                                            ng-click="removeCars($index)" class="fa fa-close fgray"></i></span></li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row home-mg">
+                        <div class="col-6 pull-left"><h3>{{'board_add_driver.h5when_driver_work' | translate}}</h3></div>
+                    </div>
+                    <div class="k-addcompanyinfo">
+                        <div class="row k-week">
+                            <ul>
+                                <li ng-click="checkChanged(0)"
+                                    ng-class="{true:'k-week-active',false:'k-week-normal'}[driver.routine[0].work]" style="cursor: pointer">{{'board_add_driver.h5Sun' | translate}}
+                                </li>
+                                <li ng-click="checkChanged(1)"
+                                    ng-class="{true:'k-week-active',false:'k-week-normal'}[driver.routine[1].work]" style="cursor: pointer">{{'board_add_driver.h5Mon' | translate}}
+                                </li>
+                                <li ng-click="checkChanged(2)"
+                                    ng-class="{true:'k-week-active',false:'k-week-normal'}[driver.routine[2].work]" style="cursor: pointer">{{'board_add_driver.h5Tue' | translate}}
+                                </li>
+                                <li ng-click="checkChanged(3)"
+                                    ng-class="{true:'k-week-active',false:'k-week-normal'}[driver.routine[3].work]" style="cursor: pointer">{{'board_add_driver.h5Wen' | translate}}
+                                </li>
+                                <li ng-click="checkChanged(4)"
+                                    ng-class="{true:'k-week-active',false:'k-week-normal'}[driver.routine[4].work]" style="cursor: pointer">{{'board_add_driver.h5Thu' | translate}}
+                                </li>
+                                <li ng-click="checkChanged(5)"
+                                    ng-class="{true:'k-week-active',false:'k-week-normal'}[driver.routine[5].work]" style="cursor: pointer">{{'board_add_driver.h5Fri' | translate}}
+                                </li>
+                                <li ng-click="checkChanged(6)"
+                                    ng-class="{true:'k-week-active',false:'k-week-normal'}[driver.routine[6].work]" style="cursor: pointer">{{'board_add_driver.h5Sat' | translate}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="k-week-time home-mg">
+                        <!--<table>-->
+                        <!--<tr>-->
+                        <!--<td width="10%" height="20"></td>-->
+                        <!--<td class="fgray" width="45%">Start</td>-->
+                        <!--<td class="fgray" width="45%">End</td>-->
+                        <!--</tr>-->
+                        <!--<tr ng-repeat="item in driver.routine track by $index" ng-show="item.work">-->
+                        <!--<td class="fgray2" height="40" style="vertical-align: middle">{{item.name}}</td>-->
+                        <!--<td class="fblue" style="padding-top: 5px">-->
+                        <!--<label>-->
+                        <!--<select class="myinput selectpicker myselect" style="text-indent: 0;"-->
+                        <!--ng-model="driver.routine[$index].start"-->
+                        <!--ng-change="selectWorkHour($index,true)"-->
+                        <!--ng-options="clock.index_id as clock.time for clock in timeClock">-->
+                        <!--</select>-->
+                        <!--</label>-->
+                        <!--</td>-->
+                        <!--<td class="fblue" style="padding-top: 5px">-->
+                        <!--<label>-->
+                        <!--<select class="myinput selectpicker myselect"-->
+                        <!--style="text-indent: 0;"-->
+                        <!--ng-model="driver.routine[$index].end"-->
+                        <!--ng-change="selectWorkHour($index,false)"-->
+                        <!--ng-options="clock.index_id as clock.time for clock in timeClock">-->
+                        <!--</select>-->
+                        <!--</label>-->
+                        <!--</td>-->
+                        <!--</tr>-->
+                        <!--</table>-->
+
+                        <table>
+                            <tr>
+                                <td width="10%" height="20"></td>
+                                <td class="fgray" width="45%">{{'board_comment.h5start' | translate}}</td>
+                                <td class="fgray" width="45%">{{'board_comment.h5end' | translate}}</td>
+                            </tr>
+                            <tr ng-repeat="item in driver.routine track by $index" ng-show="item.work">
+                                <td class="fgray" height="40" style="vertical-align: middle"><b>{{item.name | translate}}</b></td>
+                                <td class="fblue" style="padding-top: 5px">
+                                    <div>
+                                        <select class="myinput selectpicker myselect"
+                                                style="text-indent: 0;background: #000"
+                                                ng-model="driver.routine[$index].start"
+                                                ng-change="selectWorkHour($index,true)"
+                                                ng-options="clock.index_id as clock.time for clock in timeClock">
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="fblue" style="padding-top: 5px">
+                                    <div>
+                                        <select class="myinput selectpicker myselect"
+                                                style="text-indent: 0;background: #000"
+                                                ng-model="driver.routine[$index].end"
+                                                ng-change="selectWorkHour($index,false)"
+                                                ng-options="clock.index_id as clock.time for clock in timeClock">
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="home-mg2">
+                        <h3>{{'board_add_driver.h5how_many_hours' | translate}}</h3>
+                        <div class="k-addcompanyinfo">
+                            <div class="row">
+                                <select class="myinput selectpicker myselect"
+                                        style="background: #000"
+                                        ng-model="driver.pre_time"
+                                        ng-options="time.hour_value as {{'time.hours | translate'}} for time in preTimes">
+
+                                </select>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <button class="fblue" ng-click="deleteCurrentDriver()">{{'board_comment.h5Delete' | translate}}</button>
+                                <button class="fblue pull-right btn btn-blue ladda-button" style="outline: none"
+                                        ng-disabled="savingDriver" ng-click="updateCurrentDriver($event)">
+                                    <span class="ladda-label">{{'board_comment.h5SAVE' | translate}}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

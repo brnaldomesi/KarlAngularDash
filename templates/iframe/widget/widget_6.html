@@ -1,0 +1,304 @@
+<face-book-pixel pixel-page='widget_6'></face-book-pixel>
+<style>
+    .table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th{
+        padding: 3px;
+        font-size: 12px;
+    }
+
+
+    .bootstrap-datetimepicker-widget table td.day{
+        width: 18px;
+        color: #ccc;
+        border: #333 solid 1px;
+        font-weight: bolder;
+    }
+    .bootstrap-datetimepicker-widget table td.new{
+        color: #888;
+        border: #333 solid 1px;
+    }
+    .bootstrap-datetimepicker-widget table td.old{
+        color: #888;
+        border: #333 solid 1px;
+    }
+
+
+    .bootstrap-datetimepicker-widget .picker-switch td span{
+        height: 26px;
+        line-height: 26px;
+    }
+    .bootstrap-datetimepicker-widget table td span{
+        width: 30px;
+        height: 40px;
+        line-height: 40px;
+        margin: 0;
+    }
+    .bootstrap-datetimepicker-widget table td span:hover{
+    }
+    .bootstrap-datetimepicker-widget .timepicker-hour, .bootstrap-datetimepicker-widget .timepicker-minute, .bootstrap-datetimepicker-widget .timepicker-second{
+        width: 25px;
+        color: #f2f2f2;
+    }
+    .bootstrap-datetimepicker-widget table thead tr:first-child th{
+        color: #ccc;
+    }
+    .bootstrap-datetimepicker-widget table thead tr:first-child th:hover{
+        background: #3b405f;
+    }
+    .dow{
+        color: #3b76c9;
+    }
+    .bootstrap-datetimepicker-widget table{
+        width: 95%;
+        margin: 0 auto;
+        color: #f2f2f2;
+    }
+
+</style>
+<div class="containerOutermost" style="margin: auto;height:400px;background: #f3f3f3 !important;overflow: hidden">
+    <div style="margin: auto;">
+        <div class="dashboard-wrapper">
+            <ul class="nav-slider" style="margin: 0;width: 90%;margin: auto;">
+                <li style="width:50%;line-height: 40px !important;text-transform: none !important;" class="act-tab">
+                    <a class="nav-font-size" ng-click="onTypeChangedToP2P()"><span
+                            style="color: #484848;font-size: 16px;font-weight: 300">{{'widget.h5transfer' | translate}}</span></a>
+                </li>
+                <li style="width:50%;line-height: 40px !important;text-transform: none !important;"><a
+                        class="nav-font-size" ng-click="onTypeChangedToHourly()">
+                    <span
+                            style="color: #484848;font-size: 16px;font-weight: 300">{{'widget.h5hourly' | translate}}</span></a>
+                </li>
+                <li class="slider" style="width:50%;"></li>
+            </ul>
+
+            <div class="widge56" style="width: 95%;margin: auto">
+                <div id="stepOne" class="show " style="text-align: left" align="left">
+                    <fieldset style="padding: 0;margin: 0;height: 340px;">
+                        <div class="datetimepickerDiv" style="margin-top: 10px">
+                            <div class="form-group datetimepickerStyle" style="margin-top: 10px">
+                                <div style="display: inline-block"><p style="font-size: 10px">{{'widget.h5date' | translate}}:</p></div>
+                                <div style="height: 24px !important;line-height: 21px!important;background: #d8d8d8;border: none;width: 80%;display: inline-block;;color:
+                                    #333;padding-top: 0;font-size: 10px;"
+                                     class="form-control"
+                                     ng-click="displayDatePicker()">
+                                    <i style="font-size: 8px;color: #38619d;margin-right: 3px" class="fa fa-clock-o"
+                                       aria-hidden="true"></i> {{dateMessage | date:'short'}}
+                                </div>
+                            </div>
+                        </div>
+                        <form id="widgetForm1" class="form-horizontal" name="widgetForm1" role="form"
+                              data-toggle="validator"
+                              novalidate>
+                            <div ng-show="bookType == 1" class="po-line" style="position: relative">
+                                <div class="form-group" id="pickAddress">
+                                    <div class="pickup">
+                                        <div class="location-bg bg-red1" style="background: #3b76c9;width: 18px;height: 18px;font-size: 8px;padding-top: 0px;margin-left: 0;color: #ccd1d8">A</div>
+                                        <i class="fa fa-map-marker" style="font-size: 8px;color: #595a5f"></i>
+                                        <input class="myinput myinputhalfone" type="text"
+                                               autocomplete="off"
+                                               ng-model="bookPickUpAddress"
+                                               placeholder="{{'widget.h5enter_pickup_location' | translate}}"
+                                               uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                                               typeahead-loading="loadingLocations1" typeahead-no-results="noResults1"
+                                               typeahead-on-select="onPickUpSearchSelect($item, $model, $label, $event)"
+                                               class="form-control" style="width:80%;font-size: 10px;text-indent: 0px;margin-left: 0px;margin-right: 0;margin-bottom:5px;color: #333"/>
+
+                                    </div>
+                                    <div style="width: 90%;margin-left: 17px">
+                                        <div><i ng-click="flight()" ng-model="airPort"
+                                                ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[airPort]"
+                                                aria-hidden="true"
+                                                style="font-size: 8px;color: #595a5f" class="dopoint"></i> <span
+                                                style="margin-left: 2px;font-size: 10px;color: #ababad;">{{'widget.h5location_airport' | translate}}</span></div>
+                                        <div ng-show="airPort" class="flight-message">
+                                            <div class="f-l-m" style="width: 100%">
+                                                <input type="text" ng-model="airLineMessage" placeholder="{{'widget.h5enter_airline' | translate}}"
+                                                       uib-typeahead="airlineCompany as airlineCompany.name for airlineCompany in getAirlineCompany($viewValue)"
+                                                       typeahead-on-select="onAirlineCompanySearchSelect($item, $model, $label, $event)"
+                                                       style="width: 110px;background: transparent; border: none ;border-bottom: 1px #555 solid;padding:3px 0;text-indent: 0px;font-size:8px;color:#595a5f">
+                                            </div>
+                                            <div class="f-r-m" style="width: 100%">
+                                                <input type="text" ng-model="airLineMessageNum"
+                                                       placeholder="{{'widget.h5enter_flight' | translate}}"
+                                                       uib-typeahead="airlineNumber as airlineNumber.flightNumber for airlineNumber in getAirlineNumber($viewValue)"
+                                                       typeahead-on-select="onAirlineNumberSearchSelect($item, $model, $label, $event)"
+                                                       style="width: 110px;background: transparent; border: none ;border-bottom: 1px #555 solid;padding:3px 0;text-indent: 0px;font-size:8px;color:#595a5f">
+                                            </div>
+                                            <div style="clear: both"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group" id="destAddress" style="margin-top:10px">
+                                    <div class="Dropoff">
+                                        <div class="location-bg bg-red2" style="background:#3b76c9;width: 18px;height: 18px;font-size: 8px;padding-top: 0;margin-left:0;color: #ccd1d8">B</div>
+                                        <i class="fa fa-map-marker fb" style="font-size: 8px;color: #595a5f"></i>
+                                        <input class="myinput myinputhalfone" type="text"
+                                               placeholder="{{'widget.h5enter_dropoff_location' | translate}}"
+                                               ng-model="bookDropOffAddress"
+                                               autocomplete="off"
+                                               uib-typeahead="place as place.name + ' ' + place.vicinity for place in getDropLocation($viewValue)"
+                                               typeahead-loading="loadingLocations2"
+                                               typeahead-no-results="noResults2"
+                                               typeahead-on-select="onDropOffSearchSelect($item, $model, $label, $event)"
+                                               class="form-control" style="width:80%;font-size: 10px;text-indent: 0px;margin-left: 0px;margin-right: 0;margin-bottom:5px;color: #333"/>
+
+                                    </div>
+                                    <div style="width: 90%;margin-left: 17px">
+                                        <div><i ng-click="reflight()" ng-model="reAirPort"
+                                                ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[reAirPort]"
+                                                aria-hidden="true"
+                                                style="font-size: 8px;color: #595a5f" class="dopoint"></i> <span
+                                                style="margin-left: 2px;font-size: 10px;color: #ababad">{{'widget.h5location_airport' | translate}}</span></div>
+                                        <div ng-show="reAirPort" class="flight-message">
+                                            <div class="f-l-m" style="width: 100%">
+                                                <input type="text" ng-model="reAirLineMessage"
+                                                       placeholder="{{'widget.h5enter_airline' | translate}}"
+                                                       uib-typeahead="airDropLineCompany as airDropLineCompany.name for airDropLineCompany in getDropAirlineCompany($viewValue)"
+                                                       typeahead-on-select="onDropAirlineCompanySearchSelect($item, $model, $label, $event)"
+                                                       style="width: 110px;background: transparent; border: none ;border-bottom: 1px #555 solid;padding:3px 0;text-indent: 0px;font-size:8px;color:#595a5f">
+                                            </div>
+                                            <div class="f-r-m" style="width: 100%">
+                                                <input type="text" ng-model="reAirLineMessageNum"
+                                                       placeholder="{{'widget.h5enter_flight' | translate}}"
+                                                       uib-typeahead="airDropLineNumber as airDropLineNumber.flightNumber for airDropLineNumber in getDropAirlineNumber($viewValue)"
+                                                       typeahead-on-select="onDropAirlineNumberSearchSelect($item, $model, $label, $event)"
+                                                       style="width: 110px;background: transparent; border: none ;border-bottom: 1px #555 solid;padding:3px 0;text-indent: 0px;font-size:8px;color:#595a5f">
+                                            </div>
+                                            <div style="clear: both"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <form id="widgetForm2"
+                              class="form-horizontal"
+                              name="widgetForm2"
+                              role="form"
+                              data-toggle="validator"
+                              novalidate>
+                            <div ng-show="bookType == 2">
+                                <div class="form-group Dropoff-position2">
+                                    <div class="location-bg bg-red1" style="background: #3b76c9;width: 18px;height: 18px;font-size: 8px;padding-top: 0px;margin-left: 0;color: #ccd1d8">A</div>
+                                    <i class="fa fa-map-marker" style="font-size: 8px;color: #595a5f"></i>
+                                    <input class="myinput myinputhalfone" type="text"
+                                           autocomplete="off"
+                                           ng-model="bookPickUpAddress"
+                                           placeholder="{{'widget.h5enter_pickup_location' | translate}}"
+                                           uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                                           typeahead-loading="loadingLocations1" typeahead-no-results="noResults1"
+                                           typeahead-on-select="onPickUpSearchSelect($item, $model, $label, $event)"
+                                           class="form-control" style="width:127px;font-size: 10px;text-indent: 0px;margin-left: 0px;margin-right: 0;margin-bottom:5px;color: #333"/>
+                                    <div style="width: 90%;margin-left: 17px">
+                                        <div><i ng-click="flight()" ng-model="airPort"
+                                                ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[airPort]"
+                                                aria-hidden="true"
+                                                style="font-size: 8px;color: #595a5f" class="dopoint"></i> <span
+                                                style="margin-left: 2px;font-size: 10px;color: #ababad">{{'widget.h5location_airport' | translate}}</span></div>
+                                        <div ng-show="airPort" class="flight-message">
+                                            <div class="f-l-m" style="width: 100%">
+                                                <!--<br>-->
+                                                <input type="text" ng-model="airLineMessage" placeholder="{{'widget.h5enter_airline' | translate}}"
+                                                       uib-typeahead="airlineCompany as airlineCompany.name for airlineCompany in getAirlineCompany($viewValue)"
+                                                       typeahead-on-select="onAirlineCompanySearchSelect($item, $model, $label, $event)"
+                                                       style="width: 110px;background: transparent; border: none ;border-bottom: 1px #555 solid;padding:3px 0;text-indent: 0;font-size:10px;color:#595a5f">
+                                            </div>
+                                            <div class="f-r-m" style="width: 100%">
+                                                <input type="text" ng-model="airLineMessageNum"
+                                                       placeholder="{{'widget.h5enter_flight' | translate}}"
+                                                       uib-typeahead="airlineNumber as airlineNumber.flightNumber for airlineNumber in getAirlineNumber($viewValue)"
+                                                       typeahead-on-select="onAirlineNumberSearchSelect($item, $model, $label, $event)"
+                                                       style="width: 110px;background: transparent; border: none ;border-bottom: 1px #555 solid;padding:3px 0;text-indent: 0;font-size:10px;color:#595a5f">
+                                            </div>
+                                            <div style="clear: both"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group" id="hours">
+                                    <div style="margin-top: 10px;font-size: 10px;display: inline-block">{{'widget.h5hours' | translate}}</div>
+                                    <div style="padding: 0;display: inline-block">
+                                        <input id="rideHours" name="rideHours" type="number"
+                                               min="1"
+                                               step="1"
+                                               placeholder="1"
+                                               style="width: 120px;margin-left: 4px;font-size: 10px;margin-right: 0;color: #333"
+                                               class="myinput myinputhalf" ng-model="hours" required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="datetimepickerDiv" style="margin-top: 10px">-->
+                                <!--<div class="form-group datetimepickerStyle" style="margin-top: 18px">-->
+                                    <!--<div style="display: inline-block"><p style="font-size: 10px">Date</p></div>-->
+                                    <!--<div style="height: 24px !important;line-height: 21px!important;background: #d8d8d8;border: none;width: 80%;display: inline-block;;color:-->
+                                    <!--#333;padding-top: 0;font-size: 10px;"-->
+                                         <!--class="form-control"-->
+                                         <!--ng-click="displayDatePicker()">-->
+                                        <!--<i style="font-size: 8px;color: #38619d;margin-right: 3px" class="fa fa-clock-o"-->
+                                           <!--aria-hidden="true"></i> {{dateMessage | date:'short'}}-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <div ng-show="getOfferError>=3">
+                                <p style="text-align: center;color: #cb444e;margin: 0 3px 0 3px;font-size: 10px">{{'widget.h5not_find_booking' | translate: ({companyName:companyInfor.name,companyEmail:companyInfor.email,companyPhone:companyInfor.phone1?companyInfor.phone1:companyInfor.phone2})}}</p>
+                            </div>
+                            <div ng-show="errorMessages">
+                                <p style="text-align: center;color: #cb444e;margin: 0 3px 0 3px;font-size: 10px">{{errorMessages}}</p>
+                            </div>
+                            <div style="width: 100%;margin-top: 10px">
+                                <div style="width: 200px;">
+                                    <button class="btn btn-primary ladda-button ladda-progress"
+                                            style="border-radius: 50px;width: 80%;color:#fff;height:26px;padding-top:1px;text-align: center"
+                                            ng-disabled="getSameOfferError==3"
+                                            ng-click="clickNextAction($event)"><span style="z-index: 0">{{'widget.h5search' | translate}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <p ng-click="displayCompanyApp()"
+                               style="font-size: 12px;color: #2b7cca;text-align: center;margin-top: 15px;cursor: pointer"><u>{{'widget.h5downloaded_app2' | translate:({companyName:companyInfor.name})}}</u></p>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="showDatePicker" style="position: fixed;top:0;left: 0;width: 100%;height: 100%;background-color:rgba(0,0,0,0.9);z-index: 10000">
+            <div style="background-color: #000;width:163px;margin: auto;margin-top: 40px;">
+                <div style="margin: auto" class="datetimepicker"></div>
+            </div>
+            <div class="widget-btn widget-c-btn">
+                <button ng-click="cancelDateButtonClick()">{{'widget.h5Cancel' | translate}}</button>
+                <button ng-click="saveDateButtonClick()">{{'widget.h5Save' | translate}}</button>
+            </div>
+        </div>
+
+        <div ng-show="showCompanyApp"
+             style="position: fixed;top:0;left: 0;width: 100%;height: 100%;background-color:rgba(0,0,0,0.9);z-index: 10000">
+            <div>
+                <span style="float: right;color:#2b7cca;margin: 5px 10px 0 0;font-size: 20px">
+                    <i ng-click="closeCompanyApp()" class="fa fa-times"
+                       aria-hidden="true"></i>
+                </span>
+                <div style="clear: both"></div>
+            </div>
+            <div style="margin-top: 60%">
+                <p style="font-size: 12px;color: #2b7cca;text-align: center;margin-top: 15px"><u>{{'widget.h5downloaded_app2' | translate:({companyName:companyInfor.name})}}</span></u></p>
+                <div  style="text-align: center">
+                    <div style="">
+                        <a ng-href="{{getCompanyIosApp}}" target="view_window"><img style="border: 1px solid white"
+                                ng-src="{{iosAppImgLink}}" height="30"
+                                width="105"/></a>
+                    </div>
+                    <div style="margin-top: 15px">
+                        <a ng-href="{{getCompanyGoogleApp}}" target="view_window"><img style="border: 1px solid white"
+                                 ng-src="{{androidAppImgLink}}" height="30" width="105"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/widget_1.html'></google-analytics>

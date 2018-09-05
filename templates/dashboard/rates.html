@@ -1,0 +1,113 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="9"></karl-header-menu>
+    <div class="btn-add" ng-click="onAddButtonClick()" style="cursor:pointer;z-index: 990;"
+         title="{{'rates.h5Add_Rate' | translate}}"><i
+            class="fa fa-plus"></i></div>
+    <div ng-show="showRatesView">
+        <div class="title-block main-padding navbar-collapse">
+            <div class="main-title ">
+                <span class="fw main-title-text">{{'rates.h5all_rates' | translate}}</span>
+            </div>
+            <div class="pull-right main-title">
+                <div class="navbar-form navbar-form-sm navbar-left shift" data-target=".navbar-collapse" role="search">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" ng-model="input.searchText"
+                                   class="form-control input-sm bg-light no-border rounded padder search-bg"
+                                   placeholder="{{'comment.h5search' | translate}}">
+                            <span class="input-group-btn">
+                                <button ng-show="input.searchText"
+                                        ng-click="onCancelSearchButtonClick()"
+                                        class="btn btn-sm bg-dark2 rounded input-search">
+                                    <i class="fa fa-close fw"></i>
+                                </button>
+                                <button class="btn btn-sm bg-dark2 rounded input-search">
+                                    <i class="fa fa-search fw"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-padding card-fix pd-b-xl pos-rlt navbar-collapse">
+            <div class="rates-card-area" ng-repeat="rate in listData">
+                <div class="rates-del-panel gen-panel">
+                    <span class="rates-del-info fw">{{'rates.h5delete_rates' | translate}}?</span>
+                    <div>
+                        <span class="fgray rates-del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                        <span class="fred dopoint" ng-click="onDeleteButtonClick(rate.offer_id)">{{'comment.h5delete' | translate}}</span>
+                    </div>
+                </div>
+                <a type="button" class="card-more"><i class="fa fa-ellipsis-v fd fa-close"></i></a>
+                <a type="button" class="card-del gen" title="{{'comment.h5delete'|translate}}"><i
+                        class="fa fa-trash fd"></i></a>
+                <div class="rates-card-block" ng-click="onEditButtonClick(rate.offer_id)">
+                    <div class="rates-name">
+                        <span class="fw f-m">{{rate.offer_name}}</span>
+                        <br/>
+                        <span class="fblack" ng-if="rate.prices.length == 1">{{rate.prices[0].price |princeTranslateFilters:false:false:companyCurrency}}
+                            <span ng-if="(rate.type == 1 || rate.type == 3)&&distanceUnit==1">/{{'comment.h5Mile' | translate}}</span>
+                            <span ng-if="(rate.type == 1 || rate.type == 3)&&distanceUnit==2">/{{'comment.h5km' | translate}}</span>
+                            <span ng-if="rate.type == 2">/{{'comment.h5Minute' | translate}}</span>
+                        </span>
+                        <span class="fblack" ng-if="rate.prices.length > 1">
+                           {{'rates.h5multi_price' | translate}}
+                        </span>
+                        <span class="fw2" ng-if="rate.type == 1">{{'rates.h5long_haul_distance' | translate}}</span>
+                        <span class="fw2" ng-if="rate.type == 2">{{'comment.h5hourly' | translate}}</span>
+                        <span class="fw2" ng-if="rate.type == 3">{{'comment.h5transfer' | translate}}</span>
+                        </span>
+                    </div>
+                    <div class="rates-line"></div>
+                    <div class="rates-ve">
+                        <span>{{rate.car_count}} {{'comment.h5vehicles' | translate}}</span>
+                        <br/>
+                        <div class="fblack"
+                             style="overflow: hidden;width: 140%;text-overflow: ellipsis;white-space: nowrap">
+                            {{rate.categories}}
+                        </div>
+                    </div>
+                    <div class="rates-aon">
+                        <span>{{rate.option_count}} {{'comment.h5addOns' | translate}}</span>
+                    </div>
+                    <div class="cl"></div>
+                    <div class="rates-des">{{rate.description}}</div>
+                    <div class="rates-line"></div>
+                    <ul class="rates-week week-color">
+                        <li ng-class="{true:'rates-week-act',false:'rates-week-nor'}[rate.workStates[0]]">
+                            {{'comment.h5Sun' | translate}}
+                        </li>
+                        <li ng-class="{true:'rates-week-act',false:'rates-week-nor'}[rate.workStates[1]]">
+                            {{'comment.h5Mon' | translate}}
+                        </li>
+                        <li ng-class="{true:'rates-week-act',false:'rates-week-nor'}[rate.workStates[2]]">
+                            {{'comment.h5Tue' | translate}}
+                        </li>
+                        <li ng-class="{true:'rates-week-act',false:'rates-week-nor'}[rate.workStates[3]]">
+                            {{'comment.h5Wen' | translate}}
+                        </li>
+                        <li ng-class="{true:'rates-week-act',false:'rates-week-nor'}[rate.workStates[4]]">
+                            {{'comment.h5Thu' | translate}}
+                        </li>
+                        <li ng-class="{true:'rates-week-act',false:'rates-week-nor'}[rate.workStates[5]]">
+                            {{'comment.h5Fri' | translate}}
+                        </li>
+                        <li ng-class="{true:'rates-week-act',false:'rates-week-nor'}[rate.workStates[6]]">
+                            {{'comment.h5Sat' | translate}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="cl pd-b-xl"></div>
+        </div>
+    </div>
+
+    <div ng-show="showNoRatesView" style="text-align: center;margin-top: 14%">
+        <div style="font-size: 28px;color: white">{{'rates.h5no_rates' | translate}}</div>
+        <div style="font-size: 18px;color: grey">
+            <div>{{'rates.h5button_info_rate' | translate}}</div>
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/rates.html'></google-analytics>

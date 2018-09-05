@@ -1,0 +1,28 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4><span class="fgray">{{'super_vehicle_maker_edit.h5edit_vehicle_name' | translate}}</span></h4>
+    <form id="editCategoryForm" name="numberTypeForm"
+          data-toggle="validator" novalidate>
+        <div class="o-blcok fw">
+            <div class="form-group">
+                <h6>{{'super_vehicle_maker_edit.h5vehicle_name' | translate}}</h6>
+                <input class="myinput"
+                       type="text"
+                       ng-model="carMaker.name"
+                       placeholder="{{'super_vehicle_maker_edit.h5enter_maker_name' | translate}}" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="row mg-t-xl center-block area-bot">
+            <button type="submit" class="btn-blue btn center-block" ng-click="onEditVehicle(editCategoryForm.$valid, $event)">
+                <span>{{'comment.h5Save' | translate}}</span>
+            </button>
+        </div>
+    </form>
+</div>
+<google-analytics analytics-page='/super-vehicle-maker-edit.html'></google-analytics>

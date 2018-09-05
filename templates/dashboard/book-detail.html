@@ -1,0 +1,343 @@
+<div ng-class="{false:'client-detail',true:'client-detail-send-back'}[hasSentBack]">
+    <a type="button" class="peyment-close" data-dismiss="modal" ng-click="onCancelButtonClick()"><i
+            class="fa fa-close fb"></i></a>
+    <h4 style="font-size: 32px">{{'book_detail.h5booking_detail' | translate}}</h4>
+    <div class="c-block2  pos-rlt" style="margin-bottom: 0">
+        <h6 ng-class="{true:'book-detail-title-font-size',false:''}[langStyle==='fr']" class="fw b-d-little-title">{{'book_detail.h5client_trip' | translate}}</h6>
+        <h6 class="fb f-s text-uline dopoint pull-right bd-sendback-width"
+            style="font-size: 14px;margin-right: 12px;margin-top: 23px;font-family:sans-serif;font-weight: 300"
+            ng-click="sendBackBooking()" ng-show="showSendBack">{{'book_detail.h5Send_Booking_Back' | translate}}</h6>
+        <div class="cal-con-card">
+            <div class="book-state" style="font-size: 14px">{{tripStateString}}</div>
+            <div class="cal-con-card-up">
+                <div ng-if="book.c_avatar_url == ''" class="cal-con-card-head"
+                     style="background:#fff url(img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: cover"></div>
+                <div ng-if="book.c_avatar_url != ''" class="cal-con-card-head"
+                     style="background:#fff url({{book.c_avatar_url}}) no-repeat 50% 50%;background-size: cover"></div>
+                <div class="cal-con-card-name">
+                    <span class="fw2 f-s"><span ng-show="showAffiliate == 2">{{'comment.h5affiliate' | translate}}</span> {{'comment.h5client' | translate}}</span>
+                    <br/>
+                    <span style="display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap"
+                          class="f-m fw">{{book.c_first_name}} {{book.c_last_name}}</span>
+                </div>
+                <div class="cl"></div>
+            </div>
+            <div class="myline"></div>
+            <div class="cal-con-card-down">
+                <div class="inline i5-fontsize" ng-show="book.type == 1">
+                    <span class="fw">{{'book_detail.h5distance_destination' | translate}}:</span>
+                    <span class="fblack">{{book.detail_distance|DistanceFormatFilter:true:book.unit}}</span>
+                    <br/>
+                    <span class="fw">{{'book_detail.h5time_destination' | translate}}: </span> <span class="fblack">{{book.detail_time | TimeFormatFilter}}</span>
+                </div>
+                <div class="inline" ng-show="book.type == 2 || book.type == 3">
+                    <span class="fw">{{'comment.h5hours' | translate}}:</span> <span class="fblack">{{book.detail_time | TimeFormatFilter}}</span>
+                </div>
+
+                <div class="pull-right">
+                    <span class="fw" ng-show="book.type == 1">{{'comment.h5transfer' | translate}}</span>
+                    <span class="fw" ng-show="book.type == 2">{{'comment.h5hourly' | translate}}</span>
+                    <span class="fw" ng-show="book.type == 3">{{'comment.h5custom_quote' | translate}}</span>
+                    <br/>
+                    <span class="fred" style="display: block;float: right" ng-show="book.appointed_at">{{book.temp_appointed_at}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="c-block2  pos-rlt" style="margin-top: 0">
+        <div class="cal-trip-card">
+            <div class="cal-trip-card-up pos-rlt">
+                <div class="cal-trip-card-loc" style="position: relative;overflow: hidden">
+                    <span class="fw">A</span>
+                    <p class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin: 0px;">
+                        {{book.d_final_address[0]}}</p>
+                    <p class="fw" style="position: relative;left: 38px;top: -10px;display: table-cell"
+                       ng-show="book.d_final_address[1]">{{book.d_final_address[1]}}</p>
+                    <div ng-hide="(book.d_airline == null||book.d_airline.length==0)&&(book.d_flight == null||book.d_flight.length ==0)"
+                         style="color: white">
+                        <p style="margin: -10px 0 10px 37px;display: inline-block;width: 35%">
+                            <b style="color: black">{{'book_detail.h5airline' | translate}}</b>
+                            <br>
+                            {{book.d_airline}}&nbsp;
+                        </p>
+                        <p style="margin: -10px 0 10px 0;display: inline-block;width: 45%">
+                            <b style="color: black">{{'book_detail.h5flight_number' | translate}}</b>
+                            <br>
+                            {{book.d_flight}}&nbsp;
+                        </p>
+                    </div>
+                    <div class="line-ver"
+                         ng-show="book.type == 1">
+                    </div>
+                    <!--<p style="margin-left: 35px">>5555555</p>-->
+                </div>
+                <div class="cal-trip-card-loc" ng-show="book.type == 1">
+                    <span style="background: #294775" class="fw">B</span>
+                    <p class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin: 0px;">
+                        {{book.a_final_address[0]}}</p>
+                    <p class="fw" style="position: relative;left: 38px;top: -10px;display: table-cell"
+                       ng-show="book.a_final_address[1]">{{book.a_final_address[1]}}</p>
+                    <div ng-hide="(book.a_airline == null||book.a_airline.length==0)&&(book.a_flight == null||book.a_flight.length ==0)"
+                         style="color: white">
+                        <p style="margin: -10px 0 10px 37px;display: inline-block;width: 35%">
+                            <b style="color: black">{{'book_detail.h5airline' | translate}}</b>
+                            <br>
+                            {{book.a_airline}}&nbsp;
+                        </p>
+                        <p style="margin: -10px 0 10px 0;display: inline-block;width: 45%">
+                            <b style="color: black">{{'book_detail.h5flight_number' | translate}}</b>
+                            <br>
+                            {{book.a_flight}}&nbsp;
+                        </p>
+                    </div>
+                </div>
+                <!--<div ng-class="{true:'line-ver',false:'air-line-ver'}[(book.d_airline == null||book.d_airline.length==0)&&(book.d_flight == null||book.d_flight.length ==0)]"-->
+                <!--ng-show="book.type == 1"></div>-->
+            </div>
+            <div class="myline"></div>
+            <div class="cal-trip-card-down">
+                <div ng-class="{false:'cal-trip-po',true:'cal-trip-op'}[isCoupon]">
+                    <span class="fblack">{{'comment.h5total_time' | translate}}</span><br/>
+                    <span><i class="fa fa-clock-o fblack"></i><span
+                            class="fw2">{{book.detail_time | TimeFormatFilter}}</span></span>
+                </div>
+                <div ng-class="{false:'cal-trip-po',true:'cal-trip-op'}[isCoupon]" ng-show="book.type == 1">
+                    <span class="fblack">{{'comment.h5distance' | translate}}</span><br/>
+                    <span><i class="fa fa-map fblack"></i><span class="fw2">{{book.detail_distance|DistanceFormatFilter:true:book.unit}}</span></span>
+                </div>
+                <div ng-class="{false:'cal-trip-po',true:'cal-trip-op'}[isCoupon]">
+                    <span class="fblack">{{'comment.h5rate' | translate}}</span><br/>
+                    <span>
+                        <i ng-show="book.ccy.toLowerCase()=='usd'" class="fa fblack fa-dollar"></i>
+                        <span class="fw2">{{book.cost | princeTranslateFilters:false:true:book.ccy}}</span>
+                        <i ng-show="book.ccy.toLowerCase()=='eur'" class="fa fblack fa-eur"></i>
+                        <i ng-show="book.ccy.toLowerCase()=='gbp'" class="fa fblack fa-gbp"></i>
+                        <span ng-show="book.ccy.toLowerCase()=='aud'" >AUD</span>
+                        <span ng-show="book.ccy.toLowerCase()=='dkk'" >DKK</span>
+                        <span ng-show="book.ccy.toLowerCase()=='cad'" >CAD</span>
+                        <span ng-show="book.ccy.toLowerCase()=='hkd'" >HKD</span>
+                        <span ng-show="book.ccy.toLowerCase()=='jpy'" >JPY</span>
+                        <span ng-show="book.ccy.toLowerCase()=='nzd'" >NZD</span>
+                        <span ng-show="book.ccy.toLowerCase()=='nok'" >NOK</span>
+                        <span ng-show="book.ccy.toLowerCase()=='sgd'" >SGD</span>
+                        <span ng-show="book.ccy.toLowerCase()=='sek'" >SEK</span>
+                        <span ng-show="book.ccy.toLowerCase()=='chf'" >CHF</span>
+                    </span>
+                </div>
+                <div ng-class="{false:'cal-trip-po',true:'cal-trip-op'}[isCoupon]" ng-show="isCoupon">
+                    <span class="fblack">{{'comment.h5coupon' | translate}}</span><br/>
+                    -<span>
+                    <i ng-show="book.ccy.toLowerCase()=='usd'" class="fa fblack fa-dollar"></i>
+                    <span class="fw2">{{book.coupon_off| princeTranslateFilters:false:true:book.ccy}}
+                    <i ng-show="book.ccy.toLowerCase()=='eur'" class="fa fblack fa-eur"></i>
+                    <i ng-show="book.ccy.toLowerCase()=='gbp'" class="fa fblack fa-gbp"></i>
+                    <span ng-show="book.ccy.toLowerCase()=='aud'" >AUD</span>
+                    <span ng-show="book.ccy.toLowerCase()=='dkk'" >DKK</span>
+                    <span ng-show="book.ccy.toLowerCase()=='cad'" >CAD</span>
+                    <span ng-show="book.ccy.toLowerCase()=='hkd'" >HKD</span>
+                    <span ng-show="book.ccy.toLowerCase()=='jpy'" >JPY</span>
+                    <span ng-show="book.ccy.toLowerCase()=='nzd'" >NZD</span>
+                    <span ng-show="book.ccy.toLowerCase()=='nok'" >NOK</span>
+                    <span ng-show="book.ccy.toLowerCase()=='sgd'" >SGD</span>
+                    <span ng-show="book.ccy.toLowerCase()=='sek'" >SEK</span>
+                    <span ng-show="book.ccy.toLowerCase()=='chf'" >CHF</span>
+                    </span></span>
+                </div>
+            </div>
+            <div class="myline"></div>
+            <div class="driver-des mg-t-s">
+                <p class="cl" style="margin: 0 0 0 10px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                    P:{{book.c_mobile | phoneNumFormatter: country}}</p>
+                <p class="cl" style="margin: 0 0 0 10px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                    E:{{book.c_email}}</p>
+                <div class="driver-des-cont" style="width: 50%">
+                    <a href="sms:{{book.c_mobile}}">
+                        <div class="dispop">
+                            <i class="fa fa-commenting-o fw"></i>
+                            <br/>
+                            <span class="fblack">{{'comment.h5text' | translate}}</span>
+                        </div>
+                    </a>
+                    <a href="tel:{{book.c_mobile}}">
+                        <div class="dispop">
+                            <i class="fa fa-phone fw"></i>
+                            <br/>
+                            <span class="fblack">{{'comment.h5call' | translate}}</span>
+                        </div>
+                    </a>
+                    <!--<p class="cl">{{book.c_mobile}}</p>-->
+
+                </div>
+                <div class="driver-des-mail">
+                    <a href="mailto:{{book.c_email}}">
+                        <div class="dispop">
+                            <i class="fa fa-envelope fw"></i>
+                            <br/>
+                            <span class="fblack">{{'comment.h5email' | translate}}</span>
+                        </div>
+                    </a>
+                    <!--<p class="cl">{{book.c_email}}</p>-->
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div style="padding: 40px 0 15px 0">
+                <a ng-click="sendEmail()"
+                   style="display: block;background: transparent;width: 55%;height: 35px;border-radius: 18px;text-decoration: none;border: 1px solid white;color: white;font-size: 15px;text-align: center;line-height: 35px;margin: auto">{{'comment.h5email_itinerary' | translate}}</a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="c-block2  pos-rlt" ng-show="book.option_data.length > 0">
+        <h6 ng-class="{true:'book-detail-title-font-size',false:''}[langStyle==='fr']" class="fw b-d-little-title" style="display: inline-block;">{{'comment.h5addOns' | translate}}</h6>
+        <div class="book-detail-notes-background" style="min-height: inherit">
+            <div  style="color: white;display: inline-block;width: 50%;" ng-repeat="option in book.option_data">
+                <span style="font-size: 20px;display: inline-block;width: 70%;white-space:nowrap;overflow: hidden;text-overflow: ellipsis">
+                 <span style="display: inline-block;vertical-align: middle;border-radius: 50%;background: #fff;width: 5px;height: 5px"></span>
+                 <sapn>{{option.option_name}}</sapn>
+                </span>
+                <sapn style="font-size: 20px;display: inline-block;vertical-align: super;margin-left: 5px">{{option.count}}</sapn>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="c-block2  pos-rlt" ng-show="book.message.length > 0">
+        <h6 ng-class="{true:'book-detail-title-font-size',false:''}[langStyle==='fr']" class="fw b-d-little-title" style="display: inline-block;">{{'comment.h5notes' | translate}}</h6>
+        <h6 ng-class="{true:'book-detail-edit-font-size',false:''}[langStyle==='fr']" class="fb f-s text-uline dopoint pull-right b-d-little-title-edit"
+            style="font-size: 20px;margin-right: 12px;margin-top: 20px;font-family:sans-serif;font-weight: 300"
+            ng-click="showOrHideMoreNotes()">
+            <span ng-show="!showMoreNotes">{{'comment.h5More' | translate}}</span>
+            <span ng-show="showMoreNotes">{{'comment.h5Less' | translate}}</span>
+        </h6>
+        <div class="book-detail-notes-background">
+            <span style="color: white;font-size: 18px;height: 80px;text-overflow:ellipsis;
+                        -webkit-line-clamp: 3;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;"
+                  ng-style="{display: showMoreNotes ? '' : '-webkit-box' }">{{book.message}}</span>
+        </div>
+    </div>
+
+    <div class="c-block2  pos-rlt">
+        <h6 ng-class="{true:'book-detail-title-font-size',false:''}[langStyle==='fr']" class="fw b-d-little-title">{{'book_detail.h5passengers_bags' | translate}}</h6>
+        <div class="cal-passenger mg-t-m" ng-show="book.passenger_names.length > 0">
+            <ul ng-show="book.passenger_names.length > 0">
+                <li ng-repeat="passengerName in book.passengerNames track by $index">
+                    <span class="fblack">{{'comment.h5passenger' | translate}} {{$index+1}}</span>
+                    <p class="fw2 f-w-500 f-m">{{passengerName}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="cal-passenger mg-t-m" style="padding-left: 15px" ng-show="book.passenger_names.length == 0">
+            <span class="fblack f-m f-w-500">{{'comment.h5null_passengers' | translate}}</span>
+        </div>
+        <div class="cal-bag">
+            <span class="fblack f-m f-w-500" ng-show="book.bags_count > 0">{{book.bags_count}} {{'comment.h5bags' | translate}}</span>
+            <span class="fblack f-m f-w-500" ng-show="book.bags_count == 0">{{'comment.h5null_bags' | translate}}</span>
+        </div>
+    </div>
+
+    <div class="c-block2  pos-rlt">
+        <h6 ng-class="{true:'book-detail-title-font-size',false:''}[langStyle==='fr']" class="fw b-d-little-title" style="display: inline-block;"><span ng-show="showAffiliate == 1">{{'comment.h5affiliate' | translate}}</span> {{'comment.h5driver_vehicle' | translate}}</h6>
+        <h6 ng-class="{true:'book-detail-edit-font-size',false:''}[langStyle==='fr']" class="fb f-s text-uline dopoint pull-right b-d-little-title b-d-little-title-edit"
+            style="font-size: 20px;margin-right: 12px;margin-top: 20px;font-family:sans-serif;font-weight: 300"
+            ng-click="editCars()" ng-show="showEditButton">{{'comment.h5Edit' | translate}}</h6>
+        <div style="clear: both"></div>
+        <div class="rates-sub" style="border-radius: 5px;" ng-style="{height:showAffiliate == 1 ? '220px':'195px'}">
+            <div ng-if="book.driver_data.avatar_url == ''" class="rates-sub-img pull-left"
+                 style="background:#fff url(../../img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: cover"></div>
+            <div ng-if="book.driver_data.avatar_url != ''" class="rates-sub-img pull-left"
+                 style="background:#fff url({{book.driver_data.avatar_url}}) no-repeat 50% 50%;background-size: cover"></div>
+            <div class="pull-left mg-l-s" style="width: 70%">
+                <span class="fw2">{{'comment.h5driver' | translate}}</span>
+                <br/>
+                <span style="display: block;white-space:nowrap;overflow: hidden;text-overflow: ellipsis" class="fw f-s"><b>{{book.driver_data.first_name}} {{book.driver_data.last_name}}</b></span></span>
+            </div>
+            <div class="cl"></div>
+            <div class="myline"></div>
+            <div class="driver-des mg-t-s">
+                <p class="cl" style="margin: 0;font-size: 15px">{{comapnyName}}</p>
+                <p class="cl"
+                   style="margin: 0;font-size: 15px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                    P.{{book.driver_data.mobile | phoneNumFormatter:country}}</p>
+                <p class="cl"
+                   style="margin: 0;font-size: 15px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                    E.{{book.driver_data.email}}</p>
+                <div class="driver-des-cont" style="height: 54px">
+                    <a href="sms:{{book.driver_data.mobile}}">
+                        <div class="dispop">
+                            <i class="fa fa-commenting-o fw"></i>
+                            <br/>
+                            <span class="fblack">{{'comment.h5text' | translate}}</span>
+                        </div>
+                    </a>
+                    <a href="tel:{{book.driver_data.mobile}}">
+                        <div class="dispop">
+                            <i class="fa fa-phone fw"></i>
+                            <br/>
+                            <span class="fblack">{{'comment.h5call' | translate}}</span>
+                        </div>
+                    </a>
+                    <!--<p class="cl">{{book.driver_data.mobile}}</p>-->
+
+                </div>
+                <div class="driver-des-mail" style="height: 54px">
+                    <a href="mailto:{{book.driver_data.email}}">
+                        <div class="dispop">
+                            <i class="fa fa-envelope fw"></i>
+                            <br/>
+                            <span class="fblack">{{'comment.h5email' | translate}}</span>
+                        </div>
+                    </a>
+                    <!--<p class="cl">{{book.driver_data.email}}</p>-->
+                </div>
+            </div>
+        </div>
+        <div class="rates-sub" style="border-radius: 5px;height: 130px;">
+            <div ng-if="book.car_data.img == ''" class="rates-sub-img pull-left"
+                 style="background:#fff url(img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: contain"></div>
+            <div ng-if="book.car_data.img != ''" class="rates-sub-img pull-left"
+                 style="background:#fff url({{book.car_data.img}}) no-repeat 50% 50%;background-size: contain"></div>
+            <div class="pull-left mg-l-s" style="width: 75%">
+                <span class="fw"><b>{{book.car_data.model}}</b></span> <span
+                    class="fblack"><b>{{book.car_data.brand}}</b></span>
+                <br/>
+                <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 50%"
+                      class="fw2" ng-hide="showAffiliate == 1">{{book.car_data.license_plate}}</span>
+                <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 50%"
+                      class="fblack">{{book.car_data.color}}</span>
+                <div style="clear: both"></div>
+            </div>
+
+            <div class="pos-rlt cl">
+                <div class="vhcard-line"></div>
+                <div class="vhpass" style="width: 52%">
+                    <span style="font-size: 14px">{{'comment.h5max_passengers' | translate}}: {{book.car_data.seats_max}}</span>
+                </div>
+                <div class="vhbags">
+                    <span style="font-size: 14px">{{'comment.h5max_bags' | translate}}: {{book.car_data.bags_max}}</span>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="row center-block area-bot book-detail-button" ng-show="showEndButton"
+         style="width: 45%;float: left;margin: 0 0 0 5px">
+        <h6 ng-class="{true:'lang-cancel-book',false:''}[langStyle=='fr']" class="fb f-s text-uline dopoint"
+            style="font-size: 20px;margin-right: 12px;margin-top: 20px;font-family:sans-serif;font-weight: 300"
+            ng-click="onEndBookButtonClick()">{{'book_detail.h5Cancel_Booking' | translate}}</h6>
+    </div>
+    <div class="row center-block area-bot book-detail-button" ng-show="isTirp"
+         style="width: 45%;float: right;margin: 15px 5px 0 0">
+        <button style="width: 100%" class="btn-line btn center-block" ng-click="editStartTrip()">
+            <span ng-show="isStart">{{'book_detail.h5Start_Trip' | translate}}</span>
+            <span ng-show="!isStart">{{'book_detail.h5End_Trip' | translate}}</span>
+        </button>
+    </div>
+    <div style="clear: both"></div>
+</div>
+<google-analytics analytics-page='/book-detail.html'></google-analytics>

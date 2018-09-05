@@ -1,0 +1,40 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4>{{'calendar_selectcars.h5select_A_Vehicle' | translate}}</h4>
+    <br/>
+    <div class="accordion basic-accordion">
+        <div ng-repeat="category in categories">
+            <h3 class="myselect">{{category.category}}
+                <span
+                        class="fred" ng-show="category.isSelect">({{'booking.h5selected' | translate}})</span>
+                <span class="fb">{{category.cars.length}} {{'comment.h5total'|translate}}</span>
+            </h3>
+            <div class="cl-block">
+                <div class="evcard-area" ng-click="onCarCardClick(category,car)"
+                     ng-repeat="car in category.cars" style="height: auto!important;">
+                    <a type="button" class="vcard-more" ng-show="car.isSelect"><i
+                            class="fa fa-check"></i></a>
+                    <div class="rates-sub" style="margin: 0!important;">
+                        <div class="rates-sub-img pull-left"
+                             style="background:#fff url({{car.img}}) no-repeat 50% 50%;background-size: contain"></div>
+                        <div class="pull-left mg-l-s" style="width: 58%;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis">
+                            <span class="fw"><b>{{car.model}}</b></span> <span
+                                class="fblack"><b>{{car.brand}}</b></span>
+                            <br/>
+                            <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 50%"
+                                  class="fw2">{{car.license_plate}}</span>
+                            <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 50%"
+                                  class="fblack">{{car.color}}</span>
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button
+            class="btn-blue btn center-block" ng-click="onEditButtonClick($event)">
+        <span>{{'comment.h5SAVE'|translate}}</span>
+    </button>
+</div>
+<google-analytics analytics-page='/calendar-selectcars.html'></google-analytics>

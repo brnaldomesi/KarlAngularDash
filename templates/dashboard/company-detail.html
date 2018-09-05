@@ -1,0 +1,157 @@
+<div class="widget">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <div>
+        <span class="fgray main-title-text-l">{{'company_detail.h5company_detail' | translate}}</span>
+    </div>
+
+    <div class="widget-body">
+        <div class="form form-horizontal no-margin book-detail-content" style="padding: 10pt">
+            <div class="center-block text-center" style="margin: 10pt 0">
+                <img ng-if="!img == '' " ng-src="{{img}}"
+                     ngf-pattern="'image/*'"
+                     style="width: 100px; height: 100px; border: 2px #e0e0e0 solid;border-radius:136px;"/>
+                <img ng-if="item.customer_avatar == '' " ng-src="img/dashboard/logo.png"
+                     ngf-pattern="'image/*'"
+                     style="width: 100px; height: 100px; border: 2px #e0e0e0 solid;border-radius:136px;"/>
+                <i ng-class="{1:'icon-lock',0:'icon-lock-open'}[an_locked]" title="AN lock"
+                   style="margin-left: 10px ; font-size: x-large" ng-click="lockSwitchAn(an_locked)" ></i>
+            </div>
+
+
+            <form id="companyEditForm" name="companyEditForm"
+                  data-toggle="validator" novalidate>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_add.h5company_name' | translate}}</h6>
+                    <div class="form-group">
+                        <input class="myinput2" ng-model="name" readonly>
+                    </div>
+                </div>
+
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">Sales Rep</h6>
+                    <div class="form-group">
+                        <input class="myinput2" ng-model="saleRep" readonly>
+                    </div>
+                </div>
+
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">Sales Assistant</h6>
+                    <div class="form-group">
+                        <input class="myinput2" ng-model="saleAssistant" readonly>
+                    </div>
+                </div>
+
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'comment.h5address' | translate}}</h6>
+                    <div class="form-group">
+                        <input class="myinput3" ng-model="address" readonly>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_detail.h5client_count' | translate}}</h6>
+                    <div class="form-group">
+                        <input class="myinput3" ng-model="customer_count" readonly>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_detail.h5Vehicle_count' | translate}}</h6>
+                    <div class="form-group">
+                        <input class="myinput3" ng-model="car_count" readonly>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_detail.h5driver_count' | translate}}</h6>
+                    <div class="form-group">
+                        <input class="myinput3" ng-model="driver_count" readonly>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_detail.h5rate_count' | translate}}</h6>
+                    <div class="form-group">
+                        <input class="myinput3" ng-model="offer_count" readonly>
+                    </div>
+                </div>
+
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_detail.h5add-on_count' | translate}}</h6>
+                    <div class="form-group">
+                        <input class="myinput3" ng-model="option_count" readonly>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <div style="position: absolute;right: 10px;top:47%;font-weight:bold;color:#3b76c9;font-size: 20px;">
+                        <span><i class="fa fa-percent" aria-hidden="true"></i></span>
+                    </div>
+                    <h6 class="fw">{{'company_detail.h5karl_fee' | translate}}</h6>
+                    <div class="form-group">
+                        <input class="myinput2" ng-model="rate" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <div class="mg-t-xxl">
+                    <button type="submit" ng-click="saveButtonClick(companyEditForm.$valid)"
+                            class="btn-blue btn ladda-button center-block mg-t-xl">
+                        <span>{{'comment.h5SAVE' | translate}}</span>
+                    </button>
+                </div>
+            </form>
+
+
+            <span style="display: block;float: right;cursor: pointer;color: transparent"><i class="fa fa-chevron-circle-down" aria-hidden="true" ng-click="isShowConfig()"></i></span>
+            <div style="clear: both"></div>
+            <div ng-show="showConfig">
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_detail.h5push_profile' | translate}}</h6>
+                    <!--<div class="form-group">-->
+                    <input class="myinput2" ng-model="pushProfile">
+                    <!--<div class="help-block with-errors"></div>-->
+                    <!--</div>-->
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_detail.h5push_token' | translate}}</h6>
+                    <!--<div class="form-group">-->
+                    <input class="myinput2" ng-model="pushToken">
+                    <!--<div class="help-block with-errors"></div>-->
+                    <!--</div>-->
+                </div>
+                <div class="mg-t-xxl" style="width: 70px;float: right;margin-right: 20px">
+                    <button ng-click="savePushClick($event)"
+                            class="btn-blue btn ladda-button center-block mg-t-xl"
+                            style="margin-top: 10px !important;width: 90px;height: 25px;font-size: 10px;line-height: 25px;font-weight: 300">
+                        <span>{{'company_detail.h5save_config' | translate}}</span>
+                    </button>
+                </div>
+                <div style="clear: both"></div>
+
+
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_detail.h5android_url' | translate}}</h6>
+                    <input class="myinput2" ng-model="androidApp">
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_detail.h5Package_Name' | translate}}</h6>
+                    <input class="myinput2" ng-model="androidPkgName">
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_detail.h5ios_url' | translate}}</h6>
+                    <input class="myinput2" ng-model="iosApp">
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'company_detail.h5IOS_Id' | translate}}</h6>
+                    <input class="myinput2" ng-model="iosId">
+                </div>
+                <div class="mg-t-xxl" style="width: 70px;float: right;margin-right: 20px">
+                    <button ng-click="saveAppClick($event)"
+                            class="btn-blue btn ladda-button center-block mg-t-xl"
+                            style="margin-top: 10px !important;width: 90px;height: 25px;font-size: 10px;line-height: 25px;font-weight: 300">
+                        <span>{{'company_detail.h5save_app' | translate}}</span>
+                    </button>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/company-detail.html'></google-analytics>

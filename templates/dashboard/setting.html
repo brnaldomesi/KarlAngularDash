@@ -1,0 +1,80 @@
+<div class="app app-header-fixed app-aside-folded mg-b-xl">
+    <karl-header-menu active-index="18"></karl-header-menu>
+    <div class="main-padding card-fix navbar-collapse">
+        <div class="mg-t-l" style="display: block">
+            <div class="h-m">
+                <h4 class="fw pull-left setting-title-fs">{{'setting.h5Company_Payment_Settings'|translate}}</h4>
+
+            </div>
+            <br class="set-br"/>
+            <div class="fgray f-w-300 set-des">
+                {{'setting.h5Select_payments_and_handled_throughout'|translate}}
+            </div>
+        </div>
+        <div class="mg-t-l cl">
+            <h4 class="setting-tittle">{{'setting.h5drivers_to_see_trip_prices'|translate}}</h4>
+            <div class="rates-option mg-t-s">
+                <h4 class="setting-select"><i class="dopoint" ng-click="settingClick(0)"
+                        ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[seePrice == 0]"></i><span>{{'setting.h5Allow_it'|translate}}</span></h4>
+                <h4 class="setting-select"><i class="dopoint" ng-click="settingClick(1)"
+                        ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[seePrice == 1]"></i><span>{{'setting.h5Not_Allow_it'|translate}}</span></h4>
+            </div>
+
+            <h4 class="setting-tittle">{{'setting.h5When_charge_passengers_bookings'|translate}}</h4>
+            <div class="rates-option mg-t-s" >
+                <h4 class="setting-select"><i class="dopoint" ng-click="settingClick(2)"
+                        ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[payAuth == 0]"></i><span>{{'setting.h5Upfront'|translate}}</span> </h4>
+                <h4 class="setting-select"><i class="dopoint" ng-click="settingClick(3)"
+                        ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[payAuth == 1]"></i><span>{{paypalOrStripe}}</span></h4>
+            </div>
+
+            <h4 class="setting-tittle">{{'setting.h5additional_charges'|translate}}</h4>
+            <div class="rates-option mg-t-s">
+                <h4 class="setting-select"><i class="dopoint" ng-click="settingClick(4)"
+                        ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[SettlementType == 0]"></i><span>{{'setting.h5Always_charge_booking_was_made'|translate}}</span></h4>
+                <h4 class="setting-select"><i class="dopoint" ng-click="settingClick(5)"
+                        ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[SettlementType == 1]"></i><span>{{'setting.h5Always_charge_end_of_trip'|translate}}</span></h4>
+                <h4 class="setting-select"><i class="dopoint" ng-click="settingClick(6)"
+                        ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[SettlementType == 2]"></i><span>{{'setting.h5drivers_to_decide'|translate}}</span></h4>
+            </div>
+
+            <h4 class="setting-tittle setting-title-fs" style="font-size: 35px">{{'setting.h5Distance_Measurement'|translate}}</h4>
+            <div class="rates-option mg-t-s" style="border-bottom: 1px solid grey;padding-bottom: 25px">
+                <h4 class="setting-select" style="font-size: 20px"><i class="dopoint dis-option" ng-click="settingClick(7)"
+                                              ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[distanceUnit == 1]"></i><span class="dis-span">{{'setting.h5Mileage'|translate}}</span></h4>
+                <h4 class="setting-select" style="font-size: 20px"><i class="dopoint dis-option" ng-click="settingClick(8)"
+                                              ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[distanceUnit == 2]"></i><span class="dis-span">{{'setting.h5kilometres'|translate}}</span></h4>
+            </div>
+
+            <div class="mg-t-s">
+                <div>
+                    <h4 class="fw pull-left  setting-title-fs" style="margin-top: 13px">{{'setting.h5AUTHORIZE'|translate}}</h4>
+
+                </div>
+                <div class="set-toggle" ng-show="showToggle">
+                    <input type="checkbox" name="masterLogin" ng-checked="swichs" style="margin-left: 30px;margin-top: -10px">
+                </div>
+                <div class="fgray f-w-300 set-des cl">
+                    {{'setting.h5Representative_info'|translate}}
+                    <br>
+                    {{'setting.h5Representative_CREDENTIALS'|translate}}
+                </div>
+            </div>
+
+            <div ng-show="showMaster" class="mg-l-s">
+                <div style="display: inline-block;">
+                    <h4 class="f-s fred">{{'setting.h5Master_login_accounts'|translate}}</h4>
+                    <h4 class="setting-tittle f-w-500" style="margin-top: 0"><span>{{userName}}</span></h4>
+                </div>
+                <div style="display: inline-block;margin-left: 25px" ng-show="showPassword">
+                    <h4 class="f-s fred">{{'setting.h5Master_login_password'|translate}}</h4>
+                    <h4 class="setting-tittle f-w-500" style="margin-top: 0"><span>{{passWord}}</span></h4>
+                </div>
+                <div>
+                    <h4 class="f-s fw2"><span style="font-weight: 100">{{'setting.h5Valid'|translate}}:</span><span>{{expireTime}}</span></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/setting.html'></google-analytics>

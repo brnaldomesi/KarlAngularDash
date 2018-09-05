@@ -1,0 +1,67 @@
+/* widget a = 1,3*/
+/* widget b = 2,4*/
+/* widget c = 5,6*/
+
+.widget-a-btn {
+    margin-top: 15px;
+}
+
+.widget-b-btn {
+    margin-top: 5px;
+}
+
+.widget-c-btn {
+    margin-top: 30px;
+}
+
+.widget-btn button {
+    width: 40%;
+    margin-left: 6%;
+    background: #3b76c9;
+    border-radius: 5px;
+    color: #f2f2f2;
+    border: none;
+}
+
+.widget-btn button:first-child {
+    background: #333;
+}
+
+.widget-btn-2 {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+}
+
+.widget-btn-2 button {
+    width: 90px;
+    margin-top: 10px;
+    background: #3b76c9;
+    border-radius: 5px;
+    color: #f2f2f2;
+    border: none;
+    display: block;
+}
+
+.widget-btn-2 button:first-child {
+    background: #333;
+}
+
+.widge56 .dropdown-menu {
+    left: 0 !important;
+}
+
+@media screen and (max-width: 170px) {
+    .prompt-words h3 {
+        font-size: 20px;
+    }
+
+    .prompt-words p {
+        font-size: 10px !important;
+    }
+
+    .prompt-words button {
+        width: 85px !important;
+    }
+}
+

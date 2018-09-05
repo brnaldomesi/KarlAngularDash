@@ -1,0 +1,425 @@
+<face-book-pixel pixel-page='customer-register'></face-book-pixel>
+<div class="client-detail custom-register">
+    <div class="row" style="background: #1a1a1a;width: 100%;margin: auto">
+        <!--<div style="width: 90px;height: 90px;border: 1px solid white;border-radius: 100%;margin:0 auto 10px auto;background: url('{{companyImg}}');background-size: cover"></div>-->
+        <!--<div>-->
+            <!--<p style="font-size: 35px;text-align: center;color: #b4b4b4" ng-show="companyInfor">-->
+                <!--{{companyInfor.name}}-->
+            <!--</p>-->
+        <!--</div>-->
+
+        <div style="width:80%;margin: auto">
+            <div class="bs-example" data-example-id="simple-nav-justified">
+                <ul class="nav nav-pills nav-justified">
+                    <li id="titleOne" role="presentation" ><a class="iframe-nav1" style="cursor: default">{{'customer_register.h5place_time' | translate}}</a></li>
+                    <li id="titleTwo" role="presentation"><a class="iframe-nav1" style="cursor: default">{{'customer_register.h5choose_ride' | translate}}</a></li>
+                    <li id="titleThree" role="presentation" class="active"><a class="iframe-nav2" style="cursor: default"><i class="fa fa-play icolor" aria-hidden="true"></i>&nbsp;&nbsp;{{'customer_register.h5register' | translate}}</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <hr style="height:2px;border:none;border-top:1px solid #555555;width:100%;margin-bottom: 0"/>
+
+    </div>
+    <div class="K-obmain poisR" style="position: relative;">
+        <div class="k-addcompanyinfo bookMessages" style="float: left;margin-bottom: 10px;position: relative">
+            <form id="registerForm" class="form-horizontal no-margin ng-pristine ng-valid"
+                  name="registerForm" role="form"
+                  data-toggle="validator" novalidate ng-show="!isLogining&&!isreLoginForm">
+                <h4 style="font-size: 22px;color: white">{{'customer_register.h5passenger_info' | translate}}</h4>
+
+                <div class="form-group  pos-rlt">
+                    <input class="myinput input-bottom" type="text" placeholder="{{'customer_register.h5first_name' | translate}}" ng-model="firstName" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <div class="form-group">
+                    <input class="myinput input-bottom" type="text" placeholder="{{'customer_register.h5last_name' | translate}}" ng-model="lastName" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+
+                <div class="form-group">
+                    <input class="myinput sign-mail input-bottom" type="email" placeholder="{{'customer_register.h5email' | translate}}" ng-model="email" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <div class="form-group">
+                    <input class="myinput sign-mobile input-bottom" type="tel" placeholder="{{'customer_register.h5mobile' | translate}}" ng-model="mobile" ng-change="formatPhone()" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+
+                <!--<h2>Password</h2>-->
+                <div class="form-group">
+                    <input class="myinput input-bottom" type="password" placeholder="{{'customer_register.h5create_password' | translate}}" ng-model="password" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <div class="form-group">
+                    <input class="myinput input-bottom" type="password" placeholder="{{'customer_register.h5re_password' | translate}}" ng-model="retypePassword"
+                           required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+
+                <h4 style="font-size: 22px;color: white">{{'customer_register.h5payment_method' | translate}}</h4>
+                <p style="width: 90%;margin: 0 0 0 10px">{{'customer_register.h5add_card' | translate}}</p>
+                <div class="form-group  pos-rlt">
+                    <select class="myinput myinputhalf-fix myselect" ng-model="charge.card_type"
+                            ng-options="item.value as item.name for item in cardTypes">
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input class="myinput input-bottom" type="text" ng-model="charge.first_name" placeholder="{{'customer_register.h5first_name' | translate}}" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <input class="myinput input-bottom" type="text" ng-model="charge.last_name" placeholder="{{'customer_register.h5last_name' | translate}}" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <input class="myinput input-bottom" type="text" ng-model="charge.card_number" placeholder="&#xf09d; {{'customer_register.h5card_num' | translate}}"
+                           required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <input class="myinput myinputhalf2 input-bottom"
+                           type="tel"
+                           style="margin-left: 4px;"
+                           ng-model="charge.expire_month"
+                           pattern="^0[1-9]|1[0-2]$"
+                           placeholder="&#xf272; {{'comment.h5MM' | translate}}"
+                           required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <input class="myinput myinputhalf2 input-bottom"
+                           style="margin-left: 4px;"
+                           type="tel"
+                           ng-model="charge.expire_year"
+                           pattern="^\d{4}$"
+                           placeholder="&#xf272; {{'comment.h5YYYY' | translate}}"
+                           required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group" ng-if="charge.card_type != 3">
+                    <input class="myinput myinput myinputhalf3 input-bottom"
+                           type="tel"
+                           ng-model="charge.cvv2"
+                           pattern="^\d{3}$"
+                           placeholder="CVC &#xf059;"
+                           required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group" ng-if="charge.card_type == 3">
+                    <input class="myinput myinput myinputhalf3 input-bottom"
+                           type="tel"
+                           ng-model="charge.cvv2"
+                           pattern="^\d{4}$"
+                           placeholder="CVC &#xf059;"
+                           required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <div class="form-group">
+                    <input class="myinput myinput myinputhalf3 input-bottom"
+                           type="text"
+                           ng-model="charge.zip"
+                           placeholder="{{'comment.h5BillingZip' | translate}}"
+                           maxlength="7"
+                           pattern="^[0-9]{5,7}$"/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<input class="myinput myinput myinputhalf3 input-bottom"-->
+                           <!--placeholder="&#xf041; {{'customer_register.h5Billing_Address' | translate}}"-->
+                           <!--ng-model="address.formatted_address"-->
+                           <!--autocomplete="off"-->
+                           <!--type="text"-->
+                           <!--uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"-->
+                           <!--typeahead-loading="loadingLocations1" typeahead-no-results="noResults1"-->
+                           <!--typeahead-on-select="onAddressSelect($item, $model, $label, $event)"-->
+                           <!--required-->
+                    <!--/>-->
+                    <!--<div class="help-block with-errors"></div>-->
+                <!--</div>-->
+                <div style="display: flex;justify-content: center;margin-top: 40px;margin-right: 50%">
+                    <button ng-click="onRegisterButtonClick(registerForm.$valid,$event)" type="submit"
+                            class="btn-blue center-block home-mg2 btn ladda-button disabled"
+                            data-style="expand-right"
+                            style=" outline: none;display: block;margin:auto">
+                        <span class="ladda-label">{{'customer_register.h5save' | translate}}</span>
+                    </button>
+                </div>
+            </form>
+
+  <p class="register-li-position" ng-click="displayLogin()">
+      <u ng-show="isreLoginForm">{{'customer_register.h5register' | translate}}</u>
+      <u ng-show="!isreLoginForm">{{'customer_register.h5login' | translate}}</u>
+  </p>
+            <form id="loginForm" class="form-horizontal no-margin ng-pristine ng-valid"
+                  name="loginForm" role="form"
+                  data-toggle="validator" novalidate ng-show="isLogining&&!isreLoginForm">
+                <h4 style="font-size: 22px;color: white">{{'customer_register.h5login' | translate}}</h4>
+
+                <div class="form-group  pos-rlt">
+                    <input class="myinput input-bottom" type="text" placeholder="{{'customer_register.h5email' | translate}}" ng-model="email" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <div class="form-group">
+                    <input class="myinput input-bottom" type="password" placeholder="{{'customer_register.h5password' | translate}}" ng-model="password" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <div style="display: flex;justify-content: center;margin-top: 40px;margin-right: 50%">
+                    <button ng-click="onLoginButtonClick(loginForm.$valid,$event)" type="submit"
+                            class="btn-blue center-block home-mg2 btn ladda-button disabled"
+                            data-style="expand-right"
+                            style="outline: none;display: block;margin:auto">
+                        <span class="ladda-label">{{'customer_register.h5login' | translate}}</span>
+                    </button>
+                </div>
+            </form>
+
+            <form id="reLoginForm" class="form-horizontal no-margin ng-pristine ng-valid"
+                  name="reLoginForm" role="form"
+                  data-toggle="validator" novalidate ng-show="isreLoginForm">
+                <h4 style="font-size: 22px;color: white">{{'customer_register.h5login' | translate}}</h4>
+
+                <div class="form-group  pos-rlt">
+                    <input class="myinput input-bottom" type="text" placeholder="{{'customer_register.h5email' | translate}}" ng-model="email" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <div class="form-group">
+                    <input class="myinput input-bottom" type="password" placeholder="{{'customer_register.h5password' | translate}}" ng-model="password" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <div style="display: flex;justify-content: center;margin-top: 40px;margin-right: 50%">
+                    <button ng-click="reLoginFormClick(reLoginForm.$valid,$event)" type="submit"
+                            class="btn-blue center-block home-mg2 btn ladda-button disabled"
+                            data-style="expand-right"
+                            style="outline: none;display: block;margin:auto">
+                        <span class="ladda-label">{{'customer_register.h5login' | translate}}</span>
+                    </button>
+                </div>
+            </form>
+            <div class="flow-app-float" style="">
+                <h3 class="app-text" style="color: #fff;font-size: 15px;text-align: center">{{'customer_register.h5downloaded_app' | translate:({companyName:companyInfor.name})}}</h3>
+                <div style="text-align: center">
+                    <div style="display: inline-block;margin-right: 5px">
+                        <a ng-href="{{getCompanyIosApp}}" target="view_window"><img
+                                ng-src="{{iosAppImgLink}}" height="30"
+                                width="100"/></a>
+                    </div>
+                    <div style="display: inline-block;margin-left: 5px">
+                        <a ng-href="{{getCompanyGoogleApp}}" target="view_window"><img
+                                ng-src="{{androidAppImgLink}}" height="30" width="100"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="carsMessages" style="width: 45%;float: right;padding: 10px;background: #313131;border-radius: 7px;margin-top: 20px">
+            <div class="">
+                <div class="lside"
+                     style="color: white">
+                    <p class="timeMessages"
+                       style="font-size: 20px;padding: 10px 5px 20px;border-bottom: 1px solid #393939;line-height: 25px">
+                        {{'customer_register.h5trip_on' | translate}} <span class="shadow"
+                                           style="background: white;display: inline-block;padding:2px;border-radius: 7px;color:darkblue;box-shadow: 1px 4px 10px black !important">{{allData.params.appointed_time*1000 | dateFormatter:'shortDate' }}</span>
+                        {{'customer_register.h5at' | translate}}
+                        <span class="shadow"
+                              style="background: white;display: inline-block;padding:2px;border-radius: 7px;color:darkblue;box-shadow: 1px 4px 10px black !important">{{allData.params.appointed_time*1000 | dateFormatter:'shortTime'}}</span>
+                    </p>
+                </div>
+
+                <div class="book-trip-down" style="margin-top: 15px;">
+                    <div>
+                        <div class="message-float" style="float: left;width: 50%">
+                            <div class="explain-font" style="font-size: 10px;line-height: 25px">{{'customer_register.h5pick_address' | translate}}</div>
+                            <div class="location-bg2 v-top inline" style="line-height: 25px"><i class="fa fa-dot-circle-o" style="color: green;font-size: 15px"></i></div>
+                            <div class="inline book-trip-blocks">
+                                <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.d_address.d_final_address[0]}}</div>
+                                <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.d_address.d_final_address[1]}}</div>
+                            </div>
+                        </div>
+                        <div style="float: left;margin-left: 10px">
+                            <div ng-show="allData.params.d_airline" style="color:darkgray;font-size: 10px;line-height: 25px">{{'customer_register.h5airline' | translate}}</div>
+                            <div ng-show="allData.params.d_airline" style="color: #ffffff;font-size: 15px;line-height: 25px">{{allData.params.d_airline}}</div>
+                        </div>
+                        <div style="float: left;margin-left: 10px">
+                            <div ng-show="allData.params.d_flight" style="color:darkgray;font-size: 10px;line-height: 25px">{{'customer_register.h5flight' | translate}}</div>
+                            <div ng-show="allData.params.d_flight" style="color: #ffffff;font-size: 15px;line-height: 25px">{{allData.params.d_flight}}</div>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+
+                    <div ng-show="allData.bookType == 1">
+                        <div class="message-float" style="float: left;width: 50%">
+                            <div class="explain-font" style="font-size: 10px;line-height: 25px">{{'customer_register.h5drop_address' | translate}}</div>
+                            <div class="location-bg2 v-top inline" style="line-height: 25px"><i class="fa fa-dot-circle-o" style="color: red;font-size: 15px"></i></div>
+                            <div class="inline book-trip-blocks">
+                                <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.a_address.a_final_address[0]}}</div>
+                                <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.a_address.a_final_address[1]}}</div>
+                            </div>
+                        </div>
+                        <div style="float: left;margin-left: 10px">
+                            <div ng-show="allData.params.a_airline" style="color:darkgray;font-size: 10px;line-height: 25px">{{'customer_register.h5airline' | translate}}</div>
+                            <div ng-show="allData.params.a_airline" style="color: #ffffff;font-size: 15px;line-height: 25px">{{allData.params.a_airline}}</div>
+                        </div>
+                        <div style="float: left;margin-left: 10px">
+                            <div ng-show="allData.params.a_flight" style="color:darkgray;font-size: 10px;line-height: 25px">{{'customer_register.h5flight' | translate}}</div>
+                            <div ng-show="allData.params.a_flight" style="color: #ffffff;font-size: 15px;line-height: 25px">{{allData.params.a_flight}}</div>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+
+                    <h4 class="fw titleFont" style="margin:15px 0 10px 0 !important;color: white">{{'customer_register.h5vehicle' | translate}}</h4>
+                    <div class="carsmessage"
+                         style="background: #3b76c9;width: 70%">
+                        <div style="border-bottom: 1px solid dimgray;background: #f2f2f2">
+                            <div style="padding: 12px;text-align: center;width: 100%">
+                                <img class="carspic" src="{{allData.params.car.img}}"
+                                     width="100%"/>
+                            </div>
+                        </div>
+                        <div class="carName" style="background: #1a1a1a;padding: 5px 12px">
+                            <!--<div>-->
+                                <!--<h2 class="carsModel" style="margin: 0;text-align: left">{{allData.params.car.model}}</h2>-->
+                            <!--</div>-->
+                            <div>
+                                <p style="margin: 0;text-align: left;float: left">{{allData.params.car.model}}</p>
+                                <div class="carsListFont" style="float: right">
+                                    <i class="fa fa-user" style="color:white"></i> <span
+                                        class="explain-font">{{allData.params.car.seats_max}}</span>
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                            <div>
+                                <p style="margin: 0;text-align: left;float: left">{{allData.params.car.brand}}</p>
+                                <div class="carsListFont" style="float: right">
+                                    <i class="fa fa-suitcase" style="color:white"></i> <span class="explain-font">{{allData.params.car.bags_max}}</span>
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                        </div>
+                        <!--<div class="carsbgt"-->
+                             <!--style="text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">-->
+                            <!--<div style="padding:15px;color: #fff">selected-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+
+                    <div ng-show="allData.reParams">
+                        <h4 class="fw titleFont" style="border-top: 1px solid #393939;padding-top: 10px;color: white">{{'customer_register.h5return_services' | translate}}</h4>
+                        <div>
+                            <div class="message-float" style="float: left;width: 50%">
+                                <div class="explain-font" style="font-size: 10px;line-height: 25px">{{'customer_register.h5pick_address' | translate}}</div>
+                                <div class="location-bg2 v-top inline" style="line-height: 25px">
+                                    <i class="fa fa-dot-circle-o" style="color: green;font-size: 15px"></i>
+                                </div>
+                                <div class="inline book-trip-blocks">
+                                    <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.a_address.a_final_address[0]}}</div>
+                                    <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.a_address.a_final_address[1]}}</div>
+                                </div>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+
+                        <div>
+                            <div class="message-float" style="float: left;width: 50%">
+                                <div class="explain-font" style="font-size: 10px;line-height: 25px">{{'customer_register.h5drop_address' | translate}}</div>
+                                <div class="location-bg2 v-top inline" style="line-height: 25px">
+                                    <i class="fa fa-dot-circle-o" style="color: red;font-size: 15px"></i>
+                                </div>
+                                <div class="inline book-trip-blocks">
+                                    <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.d_address.d_final_address[0]}}</div>
+                                    <div class="fw" style="font-size: 15px;line-height: 25px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{allData.params.d_address.d_final_address[1]}}</div>
+                                </div>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+
+                        <h4 class="fw titleFont"  style="margin:15px 0 10px 0 !important;color: white">{{'customer_register.h5vehicle' | translate}}</h4>
+                        <div class="carsmessage"
+                             style="background: #3b76c9;width: 70%">
+                            <div style="border-bottom: 1px solid dimgray;background: #f2f2f2">
+                                <div style="padding: 12px;text-align: center;width: 100%">
+                                    <img class="carspic" src="{{allData.reParams.car.img}}"
+                                         width="100%"/>
+                                </div>
+                            </div>
+                            <div class="carName" style="background: #1a1a1a;padding:5px 12px">
+                                <div>
+                                    <p style="margin: 0;text-align: left;float: left">{{allData.reParams.car.model}}</p>
+                                    <div class="carsListFont" style="float: right">
+                                        <i class="fa fa-user" style="color:white"></i> <span
+                                            class="explain-font">{{allData.reParams.car.seats_max}}</span>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                </div>
+                                <div>
+                                    <p style="margin: 0;text-align: left;float: left">{{allData.reParams.car.brand}}</p>
+                                    <div class="carsListFont" style="float: right">
+                                        <i class="fa fa-suitcase" style="color:white"></i> <span class="explain-font">{{allData.reParams.car.bags_max}}</span>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                </div>
+                            </div>
+                            <!--<div class="carsbgt"-->
+                                 <!--style="text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">-->
+                                <!--<div style="padding:15px;color: #fff">selected-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+
+                    <h4 class="fw titleFont" style="margin:20px 0 10px 0!important;color: white">{{'customer_register.h5total' | translate}}</h4>
+                    <div class="block-balance-top" style="margin: auto"></div>
+                    <div class="block-balance" style="padding: 10px 0 10px 0;margin: auto">
+                        <div style="padding: 0 10px 10px">
+                            <div style="float: left;">
+                                <span class="d-s-b fw f-s" style="color: #c7c7c7">{{'customer_register.h5item_des' | translate}}</span>
+                                <span class="d-s-b fw f-s" style="color: #f5f5f5">{{'customer_register.h5amount_paid' | translate}}</span>
+                                <span class="d-s-b fw f-s" style="color: #919191">{{allData.params.appointed_time*1000 | dateFormatter:'langsDate'}}</span>
+                            </div>
+                            <div style="float: right">
+                                <span class="d-s-b fw f-s" style="color: #c7c7c7;text-align: right">{{'customer_register.h5cost' | translate}}</span>
+                                <span ng-show="!rsOffer" class="d-s-b fblue f-s" style="color:#ff2728">+{{cost | PriceFormatFilter:true:false:offer.ccy}}</span>
+                                <span ng-show="rsOffer&&offer.ccy==rsOffer.ccy" class="d-s-b fblue f-s" style="color:#ff2728">+{{cost+reCost | PriceFormatFilter:true:false:offer.ccy}}</span>
+                                <span ng-show="rsOffer&&offer.ccy!=rsOffer.ccy" class="d-s-b fblue f-s" style="color:#ff2728">+{{cost | PriceFormatFilter:true:false:offer.ccy}}+{{reCost | PriceFormatFilter:true:false:rsOffer.ccy}}</span>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                        <div style="padding: 10px;background: #28293b;text-align: right">
+                            <span class="fw f-s" style="color: #b6b6b6;font-size: 15px;margin-right: 15px">{{'customer_register.h5total' | translate}}</span>
+                            <span ng-show="!rsOffer" class="fw f-s" style="color: #ffffff;font-size: 25px;font-weight: 600">{{allData.params.showTotalPrice | PriceFormatFilter:true:false:offer.ccy}}</span>
+                            <span ng-show="rsOffer&&offer.ccy==rsOffer.ccy" class="fw f-s" style="color: #ffffff;font-size: 25px;font-weight: 600">{{allData.params.showTotalPrice + showRsTotalPrice | PriceFormatFilter:true:false:offer.ccy}}</span>
+                            <span ng-show="rsOffer&&offer.ccy!=rsOffer.ccy" class="fw f-s" style="color: #ffffff;font-size: 25px;font-weight: 600">{{allData.params.showTotalPrice | PriceFormatFilter:true:false:offer.ccy}}+{{showRsTotalPrice | PriceFormatFilter:true:false:rsOffer.ccy}}</span>
+                        </div>
+                        <div style="height: 15px;"></div>
+                    </div>
+                </div>
+            </div>
+            <!--<div style="text-align: center;margin-top:50px;margin-top: 50px" class="logButton">-->
+                <!--<button ng-click="onLoginButtonClick($event)"-->
+                        <!--disabled="disabled"-->
+                        <!--class="btn-blue center-block home-mg2 btn ladda-button "-->
+                        <!--data-style="expand-right" id="buynow"-->
+                        <!--style="outline: none;display: block;margin:auto" data-dismiss="modal">-->
+                    <!--<span class="ladda-label">Confirm Payment</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        </div>
+        <div style="clear: both"></div>
+        <div class="middle-line"></div>
+    </div>
+</div>
+<google-analytics analytics-page='/customer-register.html'></google-analytics>
+

@@ -1,0 +1,36 @@
+{
+  "name": "date-format",
+  "description": "PHP-like date formatting for JS",
+  "main": "dist/date-format.js",
+  "authors": [
+    "andrienko <ilia@andrienko.org>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "date",
+    "format",
+    "tiny",
+    "php",
+    "format"
+  ],
+  "homepage": "https://github.com/andrienko/date.format",
+  "ignore": [
+    "./.git",
+    "./.gitignore",
+    "./node_modules",
+    "./index.html",
+    "./bower_components",
+    "./package.json",
+    "./node_test.js"
+  ],
+  "_release": "e2b199fd9b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e2b199fd9b5c57dbb08733caea224953b4673c89"
+  },
+  "_source": "https://github.com/andrienko/date.format.git",
+  "_target": "*",
+  "_originalSource": "date-format",
+  "_direct": true
+}

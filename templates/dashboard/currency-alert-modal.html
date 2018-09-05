@@ -1,0 +1,25 @@
+<div class="client-detail" style="min-height: 400px ; background-color: #3b76c9;">
+    <div style="height: 15px"></div>
+    <div style=" width:84px; height:84px; background-color:#C9DAE1;
+    border-radius:41px; padding: 2px ; margin:20px auto">
+        <span style="height:80px; line-height:80px; border-radius: 40px; display:block; background-color: #ffffff; color:#C9DAE1; text-align:center;font-size: 5em;">i</span>
+    </div>
+    <p style="color:#f2f2f2;text-align: center; font-size: 18px;margin-top: 20px">{{"currency.h5Notice"|translate}}
+    </p>
+    <div style="text-align: center ;border: #fcfcfc solid 1px;width: 238px;padding: 6px;margin: 30px auto;border-radius: 25px;font-size: 16px;" >
+        <select class="currency-select"
+                ng-model="currentCcy"
+                ng-options="item.value as item.title for item in defaultCurrency"
+                style="background: transparent;width: 180px;border: none;text-align: center;color: #fff;margin-left: 45px;
+  -moz-appearance:none;
+  -webkit-appearance:none;">
+            <option value="" disabled selected>- {{'currency.h5SelectTitle' | translate}}...... -</option>
+        </select>
+    </div>
+    <div style="text-align: center ;margin-top: 20px">
+        <button style="border-radius:45px;cursor:pointer; max-width:240px;width: 70%  ; padding: 6px;color:#ffffff;margin: auto;background: #393b75;font-size: 18px;border: none"
+                ng-click="onOkButtonClick()">{{"comment.h5OK"|translate}}
+        </button>
+    </div>
+</div>
+<google-analytics analytics-page='/currency-alert-modal.html'></google-analytics>

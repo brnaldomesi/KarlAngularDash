@@ -1,0 +1,22 @@
+<div class="client-detail" style="min-height:300px">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h5 style="color: #fff;font-size: 24px;margin-top: 10px;">{{'comment.h5company'|translate}}</h5>
+    <h5 style="color: #fff;font-size: 24px;margin-top: 4px;">{{'terms_conditions.h5Terms_Conditions'|translate}}</h5>
+
+    <form id="termsForm"
+          name="termsForm"
+          role="form"
+          novalidate class="profile-textarea">
+
+        <p style="margin-top: 25px;" ng-model="disclaimer" medium-editor
+           data-placeholder="{{'terms_conditions.h5conditions_placeholder'|translate}}"
+       class="tos-icon textinput"></p>
+
+        <div class="mg-t-xxl">
+            <button type="submit" class="btn-blue btn center-block mg-t-xl" ng-click="onEditCompanyDisclaimer()">
+                <span>{{'comment.h5Save'|translate}}</span>
+            </button>
+        </div>
+    </form>
+</div>
+<google-analytics analytics-page='/terms-conditions.html'></google-analytics>

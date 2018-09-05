@@ -1,0 +1,33 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4>{{'add_as_driver.h5add_as_driver' | translate}}</h4>
+    <form id="addDriverForm" name="addDriverForm"
+          data-toggle="validator" novalidate>
+        <div class="c-block2  pos-rlt">
+            <h6 class="fw">{{'add_as_driver.h5drivers_license' | translate}}</h6>
+            <div class="form-group">
+                <input class="myinput2" type="text" placeholder="{{'comment.h5license' | translate}}" ng-model="license"/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <h6 class="fw">{{'comment.h5advanced_notice' | translate}}</h6>
+            <div class="form-group">
+                <input class="myinput2 addon-main"
+                       type="number"
+                       step="1"
+                       min="0"
+                       ng-model="delayTime"
+                       max="48"
+                       required/>
+                <span class="myinput2 addon-sub">{{'comment.h5hours' | translate}}</span>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <button type="submit" class="btn-blue btn center-block mg-t-xl"
+                ng-click="onSubmitButtonClick(addDriverForm.$valid, $event)">
+            <span>{{'comment.h5SAVE' | translate}}</span>
+        </button>
+    </form>
+</div>
+<google-analytics analytics-page='/add-as-driver.html'></google-analytics>

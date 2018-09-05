@@ -1,0 +1,27 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="15"></karl-header-menu>
+    <div class="btn-add hidden-xs" style="cursor:pointer;" ng-click="onAddButtonClick()"><i class="fa fa-plus"></i>
+    </div>
+
+    <div class="title-block main-padding  navbar-collapse">
+        <div class="main-title ">
+            <span class="fw main-title-text">{{'super_vehicle_maker.h5all_maker' | translate}}</span>
+            <span class="fw main-title-text pull-right visible-xs btn-add-text dopoint" ng-click="onAddButtonClick()"><i
+                    class="fa fa-plus"></i>{{'comment.h5Add' | translate}}</span>
+        </div>
+    </div>
+
+
+    <div class="main-padding card-fix pos-rlt navbar-collapse">
+        <div class="card-area-two" ng-repeat="item in maker">
+            <div class="card-block-two" ng-click="onEditButtonClick($index)">
+                <div class="uname f-w-500">
+                    <span class="fw">{{item.name}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cl"></div>
+</div>
+<google-analytics analytics-page='/super-vehicle-maker.html'></google-analytics>

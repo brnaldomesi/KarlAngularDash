@@ -1,0 +1,338 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="17"></karl-header-menu>
+    <div class="title-block navbar-collapse">
+        <input class="myinput myinputhalf-fix"
+               type="text"
+               ng-model="companySelected"
+               uib-typeahead="company as company.company_name  for company in getCompaniesList($viewValue) "
+               typeahead-min-length="1"
+               typeahead-on-select="onSearchSelect($item)"
+               placeholder="{{'super_stats.h5Search_Company'|translate}}"/>
+        <div class="nav-margin ">
+            <ul class="nav-slider nav-font nav-style" style="margin-top:10px;">
+                <li style="width:33%;line-height: 50px;height: 50px;display: inline-block"
+                    class="act-tab1 financeTitle " ng-click="onTabChanged(0)"><a href="">{{'comment.h5day' | translate}}</a>
+                </li>
+                <li style="width:33%;line-height: 50px;height: 50px;display: inline-block" class="financeTitle"
+                    ng-click="onTabChanged(1)"><a href="">{{'comment.h5week' | translate}}</a></li>
+                <li style="width:34%;line-height: 50px;height: 50px;display: inline-block" class="financeTitle"
+                    ng-click="onTabChanged(2)"><a href="">{{'comment.h5month' | translate}}</a>
+                </li>
+                <li class="slider" style="width:33%;"></li>
+            </ul>
+            <hr style="margin-top: -31px;color:grey">
+        </div>
+
+        <div class="stats-container" style="background: #171821">
+            <div class="stats-main-padding">
+                <!---------------Day---------------------->
+                <div class="nav-margin" ng-show="tab == 0">
+                    <div class="stats-date">
+                        <span>
+                            {{dateString}}
+                        </span>
+                        <div class="stats-inline">
+                            <span class="f-s fb hidden-xs">{{'comment.h5date' | translate}}:</span>
+                            <div class="stats-date-block" ng-click="onSelectDateButtonClick()">
+                                <span>
+                                    {{dateString}}
+                                 </span>
+                                <i class="fa fa-caret-down fw2 pull-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-card bg-stats-complet">
+                        <div class="stats-cyc bg-stats-complet-main">
+                            <p>
+                                <i class="fa fa-calendar-minus-o"></i>
+                                <span>{{'stats.h5completed_bookings' | translate}}</span>
+                            </p>
+                            <div class="stats-card-line"></div>
+                            <span class="f-xs" style="color: #9eb5db">{{dateString}}</span>
+                            <div id="day-stats-1" class="stats-cyc-cont">
+                                <!-- 控件内容 -->
+                            </div>
+                        </div>
+                        <div class="stats-old-info">
+                            <span class="f-l f-w-300 fw2">{{yesterday.completedBooksTotal}}</span>
+                            <span ng-show="yesterday.completedBooksTotal != today.completedBooksTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[yesterday.completedBooksTotal-today.completedBooksTotal > 0]" >
+                                (<span ng-show="yesterday.completedBooksTotal-today.completedBooksTotal > 0">+</span>{{yesterday.completedBooksTotal-today.completedBooksTotal}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5yesterday' | translate}}</span>
+                            <br/>
+                            <span class="f-l f-w-300 fw2">{{twoDaysAgo.completedBooksTotal}}</span>
+                            <span ng-show="twoDaysAgo.completedBooksTotal != today.completedBooksTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[twoDaysAgo.completedBooksTotal-today.completedBooksTotal >= 0]">
+                                (<span ng-show="twoDaysAgo.completedBooksTotal-today.completedBooksTotal > 0">+</span>{{twoDaysAgo.completedBooksTotal-today.completedBooksTotal}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5two_days_ago' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="stats-card bg-stats-ontime">
+                        <div class="stats-cyc bg-stats-ontime-main">
+                            <p>
+                                <i class="fa fa-clock-o"></i>
+                                <span>{{'stats.h5driver_on_time' | translate}}</span>
+                            </p>
+                            <div class="stats-card-line"></div>
+                            <span class="f-xs" style="color: #9eb5db">{{dateString}}</span>
+                            <div id="day-stats-2" class="stats-cyc-cont">
+                                <!-- 控件内容 -->
+                            </div>
+                        </div>
+                        <div class="stats-old-info">
+                            <span class="f-l f-w-300 fw2">{{yesterday.driverOntimeRate.toFixed(0)}}%</span>
+                            <span ng-show="yesterday.driverOntimeRate != today.driverOntimeRate"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[yesterday.driverOntimeRate-today.driverOntimeRate > 0]">
+                                (<span ng-show="yesterday.driverOntimeRate-today.driverOntimeRate > 0">+</span>{{(yesterday.driverOntimeRate-today.driverOntimeRate).toFixed(0)}}%)
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5yesterday' | translate}}</span>
+                            <br/>
+                            <span class="f-l f-w-300 fw2">{{twoDaysAgo.driverOntimeRate.toFixed(0)}}%</span>
+                            <span ng-show="twoDaysAgo.driverOntimeRate != today.driverOntimeRate"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[twoDaysAgo.driverOntimeRate-today.driverOntimeRate > 0]">
+                                (<span ng-show="twoDaysAgo.driverOntimeRate-today.driverOntimeRate > 0">+</span>{{(twoDaysAgo.driverOntimeRate-today.driverOntimeRate).toFixed(0)}}%)
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5two_days_ago' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="stats-card bg-stats-earn">
+                        <div class="stats-cyc bg-stats-earn-main">
+                            <p>
+                                <i class="fa fa-money"></i>
+                                <span>{{'stats.h5total_earnings' |translate}}</span>
+                            </p>
+                            <div class="stats-card-line"></div>
+                            <span class="f-xs"  style="color: #9eb5db">{{dateString}}</span>
+                            <div id="day-stats-3" class="stats-cyc-cont">
+                                <!-- 控件内容 -->
+                            </div>
+                        </div>
+                        <div class="stats-old-info">
+                            <span class="f-l f-w-300 fw2">{{yesterday.earningsTotal | PriceFormatFilter:'$'}}</span>
+                            <span ng-show="yesterday.earningsTotal != today.earningsTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[yesterday.earningsTotal-today.earningsTotal > 0]">
+                                (<span ng-show="yesterday.earningsTotal-today.earningsTotal > 0">+</span><span ng-show="yesterday.earningsTotal-today.earningsTotal < 0">-</span>{{yesterday.earningsTotal-today.earningsTotal | PriceFormatFilter:'$':'true'}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5yesterday' | translate}}</span>
+                            <br/>
+                            <span class="f-l f-w-300 fw2">{{twoDaysAgo.earningsTotal | PriceFormatFilter:'$'}}</span>
+                            <span ng-show="twoDaysAgo.earningsTotal != today.earningsTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[twoDaysAgo.earningsTotal-today.earningsTotal > 0]">
+                                (<span ng-show="twoDaysAgo.earningsTotal-today.earningsTotal > 0">+</span><span ng-show="twoDaysAgo.earningsTotal-today.earningsTotal < 0">-</span>{{twoDaysAgo.earningsTotal-today.earningsTotal | PriceFormatFilter:'$':'true'}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5two_days_ago' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!----------------Week-------------------->
+                <div class="nav-margin" ng-show="tab == 1">
+                    <div class="stats-date">
+                        <span>
+                            {{dateString}}
+                        </span>
+                        <div class="stats-inline">
+                            <span class="f-s fb hidden-xs">{{'comment.h5date' | translate}}:</span>
+                            <div class="stats-date-block" ng-click="onSelectDateButtonClick()">
+                                <span>
+                                    {{dateString}}
+                                 </span>
+                                <i class="fa fa-caret-down fw2 pull-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-card bg-stats-complet">
+                        <div class="stats-cyc bg-stats-complet-main">
+                            <p>
+                                <i class="fa fa-calendar-minus-o"></i>
+                                <span>{{'stats.h5completed_bookings' | translate}}</span>
+                            </p>
+                            <div class="stats-card-line"></div>
+                            <span class="f-xs"  style="color: #9eb5db">{{dateString}}</span>
+                            <div id="week-stats-1" class="stats-cyc-cont">
+                                <!-- 控件内容 -->
+                            </div>
+                        </div>
+                        <div class="stats-old-info">
+                            <span class="f-l f-w-300 fw2">{{lastWeek.completedBooksTotal}}</span>
+                            <span ng-show="lastWeek.completedBooksTotal != thisWeek.completedBooksTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[lastWeek.completedBooksTotal-thisWeek.completedBooksTotal > 0]" >
+                                (<span ng-show="lastWeek.completedBooksTotal-thisWeek.completedBooksTotal > 0">+</span>{{lastWeek.completedBooksTotal-thisWeek.completedBooksTotal}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5last_week' | translate}}</span>
+                            <br/>
+                            <span class="f-l f-w-300 fw2">{{twoWeeksAgo.completedBooksTotal}}</span>
+                            <span ng-show="twoWeeksAgo.completedBooksTotal != thisWeek.completedBooksTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[twoWeeksAgo.completedBooksTotal-thisWeek.completedBooksTotal >= 0]">
+                                (<span ng-show="twoWeeksAgo.completedBooksTotal-thisWeek.completedBooksTotal > 0">+</span>{{twoWeeksAgo.completedBooksTotal-thisWeek.completedBooksTotal}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5two_weeks_ago' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="stats-card bg-stats-ontime">
+                        <div class="stats-cyc bg-stats-ontime-main">
+                            <p>
+                                <i class="fa fa-clock-o"></i>
+                                <span>{{'stats.h5driver_on_time' | translate}}</span>
+                            </p>
+                            <div class="stats-card-line"></div>
+                            <span class="f-xs"  style="color: #9eb5db">{{dateString}}</span>
+                            <div id="week-stats-2" class="stats-cyc-cont">
+                                <!-- 控件内容 -->
+                            </div>
+                        </div>
+                        <div class="stats-old-info">
+                            <span class="f-l f-w-300 fw2">{{lastWeek.driverOntimeRate.toFixed(0)}}%</span>
+                            <span ng-show="lastWeek.driverOntimeRate != thisWeek.driverOntimeRate"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[lastWeek.driverOntimeRate-thisWeek.driverOntimeRate > 0]">
+                                (<span ng-show="lastWeek.driverOntimeRate-thisWeek.driverOntimeRate > 0">+</span>{{(lastWeek.driverOntimeRate-thisWeek.driverOntimeRate).toFixed(0)}}%)
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5last_week' | translate}}</span>
+                            <br/>
+                            <span class="f-l f-w-300 fw2">{{twoWeeksAgo.driverOntimeRate.toFixed(0)}}%</span>
+                            <span ng-show="twoWeeksAgo.driverOntimeRate != thisWeek.driverOntimeRate"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[twoWeeksAgo.driverOntimeRate-thisWeek.driverOntimeRate > 0]">
+                                (<span ng-show="twoWeeksAgo.driverOntimeRate-thisWeek.driverOntimeRate > 0">+</span>{{(twoWeeksAgo.driverOntimeRate-thisWeek.driverOntimeRate).toFixed(0)}}%)
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5two_weeks_ago' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="stats-card bg-stats-earn">
+                        <div class="stats-cyc bg-stats-earn-main">
+                            <p>
+                                <i class="fa fa-money"></i>
+                                <span>{{'stats.h5total_earnings' |translate}}</span>
+                            </p>
+                            <div class="stats-card-line"></div>
+                            <span class="f-xs" style="color: #9eb5db">{{dateString}}</span>
+                            <div id="week-stats-3" class="stats-cyc-cont">
+                                <!-- 控件内容 -->
+                            </div>
+                        </div>
+                        <div class="stats-old-info">
+                            <span class="f-l f-w-300 fw2">{{lastWeek.earningsTotal | PriceFormatFilter:'$'}}</span>
+                            <span ng-show="lastWeek.earningsTotal != thisWeek.earningsTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[lastWeek.earningsTotal-thisWeek.earningsTotal > 0]">
+                                (<span ng-show="lastWeek.earningsTotal-thisWeek.earningsTotal > 0">+</span><span ng-show="lastWeek.earningsTotal-thisWeek.earningsTotal < 0">-</span>{{lastWeek.earningsTotal-thisWeek.earningsTotal | PriceFormatFilter:'$':'true'}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5last_week' | translate}}</span>
+                            <br/>
+                            <span class="f-l f-w-300 fw2">{{twoWeeksAgo.earningsTotal | PriceFormatFilter:'$'}}</span>
+                            <span ng-show="twoWeeksAgo.earningsTotal != thisWeek.earningsTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[twoWeeksAgo.earningsTotal-thisWeek.earningsTotal > 0]">
+                                (<span ng-show="twoWeeksAgo.earningsTotal-thisWeek.earningsTotal > 0">+</span><span ng-show="twoWeeksAgo.earningsTotal-thisWeek.earningsTotal < 0">-</span>{{twoWeeksAgo.earningsTotal-thisWeek.earningsTotal | PriceFormatFilter:'$':'true'}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5two_weeks_ago' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--=================Month=====================-->
+                <div class="nav-margin" ng-show="tab == 2">
+                    <div class="stats-date">
+                        <span>
+                            {{dateString}}
+                        </span>
+                        <div class="stats-inline">
+                            <span class="f-s fb hidden-xs">{{'comment.h5date' | translate}}:</span>
+                            <div class="stats-date-block" ng-click="onSelectDateButtonClick()">
+                                <span>
+                                    {{dateString}}
+                                 </span>
+                                <i class="fa fa-caret-down fw2 pull-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-card bg-stats-complet">
+                        <div class="stats-cyc bg-stats-complet-main">
+                            <p>
+                                <i class="fa fa-calendar-minus-o"></i>
+                                <span>{{'stats.h5completed_bookings' | translate}}</span>
+                            </p>
+                            <div class="stats-card-line"></div>
+                            <span class="f-xs" style="color: #9eb5db">{{dateString}}</span>
+                            <div id="month-stats-1" class="stats-cyc-cont">
+                                <!-- 控件内容 -->
+                            </div>
+                        </div>
+                        <div class="stats-old-info">
+                            <span class="f-l f-w-300 fw2">{{lastMonth.completedBooksTotal}}</span>
+                            <span ng-show="lastMonth.completedBooksTotal != thisMonth.completedBooksTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[lastMonth.completedBooksTotal-thisMonth.completedBooksTotal > 0]" >
+                                (<span ng-show="lastMonth.completedBooksTotal-thisMonth.completedBooksTotal > 0">+</span>{{lastMonth.completedBooksTotal-thisMonth.completedBooksTotal}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5last_month' | translate}}</span>
+                            <br/>
+                            <span class="f-l f-w-300 fw2">{{twoMonthsAgo.completedBooksTotal}}</span>
+                            <span ng-show="twoMonthsAgo.completedBooksTotal != thisMonth.completedBooksTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[twoMonthsAgo.completedBooksTotal-thisMonth.completedBooksTotal >= 0]">
+                                (<span ng-show="twoMonthsAgo.completedBooksTotal-thisMonth.completedBooksTotal > 0">+</span>{{twoMonthsAgo.completedBooksTotal-thisMonth.completedBooksTotal}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5two_months_ago' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="stats-card bg-stats-ontime">
+                        <div class="stats-cyc bg-stats-ontime-main">
+                            <p>
+                                <i class="fa fa-clock-o"></i>
+                                <span>{{'stats.h5driver_on_time' | translate}}</span>
+                            </p>
+                            <div class="stats-card-line"></div>
+                            <span class="f-xs" style="color: #9eb5db">{{dateString}}</span>
+                            <div id="month-stats-2" class="stats-cyc-cont">
+                                <!-- 控件内容 -->
+                            </div>
+                        </div>
+                        <div class="stats-old-info">
+                            <span class="f-l f-w-300 fw2">{{lastMonth.driverOntimeRate.toFixed(0)}}%</span>
+                            <span ng-show="lastMonth.driverOntimeRate != thisMonth.driverOntimeRate"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[lastMonth.driverOntimeRate-thisMonth.driverOntimeRate > 0]">
+                                (<span ng-show="lastMonth.driverOntimeRate-thisMonth.driverOntimeRate > 0">+</span>{{(lastMonth.driverOntimeRate-thisMonth.driverOntimeRate).toFixed(0)}}%)
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5last_month' | translate}}</span>
+                            <br/>
+                            <span class="f-l f-w-300 fw2">{{twoMonthsAgo.driverOntimeRate.toFixed(0)}}%</span>
+                            <span ng-show="twoMonthsAgo.driverOntimeRate != thisMonth.driverOntimeRate"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[twoMonthsAgo.driverOntimeRate-thisMonth.driverOntimeRate > 0]">
+                                (<span ng-show="twoMonthsAgo.driverOntimeRate-thisMonth.driverOntimeRate > 0">+</span>{{(twoMonthsAgo.driverOntimeRate-thisMonth.driverOntimeRate).toFixed(0)}}%)
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5two_months_ago' | translate}}</span>
+                        </div>
+                    </div>
+                    <div class="stats-card bg-stats-earn">
+                        <div class="stats-cyc bg-stats-earn-main">
+                            <p>
+                                <i class="fa fa-money"></i>
+                                <span>{{'stats.h5total_earnings' |translate}}</span>
+                            </p>
+                            <div class="stats-card-line"></div>
+                            <span class="f-xs" style="color: #9eb5db">{{dateString}}</span>
+                            <div id="month-stats-3" class="stats-cyc-cont">
+                                <!-- 控件内容 -->
+                            </div>
+                        </div>
+                        <div class="stats-old-info">
+                            <span class="f-l f-w-300 fw2">{{lastMonth.earningsTotal | PriceFormatFilter:'$'}}</span>
+                            <span ng-show="lastMonth.earningsTotal != thisMonth.earningsTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[lastMonth.earningsTotal-thisMonth.earningsTotal > 0]">
+                                (<span ng-show="lastMonth.earningsTotal-thisMonth.earningsTotal > 0">+</span><span ng-show="lastMonth.earningsTotal-thisMonth.earningsTotal < 0">-</span>{{lastMonth.earningsTotal-thisMonth.earningsTotal | PriceFormatFilter:'$':'true'}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5last_month' | translate}}</span>
+                            <br/>
+                            <span class="f-l f-w-300 fw2">{{twoMonthsAgo.earningsTotal | PriceFormatFilter:'$'}}</span>
+                            <span ng-show="twoMonthsAgo.earningsTotal != thisMonth.earningsTotal"
+                                  ng-class="{true:'f-s fb',false:'f-s fred'}[twoMonthsAgo.earningsTotal-thisMonth.earningsTotal > 0]">
+                                (<span ng-show="twoMonthsAgo.earningsTotal-thisMonth.earningsTotal > 0">+</span><span ng-show="twoMonthsAgo.earningsTotal-thisMonth.earningsTotal < 0">-</span>{{twoMonthsAgo.earningsTotal-thisMonth.earningsTotal | PriceFormatFilter:'$':'true'}})
+                            </span>
+                            <span class="f-s fgray">{{'stats.h5two_months_ago' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<google-analytics analytics-page='/super-stats.html'></google-analytics>

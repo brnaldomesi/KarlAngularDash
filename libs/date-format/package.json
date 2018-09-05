@@ -1,0 +1,29 @@
+{
+  "name": "date_format",
+  "version": "0.1.1",
+  "description": "PHP-like date formatting for JS",
+  "main": "dist/date-format.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrienko/date-format.git"
+  },
+  "keywords": [
+    "date",
+    "format",
+    "tiny",
+    "php",
+    "format"
+  ],
+  "author": "andrienko <ilia@andrienko.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrienko/date-format/issues"
+  },
+  "homepage": "https://github.com/andrienko/date-format#readme",
+  "dependencies": {
+    "uglify-js": "^2.6.1"
+  },
+  "scripts": {
+    "minify": "uglifyjs ./dist/date-format.js -o ./dist/date-format.min.js"
+  }
+}

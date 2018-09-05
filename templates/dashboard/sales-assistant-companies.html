@@ -1,0 +1,117 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="26"></karl-header-menu>
+    <div class="title-block navbar-collapse" style="height: 50px">
+        <div class="pull-lift main-title" style="padding: 0">
+            <div class="navbar-form navbar-form-sm navbar-left shift" role="search">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" ng-model="input.searchText"
+                               class="form-control input-sm bg-light no-border rounded padder search-bg"
+                               placeholder="{{'comment.h5search' | translate}}">
+                        <span class="input-group-btn">
+                            <button ng-show="input.searchText"
+                                    ng-click="onCancelSearchButtonClick()"
+                                    class="btn btn-sm bg-dark2 rounded input-search">
+                                <i class="fa fa-close fw"></i>
+                            </button>
+                            <button class="btn btn-sm bg-dark2 rounded input-search">
+                                <i class="fa fa-search fw"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div ng-show="showSearchResult" style="display: inline-block">
+                        <h3 class="fw" style="margin : -20px 0 0 15px ; font-size: 20px"
+                            ng-show="searchResult.length > 0">
+                            {{'vehicles.h5search_result' | translate}}
+                        </h3>
+                        <h3 class="fw" style="margin : -20px 0 0 15px ; font-size: 20px"
+                            ng-show="searchResult.length == 0">
+                            {{'vehicles.h5no_result' | translate}}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div style="clear: both"></div>
+
+    <div class="main-padding card-fix pos-rlt navbar-collapse">
+
+        <div id="rates-vehicle-accordion" class="basic-accordion" ng-show="!showSearchResult" style="margin-left: 0">
+            <div ng-repeat="sales in salesList">
+                <h3 class="myselect">
+                    <span>{{sales.salesName}} </span>
+                    <span># {{sales.salesId}} </span>
+                    <span class="fb">({{sales.companiesCount}} {{'saleTotals.h5companies'|translate}})</span>
+                </h3>
+                <div class="cl-block hid" style="width: 70%">
+                    <!--sub according-->
+                    <div class="basic-accordion rates-sub-accordion" style="margin-left: 0;max-width: 480px">
+                        <div ng-repeat="company in sales.companies">
+                            <div class="rates-sub dopoint" style="height: 50px">
+                                <div style="width: 58%;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis" class="pull-left mg-l-s">
+                                    <span class="fw"><b>{{company.name}}</b></span>
+                                    <div style="clear: both"></div>
+                                </div>
+                                <i class="fa fa-angle-down pull-right"></i>
+                            </div>
+                            <div class="cl-block rates-sub-cont">
+                                    <div style="float: left;margin-left: 15px">
+                                    <span><span>{{'sale_rep_companies.h5VEHICLES' | translate}} : </span>{{company.car_count}}</span>
+                                    <br>
+                                    <span><span>{{'sale_rep_companies.h5DRIVERS' | translate}} : </span>{{company.driver_count}}</span>
+                                    <br>
+                                    <span><span>{{'sale_rep_companies.h5RATES' | translate}} : </span>{{company.rate_count}}</span>
+                                    </div>
+                                    <div style="float: left;margin-left: 70px">
+                                    <span><span>{{'sale_rep_companies.h5CUSTOMERS' | translate}} : </span>{{company.customer_count}}</span>
+                                    <br>
+                                    <span><span>{{'sale_rep_companies.h5RIDES' | translate}} : </span>{{company.rides_count}}</span>
+                                    <br>
+                                    <span><span>{{'sale_rep_companies.h5REVENUE' | translate}} : </span>{{company.rev_total | princeTranslateFilters : false:false:company.ccy}}</span>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- / sub according-->
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="basic-accordion rates-subs-accordion" style="margin-left: 0;max-width: 500px" ng-show="showSearchResult">
+            <div ng-repeat="company in searchResult">
+                <div class="rates-sub dopoint" style="height: 50px">
+                    <div style="width: 58%;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis" class="pull-left mg-l-s">
+                        <span class="fw"><b>{{company.name}}</b></span>
+                        <span><b class="assis-search-fr">{{company.first_name}}{{company.last_name}} #{{company.sale_id}}</b></span>
+                        <div style="clear: both"></div>
+                    </div>
+                    <i class="fa fa-angle-down pull-right"></i>
+                </div>
+                <div class="cl-block rates-sub-cont">
+                    <div style="float: left;margin-left: 15px">
+                        <span><span>{{'sale_rep_companies.h5VEHICLES' | translate}} : </span>{{company.car_count}}</span>
+                        <br>
+                        <span><span>{{'sale_rep_companies.h5DRIVERS' | translate}} : </span>{{company.driver_count}}</span>
+                        <br>
+                        <span><span>{{'sale_rep_companies.h5RATES' | translate}} : </span>{{company.rate_count}}</span>
+                    </div>
+                    <div style="float: left;margin-left: 70px">
+                        <span><span>{{'sale_rep_companies.h5CUSTOMERS' | translate}} : </span>{{company.customer_count}}</span>
+                        <br>
+                        <span><span>{{'sale_rep_companies.h5RIDES' | translate}} : </span>{{company.rides_count}}</span>
+                        <br>
+                        <span><span>{{'sale_rep_companies.h5REVENUE' | translate}} : </span>{{company.rev_total | princeTranslateFilters : false:false:company.ccy}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/sales-assistant-Companies.html'></google-analytics>

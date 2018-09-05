@@ -1,0 +1,19 @@
+{
+  "warning": "Warning",
+  "determine_to_delete": "Are you sure to delete？",
+  "change_pay_warning": "If you modify the default payment method, all stored credit card information will be invalid.",
+  "delete_customer": "Warning! Before deleting this client please make sure that they are not currently on a booking or have any bookings coming up. This action will delete ALL client information.(Personal Info & Payment Info). Are you sure you want to delete this client?",
+  "delete_passenger_fault": "Passenger was deleted fault",
+  "delete_passenger_success": "Passenger was deleted successfully",
+  "passenger_has_booking": "Fault , the client has orders not executed.",
+  "vehicle_routine_not_work": "You have not created a schedule for this vehicle. Please go to the Vehicles tab and in the Vehicle details section set their schedule. Do you want to save your current progress?",
+  "driver_routine_not_work": "You have not created a schedule for this driver. Please go to the Drivers tab and in the Driver details section set their schedule. Do you want to save your current progress?",
+  "driver_car_not_work": "You don't have any vehicles assigned for this driver. Please go to the \"Accessible Vehicles\" section and add vehicles for your driver. Do you want to save your current progress?",
+  "driver_car_not_work_edit": "You don't have any vehicles assigned for this driver. Please go to the VEHICLE tab and add vehicles for your driver. Do you want to save your current progress?",
+  "rate_car_not_work": "Don't forget to finish adding vehicles & assigning drivers to this rate. You can go to \"Select vehicles for this rate\" section and make sure you have added vehicles and drivers. Do you want to save your current progress?",
+  "rate_car_not_work_edit": "Don't forget to finish adding vehicles & assigning drivers to this rate. You can go to VEHICLE tab and make sure you have added vehicles and drivers. Do you want to save your current progress?",
+  "rate_driver_not_work": "Don't forget to finish adding drivers to this rate. You can go to \"Select vehicles for this rate\" section and make sure you have added vehicles and drivers. Do you want to save your current progress?",
+  "rate_driver_not_work_edit": "Don't forget to finish adding drivers to this rate. You can go to VEHICLE tab and make sure you have added vehicles and drivers. Do you want to save your current progress?",
+  "rate_routine_not_work": "Your rate looks good! But you need to set a schedule for it. Go down to the \"Rate Schedule\" section to set it up. Do you want to save your current progress?",
+  "customer_select_mc": "Select MailChimp List"
+}

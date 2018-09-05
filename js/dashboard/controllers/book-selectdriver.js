@@ -1,0 +1,30 @@
+angular.module('KARL.Controllers')
+    .controller('BookSelectDriverCtrl', function ($scope, $stateParams,$timeout) {
+
+        $timeout(function () {
+            angular.element('#selectDriverForm').validator();
+        },0);
+
+        $scope.drivers = $stateParams.data.drivers;
+        $scope.input = {};
+        angular.forEach($scope.drivers,function (driver,index) {
+            if(driver.isSelect){
+                $scope.input.selectedIndex = index;
+            }
+        });
+
+        $scope.onCancelButtonClick = function () {
+            if ($stateParams.event.cancel) {
+                $stateParams.event.cancel();
+            }
+        };
+
+        $scope.onSaveButtonClick = function (valid) {
+            if(!valid){
+                return;
+            }
+            if ($stateParams.event.ok) {
+                $stateParams.event.ok($scope.drivers[$scope.input.selectedIndex]);
+            }
+        }
+    });

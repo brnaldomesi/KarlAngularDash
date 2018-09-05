@@ -1,0 +1,132 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <div>
+        <span class="fgray main-title-text-l" >{{"ClientEdit.h5client_details"|translate}}</span>
+    </div>
+    <div ng-if="customer.avatar_url == ''" class="chead center-block mg-t-l"
+         style="background:#fff url(img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: cover"></div>
+    <div ng-if="customer.avatar_url != ''" class="chead center-block mg-t-l"
+         style="background:#fff url({{customer.avatar_url}}) no-repeat 50% 50%;background-size: cover"></div>
+
+    <div>
+        <ul class="nav-slider ">
+            <li style="width:50%;" class="act-tab"><a ng-click="changeTabs(0)">{{"comment.h5client"|translate}}</a></li>
+            <li style="width:50%;"><a ng-click="changeTabs(1)">{{"comment.h5payment"|translate}}</a></li>
+            <li class="slider" style="width:50%;"></li>
+        </ul>
+        <div ng-show="!showPayment">
+            <div ng-show="companyMCList.length >0"
+                 style="
+                 text-align: center;
+                 font-size:larger;
+                 cursor: pointer;
+                 margin-top: 10px"
+                 ng-click="openCustomerMc()">
+                {{'ClientEdit.h5MgrMC'| translate }}
+            </div>
+
+            <div ng-show="showPaymentCustomerInput" style="align-content: center">
+                <div class="row check-act" style="cursor: pointer" ng-click="addPaymentExistCheck = !addPaymentExistCheck">
+                    <i ng-class="{false:'fa fa-square-o fred',true:'fa fa-check-square-o fred'}[addPaymentExistCheck]"
+                    ></i>
+                    <span class="grey">{{tipsMsg}}</span>
+                </div>
+                <div class="form-group  pos-rlt"  ng-show="addPaymentExistCheck">
+                    <input class="myinput" ng-model="paymentExistCustomerId"
+                           type="text" placeholder="{{customerPlaceholder}}"/>
+                    <p id="resultColor">{{resultMsg}}</p>
+                </div>
+                <br ng-show="addPaymentExistCheck">
+                <br ng-show="addPaymentExistCheck">
+            </div>
+
+            <form id="clientForm" name="clientForm"
+                  data-toggle="validator" novalidate>
+                <div class="form-group  pos-rlt">
+                    <select class="myinput myselect" ng-model="customer.gender"
+                            ng-options="item.value as item.name for item in genders">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input ng-model="customer.first_name" class="myinput" type="text" placeholder="{{'comment.h5first_name' | translate}}"
+                           maxlength="50"
+                           required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <input ng-model="customer.last_name" class="myinput" type="text" placeholder="{{'comment.h5last_name' | translate}}"
+                           maxlength="50" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <input ng-model="customer.email" maxlength="100" class="myinput sign-mail" type="email" placeholder="{{'comment.h5client_email' | translate}}"
+                           required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <input ng-model="customer.mobile"
+                           class="myinput sign-mobile"
+                           type="tel"
+                           ng-change="formatPhone()"
+                           placeholder="{{'comment.h5phone_number' | translate}}" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <h4>{{'comment.h5address' | translate}}</h4>
+                <div class="form-group">
+                    <input ng-model="customer.formatted_address"
+                           class="myinput myinput-map"
+                           type="text"
+                           placeholder="{{'ClientEdit.h5street_address' |translate}}"
+                           uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                           typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                           typeahead-on-select="onAddressSelect($item, $model, $label, $event)"/>
+                    <i class="fa fa-map-marker fb f-m dopoint" ng-click="selectLocationOnMap()"></i>
+                    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                    <div ng-show="noResults" style="text-indent: 15px;color: #ff4d00">
+                        <i class="glyphicon glyphicon-remove"></i>{{'ClientEdit.h5no_results_found' | translate}}
+                    </div>
+                </div>
+                <button class="btn-blue btn center-block mg-t-xl"
+                        ng-click="onSaveButtonClick(clientForm.$valid,$event)">
+                    <span>{{'comment.h5SAVE' | translate}}</span>
+                </button>
+            </form>
+        </div>
+        <div ng-show="showPayment">
+            <h4 class="clint-Payment-fs" style="font-size: 25px">{{'ClientEdit.h5existing_payment' | translate}}</h4>
+            <div class="mg-t-xl"></div>
+            <div ng-repeat="item in paymentListData">
+                <div class="pos-rlt">
+                    <div class="pay-del-panel">
+                        <span class="card-del-info fw">{{'ClientEdit.h5delete_payment' | translate}}?</span>
+                        <div>
+                            <span class="fgray card-del-cancel dopoint">{{'comment.h5cancel' | translate}}</span>
+                            <span class="fred dopoint" ng-click="onDeleteCardButtonClick($index)">{{'comment.h5delete' | translate}}</span>
+                        </div>
+                    </div>
+                    <a type="button" class="pay-more"><i class="fa fa-ellipsis-v fblack fa-close"></i></a>
+                    <a type="button" class="pay-pen card-del" style="top:20px;right:34px" title="{{'comment.h5Delete_Card' | translate}}"><i
+                            class="fa fa-trash"></i></a>
+                </div>
+                <div ng-class="{0:'pay-disable pos-rlt dopoint',1:'pos-rlt dopoint'}[item.check_pass]"
+                     ng-click="onCreditCardDetailClick($index)">
+                    <div class="payment-block">
+                        <div class="payment-list">
+                            <div class="pname">
+                                <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 45%">{{item.first_name}}</span>
+                                <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 45%">{{item.last_name}}</span>
+                                <div style="clear: both"></div>
+                            </div>
+                            <span class="pull-left" ng-class="{'en-lang-bill':item.check_pass==0&&langStyle=='en','un-lang-bill':item.check_pass==0&&langStyle=='fr'}"><span
+                                    ng-show="item.check_pass == 1">{{item.cardTypeName}}</span></span>
+                            <span class="pull-right">{{item.card_number}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="fw fs-s dopoint" ng-click="addCardClick()">+ {{'ClientEdit.h5add_payment' | translate}}</span>
+
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/client-edit.html'></google-analytics>

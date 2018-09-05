@@ -1,0 +1,16 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h5 style="font-size: 24px"><span class="fgray">{{"mgrCustomerToMc.title"|translate}}</span></h5>
+    <div class="row check-act" style="cursor: pointer"
+         ng-repeat="item in companyMCList"
+         ng-click="changeMCList(item)"
+    >
+        <i ng-class="{0:'fa fa-square-o fred',1:'fa fa-check-square-o fred'}[item.checked]"></i>
+        <span class="grey">{{item.name}}</span>
+    </div>
+    <button type="submit" class="btn-blue btn center-block mg-t-xl"
+            ng-click="onCancelButtonClick()">
+        <span>{{'mgrCustomerToMc.finish' | translate}}</span>
+    </button>
+</div>
+<google-analytics analytics-page='/option-add.html'></google-analytics>

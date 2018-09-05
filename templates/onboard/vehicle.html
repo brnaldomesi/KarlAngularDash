@@ -1,0 +1,60 @@
+<div class="container" style="height: 800px;">
+    <div class="dashboard-wrapper">
+
+        <div class="K-obmain poisR">
+                <div class="k-ob-back"><span ng-click="backEvent()" ng-show="false">{{'board_vehicle.h5back' | translate}}</span></div>
+            <div class="autoclose">
+                <button type="button" ng-click="closeWindow()" class="close" data-dismiss="modal" aria-label="Close"
+                        style="color: red;opacity: 1;font-size: 30px;text-shadow: none;outline:none;"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="row">
+                <img src="img/onboard/home-logo-s.png" class="center-block k-logo-s"/>
+            </div>
+
+            <div class="k-addcompany home-mg2">
+                <div style="padding-left: 40px ; padding-right: 40px">
+                    <span style="font-size: 24px">{{'board_vehicle.h5add_vehicle_detail' | translate}}</span>
+                    <a class="pull-right" style="font-size: small;cursor: pointer" ng-click="skipToFinal()">{{'board_vehicle.h5or_skip_go_to_dashboard' | translate}}</a>
+                </div>
+                <div class="k-addcompanyinfo fr-margin">
+                    <div class="vehicledetail"><span class="">{{'board_vehicle.h5year' | translate}}</span>
+                        <span class="fwhite pull-right fblue" >{{car.year}}</span>
+                    </div>
+                    <div class="vehicledetail"><span>{{'board_vehicle.h5make' | translate}}</span><span
+                            class="fwhite pull-right fblue" >{{car.brand_name}}</span></div>
+                    <div class="vehicledetail"><span>{{'board_vehicle.h5model' | translate}}</span><span
+                            class="fwhite pull-right fblue" >{{car.model_name}}</span></div>
+                    <div class="vehicledetail"><span>{{'board_vehicle.h5color' | translate}}</span><span
+                            class="fwhite pull-right fblue">{{car.color}}</span></div>
+                    <div class="vehicledetail"><span>{{'board_vehicle.h5license_plate' | translate}}</span><span
+                            class="fwhite pull-right fblue">{{car.license}}</span></div>
+                </div>
+                <br/>
+                <h1>{{'board_vehicle.h5add_vehicle_list' | translate}}</h1>
+                <div class="k-addcompanyinfo">
+                    <div class="row">
+                        <div class="vehiclelist">
+                            <ul>
+                                <li class="vehicle-item" ng-repeat="item in carList track by $index" ng-click="switchCar($index)"
+                                onclick="$(this).addClass('vehicle-active').siblings().removeClass('vehicle-active');"
+                                >
+                                    <span>{{item.model_name}}</span><span>{{item.brand_name}}</span><span>{{item.license}}</span>
+                                    <span><i ng-click="showCarDetail($index)" class="fa fa-pencil fwhite" title="{{'board_edit_vehicle.h5edit_vehicle' | translate}}" style="cursor: pointer"></i></span></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <span class="fblue" ng-click="addAnotherVehicle()" ng-show="carList.length<5" style="cursor: pointer">{{'board_vehicle.h5add_vehicle' | translate}}</span>
+                        <button class="pull-right btn-blue" ng-click="nextToDriver()">{{'board_vehicle.h5continue' | translate}}</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

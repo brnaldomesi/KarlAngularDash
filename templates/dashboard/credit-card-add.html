@@ -1,0 +1,70 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4 style="font-size: 27px">{{'comment.h5add_payment' | translate}}</h4>
+    <form id="addCreditCardForm" name="addCreditCardForm"
+          data-toggle="validator" novalidate>
+        <div class="form-group  pos-rlt">
+            <select class="myinput myselect" ng-model="charge.card_type"
+                    ng-change="onChangesCardType()"
+                    ng-options="item.value as item.name for item in cardTypes">
+            </select>
+        </div>
+        <div class="form-group">
+            <input class="myinput" type="text" ng-model="charge.card_number"
+                   placeholder="{{'comment.h5card_number' | translate}}" required/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <input class="myinput" type="text" ng-model="charge.first_name" maxlength="50"
+                   placeholder="{{'comment.h5first_name' | translate}}" required/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <input class="myinput" type="text" ng-model="charge.last_name" maxlength="50"
+                   placeholder="{{'comment.h5last_name' | translate}}" required/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <h5>{{'credit_card_add.h5expiration' | translate}}</h5>
+        <div class="form-group">
+            <input class="myinput myinputhalf2"
+                   type="tel"
+                   style="margin-left: 12px;"
+                   ng-model="charge.expire_month"
+                   pattern="^0[1-9]|1[0-2]$"
+                   placeholder="{{'comment.h5MM' | translate}}"
+                   required/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <input class="myinput myinputhalf2"
+                   style="margin-left: 12px;"
+                   type="tel"
+                   ng-model="charge.expire_year"
+                   pattern="^\d{4}$"
+                   placeholder="{{'comment.h5YYYY' | translate}}"/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <input class="myinput myinput myinputhalf3"
+                   type="tel"
+                   ng-model="charge.cvv2"
+                   placeholder="CVC"
+                   required/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <input class="myinput myinput myinputhalf3"
+                   type="text"
+                   ng-model="charge.zip"
+                   maxlength="7"
+                   pattern="^[0-9]{5,7}$"
+                   placeholder="{{'credit_card_add.h5BillingZip' | translate}}"/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <button type="submit" class="btn-blue btn center-block mg-t-xl"
+                ng-click="addCreditCard(addCreditCardForm.$valid,$event)">
+            <span>{{'comment.h5SAVE' | translate}}</span>
+        </button>
+    </form>
+</div>
+<google-analytics analytics-page='/credit-card-add.html'></google-analytics>

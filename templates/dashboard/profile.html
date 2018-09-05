@@ -1,0 +1,270 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="13"></karl-header-menu>
+    <div class="main-padding card-fix navbar-collapse">
+        <div class="profile-main pos-rlt pd-b-m">
+            <div class="pos-rlt center-block">
+                <div class="chead-profile-edit" ng-click=""><i class="fa fa-pencil fw"></i></div>
+                <div ng-show="!showAdmin">
+                    <div class="chead center-block mg-t-l dopoint"
+                         ngf-select="uploadCompanyImg($file)"
+                         title="{{'comment.h5Upload_Company_Avatar'|translate}}"
+                         style="background:#fff url({{company.img}}) no-repeat 50% 50%;background-size: cover"></div>
+                </div>
+                <div ng-show="showAdmin">
+                    <div class="chead center-block mg-t-l dopoint"
+                         ngf-select="uploadUserImg($file)"
+                         title="{{'comment.h5Upload_Admin_Avatar'|translate}}"
+                         style="background:#fff url({{user.avatar_url}}) no-repeat 50% 50%;background-size: cover"></div>
+                </div>
+            </div>
+            <!--切换-->
+            <div id="tabs" class="profile-tab">
+                <ul class="nav-slider ">
+                    <li style="width:50%;" class="act-tab"><a ng-click="changeTabs(0)">{{'comment.h5company' |
+                        translate}}</a></li>
+                    <li style="width:50%;" ng-click="changeTabs(1)"><a>{{'comment.h5admin' | translate}}</a></li>
+                    <li class="slider" style="width:50%;"></li>
+                </ul>
+                <div ng-show="!showAdmin">
+                    <form id="companyForm" name="companyForm"
+                          data-toggle="validator" novalidate>
+                        <h4>{{'Profile.h5about_company' | translate}}</h4>
+                        <div class="profile-main-block">
+                            <h5>{{'Profile.h5company_name' | translate}}</h5>
+                            <div class="form-group">
+                                <input class="profile-input" ng-model="company.name" type="text" placeholder=""
+                                       required/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <h5>{{'comment.h5phone' | translate}}</h5>
+                            <div class="form-group">
+                                <input class="profile-input"
+                                       ng-model="company.phone1"
+                                       type="text"
+                                       ng-change="formatPhone(1)"
+                                       placeholder="" required/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="pos-rlt">
+                                <h5>{{'comment.h5email' | translate}}</h5>
+                                <div class="pos-abt pull-right mail-set" ng-click="onShowEmailDetailClick()"
+                                     style="cursor: pointer;" title="{{'comment.h5Config_Email' | translate}}"><i
+                                        class="fa fa-cog"></i></div>
+                                <div class="form-group">
+                                    <input class="profile-input" ng-model="company.email" type="email" placeholder=""
+                                           required/>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div ng-show="showEmailDetail">
+
+                                <div class="form-group">
+                                    <input class="profile-input testpl" ng-model="company.email_password"
+                                           type="password"
+                                           placeholder="{{'comment.h5email_password' | translate}}" required/>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+
+
+                                <div style="position:relative;margin-left: 12px">
+<span style="margin-left:100px;width:18px;overflow:hidden;">
+<select class="myinput proselect" style="border-bottom: #2e3066 1px solid;width:92%;margin-left:-100px;height: 45px"
+        ng-model="hey"
+        ng-options="emails as emails.name +'&nbsp;&nbsp;-&nbsp;&nbsp;'+ emails.values for emails in emailList"
+        ng-change="changeCard(hey.id)">
+</select></span><input class="myinput testpl" placeholder="{{'Profile.h5email_host' | translate}}" type="text"
+                       ng-model="company.email_host"
+                       ng-disabled="hey.id != 23"
+                       style="border-bottom: #2e3066 1px solid;width:88%;height: 45px;position:absolute;left:-12px;background: #3b76c9">
+                                </div>
+                                <input placeholder="{{'Profile.h5port' | translate}}" class="myinput testpl"
+                                       style="border-bottom: #2e3066 1px solid;width:90%;height: 45px;" type="text"
+                                       ng-model="company.email_port">
+
+                                <div>
+                                    <p style="color: #272a49;font-size: 17px;margin-left: 18px">ex: 25, 587, 465, 2525
+                                        (SMPT with SSL: 4065, 25025)</p>
+                                    <p style="color: #fff;font-size: 17px;margin-left: 18px">{{'Profile.h5port_warning'
+                                        | translate}}</p>
+                                </div>
+
+                                <!--<div class="form-group">-->
+                                <!--<input class="profile-input" ng-model="company.email_host" type="text"-->
+                                <!--placeholder="Email Host" required/>-->
+                                <!--<div class="help-block with-errors"></div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                <!--<input class="profile-input" ng-model="company.email_port" type="text"-->
+                                <!--placeholder="Email Port" required/>-->
+                                <!--<div class="help-block with-errors"></div>-->
+                                <!--</div>-->
+
+                            </div>
+                            <div class="pos-rlt">
+                                <h5>{{'comment.h5address' | translate}}</h5>
+                                <div class="pos-abt pull-right mail-set" ng-click="selectLocationOnMap()"
+                                     style="cursor: pointer;"><i class="fa fa-map-marker f-l dopoint"></i></div>
+                                <div class="form-group">
+                                    <input class="profile-input profile-input-map testpl"
+                                           type="text"
+                                           ng-model="company.formatted_address"
+                                           placeholder="{{'comment.h5street_address' |translate}}"
+                                           uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                                           typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                                           typeahead-on-select="onAddressSelect($item, $model, $label, $event)"/>
+
+                                    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                                    <div ng-show="noResults" style="text-indent: 15px;color: #ff4d00">
+                                        <i class="glyphicon glyphicon-remove"></i> {{'comment.h5no_results_found' |
+                                        translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-case">
+                                <h5>{{'comment.h5language' | translate}}</h5>
+                                <div class="select">
+                                    <select class="currency-select"
+                                            ng-model="selectedLanguage"
+                                            ng-options="item.value as item.title for item in defaultCompanyLanguage"></select>
+                                </div>
+                            </div>
+                            <div class="pos-rlt">
+                                <h5 style="display: inline-block">{{'Profile.h5Company_Terms_Conditions' |
+                                    translate}}</h5>
+                                <button class="btn-profile-tos" ng-click="onGetCompanyDisclaimer()">
+                                    <span ng-show="isDisclaimer">{{'Profile.h5Add' | translate}}</span>
+                                    <span ng-show="!isDisclaimer">{{'Profile.h5Edit' | translate}}</span>
+                                </button>
+                                <p class="des-profile-tos">{{'Profile.h5Add_T&C_info' | translate}}</p>
+                            </div>
+                        </div>
+                        <button class="btn-blue2 btn center-block mg-t-xl"
+                                ng-click="onCompanySubmit($event)">
+                            <span>{{'comment.h5SAVE' | translate}}</span>
+                        </button>
+                    </form>
+                </div>
+                <div ng-show="showAdmin">
+                    <form id="adminForm" name="adminForm"
+                          data-toggle="validator" novalidate>
+                        <h4>{{'Profile.h5about' | translate}}</h4>
+                        <div class="profile-main-block">
+                            <h5>{{'comment.h5name' | translate}}</h5>
+                            <div class="form-group">
+                                <input class="profile-input testpl" ng-model="user.first_name" type="text"
+                                       placeholder="{{'comment.h5first_name' | translate}}" required/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input class="profile-input testpl" ng-model="user.last_name" type="text"
+                                       placeholder="{{'comment.h5last_name' | translate}}" required/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <h5>{{'comment.h5email' | translate}}</h5>
+                            <div class="form-group">
+                                <input class="profile-input" ng-model="user.email" type="email" placeholder=""
+                                       required/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <h5>{{'comment.h5phone' | translate}}</h5>
+                            <div class="form-group">
+                                <input class="profile-input" ng-model="user.mobile" type="tel" placeholder=""
+                                       ng-change="formatPhone(2)"
+                                       required/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <h5>{{'comment.h5password' | translate}}</h5>
+                            <input class="profile-input" readonly="readonly" value="123456" type="password"
+                                   placeholder=""/>
+                        </div>
+
+                        <div class="fs-s dopoint mg-t-m" style="text-indent:10px;cursor: pointer;color: #272a49"
+                             ng-click="onChangePasswordClick()">{{'comment.h5change_password' | translate}}
+                        </div>
+                        <div ng-if="changePassword">
+                            <div class="form-group">
+                                <input type="password" style="display: none">
+                                <input class="profile-input testpl" ng-model="user.oldPwd" type="password"
+                                       placeholder="{{'Profile.h5current_password' | translate}}" required/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" style="display: none">
+                                <input class="profile-input testpl" ng-model="user.newPwd" type="password"
+                                       placeholder="{{'Profile.h5new_password' | translate}}" required/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" style="display: none">
+                                <input class="profile-input testpl" ng-model="user.newPwdVerfy" type="password"
+                                       placeholder="{{'Profile.h5re_new_password' | translate}}" required/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="mg-t-xl">
+                            <a type="submit" ng-show="isShowAddDriver" class="fw2 f-s text-uline dopoint pull-left "
+                               ng-click="adminAddAsDriver()" style="margin-left:2%;">
+                                <span>{{'Profile.h5add_as_driver' | translate}}</span>
+                            </a>
+                            <button class="btn-blue2 btn center-block "
+                                    ng-click="onAdminSubmit($event)">
+                                <span>{{'comment.h5SAVE' | translate}}</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- / 切换-->
+        </div>
+
+        <div class="porfile-sub">
+            <h4>{{'comment.h5payment' | translate}}</h4>
+            <div class="fw fs-s dopoint mg-t-m"
+                 style="text-indent:10px;"
+            >
+                <h5>Connect with Stripe</h5>
+            </div>
+            <div class="pay-act" ng-show="sAcctId != null && sAcctId !=''">
+                <div class="pos-rlt">
+                    <div class="payment-block">
+                        <div class="payment-list" style="height: 45px">
+                            <b><span style="color: #294775">{{sAcctId}}</span></b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: left;margin-top: 20px" ng-show="sAcctId == null || sAcctId ==''">
+                <a href="{{link}}" target="_blank"><img
+                        style="max-width: 220px;width: 55% ; max-height: 40px; height: 55%"
+                        src="img/dashboard/connect-stripe.png"/></a>
+            </div>
+            <div class="fw fs-s dopoint mg-t-m"
+                 style="text-indent:10px;" ng-show="sAcctId != null && sAcctId !=''"
+            >
+                <a href="{{link}}" target="_blank">{{'Profile.h5ResetStripeAcct' | translate}}</a>
+            </div>
+
+        </div>
+        <div class="porfile-sub">
+            <h4>{{'Profile.h5Mail_Chimp_Integration' | translate}}</h4>
+            <h5>{{'Profile.h5Email_Marketing' | translate}}</h5>
+            <div class="pay-act" ng-click="popMailChimpSetting()">
+                <div class="pos-rlt">
+                    <img class="payment-logo" style="width: 50px ;height: 50px"
+                         src="img/dashboard/mc_freddie_color_web.png"/>
+                </div>
+                <div class="pos-rlt">
+                    <div class="payment-block">
+                        <div class="payment-list">
+                            <div class="pname"><br></div>
+                            <span class="pull-left" style="margin-top: 8px;">{{mcMsg}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cl"></div>
+
+    </div>
+</div>
+<google-analytics analytics-page='/profile.html'></google-analytics>

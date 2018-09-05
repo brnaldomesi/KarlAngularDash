@@ -1,0 +1,131 @@
+/* Theme Variables */
+
+/* login */
+.login .bg {
+    margin-top: -15px;
+    padding-top: 20px;
+    background-color: #000;
+    background: url("../../img/dashboard/ui-bg01.jpg") no-repeat left;
+}
+
+.hand-pointer {
+    cursor: pointer;
+}
+
+.book-detail-content .form-group{
+    margin-bottom: 10px;
+}
+
+/* calendar in calendar */
+.col-md-4 .fc-event {
+    width: 14px !important;
+    border-radius: 9px !important;
+}
+
+.col-md-4 .fc-content {
+    text-align: center !important;
+}
+/* calendar in events */
+
+/* scroll horizontal div */
+.scroll-horizontal {
+    width:50%;
+    height:300px;
+    border:thin solid black;
+    overflow-x:scroll;
+    overflow-y:hidden;
+}
+
+.ride {
+    cursor: pointer;
+    opacity: .9;
+    transition: opacity .35s ease-in-out;
+}
+
+/* CSS for Credit Card Payment form */
+.credit-card-box .panel-title {
+    display: inline;
+    font-weight: bold;
+}
+
+.credit-card-box .form-control.error {
+    border-color: red;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+.credit-card-box label.error {
+    font-weight: bold;
+    color: red;
+    padding: 2px 8px;
+    margin-top: 2px;
+}
+
+.credit-card-box .payment-errors {
+    font-weight: bold;
+    color: red;
+    padding: 2px 8px;
+    margin-top: 2px;
+}
+
+.credit-card-box label {
+    display: block;
+}
+
+/* The old "center div vertically" hack */
+.credit-card-box .display-table {
+    display: table;
+}
+
+.credit-card-box .display-tr {
+    display: table-row;
+}
+
+.credit-card-box .display-td {
+    display: table-cell;
+    vertical-align: middle;
+
+}
+
+/* Just looks nicer */
+.credit-card-box .panel-heading img {
+    min-width: 180px;
+}
+
+.gn-menu-main {
+    display: none;
+}
+
+@media all and (max-width: 768px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2 / 1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
+
+    .gn-menu-main {
+        display: inherit;
+    }
+}
+
+.gn-menu-main li.gn-icon {
+    padding-left: 22px;
+}
+
+.gn-menu-main li.gn-icon.active a {
+    color: #ed6d49;
+}
+
+.gn-menu-main li.gn-icon .fa {
+    margin-right: 20px;
+}
+
+.gn-menu-main .h-menu{
+    padding: 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+/* wei style */
+/* companies-detail */
+.mDl{margin: 10pt 10pt;}
+.mDl dt{
+    line-height: 280%;font-size: 9pt;color: #bbb;
+}
+.mDl dd{line-height: 200%;font-size:10pt;border-bottom: #eee solid 1px;margin-bottom: 10pt;}

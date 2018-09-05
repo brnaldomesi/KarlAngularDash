@@ -1,0 +1,241 @@
+.btn-red {
+    border: #ff4d00 solid 1px;
+    width: 120px;
+    height: 35px;
+    border-radius: 30px;
+}
+
+@media screen and (max-width: 767px) {
+    /*小于767 mobile */
+    .login-main {
+        background:url(../../../img/dashboard/k-bg.jpg) no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 110%;
+        padding-top: 15%;
+    }
+
+    .login-title {
+        width: 100%;
+        text-align: center;
+        font-size: 34px;
+    }
+
+    .login-input {
+        width: 90%;
+        padding: 0 10px;
+    }
+    .login-input h3{
+        font-size: 18px;
+        margin-left: 5%;
+    }
+
+    .login-tip {
+        width: 90%;
+        margin: 10%;
+        height: 150px;
+        margin-top: 20%;
+        font-size: 12px;
+        position: relative;
+
+    }
+    .login-tip h3{
+        font-size: 14px;
+    }
+
+    .login-tip-line {
+        border-bottom: 4px #ff4d00 solid;
+        margin: 7px 0;
+        width: 40px;
+    }
+
+    .login-tip .login-learn{
+        font-size: 12px;
+        width: 110px;
+        height: 28px;
+        line-height: 21px;
+        position: absolute;
+        top:0;
+        left: 160px;
+
+    }
+
+    .login-logo {
+        width: 100px;
+        height: 40px;
+        background: url(../../../img/dashboard/k-login-logo.png) no-repeat;
+        background-size: contain;
+    }
+
+    .login-btn-block {
+        height: 30px;
+        text-align: center;
+        padding-top: 3%;
+    }
+
+    .login-btn-block button {
+        background: transparent;
+        margin: 5px;
+    }
+
+    .btn-login {
+        border: #ff4d00 solid 1px;
+        width: 160px;
+        height: 26px;
+        border-radius: 30px;
+    }
+
+}
+
+@media (min-width:768px) and (max-width:991px){
+    /*大于768小于991  portable */
+
+    .view-container{
+        height: 100%;
+    }
+
+    .login-main {
+        background:url(../../../img/dashboard/k-bg.jpg) no-repeat;
+        background-size: 100%;
+        width: 100%;
+        height: 100%;
+        padding-top: 70px;
+    }
+
+    .login-title {
+        width: 100%;
+        text-align: center;
+        font-size: 72px;
+    }
+
+    .login-input {
+        width: 350px;
+        padding: 0 20px;
+    }
+
+    .login-tip {
+        width: 200px;
+        position: fixed;
+        right:3%;
+        bottom:3%;
+        font-size: 12px;
+    }
+
+    .login-tip h3{
+        font-size: 16px;
+    }
+
+    .login-tip-line {
+        border-bottom: 4px #ff4d00 solid;
+        margin: 5px 0;
+        width: 40px;
+    }
+
+    .login-logo {
+        width: 200px;
+        height: 60px;
+        background: url(../../../img/dashboard/k-login-logo.png) no-repeat;
+        background-size: contain;
+    }
+
+    .login-btn-block {
+        text-align: center;
+        padding-top: 50px;
+    }
+
+    .login-btn-block button {
+        background: transparent;
+        margin: 5px;
+    }
+
+    .btn-login {
+        border: #ff4d00 solid 1px;
+        width: 200px;
+        height: 30px;
+        border-radius: 30px;
+    }
+
+    .login-tip .login-learn{
+        font-size: 12px;
+        width: 110px;
+        height: 28px;
+        line-height: 21px;
+    }
+
+}
+
+
+@media screen and (min-width:992px) {
+    /*大于992  pc */
+    .view-container{
+        height: 100%;
+    }
+
+    .login-main {
+        background:url(../../../img/dashboard/k-bg.jpg) no-repeat;
+        background-size: 100%;
+        width: 100%;
+        height: 100%;
+        padding-top: 80px;
+    }
+
+    .login-title {
+        width: 100%;
+        text-align: center;
+        font-size: 78px;
+    }
+
+    .login-input {
+        width: 350px;
+        padding: 0 20px;
+    }
+
+    .login-tip {
+        width: 240px;
+        margin: 10px;
+        position: fixed;
+        right:5%;
+        bottom:8%;
+    }
+
+    .login-tip-line {
+        border-bottom: 4px #ff4d00 solid;
+        margin: 5px 0;
+        width: 40px;
+    }
+
+    .login-logo {
+        width: 200px;
+        height: 60px;
+        background: url(../../../img/dashboard/k-login-logo.png) no-repeat;
+        background-size: contain;
+    }
+
+    .login-btn-block {
+        text-align: center;
+        padding-top: 45px;
+    }
+
+    .login-btn-block button {
+        background: transparent;
+        margin: 5px;
+    }
+
+    .btn-login {
+        border: #ff4d00 solid 1px;
+        width: 200px;
+        height: 35px;
+        border-radius: 30px;
+    }
+
+    .login-tip .login-learn{
+        font-size: 12px;
+        width: 110px;
+        height: 28px;
+        line-height: 21px;
+    }
+
+}
+
+
+

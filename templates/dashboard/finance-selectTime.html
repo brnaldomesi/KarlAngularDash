@@ -1,0 +1,13 @@
+<div class="client-detail" >
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4 ng-show="showState==0"><span class="fgray">{{'comment.h5from' | translate}}</span></h4>
+    <h4 ng-show="showState==1"><span class="fgray">{{'comment.h5to' | translate}}</span></h4>
+    <div class="mg-t-s finance-time-pick">
+        <div style="margin: auto;" class="datetime"></div>
+    </div>
+    <div class="mg-t-l">
+        <span class="f-m fb" ng-click="onCancelButtonClick()">{{'comment.h5cancel' | translate}}</span>
+        <span  class="pull-right btn-blue2" ng-click="onDoneButtonClick()" style="text-align: center">{{'comment.h5done' | translate}}</span>
+    </div>
+</div>
+<google-analytics analytics-page='/finance-selectTime.html'></google-analytics>

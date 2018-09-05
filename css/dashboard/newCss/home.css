@@ -1,0 +1,831 @@
+.textline-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
+
+.line-blue {
+    height: 1px;
+    width: 100%;
+    background: #36378f;
+    margin: 10px 0;
+}
+
+@media screen and (max-width: 767px) {
+    /*小于767 mobile */
+    .home-today {
+        display: block;
+        width: 80%;
+        height: 60px;
+        background: #3b76c9;
+        position: absolute;
+        left: 10%;
+        margin-top: 12%;
+        padding: 0 20px;
+    }
+
+    .home-today span {
+        font-size: 38px;
+    }
+
+    .home-today i {
+        margin-top: 20px;
+    }
+
+    .home-panel-close {
+        display: block;
+    }
+
+    .home-panel {
+        display: none;
+        width: 90%;
+        height: 87%;
+        background: #3b76c9;
+        margin: 10% 5% 0 5%;
+        border-radius: 5px;
+        padding: 7px;
+        padding-top: 25px;
+        overflow: auto;
+        position: absolute;
+        left: 1%;
+        right: 1%;
+        z-index: 1000;
+    }
+
+    .book-name {
+        font-size: 22px;
+    }
+
+    .home-panel > div {
+        margin: 15px 0;
+    }
+
+    .home-map {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        position: fixed;
+    }
+
+    .line-bottom {
+        border-bottom: #729bd5 solid 1px;
+        padding-bottom: 10px;
+    }
+
+    .time-booking {
+    }
+
+    .home-book-area {
+        color: #f2f2f2;
+        margin: 10px 0;
+    }
+
+    .home-book-info {
+        display: none;
+    }
+
+    .home-book-info-xs {
+        display: block;
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+        background: #4444bf;
+        padding: 10px 10px;
+    }
+
+    .home-book-more {
+        width: 100%;
+        height: 35px;
+        line-height: 25px;
+        padding: 5px 20px;
+        font-size: 15px;
+        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5) inset;
+    }
+
+    .home-book-more i {
+        font-size: 18px;
+        margin: 5px;
+    }
+
+    .state-ontime {
+        background: #39b54a;
+    }
+
+    .state-required {
+        background: #e5b612;
+    }
+
+    .state-late {
+        background: #ed1c24;
+    }
+
+    .state-idle {
+        background: #13478f;
+    }
+
+    .home-book-detail {
+        width: 100%;
+        background: #4444bf;
+        border-radius: 0 0 5px 5px;
+        padding: 10px 8px;
+    }
+
+    .detail-call {
+        padding: 20px 0;
+        width: 90%;
+        margin-left:auto ;
+        margin-right:auto ;
+
+    }
+
+    .detail-call button {
+        margin: 0 10px;
+    }
+
+    .btn-line2 {
+        width: 40%;
+        height: 36px;
+        line-height: 30px;
+        font-weight: 500;
+        color: #fff;
+        background: transparent;
+        font-size: 14px;
+        padding: 0;
+        border: #f2f2f2 solid 1px;
+        border-radius: 20px;
+        outline: none;
+    }
+
+    .btn-line2:hover, .btn-line2:focus {
+        color: #fff;
+    }
+
+    .home-trip-op-block {
+
+    }
+
+    .home-trip-op {
+        margin: 0 2%;
+        display: inline-block;
+    }
+
+    .home-trip-op i {
+        margin: 0 5px;
+    }
+
+    .home-trip-card-loc {
+        margin-left: 0;
+        position: relative;
+        overflow: hidden
+
+    }
+
+    .home-trip-card-loc > span {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 100%;
+        background: #282a4b;
+        font-weight: bold;
+        margin: 0 5px;
+        vertical-align: top;
+    }
+
+    .home-trip-card-loc > p {
+        display: inline-block;
+        width: 83%;
+    }
+
+    .line-ver2 {
+        position: absolute;
+        width: 2px;
+        height: 40px;
+        background: #282a4b;
+        left: 16px;
+        top: 40px;
+        z-index: 1;
+    }
+
+    .line-ver2-long {
+        position: absolute;
+        width: 2px;
+        height: 150px;
+        background: #282a4b;
+        left: 17px;
+        top: 25px;
+        z-index: 1;
+    }
+
+    .home-sort {
+        width: 160px;
+        padding: 3px;
+    }
+
+    .home-sort span {
+        float: right;
+    }
+
+    .home-sort i {
+        display: none;
+        float: right;
+        font-size: 15px;
+        margin-top: 5px;
+        margin-left: 15px;
+    }
+
+    .home-sort-panel {
+        width: 180px;
+        height: 170px;
+        background: #f2f2f2;
+        right:3%;
+        border-radius: 9px;
+        margin-right: 15px;
+        z-index: 10000;
+    }
+    .home-sort-panel ul{
+        list-style: none;
+        padding: 10px 15px;
+    }
+    .home-sort-panel ul li{
+        width: 100%;
+        height: 30px;
+        color: #36378f;
+        font-weight: bold;
+        font-size: 16px;
+        border-bottom: #bdbde3 solid 1px;
+    }
+    .home-sort-panel ul .state-0{
+        background: url("../../../img/dashboard/state-0.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-1{
+        background: url("../../../img/dashboard/state-1.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-2{
+        background: url("../../../img/dashboard/state-2.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-3{
+        background: url("../../../img/dashboard/state-3.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-4{
+        background: url("../../../img/dashboard/state-4.png") no-repeat;
+        text-indent: 25px;
+    }
+
+    .home-search {
+        width: 100%;
+    }
+    .home-search input{
+        color:#333;
+    }
+
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    /*大于768小于991  portable */
+    .home-today {
+        display: block;
+        width: 60%;
+        height: 60px;
+        background: #3b76c9;
+        position: absolute;
+        left: 25%;
+        margin-top: 12%;
+        padding: 0 20px;
+    }
+
+    .home-today span {
+        font-size: 38px;
+    }
+
+    .home-today i {
+        margin-top: 20px;
+    }
+
+    .home-panel-close {
+        display: block;
+    }
+
+    .home-panel {
+        display: none;
+        width: 58%;
+        height: 87%;
+        background: #3b76c9;
+        margin: 10% 5% 0 5%;
+        border-radius: 5px;
+        padding: 15px;
+        padding-top: 25px;
+        overflow: auto;
+        position: absolute;
+        z-index: 99999;
+        right: 1%;
+    }
+
+    .book-name {
+        font-size: 26px;
+    }
+
+    .home-panel > div {
+        margin: 15px 0;
+    }
+
+    .home-map {
+        width: 100%;
+        padding: 0;
+        position: fixed;
+    }
+
+    .line-bottom {
+        border-bottom: #729bd5 solid 1px;
+        padding-bottom: 10px;
+    }
+
+    .time-booking {
+    }
+
+    .home-book-area {
+        color: #f2f2f2;
+        margin: 10px 0;
+    }
+
+    .home-book-info {
+        display: block;
+        width: 100%;
+        height: 180px;
+        border-radius: 5px 5px 0 0;
+        background: #4444bf;
+        padding: 10px 20px;
+    }
+
+    .home-book-info-xs {
+        display: none;
+    }
+
+    .home-book-more {
+        width: 100%;
+        height: 35px;
+        line-height: 25px;
+        padding: 5px 20px;
+        font-size: 15px;
+        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5) inset;
+    }
+
+    .home-book-more i {
+        font-size: 18px;
+        margin: 5px;
+    }
+
+    .state-ontime {
+        background: #39b54a;
+    }
+
+    .state-required {
+        background: #e5b612;
+    }
+
+    .state-late {
+        background: #ed1c24;
+    }
+
+    .state-idle {
+        background: #13478f;
+    }
+
+    .home-book-detail {
+        width: 100%;
+        /*某些分辨率下高度撑出*/
+        /*height: 600px;*/
+        background: #4444bf;
+        border-radius: 0 0 5px 5px;
+        padding: 10px 20px;
+    }
+
+    .detail-call {
+        padding: 20px 0;
+        width: 80%;
+        margin-left:auto ;
+        margin-right:auto ;
+    }
+
+    .detail-call button {
+        margin: 0 10px;
+    }
+
+    .btn-line2 {
+        width: 40%;
+        height: 36px;
+        line-height: 30px;
+        font-weight: 500;
+        color: #fff;
+        background: transparent;
+        font-size: 14px;
+        padding: 0;
+        border: #f2f2f2 solid 1px;
+        border-radius: 20px;
+        outline: none;
+    }
+
+    .btn-line2:hover, .btn-line2:focus {
+        color: #fff;
+    }
+
+    .home-trip-op {
+        margin: 0 10px;
+        display: inline-block;
+    }
+
+    .home-trip-op i {
+        margin: 0 5px;
+    }
+
+    .home-trip-card-loc {
+        margin-left: 15px;
+        position: relative;
+        overflow: hidden
+
+    }
+
+    .home-trip-card-loc > span {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 100%;
+        background: #282a4b;
+        font-weight: bold;
+        margin: 0 5px;
+        vertical-align: top;
+    }
+
+    .home-trip-card-loc > p {
+        display: inline-block;
+        width: 270px;
+    }
+
+
+
+
+
+
+
+
+    .line-ver2 {
+        position: absolute;
+        width: 2px;
+        height: 40px;
+        background: #282a4b;
+        left: 31px;
+        top: 40px;
+        z-index: 1;
+    }
+
+    .line-ver2-long {
+        position: absolute;
+        width: 2px;
+        height: 150px;
+        background: #282a4b;
+        left: 17px;
+        top: 25px;
+        z-index: 1;
+    }
+
+    .home-sort {
+        width: 215px;
+        padding: 3px;
+    }
+
+    .home-sort span {
+        float: right;
+    }
+
+    .home-sort i {
+        float: right;
+        font-size: 15px;
+        margin-top: 5px;
+        margin-left: 15px;
+    }
+
+    .home-sort-panel {
+        width: 180px;
+        height: 170px;
+        background: #f2f2f2;
+        right:10%;
+        border-radius: 9px;
+        margin-right: 15px;
+        z-index: 10000;
+    }
+    .home-sort-panel ul{
+        list-style: none;
+        padding: 10px 15px;
+    }
+    .home-sort-panel ul li{
+        width: 100%;
+        height: 30px;
+        color: #36378f;
+        font-weight: bold;
+        font-size: 16px;
+        border-bottom: #bdbde3 solid 1px;
+    }
+    .home-sort-panel ul .state-0{
+        background: url("../../../img/dashboard/state-0.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-1{
+        background: url("../../../img/dashboard/state-1.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-2{
+        background: url("../../../img/dashboard/state-2.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-3{
+        background: url("../../../img/dashboard/state-3.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-4{
+        background: url("../../../img/dashboard/state-4.png") no-repeat;
+        text-indent: 25px;
+    }
+
+    .home-search {
+        width: 100%;
+    }
+    .home-search input{
+        color:#333;
+    }
+
+
+}
+
+@media screen and (min-width: 992px) {
+    /*大于992  pc */
+    .home-today {
+        display: none;
+    }
+
+    .home-panel-close {
+        display: none;
+    }
+
+    .home-panel {
+        display: block;
+        width: 420px;
+        height: 87%;
+        background: #3b76c9;
+        margin: 2% 0 0 0;
+        border-radius: 5px;
+        /*float: left;*/
+        padding: 20px;
+        padding-top: 25px;
+        overflow: auto;
+        position: fixed;
+        z-index: 1000;
+        left: 230px;
+    }
+
+    .home-panel > div {
+        margin: 15px 0;
+    }
+
+    .book-name {
+        font-size: 26px;
+    }
+
+    .home-map {
+        width: 100%;
+        height: 100%;
+        background: #333;
+        padding: 0;
+    }
+
+    .line-bottom {
+        border-bottom: #729bd5 solid 1px;
+        padding-bottom: 10px;
+    }
+
+    .time-booking {
+    }
+
+    .home-book-area {
+        color: #f2f2f2;
+        margin: 10px 0;
+    }
+
+    .home-book-info {
+        display: block;
+        width: 100%;
+        /*height: 180px;*/
+        border-radius: 5px 5px 0 0;
+        background: #4444bf;
+        padding: 10px 20px;
+    }
+
+    .home-book-info-xs {
+        display: none;
+    }
+
+    .home-book-more {
+        width: 100%;
+        height: 35px;
+        line-height: 25px;
+        padding: 5px 20px;
+        font-size: 15px;
+        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5) inset;
+    }
+
+    .home-book-more i {
+        font-size: 18px;
+        margin: 5px;
+    }
+
+    .state-ontime {
+        background: #39b54a;
+    }
+
+    .state-required {
+        background: #e5b612;
+    }
+
+    .state-late {
+        background: #ed1c24;
+    }
+
+    .state-idle {
+        background: #13478f;
+    }
+
+    .home-book-detail {
+        width: 100%;
+        background: #4444bf;
+        border-radius: 0 0 5px 5px;
+        padding: 10px 20px;
+    }
+
+    .detail-call {
+        padding: 20px 0;
+    }
+
+    .detail-call button {
+        margin: 0 18px;
+    }
+
+    .btn-line2 {
+        width: 120px;
+        height: 36px;
+        line-height: 36px;
+        font-weight: 500;
+        color: #fff;
+        background: transparent;
+        font-size: 14px;
+        padding: 0;
+        border: #f2f2f2 solid 1px;
+        border-radius: 20px;
+        outline: none;
+    }
+
+    .btn-line2:hover, .btn-line2:focus {
+        color: #fff;
+    }
+
+    .home-trip-op {
+        margin: 0 10px;
+        display: inline-block;
+    }
+
+    .home-trip-op i {
+        margin: 0 5px;
+    }
+
+    .home-trip-card-loc {
+        margin-left: 15px;
+        position: relative;
+        overflow: hidden
+
+    }
+
+    .home-trip-card-loc > span {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 100%;
+        background: #282a4b;
+        font-weight: bold;
+        margin: 0 5px;
+        vertical-align: top;
+    }
+
+    .home-trip-card-loc > p {
+        display: inline-block;
+        width: 250px;
+    }
+
+    .home-airline{
+        /*text-align: left;*/
+    }
+
+    .line-ver2 {
+        position: absolute;
+        width: 2px;
+        height: 40px;
+        background: #282a4b;
+        left: 31px;
+        top: 40px;
+        z-index: 1;
+    }
+    .line-ver2-long {
+        position: absolute;
+        width: 2px;
+        height: 150px;
+        background: #282a4b;
+        left: 17px;
+        top: 25px;
+        z-index: 1;
+    }
+
+    .home-sort {
+        width: 215px;
+        padding: 3px;
+    }
+
+    .home-sort span {
+        float: right;
+    }
+
+    .home-sort i {
+        float: right;
+        font-size: 15px;
+        margin-top: 5px;
+        margin-left: 15px;
+    }
+
+    .home-sort-panel {
+        width: 180px;
+        height: 170px;
+        background: #f2f2f2;
+        right:0;
+        border-radius: 9px;
+        margin-right: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        z-index: 10000;
+    }
+    .home-sort-panel ul{
+        list-style: none;
+        padding: 10px 15px;
+    }
+    .home-sort-panel ul li{
+        width: 100%;
+        height: 30px;
+        color: #36378f;
+        font-weight: bold;
+        font-size: 16px;
+        border-bottom: #bdbde3 solid 1px;
+    }
+    .home-sort-panel ul .state-0{
+        background: url("../../../img/dashboard/state-0.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-1{
+        background: url("../../../img/dashboard/state-1.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-2{
+        background: url("../../../img/dashboard/state-2.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-3{
+        background: url("../../../img/dashboard/state-3.png") no-repeat;
+        text-indent: 25px;
+    }
+    .home-sort-panel ul .state-4{
+        background: url("../../../img/dashboard/state-4.png") no-repeat;
+        text-indent: 25px;
+    }
+
+    .home-search {
+        width: 100%;
+    }
+    .home-search input{
+        color:#333;
+    }
+}
+
+@media (max-width: 320px) {
+    .detail-call {
+        width: 100%;
+    }
+
+    .btn-line2 {
+        font-weight: 300;
+        font-size: 11px;
+    }
+}

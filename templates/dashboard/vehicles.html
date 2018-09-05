@@ -1,0 +1,135 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="3"></karl-header-menu>
+    <div class="btn-add" ng-click="onAddButtonClick()" style="cursor:pointer;" title="{{'comment.h5Add_Vehicle' | translate}}"><i
+            class="fa fa-plus"></i></div>
+    <div class="main-padding card-fix pd-b-xl pos-rlt navbar-collapse">
+        <div>
+            <div>
+                <div class="h-m search-block">
+                    <div class="input-group pull-left an-search">
+                        <input type="text"
+                               ng-model="input.searchText"
+                               class="form-control input-sm bg-light no-border rounded padder search-bg"
+                               placeholder="{{'comment.h5search' | translate}}">
+                        <span class="input-group-btn">
+                            <button ng-show="input.searchText"
+                                    ng-click="onCancelSearchButtonClick()"
+                                    class="btn btn-sm bg-dark2 rounded input-search"
+                                    style="margin-top: 0">
+                                <i class="fa fa-close fw"></i>
+                            </button>
+                            <button class="btn btn-sm bg-dark2 rounded input-search"
+                                    style="margin-top: 0">
+                                <i class="fa fa-search fw"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="vehicle-select">
+                    <!--<span class="fgray" style="margin-right: 20px;">Categories:</span>-->
+                    <!--<select class="selectpicker"-->
+                    <!--ng-model="selectedCategory"-->
+                    <!--ng-options="item.value as item.categoryName for item in categories"-->
+                    <!--ng-change="onCategorySelect()">-->
+                    <!--</select>-->
+                </div>
+            </div>
+            <div>
+                <div id="vehicle-accordion" class="basic-accordion" ng-show="!showSearchResult">
+                    <div ng-repeat="brand in brands">
+                        <h3 class="myselect">{{brand.brandName}}<span class="fb">{{brand.cars.length}} {{'comment.h5total' | translate}}</span></h3>
+                        <div class="cl-block">
+                            <div class="vhcard-area" ng-repeat="car in brand.cars">
+                                <div class="del-panel gen-panel">
+                                    <span class="del-info fw">{{'vehicles.h5delete_vehicles' | translate}}?</span>
+                                    <div>
+                                        <span class="fgray del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                                        <span class="fred dopoint" ng-click="onDeleteButtonClick(car.id)">{{'comment.h5delete' | translate}}</span>
+                                    </div>
+                                </div>
+                                <a type="button" class="card-more" style="top:5px;"><i
+                                        class="fa fa-ellipsis-v fd fa-close"></i></a>
+                                <a type="button" class="card-del gen" style="top:5px;" title="{{'comment.h5delete'|translate}}"><i
+                                        class="fa fa-trash fd"></i></a>
+                                <div class="vhcard-block pos-rlt dopoint" ng-click="onEditButtonClick(car.id)">
+                                    <!--<div class="pos-abt vhtime">Available in 2 hours</div>-->
+                                    <div class="vhhead pull-left"
+                                         style="background:#fff url({{car.img}}) no-repeat 50% 50%;background-size: contain"></div>
+
+                                    <div class="vhname">
+                                        <span class="fw">{{car.model}}</span>
+                                        <br/>{{car.category}}
+                                    </div>
+                                    <div class="vhcard-line"></div>
+                                    <div class="vhpass">
+                                        <span style="display: block;white-space:nowrap;overflow: hidden;text-overflow: ellipsis">{{car.license_plate}}</span>
+                                        <span style="font-size: 13px">
+                                        {{'comment.h5max_passengers' | translate}}: {{car.seats_max}}
+                                    </span>
+                                    </div>
+                                    <div class="vhbags" style="">
+                                        <span style="display: block;white-space:nowrap;overflow: hidden;text-overflow: ellipsis">{{'comment.h5color' | translate}}: {{car.color}}</span>
+                                        <span style="font-size: 13px">{{'comment.h5max_bags' | translate}}: {{car.bags_max}}</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="basic-accordion" ng-show="showSearchResult">
+                    <h3 class="fw" style="margin-left: 15px" ng-show="searchResult.length > 0">
+                        {{'vehicles.h5search_result' | translate}}
+                    </h3>
+                    <h3 class="fw" style="margin-left: 15px" ng-show="searchResult.length == 0">
+                        {{'vehicles.h5no_result' | translate}}
+                    </h3>
+                    <div class="cl-block">
+                        <div class="vhcard-area" ng-repeat="car in searchResult">
+                            <div class="del-panel gen-panel">
+                                <span class="del-info fw">{{'vehicles.h5delete_vehicles' | translate}}?</span>
+                                <div>
+                                    <span class="fgray del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                                    <span class="fred dopoint" ng-click="onDeleteButtonClick(car.id)">{{'comment.h5delete' | translate}}</span>
+                                </div>
+                            </div>
+                            <a type="button" class="searchcard-more" style="top:5px;"><i
+                                    class="fa fa-ellipsis-v fd fa-close"></i></a>
+                            <a type="button" class="card-del gen" style="top:5px;"><i class="fa fa-trash fd"></i></a>
+                            <div class="vhcard-block pos-rlt dopoint" ng-click="onEditButtonClick(car.id)">
+                                <!--<div class="pos-abt vhtime">Available in 2 hours</div>-->
+                                <div class="vhhead pull-left"
+                                     style="background:#fff url({{car.img}}) no-repeat 50% 50%;background-size: contain"></div>
+
+                                <div class="vhname">
+                                    <span class="fw">{{car.model}}</span>
+                                    <br/>{{car.category}}
+                                </div>
+                                <div class="vhcard-line"></div>
+                                <div class="vhpass">
+                                    <span style="display: block;white-space:nowrap;overflow: hidden;text-overflow: ellipsis">{{car.license_plate}}</span>
+                                    <span>
+                                        {{'comment.h5max_passengers' | translate}}: {{car.seats_max}}
+                                    </span>
+                                </div>
+                                <div class="vhbags">
+                                    <span style="display: block;white-space:nowrap;overflow: hidden;text-overflow: ellipsis">{{'comment.h5color' | translate}}: {{car.color}}</span>
+                                    <span>{{'comment.h5max_bags' | translate}}: {{car.bags_max}}</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="cl pd-b-xl"></div>
+        </div>
+
+        <!-- /content -->
+    </div>
+</div>
+
+<google-analytics analytics-page='/vehicle.html'></google-analytics>

@@ -1,0 +1,77 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="7"></karl-header-menu>
+    <div class="btn-add" style="cursor:pointer;" ng-click="onAddButtonClick()" title="{{'comment.h5Add_Client'|translate}}"><i class="fa fa-plus"></i></div>
+    <div class="title-block main-padding navbar-collapse">
+        <div class="main-title ">
+            <span class="fw main-title-text">{{'client.h5all_client'|translate}}</span>
+        </div>
+        <div class="pull-right main-title">
+            <div class="navbar-form navbar-form-sm navbar-left shift" role="search">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" ng-model="input.searchText"
+                               class="form-control input-sm bg-light no-border rounded padder search-bg"
+                               placeholder="{{'comment.h5search' | translate}}">
+                        <span class="input-group-btn">
+                            <button ng-show="input.searchText"
+                                    ng-click="onCancelSearchButtonClick()"
+                                    class="btn btn-sm bg-dark2 rounded input-search">
+                                <i class="fa fa-close fw"></i>
+                            </button>
+                            <button class="btn btn-sm bg-dark2 rounded input-search">
+                                <i class="fa fa-search fw"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-padding card-fix pos-rlt navbar-collapse">
+        <div class="card-area" ng-repeat="item in listData">
+            <a type="button"
+                ng-mouseenter="item.mouse=true" ng-mouseleave="item.mouse=false"
+               class="card-more"
+               title="{{'comment.h5delete'|translate}}"
+            >
+                <i ng-class="{true:'fa fa-trash fd fa-close',false:'fa fa-ellipsis-v fd fa-close'}[item.mouse]"
+                ng-click="deleteCustomer(item.customer_id)"
+                ></i>
+            </a>
+
+            <div class="card-block" ng-click="onEditButtonClick(item)">
+                <div ng-if="item.customer_avatar == ''" class="uhead pull-left"
+                     style="background:#fff url(img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: cover"></div>
+                <div ng-if="item.customer_avatar != ''" class="uhead pull-left"
+                     style="background:#fff url({{item.customer_avatar}}) no-repeat 50% 50%;background-size: cover"></div>
+                <div class="uname f-w-500 text-clip">
+                    <span class="fw" style="font-size: 19px;">{{item.first_name}} {{item.last_name}}</span>
+                    <div style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden; width: 70%;">{{item.email}}</div>
+                    <div style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden; width: 100%">
+                        <span style=" width: 70%;">{{item.mobile | phoneNumFormatter : country}}</span>
+                        <img src="img/dashboard/icon-mailchimp.png" style="width:18px;height: 18px;" ng-show="item.mc_count>0"/>
+                    </div>
+
+                </div>
+                <div class="uaddress">
+                    <span style="width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: inline-block">{{item.final_address[0]}}</span>
+                    <span style="width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: inline-block" ng-show="item.final_address[1]">{{item.final_address[1]}}</span>
+                </div>
+                <div class="upay" style="line-height: 170%;">
+                    <span ng-show="item.cards.length > 0"><img style="width: 20px" src="{{item.cardTypeImg}}"/></span>
+                    <span style="color: #a7bbde !important;">{{item.cardNumber}}</span>
+                    <br/>
+                    <span><b>{{item.cardCount}}</b></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <uib-pagination total-items="pageTotalItems" items-per-page="pagePreCount" ng-model="currentPage"
+                    previous-text="{{'pagination.h5previous' | translate}}" next-text="{{'pagination.h5next' | translate}}"
+                    max-size="10" ng-change="onPageChange()" class="pagenum"
+                    style="width: auto;display: table;margin-left: auto;margin-right: auto;">
+    </uib-pagination>
+    <div class="cl"></div>
+</div>
+<google-analytics analytics-page='/clients.html'></google-analytics>

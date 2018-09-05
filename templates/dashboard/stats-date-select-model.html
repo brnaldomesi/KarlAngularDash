@@ -1,0 +1,50 @@
+<div class="stats-date-model">
+    <div style="margin: auto;position: relative">
+        <a type="button" class="stats-date-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+        <div class="">
+            <div class="stats-cal" ng-show="type == 0 || type == 1">
+                <div ui-calendar="statsDate.calendar" class="calendar" ng-model="eventSources"></div>
+            </div>
+
+            <div ng-show="type == 2" style="padding-top: 5px;">
+
+                <div class="stats-mon-block">
+                    <div>
+                        <div class="fc-toolbar">
+                            <div ng-click="changeYear(false)" class="fc-left" style="margin-left: 30px;margin-top: 15px;">
+                                <button type="button"
+                                        class="fc-prev-button fc-button fc-state-default fc-corner-left fc-corner-right">
+                                    <span class="fc-icon fc-icon-left-single-arrow"></span></button>
+                            </div>
+                            <div ng-click="changeYear(true)" class="fc-right" style="margin-right: 30px; margin-top: 15px;">
+                                <button type="button"
+                                        class="fc-next-button fc-button fc-state-default fc-corner-left fc-corner-right">
+                                    <span class="fc-icon fc-icon-right-single-arrow"></span></button>
+                            </div>
+                            <div class="fc-center" style="margin-top: 10px;"><h2>{{selectDate | date:'yyyy'}}</h2></div>
+                            <div class="fc-clear"></div>
+                        </div>
+                    </div>
+
+                    <ul>
+                        <li ng-repeat="month in allMonths"
+                            ng-class="{true:'mon-sel',false:''}[month.isSelected]"
+                            ng-click="changeMonth($index)" class="dopoint">
+                            {{month.date | dateFormatter:'shortMonth'}}
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div style="width: 100%;">
+                <div style="width: 200px;margin: 10px auto">
+                    <button class="btn btn-primary ladda-button ladda-progress"
+                            style="border-radius: 50px;width: 200px;color:#fff;height:26px;padding-top:1px;text-align: center"
+                            ng-click="onSaveButtonClick()">{{'comment.h5OK'|translate}}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/stats-date-select-model.html'></google-analytics>

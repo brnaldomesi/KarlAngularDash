@@ -1,0 +1,43 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4><span class="fgray">{{'super_vehicle_category_edit.h5edit_category' | translate}}</span></h4>
+    <form id="editCategoryForm" name="numberTypeForm"
+          data-toggle="validator" novalidate>
+        <div class="o-blcok fw">
+            <div class="form-group">
+                <h6>{{'super_vehicle_category_edit.h5category_name' | translate}}</h6>
+                <input class="myinput"
+                       type="text"
+                       ng-model="CategoryName"
+                       placeholder="{{'super_vehicle_category_add.h5enter_category_name' | translate}}" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="o-blcok fw">
+            <div class="form-group pos-rlt">
+                <h6>{{'super_vehicle_category_add.h5describe' | translate}}</h6>
+                <input class="myinput"
+                       type="text"
+                       min="0"
+                       step="0.01"
+                       max="999999.99"
+                       ng-model="CategoryDescribe"
+                       placeholder="{{'super_vehicle_category_add.h5enter_describe' | translate}}" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="row mg-t-xl center-block area-bot">
+            <button type="submit" class="btn-blue btn center-block" ng-click="onEditOption(editCategoryForm.$valid, $event)">
+                <span>{{'comment.h5Save' | translate}}</span>
+            </button>
+        </div>
+    </form>
+</div>
+<google-analytics analytics-page='/super-vehicle-category-eidt.html'></google-analytics>

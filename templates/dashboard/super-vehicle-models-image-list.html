@@ -1,0 +1,38 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4><span class="fgray">{{'super_vehicle_models_add.h5create_vehicle_model' | translate}}</span></h4>
+    <form id="addCategoryForm" name="numberTypeForm"
+          data-toggle="validator" novalidate>
+        <div class="form-group">
+            <label class=" pull-left" ng-repeat="carModelsImage in carModelsImages">
+                <input type="radio" name="inlineRadioOptions" ng-show="false"
+                       ng-value="carModelsImage.id" ng-model="carImage">
+                <img id="radioImage{{carModelsImage.id}}"
+                     class="radioImage"
+                     ng-src="{{carModelsImage.img}}"
+                     ng-model="imageId"
+                     ngf-pattern="'image/*'"
+                     ngf-select="replaceImage($file,carModelsImage.id)"
+                     style="width: 180px; height: 135px; border: 5px #e0e0e0 solid;border-radius:8px;margin: 6px"/>
+            </label>
+
+            <label class="pull-left">
+                <input type="radio" name="inlineRadioOptions" ng-show="false"
+                       ng-value="-1" ng-model="carImage">
+                <div id="uploadImg" class="radioImage center-block"
+                     style="width: 180px; height: 135px; border: 5px #e0e0e0 solid;
+                             border-radius:8px;line-height: 95px;margin: 6px;text-align:center"
+                >
+                    <img src="img/dashboard/icon-add.png" ngf-pattern="'image/*'"
+                         ngf-accept="'image/*'"
+                         ngf-max-size="20MB" ngf-min-height="100"
+                         ngf-select="addNewCarImage($file,$event)"
+                         style="margin-top: 30px"
+                    />
+                </div>
+
+            </label>
+        </div>
+    </form>
+</div>
+<google-analytics analytics-page='/super-vehicle-models-image-list.html'></google-analytics>

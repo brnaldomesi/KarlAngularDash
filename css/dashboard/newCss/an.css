@@ -1,0 +1,539 @@
+
+.hid{display: none;}
+
+.f-w-300{
+    font-weight: 300;
+}
+.f-w-500{
+    font-weight: 500;
+}
+
+.cl-block{
+    overflow:auto;zoom:1;
+}
+
+
+@media screen and (max-width: 767px) {
+    /*小于767 mobile */
+    .f-xxs {
+        font-size: 10px;
+    }
+    .f-xs {
+        font-size: 12px;
+    }
+    .f-s {
+        font-size: 15px;
+    }
+
+    .f-m {
+        font-size: 20px;
+    }
+
+    .f-l {
+        font-size: 30px;
+    }
+    .pd-s{padding: 0 20px;}
+
+    .indent-s {
+        text-indent: 0px;
+    }
+
+    .indent-m {
+        text-indent: 0px;
+    }
+    .indent-l {
+        text-indent: 0px;
+    }
+    .indent-xl {
+        text-indent: 0px;
+    }
+
+    .h-s {
+        height: 15px;
+    }
+
+    .h-m {
+        height: 35px;
+    }
+
+    .h-l {
+        height: 50px;
+    }
+
+    .local-switch {
+        height: 30px;
+        /*width: 25px;*/
+        margin: 40px;
+        margin-top: 10px;
+
+    }
+    .local-switch input{
+
+    }
+
+    /*.an-search {*/
+        /*width: 96%;*/
+        /*margin-top: 5px;*/
+        /*margin-left: 2%;*/
+        /*margin-right: auto;*/
+    /*}*/
+
+    .calendar-search {
+        width: 96%;
+        margin-top: 5px;
+        margin-left: 2%;
+        margin-right: auto;
+    }
+
+    .basic-accordion{
+        color: #f2f2f2;
+        margin-left: 1%;
+    }
+    .basic-accordion h3{
+        border-bottom: #595a60 solid 1px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        font-weight: 400;
+        max-width: 98%;
+        cursor: pointer;
+    }
+    .basic-accordion h3 i{
+        margin-right: 10px;
+    }
+    .basic-accordion h3 span{
+        margin-left: 7px;
+    }
+
+
+    .vcard-area{
+        width: 98%;
+        height: 140px;
+        position: relative;
+        float: left;
+        margin: 7px;
+    }
+    .vcard-block{
+        cursor: pointer;
+        width:98%;
+        height: 140px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+    }
+    .vhead{
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        background:#fff url(../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+        margin-right: 10px;
+
+    }
+
+    .vname{font-size: 20px}
+    .vpass{width: 55%;float: left;;margin-top: 10px;font-size: 15px}
+    .vbags{float: right;margin-top: 10px;text-align: right;font-size: 15px;}
+
+    .vcard-more{
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 15px;
+        right: 4%;
+        z-index: 980;
+    }
+    .vcard-more i{
+        color: #ff4d00;
+    }
+    .vcard-more .glyphicon-ok-sign{
+        font-size: 22px;
+    }
+    .vcard-more .fa-circle-o{
+        font-size: 25px;
+    }
+    .an-fleet{margin-left: 4%;}
+    .an-fleet i{
+        font-size: 16px;
+        margin-right: 5px;
+    }
+
+    .an-switch{
+
+    }
+    .an-switch div{
+        margin:0 5%;
+    }
+    .an-text-des{
+        margin-top: 40px;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: -30px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    /*大于768小于991  portable */
+    .f-xxs {
+        font-size: 12px;
+    }
+    .f-xs {
+        font-size: 14px;
+    }
+    .f-s {
+        font-size: 18px;
+    }
+
+    .f-m {
+        font-size: 24px;
+    }
+
+    .f-l {
+        font-size: 30px;
+    }
+
+    .indent-s {
+        text-indent: 10px;
+    }
+
+    .indent-m {
+        text-indent: 20px;
+    }
+    .indent-l {
+        text-indent: 30px;
+    }
+    .indent-xl {
+        text-indent: 50px;
+    }
+
+    .h-s {
+        height: 25px;
+    }
+
+    .h-m {
+        height: 50px;
+    }
+
+    .h-l {
+        height: 70px;
+    }
+
+    .local-switch {
+        height: 30px;
+        /*margin: 40px;*/
+        margin: 40px;
+        margin-top: 7px;
+    }
+
+    .an-search {
+        width: 213px;
+        margin-top: 20px;
+        margin-left: 30px;
+    }
+
+    .modify-an-search {
+        width: 213px;
+        margin-top: 20px;
+        margin-left: 30px;
+    }
+    .calendar-search {
+        width: 213px;
+        margin-top: 10px;
+        margin-left: 30px;
+    }
+
+    .basic-accordion{
+        color: #f2f2f2;
+        margin-left: 20px;
+    }
+    .basic-accordion h3{
+        border-bottom: #595a60 solid 1px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+        font-weight: 400;
+        max-width: 700px;
+        cursor: pointer;
+    }
+    .basic-accordion h3 i{
+        margin-right: 10px;
+    }
+    .basic-accordion h3 span{
+        margin-left: 10px;
+    }
+
+
+    .vcard-area{
+        width: 315px;
+        height: 140px;
+        position: relative;
+        float: left;
+        margin: 7px;
+    }
+    .vcard-block{
+        cursor: pointer;
+        width:315px;
+        height: 140px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+    }
+    .vhead{
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        background:#fff url(../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+        margin-right: 10px;
+
+    }
+
+    .vname{font-size: 20px}
+    .vpass{width: 55%;float: left;;margin-top: 10px;font-size: 15px}
+    .vbags{float: right;margin-top: 10px;text-align: right;font-size: 15px;}
+
+    .vcard-more{
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 15px;
+        right: 18px;
+        z-index: 980;
+    }
+    .vcard-more i{
+        color: #ff4d00;
+    }
+    .vcard-more .glyphicon-ok-sign{
+        font-size: 22px;
+    }
+    .vcard-more .fa-circle-o{
+        font-size: 25px;
+    }
+
+    .an-fleet i{
+        font-size: 20px;
+        margin-right: 5px;
+    }
+
+    .an-switch{
+
+    }
+    /*.an-switch div{*/
+        /*margin-left: 50px;*/
+    /*}*/
+    .an-text-des{
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: -20px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    /*大于992  pc */
+    .f-xxs {
+        font-size: 12px;
+    }
+    .f-xs {
+        font-size: 14px;
+    }
+
+    .f-s {
+        font-size: 15px;
+    }
+
+    .f-m {
+        font-size: 24px;
+    }
+
+    .f-l {
+        font-size: 30px;
+    }
+
+    .indent-s {
+        text-indent: 10px;
+    }
+
+    .indent-m {
+        text-indent: 20px;
+    }
+    .indent-l {
+        text-indent: 30px;
+    }
+    .indent-xl {
+        text-indent: 50px;
+    }
+
+    .h-s {
+        height: 25px;
+    }
+
+    .h-m {
+        height: 50px;
+    }
+
+    .h-l {
+        height: 70px;
+    }
+
+    .local-switch {
+        height: 30px;
+        margin: 40px;
+        margin-top: 20px;
+    }
+
+    .an-search {
+        width: 213px;
+        margin-top: 20px;
+        margin-left: 30px;
+    }
+
+    .modify-an-search {
+        width: 133px;
+        margin-top: 20px;
+        margin-left: 30px;
+    }
+    .calendar-search {
+        width: 213px;
+        margin-top: 25px;
+        margin-left: 30px;
+    }
+
+    .basic-accordion{
+        color: #f2f2f2;
+        margin-left: 20px;
+    }
+    .basic-accordion h3{
+        border-bottom: #595a60 solid 1px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+        font-weight: 400;
+        max-width: 700px;
+        cursor: pointer;
+    }
+    .basic-accordion h3 i{
+        margin-right: 10px;
+    }
+    .basic-accordion h3 span{
+        margin-left: 10px;
+    }
+
+
+    .vcard-area{
+        width: 315px;
+        height: 140px;
+        position: relative;
+        float: left;
+        margin: 7px;
+    }
+    .vcard-block{
+        cursor: pointer;
+        width:315px;
+        height: 140px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+    }
+    .vhead{
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        background:#fff url(../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+        margin-right: 10px;
+
+    }
+
+    .vname{font-size: 20px}
+    .vpass{width: 55%;float: left;;margin-top: 10px;font-size: 15px}
+    .vbags{float: right;margin-top: 10px;text-align: right;font-size: 15px;}
+
+    .vcard-more{
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 15px;
+        right: 2px;
+        z-index: 980;
+    }
+    .vcard-more i{
+        color: #ff4d00;
+    }
+    .vcard-more .glyphicon-ok-sign{
+        font-size: 22px;
+    }
+    .vcard-more .fa-circle-o{
+        font-size: 25px;
+    }
+
+    .an-fleet i{
+       font-size: 20px;
+        margin-right: 5px;
+    }
+
+    .an-switch{
+
+    }
+    .an-switch .mg-t-l{
+        margin-left: 20px;
+
+    }
+
+    .an-text-des{
+        margin-left: 20px;
+        margin-right: 10%;
+        margin-bottom: -20px;
+
+    }
+
+}
+
+@media screen and (max-width: 992px) {
+    .modify-an-search {
+        width: 96%;
+        margin-top: 5px;
+        margin-left: 2%;
+        margin-right: auto;
+    }
+}
+
+.aninputhalf-fix {
+    width: 250px;
+    margin-left: 10px;
+}
+
+.an-half-mile{
+    position: absolute;
+    left: 37%;
+    bottom:19px;
+    font-size: 22px;
+    color: #4444bf
+}
+.anfont{
+    text-align: center;
+}
+.anfont::-webkit-input-placeholder{ /* Chrome/Opera/Safari */
+    text-align: left;
+    font-size: 13px;
+}
+.anfont::-moz-placeholder{ /* Firefox 19+ */
+    font-size: 13px;
+    text-align: left;
+}
+.anfont:-moz-placeholder{ /* Firefox 18- */
+    font-size: 13px;
+    text-align: left;
+}
+.anfont:-ms-input-placeholder{  /* IE 10+ */
+    font-size: 13px;
+    text-align: left;
+}

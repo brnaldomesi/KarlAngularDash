@@ -1,0 +1,259 @@
+.btn-brown {
+    width: 200px;
+    height: 34px;
+    background: #913419;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+}
+
+@media screen and (max-width: 991px) {
+    /*小于767 mobile */
+    .location-bg {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border-radius: 100%;
+        padding: 2px;
+        font-size: 14px;
+        text-align: center;
+        font-weight: bold;
+        margin-left: 10px;
+        color: #fff;
+    }
+    .location-bg2 {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border-radius: 100%;
+        padding: 2px;
+        font-size: 14px;
+        text-align: center;
+        font-weight: bold;
+        /*margin-left: 10px;*/
+        color: #fff;
+    }
+
+    .bg-red1 {
+        background: #3d81de;
+    }
+
+    .bg-red2 {
+        background: #2e4364;
+    }
+
+    .evcard-area{
+        width: 98%;
+        height: 160px;
+        position: relative;
+        float: left;
+        margin: 7px;
+    }
+    .evcard-block{
+        cursor: pointer;
+        width:98%;
+        height: 160px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+    }
+    .evhead{
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        background:#fff url(../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+        margin-right: 10px;
+
+    }
+
+    .evname{font-size: 20px}
+    .evpass{width: 50%;float: left;;margin-top: 10px;font-size: 15px}
+    .evbags{float: right;margin-top: 10px;text-align: right;font-size: 15px;}
+
+    .layout-half{
+        width: 45%;
+        /*margin-right: auto;*/
+        /*margin-left: 7px;*/
+    }
+
+    .book-trip-card {
+        width: 98%;
+        /*height: 430px;*/
+        background: #2f2f2f;
+        border-radius: 8px;
+        padding: 10px 15px;
+        margin: 20px 0;
+    }
+    /*.book-trip-up{*/
+        /*font-size: 20px;*/
+        /*font-weight: bold;*/
+        /*height: 35px;*/
+        /*color: #f2f2f2;*/
+        /*padding-bottom: 36px;*/
+        /*!*border-bottom: #4b4d67 solid 1px;*!*/
+    /*}*/
+    .book-trip-up span{
+        /*display: block;*/
+        /*background: #f2f2f2;*/
+        /*color: #272b4a;*/
+        border-radius: 4px;
+        /*margin: 5px;*/
+        /*padding: 0 8px;*/
+
+    }
+    .book-trip-down{
+        clear: both;
+    }
+
+    .book-trip-down > div{
+        display: block;
+        margin: 5px;
+        margin-right: 5%;
+    }
+    /*.swiper-container{*/
+        /*height:100px*/
+    /*}*/
+
+}
+
+
+@media screen and (min-width: 992px) {
+    /*大于992  pc */
+    .location-bg {
+        display: inline-block;
+        /*width: 30%;*/
+        width: 25px;
+        height: 25px;
+
+        border-radius: 100%;
+        padding: 2px;
+        font-size: 14px;
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .bg-red1 {
+        background: #3d81de;
+    }
+
+    .bg-red2 {
+        background: #2e4364;
+    }
+
+    .evcard-area{
+        width: 300px;
+        height: 160px;
+        position: relative;
+        float: left;
+        margin: 7px;
+    }
+    .evcard-block{
+        cursor: pointer;
+        width:300px;
+        height: 160px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+    }
+    .evhead{
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        background:#fff url(../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+        margin-right: 10px;
+
+    }
+
+    .evname{font-size: 20px}
+    .evpass{width: 50%;float: left;;margin-top: 10px;font-size: 15px}
+    .evbags{float: right;margin-top: 10px;text-align: right;font-size: 15px;}
+
+    .layout-half{
+        width: 42%;
+        margin-right: 5%;
+    }
+
+    .book-trip-card {
+        width: 100%;
+        /*height: 130px;*/
+        background: #2f2f2f;
+        border-radius: 8px;
+        padding: 10px 15px;
+        margin: 20px 0;
+    }
+    .book-trip-up{
+        font-size: 20px;
+        font-weight: bold;
+        height: 35px;
+        color: #f2f2f2;
+        padding-bottom: 36px;
+        border-bottom: #555555 solid 1px;
+    }
+    /*.book-trip-up span{*/
+        /*display: inline-block;*/
+        /*!*background: #f2f2f2;*!*/
+        /*color: #272b4a;*/
+        /*border-radius: 4px;*/
+        /*!*margin:  5px;*!*/
+        /*padding: 0 8px;*/
+
+    /*} */
+    .flow-time{
+        display: inline-block;
+        /*background: #f2f2f2;*/
+        color: #272b4a;
+        border-radius: 4px;
+        /*margin:  5px;*/
+        padding: 0 8px;
+
+    }
+    .book-trip-down > div{
+        margin: 5px;
+        margin-right: 5%;
+    }
+    /*.swiper-container{*/
+        /*height:100px;*/
+        /*width:100%*/
+    /*}*/
+/*.swiper-slide{*/
+    /*width:100%*/
+    /*!*height:600px*!*/
+/*}*/
+.swiper-wrapper{
+    /*width: 30%;*/
+    /*height: 300px;*/
+}
+    /*.swiper-slide{*/
+        /*height: 300px;*/
+    /*}*/
+
+    /*.swiper-container{*/
+        /*height: 300px;*/
+    /*}*/
+
+}
+
+/*.swiper-wrapper{*/
+    /*width: 30%;*/
+    /*!*height: 300px;*!*/
+/*}*/
+/*.swiper-container{*/
+    /*height: 300px;*/
+/*}*/
+/*@media screen and (max-width: 1200px) {*/
+    /*.swiper-wrapper{*/
+        /*width: 30%;*/
+        /*!*height: 300px;*!*/
+    /*}*/
+
+    /*.swiper-container{*/
+        /*height: 300px;*/
+    /*}*/
+/*}*/

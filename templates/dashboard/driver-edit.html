@@ -1,0 +1,384 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <div>
+        <span class="fgray main-title-text-l">{{'driver_edit.h5driver_details' | translate}}</span>
+    </div>
+    <!--切换-->
+    <div id="tabs">
+        <ul class="nav-slider ">
+            <li style="width:50%;" class="act-tab"><a ng-click="changeTabs(0)"
+                                                      style="color: #fff;font-size: 22px;font-weight: 300">{{'comment.h5driver' | translate}}</a>
+            </li>
+            <li style="width:50%;"><a ng-click="changeTabs(1)" style="color: #fff;font-size: 22px;font-weight: 300">{{'comment.h5vehicle' | translate}}</a>
+            </li>
+            <li class="slider" style="width:50%;"></li>
+        </ul>
+        <form id="driverForm"
+              name="driverForm"
+              role="form"
+              data-toggle="validator"
+              novalidate>
+            <div ng-show="showDriver">
+                <div ng-show="isAdmin" style="text-align: center">{{'driver_edit.h5driver_is_admin' | translate}}</div>
+                <div ng-show="!isAdmin" class="dhead-edit"><i class="fa fa-pencil fw"></i></div>
+                <div class="chead center-block mg-t-l dopoint"
+                     ng-click="allowUploadAvatar()"
+                     ng-disabled="isAdmin"
+                     ngf-select="upload($file)"
+                     ngf-pattern="'image/*'"
+                     ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                     title="{{'comment.h5Upload_Avatar'|translate}}"
+                     style="background:#fff url({{image}}) no-repeat 50% 50%;background-size: cover">
+                </div>
+                <div ng-show="!isAdmin">
+                    <div class="c-block  pos-rlt">
+                        <select class="myinput myselect" ng-model="input.gender"
+                                ng-options="item.value as item.name for item in genders">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="myinput" type="text" ng-model="input.firstName" maxlength="50" placeholder="{{'comment.h5first_name' | translate}}"
+                               required/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <input class="myinput" type="text" placeholder="{{'comment.h5last_name' | translate}}" maxlength="50" ng-model="input.lastName" required/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div style="margin-left: 24px;color: dodgerblue">
+                        <i ng-click="setLastNameHidden()"
+                           ng-model="lastNameHidden"
+                           ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[lastNameHidden]"
+                           style="color: white" class="dopoint">
+                        </i>
+                        <span style="margin-left: 10px;">
+                        {{'driver_add.h5keep_lastName_hidden' | translate}}
+                    </span>
+                    </div>
+                    <div class="form-group">
+                        <input class="myinput sign-mail"
+                               placeholder="{{'comment.h5client_email' | translate}}"
+                               name="email"
+                               type="email"
+                               ng-model="input.email"
+                               maxlength="100"
+                               required/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <input class="myinput sign-mobile"
+                               type="tel"
+                               placeholder="{{'comment.h5phone_number' | translate}}"
+                               name="mobile"
+                               ng-model="input.mobile"
+                               ng-change="formatPhone()"
+                               required/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="c-block2  pos-rlt">
+                        <h6 class="fw">{{'comment.h5address' | translate}}</h6>
+                    </div>
+
+                    <div class="form-group">
+                        <input ng-model="input.formatted_address"
+                               class="myinput myinput-map"
+                               type="text"
+                               placeholder="{{'comment.h5street_address' |translate}}"
+                               uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                               typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                               typeahead-on-select="onAddressSelect($item, $model, $label, $event)"/>
+                        <i class="fa fa-map-marker fb f-m dopoint" ng-click="selectLocationOnMap()"></i>
+                        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                        <div ng-show="noResults">
+                            <i class="glyphicon glyphicon-remove"></i>
+                            {{'comment.h5no_results_found' | translate}}
+                        </div>
+                    </div>
+                    <div class="c-block2  pos-rlt">
+                        <h6 class="fw">{{'comment.h5password' | translate}}</h6>
+                        <div class="form-group">
+                            <input type="password" style="display: none">
+                            <input class="myinput" type="text" ng-model="input.password"
+                                   id="passOne"
+                                   autocomplete="new-password"
+                                   ng-focus="modifyPassType(1)"
+                                   placeholder="{{'driver_edit.h5new_password' | translate}}"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" style="display: none">
+                            <input class="myinput" type="text" ng-model="input.rePassword"
+                                   id="passTwo"
+                                   autocomplete="new-password"
+                                   ng-focus="modifyPassType(2)"
+                                   placeholder="{{'driver_edit.h5ReNew_Password' | translate}}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'comment.h5drivers_license' | translate}}</h6>
+                    <div class="form-group">
+                        <input class="myinput2" maxlength="100" type="text" placeholder="{{'comment.h5license' | translate}} #"
+                               ng-model="input.license"/>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'comment.h5advanced_notice' | translate}}</h6>
+                    <div class="form-group">
+                        <select style="width: 78%;line-height: 40px;" class="myselect myinput2"
+                                ng-model="input.delayTime"
+                                ng-options="item for item in allTime">
+                        </select>
+                        <span class="myinput2 addon-sub">{{'comment.h5hours' | translate}}</span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'comment.h5driver_schedule' | translate}}</h6>
+                    <div class="rates-option mg-t-s">
+                <span ng-click="onRoutineWeekChange(0)" class="dopoint">
+                    <i ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[!routine[0].work
+                    && routine[1].work
+                    && routine[2].work
+                    && routine[3].work
+                    && routine[4].work
+                    && routine[5].work
+                    && !routine[6].work]"></i>
+                    {{'comment.h5week_days' | translate}}
+                </span>
+                        <span ng-click="onRoutineWeekChange(1)" class="dopoint">
+                    <i ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[routine[0].work
+                    && !routine[1].work
+                    && !routine[2].work
+                    && !routine[3].work
+                    && !routine[4].work
+                    && !routine[5].work
+                    && routine[6].work]"></i>
+                    {{'comment.h5weekends' | translate}}
+                </span>
+                        <span ng-click="onRoutineWeekChange(2)" class="dopoint">
+                    <i ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[routine[0].work
+                    && routine[1].work
+                    && routine[2].work
+                    && routine[3].work
+                    && routine[4].work
+                    && routine[5].work
+                    && routine[6].work]"></i>
+                    {{'comment.h5all_week' | translate}}</span>
+                    </div>
+                    <div class="row rates-week">
+                        <ul>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[0].work]"
+                                ng-click="checkDayChanged(0)" class="dopoint">{{'comment.h5Sun' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[1].work]"
+                                ng-click="checkDayChanged(1)" class="dopoint">{{'comment.h5Mon' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[2].work]"
+                                ng-click="checkDayChanged(2)" class="dopoint">{{'comment.h5Tue' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[3].work]"
+                                ng-click="checkDayChanged(3)" class="dopoint">{{'comment.h5Wen' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[4].work]"
+                                ng-click="checkDayChanged(4)" class="dopoint">{{'comment.h5Thu' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[5].work]"
+                                ng-click="checkDayChanged(5)" class="dopoint">{{'comment.h5Fri' | translate}}
+                            </li>
+                            <li ng-class="{true:'rates-week-active',false:''}[routine[6].work]"
+                                ng-click="checkDayChanged(6)" class="dopoint">{{'comment.h5Sat' | translate}}
+                            </li>
+                        </ul>
+                    </div>
+                    <table style="width: 98%" class="mg-t-s">
+                        <tr ng-show="hasRoutine">
+                            <td width="10%" height="20"></td>
+                            <td class="fgray" width="45%" align="center">{{'comment.h5start' | translate}}</td>
+                            <td class="fgray" width="45%" align="center">{{'comment.h5end' | translate}}</td>
+                        </tr>
+                        <tr ng-repeat="item in routine track by $index" ng-show="item.work">
+                            <td class="fw" height="40" style="vertical-align: middle"><b>{{item.name | translate}}</b></td>
+                            <td class="fblue">
+                                <select class="myselect myinput"
+                                        ng-model="routine[$index].start"
+                                        ng-change="selectWorkHour($index,true)"
+                                        ng-options="clock.index_id as clock.time for clock in timeClock">
+                                </select>
+                            </td>
+                            <td class="fblue">
+                                <select class="myselect myinput"
+                                        ng-model="routine[$index].end"
+                                        ng-change="selectWorkHour($index,false)"
+                                        ng-options="clock.index_id as clock.time for clock in timeClock">
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw">{{'driver_edit.h5Driver_event' | translate}}</h6>
+                    <div class="mg-t-l pos-rlt event-del" ng-repeat="event in carEvents">
+                        <div class="del-panel gen-panel">
+                            <span ng-class="{true:'delete-event-title',false:''}[langStyle==='fr']" class="del-info fw">{{'driver_edit.h5delete_event' | translate}}?</span>
+                            <div ng-class="{true:'fr-event-font-margin',false:''}[langStyle==='fr']">
+                                <span ng-if="langStyle!=='fr'" class="fgray del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                                &nbsp;&nbsp;
+                                <span ng-class="{true:'fr-event-font',false:''}[langStyle==='fr']" class="fred dopoint"
+                                      ng-show="event.repeat_type == 1 && event.creator_type != 0 ||event.repeat == 1"
+                                      ng-click="onDeleteEventClick(event,1)">
+                            {{'driver_edit.h5delete_all_upcoming' | translate}}
+                        </span>
+                                &nbsp;&nbsp;
+                                <span class="fred dopoint"
+                                      ng-show="event.creator_type != 0"
+                                      ng-click="onDeleteEventClick(event,0)">{{'comment.h5delete' | translate}}</span>
+
+                                <span ng-if="langStyle==='fr'" style="display: block" class="fgray del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+
+                            </div>
+                        </div>
+                        <a type="button" class="eventcard-more"><i class="fa fa-ellipsis-v fd fa-close"></i></a>
+                        <a type="button" class="card-del gen"><i class="fa fa-trash fd"></i></a>
+                        <div ng-class="{true:'fr-card-event-height',false:''}[langStyle==='fr']" class="card-event">
+                            <span class="f-s fw2"><b>{{event.start_time*1000|dateFormatter:'eventDate'}} - {{event.end_time*1000|dateFormatter:'eventDate'}}</b></span><br/>
+                            <span class="f-s fb2" ng-if="event.repeat == 0">{{'vehicle_edit.h5no_repeat' | translate}}</span>
+                            <span class="f-s fb2"
+                                  ng-if="event.repeat == 1 && event.repeat_type == 0">{{'vehicle_edit.h5repeat_everyDay' | translate}}</span>
+                            <span class="f-s fb2"
+                                  ng-if="event.repeat == 1 && event.repeat_type == 1">{{'vehicle_edit.h5repeat_everyWeek' | translate}}</span>
+                            <span class="f-s fb2"
+                                  ng-if="event.repeat == 1 && event.repeat_type == 2">{{'vehicle_edit.h5repeat_everyMonth' | translate}}</span>
+                            <span class="f-s fb2"
+                                  ng-if="event.repeat == 1 && event.repeat_type == 3">{{'vehicle_edit.h5repeat_everyYear' | translate}}</span>
+                            <br/>
+                            <div class="vhcard-line"></div>
+                            <span>{{event.content}}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="mg-t-l">
+                        <span class="fb f-s text-uline dopoint" ng-click="onShowAddEventClick()">{{'vehicle_edit.h5add_event' | translate}}</span>
+                    </div>
+                    <div ng-if="showAddEvent">
+                        <div class="c-block2 pos-rlt">
+                            <div class="fw" style="font-weight:300">{{'vehicle_edit.h5event_start' | translate}}</div>
+                            <div class="mg-t-s time-ctr">
+                                <div style="margin: auto;" class="datetimeStart"></div>
+                            </div>
+                        </div>
+                        <div class="c-block2 pos-rlt">
+                            <div class="fw" style="font-weight:300">{{'vehicle_edit.h5event_end' | translate}}</div>
+                            <div class="form-group">
+                                <div class="mg-t-s time-ctr">
+                                    <div style="margin: auto;" class="datetimeEnd"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="c-block2 pos-rlt">
+                            <div class="fw" style="font-weight:300">{{'comment.h5repeat' | translate}}</div>
+                            <div class="form-group">
+                                <select class="myselect myinput2" ng-model="event.repeatType">
+                                    <option value="">
+                                        {{'comment.h5no_repeat' | translate}}
+                                    </option>
+                                    <option value="0">
+                                        {{'comment.h5day' | translate}}
+                                    </option>
+                                    <option value="1">
+                                        {{'comment.h5week' | translate}}
+                                    </option>
+                                    <option value="2">
+                                        {{'comment.h5month' | translate}}
+                                    </option>
+                                    <option value="3">
+                                        {{'comment.h5year' | translate}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="c-block2 pos-rlt">
+                            <div class="fw" style="font-weight:300">{{'comment.h5comment' | translate}}</div>
+                            <div class="form-group">
+                                <div contenteditable="true" class="contenteditable"
+                                     style="width: 98% ; margin: 2px"
+                                     ng-model="event.content"
+                                     ng-maxlength="140"
+                                     placeholder="{{'vehicle_edit.h5char_exceed_warning' | translate}}" required></div>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="mg-t-l">
+                            <span class="f-m fb dopoint" ng-click="onAddEventCancel()">{{'comment.h5cancel' | translate}}</span>
+                            <span class="pull-right btn-blue2 dopoint" ng-click="onAddEventDone()"
+                                  style="text-align: center">{{'vehicle_edit.h5Save_Event' | translate}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mg-t-xxl">
+                    <button ng-click="onSubmitButtonClick($event)"
+                            class="btn-blue btn center-block mg-t-xl">
+                        <span>{{'comment.h5SAVE' | translate}}</span>
+                    </button>
+                </div>
+            </div>
+
+            <div ng-show="!showDriver">
+                <div class="c-block2  pos-rlt">
+                    <h6 class="fw"  style="font-size: 15px">{{'driver_edit.h5select_vehicles' | translate}}</h6>
+                    <!--main according-->
+                    <div id="rates-vehicle-accordion" class="basic-accordion" style="margin-left: 0;margin-top: 0">
+                        <div ng-repeat="category in categories">
+                            <h3 class="rates-select">
+                                <i ng-click="onCategorySelect(category);$event.stopPropagation();"
+                                   ng-class="{true:'fa fa-check-square-o dispop',false:'fa fa-square-o dispop'}[category.selectedCount == category.cars.length]"></i>
+                                <span>{{category.categoryName}} </span>
+                                <span class="fred">({{category.selectedCount}} {{'comment.h5selected' | translate}})</span>
+                                <span class="fb">{{category.cars.length}} {{'comment.h5total' | translate}}</span>
+                            </h3>
+                            <div class="cl-block hid">
+                                <!--sub according-->
+                                <div class="basic-accordion rates-sub-accordion" style="margin-left: 0">
+                                    <div ng-repeat="car in category.cars">
+                                        <input type="checkbox" value="car.id" ng-click="onCarSelect(category,car)"
+                                               ng-model="car.isSelect" class="chbox pull-right dopoint"
+                                               style="margin-top: 15px;margin-right: 10px;height: 14px;width: 14px">
+                                        <div class="rates-sub">
+                                            <div class="rates-sub-img pull-left"
+                                                 style="background:#fff url({{car.img}}) no-repeat 50% 50%;background-size: contain"></div>
+                                            <div class="pull-left mg-l-s" style="width: 70%;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis">
+                                                <span class="fw"><b>{{car.model}}</b></span> <span
+                                                    class="fblack"><b>{{car.brand}}</b></span>
+                                                <br/>
+                                                <span class="fw2"
+                                                      style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 50%">{{car.license_plate}}</span>
+                                                <span class="fblack"
+                                                      style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 50%">{{car.color}}</span>
+                                                <div style="clear: both"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- / sub according-->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / main according-->
+                </div>
+
+                <div class="mg-t-xxl">
+                    <button ng-click="onSubmitButtonClick($event)"
+                            class="btn-blue btn center-block mg-t-xl">
+                        <span>{{'comment.h5SAVE' | translate}}</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- / 切换-->
+</div>
+<google-analytics analytics-page='/driver-edit.html'></google-analytics>

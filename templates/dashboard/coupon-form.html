@@ -1,0 +1,101 @@
+<!--Created by pham 3/16/2018 -->
+
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <div>
+        <span class="fgray main-title-text-l">{{ couponId == "0" ? ('coupon_form.h5add_coupon' | translate) : ('coupon_form.h5edit_coupon' | translate) }}</span>
+    </div>
+    <form id="couponForm"
+              name="couponForm"
+              role="form"
+              data-toggle="validator"
+              novalidate>
+
+        <div class="c-block2 pos-rlt">
+            <div class="form-group row">
+            	<div class="pull-left" style="width: 20%;">
+            		<h6 class="fw">{{'coupon_form.h5code' | translate}}</h6>
+            	</div>
+            	<div class="pull-right" style="width: 60%; margin-top:7px;">
+	                <input ng-model="$parent.code" ng-keydown="codekeyDown($event)" ng-if="couponId == 0" class="myinput2" type="text" style="text-align: center;" required />
+                    <input ng-model="$parent.code" ng-keydown="codekeyDown($event)" ng-if="couponId != 0" class="myinput2" type="text" style="text-align: center;" />
+	            	<div class="help-block with-errors"></div>
+	            </div>
+            </div>
+        </div>
+
+        <div class="c-block2 pos-rlt">
+            <div class="form-group row">
+            	<div class="pull-left" style="width: 60%;">
+            		<h6 class="fw">{{'coupon_form.h5discount_amount' | translate}}</h6>
+            	</div>
+            	<div class="pull-right" style="width: 40%; margin-top:7px;">
+	                <input class="myinput2" type="number" ng-change="onDiscount_amount_changed()" ng-model="discount_amount" style="text-align: center;" />
+	            	<div class="help-block with-errors"></div>
+	            </div>
+            </div>
+        </div>
+
+        <div class="rates-option" style="margin-top:15px;">
+            <span ng-click="onTypeChanged(1)" class="dopoint"><i
+                    ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[discount_type == 1]"></i>{{'coupon_form.h5percentAge' | translate}}</span>
+            <span ng-click="onTypeChanged(0)" class="dopoint"><i
+                    ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[discount_type == 0]"></i>{{'coupon_form.h5fixedAmount' | translate}}</span>
+            
+        </div>
+
+        <div>
+	        <div class="f-s f-w-300 fw rates-set" style="cursor: pointer; margin-left:6px; height: 50px;"
+		         ng-click="is_onetime = !is_onetime">
+		        <i ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[is_onetime]"></i>
+		        {{'coupons.h5oneTime_use_per_customer' | translate}}
+		    </div>
+		</div>
+	    <div class="c-block2 pos-rlt">
+            <div class="form-group">
+                <h6 class="fw">{{'coupon_form.h5nameThis_promoCode' | translate}}</h6>
+                <input ng-if="couponId == 0" class="myinput2" type="text" ng-model="$parent.title" required/>
+                <input ng-if="couponId != 0" class="myinput2" type="text" ng-model="$parent.title"/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="c-block2 pos-rlt">
+            <div class="form-group row">
+                <h6 class="fw">{{'coupon_form.h5startingDate' | translate}}</h6>
+                <datepicker style="border-bottom: #ff4d00 1px solid;" date-format="yyyy-MM-dd">
+				  <input class="myinput2" ng-model="starting_date" ng-change="starting_date_changed()" ng-keydown="starting_date_keyDown($event)" type="text" style="border: 0; background-color: #171821; height: 32px;" />
+				</datepicker>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="c-block2 pos-rlt">
+            <div class="form-group row">
+                <h6 class="fw">{{'coupon_form.h5endDate' | translate}}</h6>
+                <datepicker style="border-bottom: #ff4d00 1px solid;" date-format="yyyy-MM-dd">
+				  <input class="myinput2" ng-model="end_date" ng-change="end_date_changed()" ng-keydown="end_date_keyDown($event)" type="text" style="border: 0; background-color: #171821; height: 32px;"/>
+				</datepicker>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="c-block2 pos-rlt" style="margin-top:7px;">
+	        <div class="f-s f-w-300 fw rates-set" style="cursor: pointer; margin-left:6px; height: 50px;"
+	             ng-click="onPermanentClick()">
+	            <div class="form-group">
+		            <i ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[is_permanent]"></i>
+		            {{'coupon_form.h5permanent' | translate}}
+		        </div>
+	        </div>
+	    </div>
+
+        <div class="mg-t-xxl">
+		    <button type="submit" ng-click="onSubmitButtonClick(couponForm.$valid, $event)" class="btn-blue btn center-block mg-t-xl">
+		        <span class="ng-binding">SAVE</span>
+		    </button>
+		</div>
+
+    </form>
+    <!--<div class="chead-edit"><i class="fa fa-pencil fw"></i></div>-->
+</div>
+<google-analytics analytics-page='/coupon-form.html'></google-analytics>

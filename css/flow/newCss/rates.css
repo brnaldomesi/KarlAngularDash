@@ -1,0 +1,549 @@
+@media screen and (max-width: 767px) {
+    /*小于767 mobile */
+    .rates-card-area {
+        width: 98%;
+        height: 250px;
+        position: relative;
+        float: left;
+        margin: 7px;
+    }
+
+    .rates-card-block {
+        cursor: pointer;
+        width: 98%;
+        height: 250px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+    }
+
+    .rates-name {
+        font-size: 18px;
+        overflow: hidden;
+        width: 93%;
+        text-overflow: ellipsis;
+        white-space: nowrap
+    }
+
+    .rates-ve {
+        width: 70%;
+        float: left;
+        font-size: 16px
+    }
+
+    .rates-aon {
+        float: right;
+        text-align: right;
+        font-size: 16px;
+    }
+
+    .rates-aon span {
+        color: #aaaada;
+    }
+
+    .rates-line {
+        height: 2px;
+        border-top: 1px solid #36378f;
+        margin: 8px 0;
+    }
+
+    .rates-des {
+        margin: 10px 0;
+        height: 45px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .rates-week {
+        list-style: none;
+        margin: 0 auto;
+        padding: 0;
+        color: #2a2a6b;
+        font-size: 14px;
+
+    }
+
+    .rates-week li {
+        display: inline-block;
+        width: 13%;
+        text-align: center;
+        margin: 0;
+        border-radius: 5px;
+        padding: 4px;
+        font-weight: bold;
+
+    }
+
+    .rates-week-act {
+        background: #3d6cc7;
+        color: #fff;
+    }
+
+    .rates-del-panel {
+        width: 98%;
+        height: 100%;
+        background: #373c74;
+        border-radius: 10px;
+        z-index: 990;
+        position: absolute;
+        display: none;
+        padding: 15px;
+        padding-top: 25%;
+        text-align: center;
+    }
+
+    .rates-del-panel div {
+        margin-top: 15px;
+        font-size: 18px;
+    }
+
+    .rates-del-panel div span {
+        margin: 0 25px;
+    }
+
+    .rates-del-panel .rates-del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+
+
+    .rates-option {
+        width: 90%;
+    }
+
+    .rates-option i {
+        margin: 0 5px;
+        color: #ff4d00;
+    }
+
+    .rates-option span {
+        margin: 10px;
+        font-size: 16px;
+        color: #fff;
+    }
+
+    .rates-set {
+        height: 70px;
+        line-height: 70px;
+    }
+
+    .rates-set i {
+        margin: 0 5px;
+        color: #ff4d00;
+    }
+
+    .rates-ap-tag {
+        display: inline-block;
+        margin: 0 10px;
+        height: 25px;
+        line-height: 25px;
+        color: #fff;
+        background: #3b76c9;
+        border-radius: 4px;
+        padding: 0 4px;
+    }
+
+    .rates-ap-tag span {
+        margin: 0 8px;
+    }
+
+    .rates-op-num {
+
+    }
+
+    .rates-op-num i {
+        font-size: 14px;
+        margin: 0 8px;
+    }
+
+    .rates-week {
+        margin-left: 12px;
+    }
+
+    .rates-week ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 14px;
+    }
+
+    .rates-week ul li {
+        width: 13%;
+        height: 26px;
+        display: inline-block;
+        border-radius: 6px;
+        background: #2e3aa8;
+        color: #fff;
+        text-align: center;
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .rates-week .rates-week-active {
+        background: #ff4d00
+    }
+
+
+    .rates-select{
+        text-indent: 0px;
+        height: 40px;
+        width: 100%;
+        background: url(../img/arrow-down.png) no-repeat scroll right center transparent;
+    }
+    .rates-select span,.rates-select i{
+        font-size: 16px;
+    }
+
+    .rates-sub{
+        width: 100%;
+        height: 70px;
+        padding: 10px;
+        background: #3b76c9;
+        font-size: 18px;
+        margin: 10px 0;
+        border-radius: 5px 5px 0 0 ;
+    }
+    .rates-sub i{
+        margin: 3px 10px;
+        color: #000;
+    }
+    .rates-sub span{
+        font-size: 16px;
+    }
+
+    .rates-sub-img{
+        width: 40px;
+        height: 40px;
+        margin-top: 5px;
+        border-radius: 100%;
+        background: #f2f2f2 url(../../../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+    }
+
+    .rates-sub-cont{
+        background: #393b75;
+        padding: 10px 0;
+        margin-top: -10px;
+        border-radius:0 0 5px 5px ;
+        padding-bottom: 15px;
+    }
+    .rates-sub-cont ul{
+        list-style: none;
+        margin-left: -30px;
+
+    }
+    .rates-sub-cont ul li{
+        margin: 8px;
+        display: block;
+    }
+    .rates-sub-cont ul li span{
+        margin-left:10px;
+        font-size: 18px;
+    }
+
+    .addon-main {
+        display: inline-block;
+        width: 78%
+    }
+
+    .addon-sub {
+        display: inline-block;
+        width: 20%;
+        height: 31px;
+        margin-left: -5px;
+        color: #4444bf;
+        text-align: right
+    }
+
+    .addon-main2 {
+        display: inline-block;
+        width: 30%;
+
+    }
+
+    .addon-sub2 {
+        display: inline-block;
+        width: 20%;
+        height: 37px;
+        margin-left: -12px;
+        color: #4444bf;
+        text-align: right
+    }
+}
+
+@media screen and (min-width: 768px) {
+    /*大于992  pc */
+    .rates-card-area {
+        width: 350px;
+        height: 250px;
+        position: relative;
+        float: left;
+        margin: 7px;
+    }
+
+    .rates-card-block {
+        cursor: pointer;
+        width: 350px;
+        height: 250px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+    }
+
+    .rates-name {
+        font-size: 18px;
+        overflow: hidden;
+        width: 93%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .rates-ve {
+        width: 70%;
+        float: left;
+        font-size: 16px
+    }
+
+    .rates-aon {
+        float: right;
+        text-align: right;
+        font-size: 16px;
+    }
+
+    .rates-aon span {
+        color: #aaaada;
+    }
+
+    .rates-line {
+        height: 2px;
+        border-top: 1px solid #36378f;
+        margin: 8px 0;
+    }
+
+    .rates-des {
+        margin: 10px 0;
+        height: 45px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .rates-week {
+        list-style: none;
+        margin: 0 auto;
+        padding: 0;
+        color: #2a2a6b;
+        font-size: 16px;
+
+    }
+
+    .rates-week li {
+        display: inline-block;
+        width: 39px;
+        text-align: center;
+        margin: 0 1px;
+        border-radius: 5px;
+        padding: 4px;
+        font-weight: bold;
+
+    }
+
+    .rates-week-act {
+        background: #3d6cc7;
+        color: #fff;
+    }
+
+    .rates-del-panel {
+        width: 100%;
+        height: 100%;
+        background: #373c74;
+        border-radius: 10px;
+        z-index: 990;
+        position: absolute;
+        display: none;
+        padding: 15px;
+        padding-top: 20%;
+        text-align: center;
+    }
+
+    .rates-del-panel div {
+        margin-top: 15px;
+        font-size: 18px;
+    }
+
+    .rates-del-panel div span {
+        margin: 0 25px;
+    }
+
+    .rates-del-panel .rates-del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+
+    .rates-option {
+
+    }
+
+    .rates-option i {
+        margin: 0 5px;
+        color: #ff4d00;
+    }
+
+    .rates-option span {
+        margin: 10px;
+        font-size: 14px;
+        color: #fff;
+    }
+
+    .rates-set {
+        height: 70px;
+        line-height: 70px;
+    }
+
+    .rates-set i {
+        margin: 0 5px;
+        color: #ff4d00;
+    }
+
+    .rates-ap-tag {
+        display: inline-block;
+        margin: 0 10px;
+        height: 25px;
+        line-height: 25px;
+        color: #fff;
+        background: #3b76c9;
+        border-radius: 4px;
+        padding: 0 4px;
+    }
+
+    .rates-ap-tag span {
+        margin: 0 8px;
+    }
+
+    .rates-op-num {
+
+    }
+
+    .rates-op-num i {
+        font-size: 14px;
+        margin: 0 8px;
+    }
+
+    .rates-week {
+        margin-left: 12px;
+    }
+
+    .rates-week ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 14px;
+    }
+
+    .rates-week ul li {
+        width: 12%;
+        height: 26px;
+        display: inline-block;
+        border-radius: 6px;
+        background: #2e3aa8;
+        color: #fff;
+        text-align: center;
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .rates-week .rates-week-active {
+        background: #ff4d00
+    }
+
+
+    .rates-select{
+        text-indent: 0px;
+        height: 40px;
+        width: 100%;
+        background: url(../img/arrow-down.png) no-repeat scroll right center transparent;
+    }
+    .rates-select span,.rates-select i{
+        font-size: 16px;
+    }
+
+    .rates-sub{
+        width: 100%;
+        height: 70px;
+        padding: 10px;
+        background: #3b76c9;
+        font-size: 18px;
+        margin: 10px 0;
+        border-radius: 5px 5px 0 0 ;
+    }
+    .rates-sub i{
+        margin: 3px 10px;
+        color: #000;
+    }
+    .rates-sub span{
+        font-size: 16px;
+    }
+
+    .rates-sub-img{
+        width: 40px;
+        height: 40px;
+        margin-top: 5px;
+        border-radius: 100%;
+        background: #f2f2f2 url(../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+    }
+
+    .rates-sub-cont{
+        background: #393b75;
+        padding: 10px 0;
+        margin-top: -10px;
+        border-radius:0 0 5px 5px ;
+        padding-bottom: 15px;
+    }
+    .rates-sub-cont ul{
+        list-style: none;
+        margin-left: -30px;
+
+    }
+    .rates-sub-cont ul li{
+        margin: 8px;
+        display: block;
+    }
+    .rates-sub-cont ul li span{
+        margin-left:10px;
+        font-size: 18px;
+    }
+    .addon-main {
+        display: inline-block;
+        width: 78%
+    }
+
+    .addon-sub {
+        display: inline-block;
+        width: 20%;
+        height: 31px;
+        margin-left: -5px;
+        color: #4444bf;
+        text-align: right
+    }
+
+    .addon-main2 {
+        display: inline-block;
+        width: 30%;
+
+    }
+
+    .addon-sub2 {
+        display: inline-block;
+        width: 20%;
+        height: 37px;
+        margin-left: -12px;
+        color: #4444bf;
+        text-align: right
+    }
+
+
+}

@@ -1,0 +1,15 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="20"></karl-header-menu>
+    <div class="title-block navbar-collapse">
+        <div style="color: white;font-size: 18px;margin: 70px 0 0 20px">
+            <p>{{'board_home.h5first_name' | translate}} : {{salesRapInfo.first_name}}</p>
+            <p>{{'board_home.h5last_name' | translate}} : {{salesRapInfo.last_name}}</p>
+            <p>{{'board_home.h5email' | translate}} : {{salesRapInfo.email}}</p>
+            <p>{{'comment.h5phone' | translate}} : {{salesRapInfo.mobile}}</p>
+            <p>{{'comment.h5country' | translate}} : {{countrys}}</p>
+            <p>{{'board_home.h5SaleRepId' | translate}} : {{salesRapInfo.sale.sale_id}}</p>
+        </div>
+    </div>
+</div>
+
+<google-analytics analytics-page='/sales-rep-home.html'></google-analytics>

@@ -1,0 +1,96 @@
+
+
+.block-balance{width:95%;background:#1a1a1a;
+    background-image:-webkit-gradient(linear,50% 0,0 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#313131),to(#313131)),
+    -webkit-gradient(linear,50% 0,100% 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#313131),to(#313131));
+    background-size:20px 15px;
+    background-repeat:repeat-x;
+    background-position:0 100%;
+    margin: 0;
+}
+
+
+.block-balance-top{width:95%;height:20px;background:#313131;
+    background-image:-webkit-gradient(linear,50% 0,0 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#1a1a1a),to(#1a1a1a)),
+    -webkit-gradient(linear,50% 0,100% 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#1a1a1a),to(#1a1a1a));
+    background-size:20px 15px;
+    background-repeat:repeat-x;
+    background-position:0 100%;
+    margin: 0;
+
+}
+
+
+.block-balance2{width:95%;background:#313131;
+    background-image:-webkit-gradient(linear,50% 0,0 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#1a1a1a),to(#1a1a1a)),
+    -webkit-gradient(linear,50% 0,100% 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#1a1a1a),to(#1a1a1a));
+    background-size:20px 15px;
+    background-repeat:repeat-x;
+    background-position:0 100%;
+    margin: 0;
+}
+
+.block-balance-top2{width:95%;height:20px;background:#1a1a1a;
+    background-image:-webkit-gradient(linear,50% 0,0 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#313131),to(#313131)),
+    -webkit-gradient(linear,50% 0,100% 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#313131),to(#313131));
+    background-size:20px 15px;
+    background-repeat:repeat-x;
+    background-position:0 100%;
+    margin: 0;
+
+}
+
+
+.dropdown-menu li a{
+    font-size:11px;
+}
+
+@media screen and (max-width: 767px) {
+    /*小于767 mobile */
+    .f-s {
+        font-size: 15px;
+    }
+
+    .f-m {
+        font-size: 20px;
+    }
+
+    .f-l {
+        font-size: 30px;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    /*大于768小于991  portable */
+    .f-s {
+        font-size: 18px;
+    }
+
+    .f-m {
+        font-size: 20px;
+    }
+
+    .f-l {
+        font-size: 30px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    /*大于992  pc */
+    .f-s {
+        font-size: 18px;
+    }
+
+    .f-m {
+        font-size: 24px;
+    }
+
+    .f-l {
+        font-size: 30px;
+    }
+}
+
+.bootstrap-switch .bootstrap-switch-handle-on, .bootstrap-switch .bootstrap-switch-handle-off, .bootstrap-switch .bootstrap-switch-label {
+    line-height: 12px !important;
+}

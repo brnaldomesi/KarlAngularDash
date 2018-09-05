@@ -1,0 +1,85 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="24"></karl-header-menu>
+    <div class="btn-add hidden-xs" style="cursor:pointer;" ng-click="addSalesAssistant()"><i class="fa fa-plus"></i>
+    </div>
+
+    <div class="title-block main-padding  navbar-collapse">
+        <div class="main-title ">
+            <span class="fw main-title-text">All Sales Assistant</span>
+            <span class="fw main-title-text pull-right visible-xs btn-add-text dopoint" ng-click="addSalesAssistant()"><i
+                    class="fa fa-plus"></i>  {{'super_vehicle_category.h5Add' | translate}}</span>
+        </div>
+
+        <div class="pull-right main-title">
+            <div class="navbar-form navbar-form-sm navbar-left shift" role="search">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" ng-model="input.searchText"
+                               class="form-control input-sm bg-light no-border rounded padder search-bg"
+                               placeholder="{{'comment.h5search' | translate}}">
+                        <span class="input-group-btn">
+                            <button ng-show="input.searchText"
+                                    ng-click="onCancelSearchButtonClick()"
+                                    class="btn btn-sm bg-dark2 rounded input-search">
+                                <i class="fa fa-close fw"></i>
+                            </button>
+                            <button class="btn btn-sm bg-dark2 rounded input-search">
+                                <i class="fa fa-search fw"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+
+    <div class="main-padding salemain-padding" ng-show="showSearchResult">
+        <h3 class="fw" style="margin : -20px 0 0 15px ; font-size: 20px" ng-show="pageTotalItems > 0">
+            {{'vehicles.h5search_result' | translate}}
+        </h3>
+        <h3 class="fw" style="margin : -20px 0 0 15px ; font-size: 20px" ng-show="pageTotalItems == 0">
+            {{'vehicles.h5no_result' | translate}}
+        </h3>
+    </div>
+
+    <div class="main-padding card-fix pos-rlt navbar-collapse">
+        <div class="card-area-two" ng-repeat="salesAssistant in salesAssistantList">
+            <div class="driver-del-panel gen-panel" style="padding-top: 2%">
+                <span class="driver-del-info fw">Delete this Sales Assistant?</span>
+                <div>
+                    <span class="fgray driver-del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                    <span class="fred dopoint"
+                          ng-click="onDeleteButtonClick(salesAssistant.asst_id)">{{'comment.h5delete' | translate}}</span>
+                </div>
+            </div>
+            <a type="button" class="card-more"><i class="fa fa-ellipsis-v fd fa-close"></i></a>
+            <a type="button" class="card-del gen" title="{{'comment.h5delete'|translate}}"><i
+                    class="fa fa-trash fd"></i></a>
+            <div ng-click="onEditButtonClick(salesAssistant.asst_id)" class="card-block-two"
+                 style="cursor: auto;height: 110px">
+                <div style="font-size: 15px">
+                    <p>
+                        <span class="fw">{{salesAssistant.first_name}} {{salesAssistant.last_name}}</span>
+                    </p>
+                    <p>
+                        <span class="fw">{{salesAssistant.asst_id}}</span>
+                    </p>
+                    <p>
+                        <span class="fw">{{salesAssistant.countryName}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <uib-pagination total-items="pageTotalItems"
+                    items-per-page="pagePerCount"
+                    ng-model="currentPage"
+                    previous-text="{{'pagination.h5previous' | translate}}"
+                    next-text="{{'pagination.h5next' | translate}}"
+                    max-size="10" ng-change="onPageChange()" class="pagenum"
+                    style="width: auto;display: table;margin-left: auto;margin-right: auto;">
+    </uib-pagination>
+</div>
+<google-analytics analytics-page='/sales-assistant.html'></google-analytics>

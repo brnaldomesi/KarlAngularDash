@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="dashboard-wrapper">
+        <div class="K-obmain poisR">
+                <div class="k-ob-back"><span ng-click="backToVehicle()" style="cursor: pointer">{{'board_vehicle.h5back' | translate}}</span></div>
+            <div class="autoclose">
+                <button type="button" ng-click="closeWindow()" class="close" data-dismiss="modal" aria-label="Close"
+                        style="color: red;opacity: 1;font-size: 30px;text-shadow: none;outline:none;"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="row">
+                <img src="img/onboard/home-logo-s.png" class="center-block k-logo-s"/>
+            </div>
+
+            <div class="k-addcompany">
+                <h1>{{'board_driver.h5driver_detail' | translate}}</h1>
+                <div class="k-addcompanyinfo">
+                    <div class="myinput">{{driver.firstName}}</div>
+                    <div class="myinput">{{driver.lastName}}</div>
+                    <div class="myinput sign-mail">{{driver.email}}</div>
+                    <div class="myinput sign-mobile">{{driver.mobile}}</div>
+                </div>
+                <h1>{{'board_driver.h5vehicle_added' | translate}}</h1>
+                <div class="k-addcompanyinfo">
+                    <div class="row">
+                        <div class="vehiclelist-static">
+                            <ul ng-repeat="item in driver.selectedCars">
+                                <li><span>{{item.model_name}}</span><span>{{item.brand_name}}</span><span>{{item.license}}</span></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                    <h1>{{'board_driver.h5work_time' | translate}}</h1>
+                    <div class="col-3 pull-right hidden" style="margin-top: 14px;"><a href="#"><i
+                            class="fa fa-pencil fwhite"></i></a></div>
+
+                <div class="k-week-time home-mg">
+                    <table style="margin-left: 10%;">
+                        <tr>
+                            <td width="10%" height="20"></td>
+                            <td class="fgray" width="45%">{{'board_comment.h5start' | translate}}</td>
+                            <td class="fgray" width="45%">{{'board_comment.h5end' | translate}}</td>
+                        </tr>
+                        <tr ng-repeat="item in driver.routine track by $index" ng-show="item.work">
+                            <td class="fgray2" height="40" style="vertical-align: middle">{{item.name | translate}}</td>
+                            <td class="fblue" >{{timeClock[item.start].time}}</td>
+                            <td class="fblue" >{{timeClock[item.end].time}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <h1>{{'board_driver.h5added_drivers_list' | translate}}</h1>
+                <div class="k-addcompanyinfo">
+                    <div class="row">
+                        <div class="vehiclelist">
+                            <ul>
+                                <li class="vehicle-item" ng-repeat="item in driverList track by $index" ng-click="switchDriver($index)"
+                                    onclick="$(this).addClass('vehicle-active').siblings().removeClass('vehicle-active');"
+                                ><span style="width: 90%;">{{item.firstName+ " " + item.lastName}}</span><span style="width: 5%;cursor: pointer" title="{{'board_driver.h5Edit_Driver' | translate}}"><i
+                                        class="fa fa-pencil fwhite" ng-click="editDriver($index)"></i></span></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <button class="fblue" ng-click="addAnotherDriver()" ng-show="driverList.length<5">{{'board_driver.h5Add_Driver' | translate}}</button>
+                        <button class="fblue pull-right btn btn-blue" style="outline: none" ng-click="nextToFinish()">{{'board_driver.h5continue' | translate}}</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

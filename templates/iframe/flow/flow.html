@@ -1,0 +1,796 @@
+<div class="containerOutermost" xmlns="http://www.w3.org/1999/html">
+    <face-book-pixel pixel-page='flow'></face-book-pixel>
+    <div style="margin:20px auto;">
+        <!--=================iframe start==================-->
+        <!--progress bar-->
+        <!--<div style="width: 90px;height: 90px;border: 1px solid white;border-radius: 100%;margin:20px auto 10px auto;background: url('{{companyImg}}');background-size: cover"></div>-->
+        <!--<div>-->
+        <!--<p style="font-size: 35px;text-align: center;color: #b4b4b4" ng-show="companyInfor">-->
+        <!--{{companyInfor.name}}-->
+        <!--</p>-->
+        <!--</div>-->
+        <div class="dashboard-wrapper">
+            <div class="row" style="margin: 0">
+                <div style="width:80%;margin: auto">
+                    <div class="bs-example" data-example-id="simple-nav-justified">
+                        <ul class="nav nav-pills nav-justified">
+                            <li id="titleOne" role="presentation" class="active">
+                                <a style="cursor: default">{{'flow.h5place_time'|translate}}</a></li>
+                            <li id="titleTwo" role="presentation"><a style="cursor: default"><i
+                                    class="fa fa-play icolor" aria-hidden="true"></i>&nbsp;&nbsp;{{'flow.h5choose_ride'|translate}}</a>
+                            </li>
+                            <li id="titleThree" role="presentation"><a style="cursor: default"><i
+                                    class="fa fa-play icolor" aria-hidden="true"></i>&nbsp;{{'flow.h5sign_in'|translate}}</a></li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <hr style="height:2px;border:none;border-top:1px solid #555555"/>
+            </div>
+            <div class="row " align="left" style="margin: 0">
+                <!--------================第二页=================--------->
+                <!--不需要-->
+
+                <!--------================第二页=================--------->
+                <div id="stepTwo" class="hidden" style="width:92%;margin: auto">
+
+                    <div class="book-trip-card pos-rlt">
+                        <div class="book-trip-up">
+                            {{'flow.h5trip_on'|translate}}
+                            <span class="flow-time" style=" background: #f2f2f2">{{pickupTime| dateFormatter:'shortDate'}}</span>
+                            {{'flow.h5at'|translate}}
+                            <span class="flow-time-edit">
+                            <span class="flow-time" style="background: #f2f2f2;display: inline-block">{{pickupTime| dateFormatter:'shortTime'}}</span>
+                            <div class="edit-any" style="display: inline-block" ng-click="editDatetime(1)" title="{{'flow.h5Edit_Datetime_Place'|translate}}">
+                                <i class="fa fa-pencil"></i>
+                            </div>
+                            </span>
+                        </div>
+
+                        <div class="book-trip-down">
+                            <div class="inline" style="vertical-align: top">
+                                <div style="color:darkgray;font-size: 10px">{{'flow.h5pick_address' | translate}}</div>
+                                <div class="location-bg2 v-top inline">
+                                    <i class="fa fa-dot-circle-o" style="color: green;font-size: 15px"></i>
+                                </div>
+                                <div class="inline book-trip-block inline2">
+                                    <div class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                        {{pickupLocation.d_final_address[0]}}
+                                    </div>
+                                    <div class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                        {{pickupLocation.d_final_address[1]}}
+                                    </div>
+                                </div>
+                                <div class="flow-air-message" style="border-left: solid 1px green;margin-left: 4px">
+                                    <div style="margin-left: 10px">
+                                        <div ng-show="dair" style="color:darkgray;font-size: 10px">{{'flow.h5airline' | translate}}</div>
+                                        <div ng-show="dair" style="color: #ffffff;font-size: 15px">{{dair}}</div>
+                                        <div ng-show="dflight" style="color:darkgray;font-size: 10px">{{'flow.h5flight' | translate}}</div>
+                                        <div ng-show="dflight" style="color: #ffffff;font-size: 15px">{{dflight}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inline" ng-show="bookType == 1" style="vertical-align: top">
+                                <div style="color:darkgrey;font-size: 10px">{{'flow.h5drop_address' | translate}}</div>
+                                <div class="location-bg2 v-top inline"><i class="fa fa-dot-circle-o"
+                                                                          style="color: red;font-size: 15px"></i></div>
+                                <div class="inline book-trip-block  inline2">
+                                    <div class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                        {{dropoffLocation.a_final_address[0]}}
+                                    </div>
+                                    <div class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                        {{dropoffLocation.a_final_address[1]}}
+                                    </div>
+                                </div>
+                                <div class="flow-air-message" style="border-left: solid 1px red;margin-left: 4px">
+                                    <div style="margin-left: 10px">
+                                        <div ng-show="aair" style="color:darkgray;font-size: 10px">{{'flow.h5airline' | translate}}</div>
+                                        <div ng-show="aair" style="color: #ffffff;font-size: 15px">{{aair}}</div>
+                                        <div ng-show="aflight" style="color:darkgray;font-size: 10px">{{'flow.h5flight' | translate}}</div>
+                                        <div ng-show="aflight" style="color: #ffffff;font-size: 15px">{{aflight}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inline" ng-show="bookType == 1" style="vertical-align: top">
+                                <div style="color:darkgrey;font-size: 10px">{{'flow.h5est_time' | translate}}</div>
+                                <div class="inline book-trip-block">
+                                    <span class="f-l fb" style="font-size: 15px">{{estimate_time_show | TimeFormatFilter}}</span>
+                                </div>
+                            </div>
+                            <div class="inline" ng-show="bookType == 1" style="vertical-align: top">
+                                <div style="color:darkgrey;font-size: 10px">{{'flow.h5est_dist' | translate}}</div>
+                                <div class="inline book-trip-block">
+                                    <span class="f-l fb" style="font-size: 15px">{{estimate_data.distance.value | DistanceFormatFilter}}</span>
+                                </div>
+                            </div>
+                            <div class="inline" ng-show="bookType == 2" style="vertical-align: top">
+                                <div style="color:darkgrey;font-size: 10px">{{'flow.h5hourly_time' | translate}}</div>
+                                <div class="inline book-trip-block">
+                                    <span class="f-l fb" style="font-size:15px">{{estimate_time_show | TimeFormatFilter}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mg-t-xl">
+                    <h4 class="book-message-font">{{'flow.h5available_vehicles' | translate}}</h4>
+                    <div class="carImg" style="position: relative;">
+
+                        <div ng-click="goGetCar($index,cate)"
+                             class="cars-card cars-hover"
+                             ng-mouseover="mouseoverover(cate)"
+                             ng-mouseleave="mouseleaveleave(cate)"
+                             style="position: relative;background: #fff;cursor: pointer;width: 200px;margin: 1%;display: inline-block;text-align: left;color: #ffffff;"
+                             ng-repeat="cate in cars">
+                            <div class="myImg"
+                                 style="background: url('{{cate.img}}') no-repeat center;background-size: contain;padding:75px;text-align: center;width: 100%">
+                                <!--<img class="img-responsive center-block" src="{{cate.img}}"-->
+                                <!--style="max-height: 100%;max-width: 100%;width: auto;height: auto">-->
+                            </div>
+                            <div class="carName" ng-class="{true:'carsbgt',false:'carsbgf'}[cate.isSelect]"
+                                 style="padding: 5px 12px">
+                                <div>
+                                    <p class="carsModel" style="font-size: 20px;margin: 0;float: left;white-space: nowrap;width: 55%;text-overflow: ellipsis;overflow: hidden;">
+                                        {{cate.model}}</p>
+                                    <div class="carsListFont" style="float: right;line-height: 28px">
+                                        <i class="fa fa-user" style="color: #909090" ng-hide="showSwiper"></i>
+                                        <span style="color:white">{{cate.seats_max}}</span>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                </div>
+                                <div>
+                                    <p style="margin: 0;float: left;width: 55%;text-overflow: ellipsis;overflow: hidden;">{{cate.brand}}</p>
+                                    <div class="carsListFont" style="float: right">
+                                        <i class="fa fa-suitcase" style="color:#909090"></i>
+                                        <span style="color:white">{{cate.bags_max}}</span>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                </div>
+                            </div>
+                            <div ng-show="cate.showSelect" ng-class="{true:'lang-car-opacity',false:'car-opacity'}[langStyle=='fr']">
+                                <div style="height: 12%;line-height: 200%;text-align: center;margin: 28% auto;border-radius: 7px;background: #3968ab;">
+                                    <h4 style="font-size: 15px;text-align: initial;padding-top: 5px;font-weight: 500;color: white">
+                                        {{'flow.h5SELECT' | translate}}</h4>
+                                </div>
+                            </div>
+                            <!--<div ng-class="{true:'carsbgt',false:'carsbgf'}[cate.isSelect]"-->
+                            <!--style="text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">-->
+                            <!--<div class="b-f-s" style="padding:15px;font-size: 20px;color: #fff">-->
+                            <!--{{cate.isSelect?'selected':'select'}}-->
+                            <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    </div>
+                    <!--===============Add ones===================-->
+                    <div class="mg-t-xl xl">
+                        <h4 class="book-message-font">{{'flow.h5number_passengers' | translate}}</h4>
+                        <select class="myinput myinputhalf-fix myselect"
+                                ng-model="selectedMaxPassengers"
+                                ng-options="item for item in maxPassengers"
+                                ng-change="onChangePassengerCount(false)" style="width: 60%;background-color: #161821">
+                        </select>
+                    </div>
+                    <div class="mg-t-xl xl" ng-show="passengers.length > 0">
+                        <div class="form-group">
+                            <h4 class="book-message-font">{{'flow.h5passenger_names' | translate}}</h4>
+                            <input ng-repeat="passenger in passengers"
+                                   ng-model="passenger.name"
+                                   class="myinput myinputhalf-fix  input-bottom"
+                                   type="text"
+                                   style="width: 60%;"
+                                   placeholder="{{'flow.h5enter_passenger_name' | translate}}"/>
+                        </div>
+                    </div>
+                    <div class="mg-t-xl xl">
+                        <h4 class="book-message-font">{{'flow.h5number_bags' | translate}}</h4>
+                        <select class="myinput myinputhalf-fix myselect"
+                                ng-model="selectedMaxBags"
+                                ng-options="item for item in maxBags" style="width: 60%;background-color: #161821">
+                        </select>
+                    </div>
+
+
+                    <div class="mg-t-xl xl" ng-show="offer.options.length > 0">
+                        <h4 class="book-message-font" style="width: 80%;line-height: 100%">
+                            <span style="float: left">{{'flow.h5add_ons' | translate}}</span>
+                            <span style="float: right;font-size: 20px;font-weight: 300;color: #3c76c8">{{'flow.h5AddOns_Price' | translate}}: <span
+                                    style="color: #fff">{{optionsPrice*(1+offer.tva/100)| princeTranslateFilters:false:false:offer.ccy}}</span></span>
+                            <div style="clear: both"></div>
+                        </h4>
+                        <div class="mg-t-s">
+                            <div class="layout-half inline" ng-repeat="item in options.number">
+                                <label class="pull-left">
+                                    <input name="addons" type="checkbox" ng-model="item.enable"
+                                           ng-change="onEnableOption(item)"/>
+                                    <span class="rates-ap-tag">{{item.name}}
+                                <span class="fblack">
+                                    <!--<b>{{item.count *item.price *(1+offer.tva/100)| PriceFormatFilter:'$'}}</b>-->
+                                    <b>{{item.price *(1+offer.tva/100)| PriceFormatFilter:true:false:offer.ccy}}</b>
+                                </span>
+                                    </span>
+                                </label>
+                                <div class="pull-right rates-op-num" ng-show="item.enable">
+                            <span class="fred" ng-click="onChangeOptionCount(item,false)"><i
+                                    class="fa fa-minus"></i></span>
+                                    <span class="fw f-s">{{item.count}}</span>
+                                    <span class="fred" ng-click="onChangeOptionCount(item,true)"><i
+                                            class="fa fa-plus"></i></span>
+                                </div>
+                                <div class="cl"></div>
+                            </div>
+
+                            <div class="layout-half inline" ng-repeat="item in options.checkBox">
+                                <label class="pull-left">
+                                    <input name="addons" type="checkbox" ng-model="item.enable"
+                                           ng-change="onEnableOption(item)"/>
+                                    <span class="rates-ap-tag">{{item.name}}
+                                <span class="fblack">
+                                    <!--<b>{{item.count * item.price *(1+offer.tva/100)| PriceFormatFilter:'$'}}</b>-->
+                                    <b>{{item.price *(1+offer.tva/100)| PriceFormatFilter:true:false:offer.ccy}}</b>
+                                </span>
+                            </span>
+                                </label>
+                                <div class="cl"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="mg-t-xl" ng-show="showCoupon">
+                        <h4 class="book-message-font">{{'flow.h5Coupon' | translate}}</h4>
+                        <div class="row fblue" style="margin:0 10px;">
+                            <span ng-show="promo_code_shown" style="color: #3B76c9;font-size: 18px;line-height: 30px;">{{'flow.h5Promo_Code' | translate}}</span>
+                            <span ng-click="showPromoCodeLine()" style="color: #3B76c9;font-size: 18px;line-height: 30px;cursor: pointer"
+                                  ng-disabled="haveVerifyCode"
+                                  ng-show="!promo_code_shown">{{'flow.h5Have_code' | translate}}</span>
+                        </div>
+                        <div ng-show="promo_code_shown" class="max-width">
+                            <div style="display: inline-block;width: 35%;">
+                                <input class="myinput" type="text" placeholder="{{'flow.h5Enter_Code' | translate}}" ng-model="couponCode"
+                                       ng-disabled="haveVerifyCode"/>
+                            </div>
+                            <button ng-disabled="checkingCode"
+                                    ng-show="!haveVerifyCode"
+                                    ng-click="getCouponCode($event)" class="btn-blue2 pull-right btn ladda-button"
+                                    style="margin: 5px 0 0 10px;outline: none;">
+                                <span class="ladda-label">{{'flow.h5Apply' | translate}}</span>
+                            </button>
+                            <div class="pull-right" style="font-size: 18px;margin-top: 16px;text-decoration: underline;cursor: pointer"
+                                 ng-click="dismissPromoCodeLine()" ng-show="!haveVerifyCode">{{'flow.h5Cancel' | translate}}
+                            </div>
+                        </div>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+
+
+                    <!--==============返程开关=============-->
+                    <div ng-show="bookType == 1">
+                        <div class="show returnCard mg-t-xl">
+                            <h4 class="book-message-font"
+                                style="display: inline-block;vertical-align: middle;margin-right: 5px">
+                                {{'flow.h5return_service' | translate}}
+                            </h4>
+                            <input type="checkbox" name="rsSwitch">
+                            <p style="font-size: 20px;margin: 0 0 0 10px;color: #f9f9f9">
+                                {{'flow.h5schedule_round_trip' | translate}}
+                            </p>
+                        </div>
+                        <div ng-show="showReturnService" style="margin-top: 20px;">
+                            <div class="book-trip-card pos-rlt">
+                                <div class="book-trip-up">
+                                    {{'flow.h5return_trip_on' | translate}}
+                                    <span class="flow-time" style="background: #f2f2f2">{{rspickupTime| dateFormatter:'shortDate'}}</span>
+                                    {{'flow.h5at' | translate}}
+                                    <span class="flow-time-edit">
+                                         <span class="flow-time" style="background: #f2f2f2;display: inline-block">{{rspickupTime| dateFormatter:'shortTime'}}</span>
+                                    <div class="edit-any" style="display: inline-block" ng-click="editDatetime(3)" title="{{'flow.h5Edit_Datetime_Place'|translate}}">
+                                        <i class="fa fa-pencil"></i>
+                                    </div>
+                                    </span>
+                                </div>
+
+                                <div class="book-trip-down">
+                                    <div class="inline">
+                                        <div style="color:darkgray;font-size: 10px">{{'flow.h5pick_address' | translate}}</div>
+                                        <div class="location-bg2 v-top inline">
+                                            <i class="fa fa-dot-circle-o" style="color: green;font-size: 15px"></i>
+                                        </div>
+                                        <div class="inline book-trip-block inline2">
+                                            <div class="fw"
+                                                 style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                                {{dropoffLocation.a_final_address[0]}}
+                                            </div>
+                                            <div class="fw"
+                                                 style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                                {{dropoffLocation.a_final_address[1]}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="inline">
+                                        <div style="color:darkgrey;font-size: 10px">{{'flow.h5drop_address' | translate}}</div>
+                                        <div class="location-bg2 v-top inline"><i class="fa fa-dot-circle-o"
+                                                                                  style="color: red;font-size: 15px"></i>
+                                        </div>
+                                        <div class="inline book-trip-block">
+                                            <div class="fw"
+                                                 style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                                {{pickupLocation.d_final_address[0]}}
+                                            </div>
+                                            <div class="fw"
+                                                 style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                                {{pickupLocation.d_final_address[1]}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="inline">
+                                        <div style="color:darkgrey;font-size: 10px">{{'flow.h5est_time' | translate}}</div>
+                                        <div class="inline book-trip-block">
+                                            <span class="f-l fb" style="font-size: 15px">{{rsestimate_data.duration.value/60 | TimeFormatFilter}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="inline">
+                                        <div style="color:darkgrey;font-size: 10px">{{'flow.h5est_dist' | translate}}</div>
+                                        <div class="inline book-trip-block">
+                                            <span class="f-l fb" style="font-size: 15px">{{rsestimate_data.distance.value | DistanceFormatFilter}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4 class="book-message-font">{{'flow.h5available_return_vehicles' | translate}}</h4>
+                            <div class="carImg" style="position: relative;">
+
+                                <div ng-click="goGetReCar($index,recate)"
+                                     ng-mouseover="mouseoverover(recate)"
+                                     ng-mouseleave="mouseleaveleave(recate)"
+                                     class="cars-card"
+                                     style="position: relative;background: #fff;cursor: pointer;width: 200px;margin: 1%;display: inline-block;text-align: left;color: #ffffff"
+                                     ng-repeat="recate in rscars">
+                                    <div class="myImg"
+                                         style="background: url('{{recate.img}}') no-repeat center;background-size: contain;padding:75px;text-align: center;width:100%">
+                                        <!--<img class="img-responsive center-block" src="{{recate.img}}"-->
+                                        <!--style="width: 100%">-->
+                                    </div>
+                                    <div class="carName" ng-class="{true:'carsbgt',false:'carsbgf'}[recate.isSelect]"
+                                         style="padding: 5px 12px">
+                                        <div>
+                                            <p class="carsModel" style="font-size: 20px;margin: 0;float: left;white-space: nowrap;width: 55%;text-overflow: ellipsis;overflow: hidden;">
+                                                {{recate.model}}</p>
+                                            <div class="carsListFont" style="float: right;line-height: 28px">
+                                                <i class="fa fa-user" style="color:#909090"></i>
+                                                <span style="color: white">{{recate.seats_max}}</span>
+                                            </div>
+                                            <div style="clear: both"></div>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 0;float: left;width: 55%;text-overflow: ellipsis;overflow: hidden;">{{recate.brand}}</p>
+                                            <div class="carsListFont" style="float: right">
+                                                <i class="fa fa-suitcase" style="color:#909090"></i>
+                                                <span style="color:white">{{recate.bags_max}}</span>
+                                            </div>
+                                            <div style="clear: both"></div>
+                                        </div>
+                                        <div ng-show="recate.showSelect" ng-class="{true:'lang-car-opacity',false:'car-opacity'}[langStyle=='fr']">
+                                            <div style="height: 12%;line-height: 200%;text-align: center;margin: 28% auto;border-radius: 7px;background: #3968ab;">
+                                                <h4 style="font-size: 15px;text-align: initial;padding-top: 5px;font-weight: 500;color: white">
+                                                    {{'flow.h5SELECT' | translate}}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div ng-class="{true:'carsbgt',false:'carsbgf'}[recate.isSelect]"-->
+                                    <!--style="text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">-->
+                                    <!--<div style="font-size: 20px;padding:15px;color: #fff">-->
+                                    <!--{{recate.isSelect?'selected':'select'}}-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                </div>
+
+                                <div class="mg-t-xl xl">
+                                    <h4 class="book-message-font">{{'flow.h5number_passengers' | translate}}</h4>
+                                    <select class="myinput myinputhalf-fix myselect"
+                                            ng-model="rsSelectedMaxPassengers"
+                                            ng-options="item for item in rsMaxPassengers"
+                                            ng-change="onChangePassengerCount(true)" style="width: 60%;background-color: #161821">
+                                    </select>
+                                </div>
+                                <div class="mg-t-xl xl" ng-show="rsPassengers.length > 0">
+                                    <div class="form-group">
+                                        <h4 class="book-message-font">{{'flow.h5passenger_names' | translate}}</h4>
+                                        <input ng-repeat="passenger in rsPassengers"
+                                               ng-model="passenger.name"
+                                               class="myinput myinputhalf-fix  input-bottom"
+                                               type="text"
+                                               style="width: 60%;"
+                                               placeholder="{{'flow.h5enter_passenger_name' | translate}}"/>
+                                    </div>
+                                </div>
+                                <div class="mg-t-xl xl">
+                                    <h4 class="book-message-font">{{'flow.h5number_bags' | translate}}</h4>
+                                    <select class="myinput myinputhalf-fix myselect"
+                                            ng-model="rsSelectedMaxBags"
+                                            ng-options="item for item in rsMaxBags" style="width: 60%;background-color: #161821">
+                                    </select>
+                                </div>
+
+                                <div class="mg-t-xl" ng-show="rsoffer.options.length > 0">
+                                    <h4 class="book-message-font" style="width: 80%;line-height: 100%">
+                                        <span style="float: left">{{'flow.h5add_ons' | translate}}</span>
+                                        <span style="float: right;font-size: 20px;font-weight: 300;color: #3c76c8">{{'flow.h5AddOns_Price' | translate}}: <span
+                                                style="color: #fff">{{rsOptionsPrice*(1+rsoffer.tva/100)| princeTranslateFilters:false:false:rsoffer.ccy}}</span></span>
+                                        <div style="clear: both"></div>
+                                    </h4>
+                                    <div class="mg-t-s">
+                                        <div class="layout-half inline" ng-repeat="reitem in rsoptions.number">
+                                            <label class="pull-left">
+                                                <input name="addons" type="checkbox" ng-model="reitem.enable"
+                                                       ng-change="onReEnableOption(reitem)"/>
+                                                <span class="rates-ap-tag">{{reitem.name}}
+                                <span class="fblack">
+                                    <!--<b>{{reitem.count *reitem.price *(1+rsoffer.tva/100)| PriceFormatFilter:'$'}}</b>-->
+                                    <b>{{reitem.price *(1+rsoffer.tva/100)| PriceFormatFilter:true:false:rsoffer.ccy}}</b>
+                                </span>
+                            </span>
+                                            </label>
+                                            <div class="pull-right rates-op-num" ng-show="reitem.enable">
+                            <span class="fred" ng-click="onReChangeOptionCount(reitem,false)"><i
+                                    class="fa fa-minus"></i></span>
+                                                <span class="fw f-s">{{reitem.count}}</span>
+                                                <span class="fred" ng-click="onReChangeOptionCount(reitem,true)"><i
+                                                        class="fa fa-plus"></i></span>
+                                            </div>
+                                            <div class="cl"></div>
+                                        </div>
+
+                                        <div class="layout-half inline" ng-repeat="reitem in rsoptions.checkBox">
+                                            <label class="pull-left">
+                                                <input name="addons" type="checkbox" ng-model="reitem.enable"
+                                                       ng-change="onReEnableOption(reitem)"/>
+                                                <span class="rates-ap-tag">{{reitem.name}}
+                                <span class="fblack">
+                                    <!--<b>{{reitem.count * reitem.price *(1+rsoffer.tva/100)| PriceFormatFilter:'$'}}</b>-->
+                                    <b>{{reitem.price *(1+rsoffer.tva/100)| PriceFormatFilter:true:false:rsoffer.ccy}}</b>
+                                </span>
+                            </span>
+                                            </label>
+                                            <div class="cl"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="mg-t-xl" ng-show="false">
+                                    <h4 class="book-message-font">{{'flow.h5Coupon' | translate}}</h4>
+                                    <div class="row fblue" style="margin:0 10px;">
+                                        <span ng-show="rs_promo_code_shown" style="color: #3B76c9;font-size: 18px;line-height: 30px;">{{'flow.h5Promo_Code' | translate}}</span>
+                                        <span ng-click="showRsPromoCodeLine()" style="color: #3B76c9;font-size: 18px;line-height: 30px;cursor: pointer"
+                                              ng-disabled="rs_haveVerifyCode"
+                                              ng-show="!rs_promo_code_shown">{{'flow.h5Have_code' | translate}}</span>
+                                    </div>
+                                    <div ng-show="rs_promo_code_shown" class="max-width">
+                                        <div style="display: inline-block;width: 35%;">
+                                            <input class="myinput" type="text" placeholder="{{'flow.h5Enter_Code' | translate}}" ng-model="couponRsCode"
+                                                   ng-disabled="rs_haveVerifyCode"/>
+                                        </div>
+                                        <button ng-disabled="rs_checkingCode"
+                                                ng-show="!rs_haveVerifyCode"
+                                                ng-click="getRsCouponCode($event)" class="btn-blue2 pull-right btn ladda-button"
+                                                style="margin: 12px 0 0 10px;outline: none;">
+                                            <span class="ladda-label">{{'flow.h5Apply' | translate}}</span>
+                                        </button>
+                                        <div class="pull-right" style="font-size: 18px;margin-top: 16px;text-decoration: underline;cursor: pointer"
+                                             ng-click="dismissRsPromoCodeLine()" ng-show="!rs_haveVerifyCode">{{'flow.h5Cancel' | translate}}
+                                        </div>
+                                    </div>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-trip-card mg-t-xl" id="priceCard" style="margin-top:15px;line-height: 25px;">
+                        <!--<div class="book-trip-up pull-left">-->
+                            <!--<h2>:</h2>-->
+                        <!--</div>-->
+                        <div class="pull-right">
+                            <span style="font-size: 15px;color: #9c9c9c">{{'flow.h5trip_total' | translate}}:</span>
+                            <span style="color: #ffffff">
+                                <h2 ng-if="showReturnService&&offer.ccy==rsoffer.ccy" style="display: inline-block;margin-top: 0;font-weight: 600">{{showTotalPrice + showRsTotalPrice | PriceFormatFilter:true:false:offer.ccy}}</h2>
+                                <h2 ng-if="showReturnService&&offer.ccy!=rsoffer.ccy" style="display: inline-block;margin-top: 0;font-weight: 600">{{showTotalPrice | PriceFormatFilter:true:false:offer.ccy}} + {{showRsTotalPrice | PriceFormatFilter:true:false:rsoffer.ccy}} </h2>
+                                <h2 ng-if="!showReturnService" style="display: inline-block;margin-top: 0;font-weight: 600">{{showTotalPrice | PriceFormatFilter:true:false:offer.ccy}}</h2>
+                                </span>
+                        </div>
+                    </div>
+
+                    <h4 class="book-message-font mg-t-xl">{{'flow.h5special_requests' | translate}}</h4>
+                    <div class="col-lg-12 col-md-12">
+                        <textarea style="width:60%;height:140px;background:#171821;border:2px solid #404148;color:#9da0b3;font-size: 14px"
+                                id="easybook-notes-textarea"
+                                ng-model="bookNote"
+                                placeholder="{{'flow.h5enter_requests' | translate}}"></textarea>
+
+                    </div>
+
+                    <div class="flow-app-float" style="float: left;margin-top: 20px;margin-left: 15px">
+                        <button type="submit" class="btn btn-primary btn-lg ladda-button btn-brown bookButton"
+                                style="border-radius:50px;padding: 0"
+                                ng-click="clickNextAction()">{{'flow.h5continue' | translate}}
+                        </button>
+                    </div>
+
+                    <div class="flow-app-float" style="float: right;margin-right: 15px">
+                        <h3 class="app-text" style="color: #fff;font-size: 15px;text-align: center">
+                            {{'flow.h5downloaded_app' | translate:({companyName:companyInfor.name})}}</h3>
+                        <div style="text-align: center">
+                            <div style="display: inline-block;margin-right: 5px">
+                                <a ng-href="{{getCompanyIosApp}}" target="view_window"><img
+                                        ng-src="{{iosAppImgLink}}" height="30"
+                                        width="100"/></a>
+                            </div>
+                            <div style="display: inline-block;margin-left: 5px">
+                                <a ng-href="{{getCompanyGoogleApp}}" target="view_window"><img
+                                        ng-src="{{androidAppImgLink}}" height="30" width="100"/></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                    <br>
+                    <br>
+                </div>
+
+                <!----------------=======第三页 sign in ==========---------------->
+
+                <div id="stepThree" style="width: 92%;margin: auto" class="hidden">
+                    <div class="book-trip-card pos-rlt">
+                        <div class="book-trip-up">
+                            {{'flow.h5trip_on' | translate}}
+                            <span class="flow-time" style="background: #f2f2f2">{{pickupTime| dateFormatter:'shortDate' }}</span>
+                            {{'flow.h5at' | translate}}
+                            <span class="flow-time-edit">
+                             <span class="flow-time" style="background: #f2f2f2;display: inline-block">{{pickupTime| dateFormatter:'shortTime'}}</span>
+                            <div class="edit-any" style="display: inline-block" ng-click="editDatetime(1)" title="{{'flow.h5Edit_Datetime_Place'|translate}}"><i class="fa fa-pencil"></i></div>
+                            </span>
+                            <div class="flow-prince" style="float: right">
+                                <span style="background: transparent;color: ghostwhite;display: inline-block;margin: 0">{{'flow.h5trip_total' | translate}}:</span>
+                                <span style="background: #f11f20;color:white;display: inline-block;height: 28px;margin: 0;border-radius: 4px">
+                                <span style="font-size:18px;color:white;padding: 0 15px">{{showTotalPrice | PriceFormatFilter:true:false:offer.ccy}}</span>
+                                </span>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                        <div class="book-trip-down">
+                            <div class="inline" style="vertical-align: top">
+                                <div style="color:darkgray;font-size: 10px">{{'flow.h5pick_address' | translate}}</div>
+                                <div class="location-bg2 v-top inline">
+                                    <i class="fa fa-dot-circle-o" style="color: green;font-size: 15px"></i>
+                                </div>
+                                <div class="inline book-trip-block inline2">
+                                    <div class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                        {{pickupLocation.d_final_address[0]}}
+                                    </div>
+                                    <div class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                        {{pickupLocation.d_final_address[1]}}
+                                    </div>
+                                </div>
+                                <div class="flow-air-message" style="border-left: solid 1px green;margin-left: 4px">
+                                    <div style="margin-left: 10px">
+                                        <div ng-show="dair" style="color:darkgray;font-size: 10px">{{'flow.h5airline' | translate}}</div>
+                                        <div ng-show="dair" style="color: #ffffff;font-size: 15px">{{dair}}</div>
+                                        <div ng-show="dflight" style="color:darkgray;font-size: 10px">{{'flow.h5flight' | translate}}</div>
+                                        <div ng-show="dflight" style="color: #ffffff;font-size: 15px">{{dflight}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inline" ng-show="bookType == 1" style="vertical-align: top">
+                                <div style="color:darkgrey;font-size: 10px">{{'flow.h5drop_address' | translate}}</div>
+                                <div class="location-bg2 v-top inline">
+                                    <i class="fa fa-dot-circle-o" style="color: red;font-size: 15px"></i>
+                                </div>
+                                <div class="inline book-trip-block inline2">
+                                    <div class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                        {{dropoffLocation.a_final_address[0]}}
+                                    </div>
+                                    <div class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                        {{dropoffLocation.a_final_address[1]}}
+                                    </div>
+                                </div>
+                                <div class="flow-air-message" style="border-left: solid 1px red;margin-left: 4px">
+                                    <div style="margin-left: 10px">
+                                        <div ng-show="aair" style="color:darkgray;font-size: 10px">{{'flow.h5airline' | translate}}</div>
+                                        <div ng-show="aair" style="color: #ffffff;font-size: 15px">{{aair}}</div>
+                                        <div ng-show="aflight" style="color:darkgray;font-size: 10px">{{'flow.h5flight' | translate}}</div>
+                                        <div ng-show="aflight" style="color: #ffffff;font-size: 15px">{{aflight}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inline" ng-show="bookType == 1" style="vertical-align: top">
+                                <div style="color:darkgrey;font-size: 10px">{{'flow.h5est_time' | translate}}</div>
+                                <div class="inline book-trip-block">
+                                    <span class="f-l fb" style="font-size: 15px;line-height: 5px">{{estimate_time_show | TimeFormatFilter}}</span>
+                                    <!--<span style="display: block">&nbsp;</span>-->
+                                </div>
+                            </div>
+                            <div class="inline" ng-show="bookType == 1" style="vertical-align: top">
+                                <div style="color:darkgrey;font-size: 10px">{{'flow.h5est_dist' | translate}}</div>
+                                <div class="inline book-trip-block">
+                                        <span class="f-l fb"
+                                              style="font-size: 15px;line-height: 5px">{{estimate_data.distance.value | DistanceFormatFilter}}</span>
+                                    <!--<span style="display: block">&nbsp;</span>-->
+                                </div>
+                            </div>
+                            <div class="inline" ng-show="bookType == 2" style="vertical-align: top">
+                                <div style="color:darkgrey;font-size: 10px">{{'flow.h5hourly_time' | translate}}</div>
+                                <div class="inline book-trip-block">
+                                    <span class="f-l fb" style="font-size:15px;line-height: 5px">{{estimate_time_show | TimeFormatFilter}}</span>
+                                    <!--<span style="display: block">&nbsp;</span>-->
+                                </div>
+                            </div>
+                            <div class="inline" style="vertical-align: top">
+                                <div style="color:darkgrey;font-size: 10px">{{'flow.h5vehicle' | translate}}
+                                    <i ng-click="editVehicle()" class="fa fa-pencil" title="{{'flow.h5Edit_Vehicle' | translate}}"
+                                       style="color: #f2f2f2;margin-left: 5px;cursor: pointer"></i>
+                                </div>
+                                <div class="inline book-trip-block" style="width: 80px;overflow: hidden;text-overflow: ellipsis;white-space: normal">
+                                    <span class="fw"
+                                          style="line-height: 5px"><b>{{cars[selectedCar].model}}</b></span>
+                                    <span style="display: block">{{cars[selectedCar].brand}}</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div ng-show="showReturnService" style="margin-top: 20px">
+                        <h4 class="book-message-font">{{'flow.h5return_service' | translate}}</h4>
+                        <div class="book-trip-card pos-rlt">
+                            <div class="book-trip-up">
+                                {{'flow.h5return_trip_on' | translate}}
+                                <span class="flow-time" style="background: #f2f2f2">{{rspickupTime| dateFormatter:'shortDate'}}</span>
+                                {{'flow.h5at' | translate}}
+                                <span class="flow-time-edit">
+                                  <span class="flow-time" style="background: #f2f2f2;display: inline-block">{{rspickupTime| dateFormatter:'shortTime'}}</span>
+                                <div class="edit-any" style="display: inline-block" ng-click="editDatetime(3)" title="{{'flow.h5Edit_Datetime_Place'|translate}}">
+                                    <i class="fa fa-pencil"></i>
+                                </div>
+                                </span>
+                                <div class="flow-prince" style="float: right">
+                                    <span style="background: transparent;color: ghostwhite;display: inline-block;margin: 0">{{'flow.h5trip_total' | translate}}:</span>
+                                    <span style="background: #f11f20;color:white;display: inline-block;height: 28px;margin: 0;border-radius: 4px">
+                                <span style="font-size:18px;color:white;padding: 0 15px">{{showRsTotalPrice | PriceFormatFilter:true:false:rsoffer.ccy}}</span>
+                                </span>
+                                </div>
+                            </div>
+
+                            <div class="book-trip-down">
+                                <div class="inline" style="vertical-align: top">
+                                    <div style="color:darkgray;font-size: 10px">{{'flow.h5pick_address' | translate}}</div>
+                                    <div class="location-bg2 v-top inline">
+                                        <i class="fa fa-dot-circle-o" style="color: green;font-size: 15px"></i>
+                                    </div>
+                                    <div class="inline book-trip-block">
+                                        <div class="fw"
+                                             style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                            {{dropoffLocation.a_final_address[0]}}
+                                        </div>
+                                        <div class="fw"
+                                             style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                            {{dropoffLocation.a_final_address[1]}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="inline" style="vertical-align: top">
+                                    <div style="color:darkgrey;font-size: 10px">{{'flow.h5drop_address' | translate}}</div>
+                                    <div class="location-bg2 v-top inline">
+                                        <i class="fa fa-dot-circle-o" style="color: red;font-size: 15px"></i>
+                                    </div>
+                                    <div class="inline book-trip-block">
+                                        <div class="fw"
+                                             style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                            {{pickupLocation.d_final_address[0]}}
+                                        </div>
+                                        <div class="fw"
+                                             style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                            {{pickupLocation.d_final_address[1]}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inline" style="vertical-align: top">
+                                    <div style="color:darkgrey;font-size: 10px">{{'flow.h5est_time' | translate}}</div>
+                                    <div class="inline book-trip-block">
+                                        <span class="f-l fb" style="font-size: 15px">{{rsestimate_data.duration.value/60 | TimeFormatFilter}}</span>
+                                    </div>
+                                </div>
+                                <div class="inline" style="vertical-align: top">
+                                    <div style="color:darkgrey;font-size: 10px">{{'flow.h5est_dist' | translate}}</div>
+                                    <div class="inline book-trip-block">
+                                        <span class="f-l fb" style="font-size: 15px">{{rsestimate_data.distance.value | DistanceFormatFilter}}</span>
+                                    </div>
+                                </div>
+                                <div class="inline" style="vertical-align: top">
+                                    <div style="color:darkgrey;font-size: 10px">{{'flow.h5vehicle' | translate}}</div>
+                                    <div class="inline book-trip-block" style="width: 80px;;overflow: hidden;text-overflow: ellipsis;white-space: normal">
+                                    <span class="fw"
+                                          style="line-height: 5px"><b>{{rscars[rsselectedCar].model}}</b></span>
+                                        <span style="display: block">{{rscars[rsselectedCar].brand}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content" style="margin-bottom: 25px">
+                        <div class="form-group flow-app-float flow-app-login" style="width: 50%;float: left">
+                            <h4 class="book-message-font" style="padding: 10px 0;margin: 10px 0 0 10px">{{'flow.h5login' | translate}}</h4>
+                            <label for="userName"></label>
+                            <input class="form-control  myinput myinputhalfone "
+                                   style="background-color: transparent;width: 80%;outline: none"
+                                   type="Email" ng-model="userName"
+                                   id="userName"
+                                   placeholder="{{'flow.h5email' | translate}}" required>
+                            <div class="help-block with-errors"></div>
+
+
+                            <label for="Password"></label>
+                            <input type="password" style="background-color: transparent;width: 80%;outline: none"
+                                   ng-model="password"
+                                   class="form-control myinput myinputhalfone" id="Password"
+                                   placeholder="{{'flow.h5password' | translate}}" required>
+
+
+                            <div style="margin-top: 30px;float: left">
+                                <span data-target=".bs-example-modal-lg"
+                                      data-backdrop="false"
+                                      ng-click="onRegisterButtonClick()"
+                                      style="color:#337ab7;
+                                        text-decoration:underline;
+                                        font-size: 16px;display:
+                                        block;margin-left: 20px;
+                                         cursor:pointer">{{'flow.h5register' | translate}}
+                                </span>
+                            </div>
+                            <br>
+                            <div style="margin-left:45%;margin-top: 10px; ">
+                                <button type="submit" class="btn btn-primary "
+                                        style="border-radius: 50px;width: 120px;"
+                                        data-backdrop="false" ng-click="clickNextAction($event)">{{'flow.h5login' | translate}}
+                                </button>
+                            </div>
+
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#modalOne" ng-show="">{{'flow.h5small_modal' | translate}}
+                            </button>
+
+                        </div>
+
+                        <div class="flow-app-float" style="float: right;margin-right: 15px;margin-top: 167px">
+                            <h3 class="app-text" style="color: #fff;font-size: 15px;text-align: center">
+                                {{'flow.h5downloaded_app' | translate:({companyName:companyInfor.name})}}</h3>
+                            <div style="text-align: center">
+                                <div style="display: inline-block;margin-right: 5px">
+                                    <a ng-href="{{getCompanyIosApp}}" target="view_window"><img
+                                            ng-src="{{iosAppImgLink}}" height="30"
+                                            width="100"/></a>
+                                </div>
+                                <div style="display: inline-block;margin-left: 5px">
+                                    <a ng-href="{{getCompanyGoogleApp}}" target="view_window"><img
+                                            ng-src="{{androidAppImgLink}}" height="30" width="100"/></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="clear: both"></div>
+
+                        <!--=================订单成功页面=====================-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/flow.html'></google-analytics>

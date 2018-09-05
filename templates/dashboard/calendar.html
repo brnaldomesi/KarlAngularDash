@@ -1,0 +1,131 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="2"></karl-header-menu>
+    <div class="main-padding-s card-fix pd-b-xl pos-rlt navbar-collapse">
+        <div ng-show="showCalendarView">
+            <div class="main-cal">
+                <div ui-calendar="uiConfig.calendar" class="calendar" ng-model="eventSources"></div>
+            </div>
+
+            <div class="mg-t-l">
+                <div class="h-m">
+                    <h4 class="fw pull-left">{{selectedDay |  dateFormatter:'weekMonthDay'}}</h4>
+                    <div class="pull-left to-book">
+                        <span class="fred f-s" ng-show="!showSearchResult">{{bookingTotalCount}} {{'calendar.h5total_bookings'|translate}}</span>
+                        <span class="fred f-s" ng-show="showSearchResult">{{searchResult.length}} {{'calendar.h5total_bookings'|translate}}</span>
+                    </div>
+
+                    <div class="input-group pull-left calendar-search">
+                        <input ng-model="input.searchText"
+                               type="text"
+                               class="form-control input-sm bg-light no-border rounded padder search-bg"
+                               placeholder="{{'comment.h5search' | translate}}">
+                        <span class="input-group-btn">
+                            <button ng-show="input.searchText"
+                                    ng-click="onCancelSearchButtonClick()"
+                                    class="btn btn-sm bg-dark2 rounded input-search"
+                                    style="margin-top: 0">
+                               <i class="fa fa-close fw"></i>
+                           </button>
+                           <button class="btn btn-sm bg-dark2 rounded input-search" style="margin-top: 0">
+                               <i class="fa fa-search fw"></i>
+                           </button>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div ng-repeat="bookingGroup in bookings" ng-show="bookings.length > 0 && !showSearchResult">
+                <div class="aline"></div>
+                <br/>
+                <div class="cal-col-date">
+                    <span class="f-m fgray">{{bookingGroup.bookingList[0].temp_appointed_at}}</span>
+                    <span class="f-s fred">{{bookingGroup.bookingCount}} {{'comment.h5bookings' | translate}}</span>
+                </div>
+                <div class="cal-col-cardarea">
+                    <div class="cal-col-cards dopoint" ng-repeat="booking in bookingGroup.bookingList"
+                         ng-click="onBookRowClick(booking)">
+                        <div class="cal-rates-card" ng-style="{background: booking.showState == 3 ? '#ff4b00' : ''}" ng-class="{1:'cal-suspended-card',2:'cal-notstart-card',3:'cal-enroud-card',4:'cal-ended-card'}[booking.condition]">
+                            <div class="f-m fw2" ng-class="{true:'statefc',false:''}[booking.showState==2]">
+                                <b style="width:88%;float: left;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">{{booking.c_first_name}} {{booking.c_last_name}}</b>
+                                <div ng-show="(booking.d_airline != null && booking.d_airline.toString().length > 0)||(booking.d_flight != null &&booking.d_flight.toString().length > 0 )||(booking.a_airline != null &&booking.a_airline.toString().length > 0 )||(booking.a_flight != null&&booking.a_flight.toString().length > 0)"
+                                     style="width:30px;height: 30px;border-radius: 100%;float: right;text-align: center;line-height: 160%;padding: 0;font-size: 19px">
+                                    <i class="fa fa-plane" aria-hidden="true"></i>
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                            <div class="f-s fw2 cal-card-ad">
+                                <div style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: block">{{booking.d_final_address[0]}}</div>
+                                <div style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: block" ng-show="booking.d_final_address[1]">{{booking.d_final_address[1]}}</div>
+                            </div>
+
+                            <div class="f-s fw cal-due">{{'calendar.h5amount_due'|translate}} : 
+                                <span class="fblack">
+                                    <b>{{booking.total_cost | princeTranslateFilters:false:false:booking.ccy}}
+                                    </b>
+                                </span>
+                                <div style="float: right">{{booking.tripStateString}}</div>
+                            </div>
+                            <div style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap" class="f-s fw2" ng-class="{true:'statebg',false:''}[booking.showState==1]">{{'comment.h5driver' | translate}}: {{booking.driver_data.first_name}}
+                                {{booking.driver_data.last_name}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="showSearchResult">
+                <div class="aline"></div>
+                <br/>
+                <div class="cal-col-cardarea">
+                    <div class="cal-col-cards dopoint" ng-repeat="booking in searchResult"
+                         ng-click="onBookRowClick(booking)">
+                        <div class="cal-rates-card" ng-style="{background: booking.showState == 3 ? '#ff4b00' : ''}"  ng-class="{1:'cal-suspended-card',2:'cal-notstart-card',3:'cal-enroud-card',4:'cal-ended-card'}[booking.condition]">
+                            <div class="f-m fw2" ng-class="{true:'statefc',false:''}[booking.showState==2]">
+                                <b style="width:88%;float: left;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">{{booking.c_first_name}} {{booking.c_last_name}}</b>
+                                <div ng-show="(booking.d_airline != null && booking.d_airline.length > 0)||(booking.d_flight != null &&booking.d_flight.length > 0 )||(booking.a_airline != null &&booking.a_airline.length > 0 )||(booking.a_flight != null&&booking.a_flight.length > 0)"
+                                     style="width:30px;height: 30px;border-radius: 100%;float: right;text-align: center;line-height: 160%;padding: 0;font-size: 19px">
+                                    <i class="fa fa-plane" aria-hidden="true"></i>
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                            <div class="f-s fw2 cal-card-ad">
+                                <div style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: block">{{booking.d_final_address[0]}}</div>
+                                <div style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: block" ng-show="booking.d_final_address[1]">{{booking.d_final_address[1]}}</div>
+                            </div>
+                            <div class="f-s fw cal-due">{{'calendar.h5amount_due' | translate}} : <span
+                                    class="fblack"><b>{{booking.total_cost | princeTranslateFilters:false:false:booking.ccy}}</b></span>
+                                <div style="float: right">{{booking.tripStateString}}</div>
+                            </div>
+                            <div class="f-s fw2" ng-class="{true:'statebg',false:''}[booking.showState==1]">{{'comment.h5driver' | translate}}: {{booking.driver_data.first_name}}
+                                {{booking.driver_data.last_name}}<i class="fa fa-angle-down pull-right f-m"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <uib-pagination ng-show="pageTotalItems>30"
+                            total-items="pageTotalItems"
+                            items-per-page="pagePerCount"
+                            ng-model="currentPage"
+                            previous-text="{{'pagination.h5previous' | translate}}"
+                            next-text="{{'pagination.h5next' | translate}}"
+                            max-size="10" ng-change="onPageChange()" class="pagenum"
+                            style="width: auto;display: table;margin-left: auto;margin-right: auto;">
+            </uib-pagination>
+        </div>
+
+
+
+
+
+        <div ng-show="showNoRatesView" style="text-align: center;margin-top: 14%">
+            <div style="font-size: 28px;color: white">{{'calendar.h5no_bookings'|translate}}.</div>
+            <div style="font-size: 18px;color: grey">
+                <div>{{'calendar.h5upcoming_bookings_warning'|translate}}.</div>
+                <div>{{'calendar.h5create_rate_info'|translate}}!</div>
+                <div>{{'calendar.h5rates_page'|translate}} <a href="#/rates" style="color: #337ab7">{{'comment.h5here' |translate}}</a>.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/calendar.html'></google-analytics>

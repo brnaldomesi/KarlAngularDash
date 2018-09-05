@@ -1,0 +1,648 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="1"></karl-header-menu>
+    <div class="main-padding card-fix pd-b-xl pos-rlt navbar-collapse">
+        <div class="mg-t-l">
+            <div class="h-m">
+                <h4 class="fw pull-left">{{'booking.h5create_a_booking' | translate}}</h4>
+            </div>
+            <hr style="opacity: 0.3">
+        </div>
+        <div class="rates-option mg-t-s" style="width: 85%">
+            <span ng-click="clickOneWay()" class="dopoint"><i
+                    ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[bookType == 1]"></i>{{'comment.h5transfer' | translate}}</span>
+            <span ng-click="clickHourly()" class="dopoint"><i
+                    ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[bookType == 2]"></i>{{'comment.h5hourly' | translate}}</span>
+            <span ng-click="clickCustomQuote()" class="dopoint"><i
+                    ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[bookType == 3]"></i>{{'comment.h5custom' | translate}}</span>
+        </div>
+
+        <!--Point-to-point-->
+        <div ng-show="bookType == 1">
+            <div class="mg-t-l">
+                <div class="">
+                    <h4 class="fw">{{'booking.h5date_time' | translate}}</h4>
+                </div>
+                <div class="mg-t-s mg-l-s">
+                    <div style="margin: auto;" class="datetimepicker"></div>
+                </div>
+            </div>
+            <div class="mg-t-xl" style="position: relative">
+                <h4 class="fw">{{'booking.h5pickup_dropoff_location' | translate}}</h4>
+                <div class="location-bg bg-red1">A</div>
+                <input class="myinput myinputhalf-fix"
+                       type="text"
+                       placeholder="{{'booking.h5enter_pickup_location' | translate}}"
+                       ng-model="bookPickUpAddress"
+                       autocomplete="off"
+                       uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                       typeahead-loading="loadingLocations1" typeahead-no-results="noResults1"
+                       typeahead-on-select="onPickUpSearchSelect($item, $model, $label, $event)"/>
+                <i class="fa fa-map-marker fb f-m dopoint" ng-click="selectLocationOnMap(1)"></i>
+                <i ng-show="loadingLocations1" class="glyphicon glyphicon-refresh"></i>
+                <div ng-show="noResults1">
+                    <i class="glyphicon glyphicon-remove"></i>{{'booking.h5no_results_found' | translate}}
+                </div>
+                <div class="book-air-width" style="width: 70%;margin-left: 40px">
+                    <span style="color: #ffcc00;"ng-show="isPickMarkedWords">{{'booking.h5change_time_info' | translate}}</span>
+                    <div><i ng-click="flight()" ng-model="airPort"
+                            ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[airPort]" aria-hidden="true"
+                            style="color: white" class="dopoint"></i> <span
+                            style="margin-left: 10px;">{{'booking.h5location_info' | translate}}</span></div>
+                    <div ng-show="airPort" class="flight-message">
+                        <div class="book-airline-width" style="float: left">
+                            <p style="margin: 0">{{'booking.h5airline' | translate}}</p>
+                            <input type="text" ng-model="airLineMessage" placeholder="{{'booking.h5enter_airline' | translate}}"
+                                   uib-typeahead="airlineCompany as airlineCompany.name for airlineCompany in getAirlineCompany($viewValue)"
+                                   typeahead-on-select="onAirlineCompanySearchSelect($item, $model, $label, $event)"
+                                   style="width: 100%;background: transparent; border: none ;border-bottom: 1px grey solid;padding: 0 10px">
+                        </div>
+                        <div class="book-flight-width" style="float: left;margin-left: 10px;width: 30%">
+                            <p style="margin: 0">{{'booking.h5flight#' | translate}}</p>
+                            <input type="text" ng-model="airLineMessageNum" placeholder="{{'booking.h5enter_flight#' | translate}}"
+                                   uib-typeahead="airlineNumber as airlineNumber.flightNumber for airlineNumber in getAirlineNumber($viewValue)"
+                                   typeahead-on-select="onAirlineNumberSearchSelect($item, $model, $label, $event)"
+                                   style="width: 100%;background: transparent; border: none ;border-bottom: 1px grey solid;padding: 0 10px">
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                </div>
+
+                <!--<div ng-class="{true:'flightpositionlogo',false:'positionlogo'}[airPort]"></div>-->
+
+                <br/>
+                <div class="location-bg bg-red2">B</div>
+                <input class="myinput myinputhalf-fix"
+                       type="text"
+                       placeholder="{{'booking.h5enter_dropoff_location' | translate}}"
+                       ng-model="bookDropOffAddress"
+                       autocomplete="off"
+                       uib-typeahead="place as place.name + ' ' + place.vicinity for place in getDropLocation($viewValue)"
+                       typeahead-loading="loadingLocations2"
+                       typeahead-no-results="noResults2"
+                       typeahead-on-select="onDropOffSearchSelect($item, $model, $label, $event)"/>
+                <i class="fa fa-map-marker fb f-m dopoint" ng-click="selectLocationOnMap(2)"></i>
+                <i ng-show="loadingLocations2" class="glyphicon glyphicon-refresh"></i>
+                <div ng-show="noResults2">
+                    <i class="glyphicon glyphicon-remove"></i> {{'booking.h5no_results_found' | translate}}
+                </div>
+
+                <div class="book-air-width" style="width: 70%;margin-left: 40px">
+                    <span style="color: #ffcc00;"ng-show="isDropMarkedWords">{{'booking.h5change_time_info' | translate}}</span>
+                    <div><i ng-click="reflight()" ng-model="reAirPort"
+                            ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[reAirPort]" aria-hidden="true"
+                            style="color: white" class="dopoint"></i> <span
+                            style="margin-left: 10px;">{{'booking.h5location_info' | translate}}</span></div>
+                    <div ng-show="reAirPort" class="flight-message">
+                        <div class="book-airline-width" style="float: left">
+                            <p style="margin: 0">{{'booking.h5airline' | translate}}</p>
+                            <!--<br>-->
+                            <input type="text" ng-model="reAirLineMessage" placeholder="{{'booking.h5enter_airline' | translate}}"
+                                   uib-typeahead="airDropLineCompany as airDropLineCompany.name for airDropLineCompany in getDropAirlineCompany($viewValue)"
+                                   typeahead-on-select="onDropAirlineCompanySearchSelect($item, $model, $label, $event)"
+                                   style="width: 100%;background: transparent; border: none ;border-bottom: 1px grey solid;padding: 0 10px">
+                        </div>
+                        <div class="book-flight-width" style="float: left;margin-left: 10px;width: 30%">
+                            <p style="margin: 0">{{'booking.h5flight#' | translate}}</p>
+                            <input type="text" ng-model="reAirLineMessageNum" placeholder="{{'booking.h5enter_flight#' | translate}}"
+                                   uib-typeahead="airDropLineNumber as airDropLineNumber.flightNumber for airDropLineNumber in getDropAirlineNumber($viewValue)"
+                                   typeahead-on-select="onDropAirlineNumberSearchSelect($item, $model, $label, $event)"
+                                   style="width: 100%;background: transparent; border: none ;border-bottom: 1px grey solid;padding: 0 10px">
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mg-t-xl">
+                <button type="submit" class="btn-brown" ng-click="onCheckP2pOffers($event)">{{'booking.h5check_availability' | translate}}</button>
+            </div>
+        </div>
+
+        <!--Hourly-->
+        <div ng-show="bookType == 2">
+            <div class="mg-t-l">
+                <div class="">
+                    <h4 class="fw">{{'booking.h5date_time' | translate}}</h4>
+                </div>
+                <div class="mg-t-s mg-l-s">
+                    <div style="margin: auto;" class="datetimepicker2"></div>
+                </div>
+            </div>
+            <div class="mg-t-xl">
+                <h4 class="fw">{{'booking.h5pickup_location' | translate}}</h4>
+                <input class="myinput myinputhalf-fix"
+                       type="text"
+                       placeholder="{{'booking.h5enter_pickup_location' | translate}}"
+                       ng-model="bookHourlyAddress"
+                       autocomplete="off"
+                       uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                       typeahead-loading="loadingLocations3" typeahead-no-results="noResults3"
+                       typeahead-on-select="onHourlySearchSelect($item, $model, $label, $event)"/>
+                <i class="fa fa-map-marker fb f-m dopoint" ng-click="selectLocationOnMap(3)"></i>
+                <i ng-show="loadingLocations3" class="glyphicon glyphicon-refresh"></i>
+                <div ng-show="noResults3">
+                    <i class="glyphicon glyphicon-remove"></i>{{'booking.h5no_results_found' | translate}}
+                </div>
+                <div style="width: 70%;margin-left: 20px">
+                    <span style="color: #ffcc00;"ng-show="isPickMarkedWords">{{'booking.h5change_time_info' | translate}}</span>
+                    <div><i ng-click="flight()" ng-model="airPort"
+                            ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[airPort]" aria-hidden="true"
+                            style="color: white" class="dopoint"></i> <span
+                            style="margin-left: 10px;">{{'booking.h5location_info' | translate}}</span></div>
+                    <div ng-show="airPort" class="flight-message">
+                        <div style="float: left;width: 50%">
+                            <p style="margin: 0">{{'booking.h5airline' | translate}}</p>
+                            <!--<br>-->
+                            <input type="text" ng-model="airLineMessage" placeholder="{{'booking.h5enter_airline' | translate}}"
+                                   uib-typeahead="airlineCompany as airlineCompany.name for airlineCompany in getAirlineCompany($viewValue)"
+                                   typeahead-on-select="onAirlineCompanySearchSelect($item, $model, $label, $event)"
+                                   style="width: 100%;background: transparent; border: none ;border-bottom: 1px grey solid;padding: 0 10px">
+                        </div>
+                        <div style="float: left;margin-left: 10px;width: 30%">
+                            <p style="margin: 0">{{'booking.h5flight#' | translate}}</p>
+                            <input type="text" ng-model="airLineMessageNum" placeholder="{{'booking.h5enter_flight#' | translate}}"
+                                   uib-typeahead="airlineNumber as airlineNumber.flightNumber for airlineNumber in getAirlineNumber($viewValue)"
+                                   typeahead-on-select="onAirlineNumberSearchSelect($item, $model, $label, $event)"
+                                   style="width: 100%;background: transparent; border: none ;border-bottom: 1px grey solid;padding: 0 10px">
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mg-t-xl">
+                <h4 class="fw">{{'comment.h5hours' | translate}}</h4>
+                <input class="myinput myinputhalf-fix"
+                       type="number"
+                       step="1"
+                       min="1"
+                       ng-model="hourlyDate"
+                       placeholder="{{'booking.h5enter_hours' | translate}}"/>
+            </div>
+            <div class="mg-t-xl">
+                <button type="submit" class="btn-brown" ng-click="onCheckHourlyOffers($event)">{{'booking.h5check_availability' | translate}}
+                </button>
+            </div>
+        </div>
+
+        <!--Custom Quote-->
+        <div ng-show="bookType == 3">
+            <div class="mg-t-l">
+                <div class="">
+                    <h4 class="fw">{{'booking.h5pickup_time' | translate}}</h4>
+                </div>
+                <div class="mg-t-s mg-l-s">
+                    <div style="margin: auto;" class="datetimepicker3"></div>
+                </div>
+                <div class="">
+                    <h4 class="fw">{{'booking.h5end_time' | translate}}</h4>
+                </div>
+                <div class="mg-t-s mg-l-s">
+                    <div style="margin: auto;" class="datetimepicker4"></div>
+                </div>
+            </div>
+            <div class="mg-t-xl">
+                <h4 class="fw">{{'booking.h5pickup_location' | translate}}</h4>
+                <input class="myinput myinputhalf-fix"
+                       type="text"
+                       ng-model="bookCustomAddress"
+                       autocomplete="off"
+                       uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                       typeahead-loading="loadingLocations4" typeahead-no-results="noResults4"
+                       typeahead-on-select="onHourlySearchSelect($item, $model, $label, $event)"
+                       placeholder="{{'booking.h5enter_pickup_location' | translate}}"/>
+                <i class="fa fa-map-marker fb f-m dopoint" ng-click="selectLocationOnMap(4)"></i>
+                <i ng-show="loadingLocations4" class="glyphicon glyphicon-refresh"></i>
+                <div ng-show="noResults4">
+                    <i class="glyphicon glyphicon-remove"></i> {{'booking.h5no_results_found' | translate}}
+                </div>
+                <div style="width: 70%;margin-left: 20px">
+                    <span style="color: #ffcc00;"ng-show="isPickMarkedWords">{{'booking.h5change_time_info' | translate}}</span>
+                    <div><i ng-click="flight()" ng-model="airPort"
+                            ng-class="{true:'fa fa-check-square',false:'fa fa-square-o'}[airPort]" aria-hidden="true"
+                            style="color: white" class="dopoint"></i> <span
+                            style="margin-left: 10px;">{{'booking.h5location_info' | translate}}</span></div>
+                    <div ng-show="airPort" class="flight-message">
+                        <div style="float: left;width: 50%">
+                            <p style="margin: 0">{{'booking.h5airline' | translate}}</p>
+                            <!--<br>-->
+                            <input type="text" ng-model="airLineMessage" placeholder="{{'booking.h5enter_airline' | translate}}"
+                                   uib-typeahead="airlineCompany as airlineCompany.name for airlineCompany in getAirlineCompany($viewValue)"
+                                   typeahead-on-select="onAirlineCompanySearchSelect($item, $model, $label, $event)"
+                                   style="width: 100%;background: transparent; border: none ;border-bottom: 1px grey solid;padding: 0 10px">
+                        </div>
+                        <div style="float: left;margin-left: 10px;width: 30%">
+                            <p style="margin: 0">{{'booking.h5flight#' | translate}}</p>
+                            <input type="text" ng-model="airLineMessageNum" placeholder="{{'booking.h5enter_flight#' | translate}}"
+                                   uib-typeahead="airlineNumber as airlineNumber.flightNumber for airlineNumber in getAirlineNumber($viewValue)"
+                                   typeahead-on-select="onAirlineNumberSearchSelect($item, $model, $label, $event)"
+                                   style="width: 100%;background: transparent; border: none ;border-bottom: 1px grey solid;padding: 0 10px">
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mg-t-xl">
+                <button type="submit" class="btn-brown" ng-click="onCheckCustomOffers($event)">{{'booking.h5check_availability' | translate}}
+                </button>
+            </div>
+        </div>
+
+
+        <!--After get offer-->
+        <div ng-show="isGetOffer" id="scrollPosition">
+            <div class="mg-t-l">
+                <div class="h-m">
+                    <h4 class="fw pull-left">{{'comment.h5vehicles' | translate}}</h4>
+
+                    <!--<div class="input-group pull-left an-search" style="">-->
+                    <!--<input type="text" class="form-control input-sm bg-light no-border rounded padder search-bg"-->
+                    <!--placeholder="Search...">-->
+                    <!--<span class="input-group-btn">-->
+                    <!--<button type="submit" class="btn btn-sm bg-dark2 rounded input-search">-->
+                    <!--<i class="fa fa-search fw"></i>-->
+                    <!--</button>-->
+                    <!--</span>-->
+                    <!--</div>-->
+
+                </div>
+                <br/>
+                <div class="accordion basic-accordion">
+                    <div ng-repeat="category in categories">
+                        <h3 class="myselect">{{category.category}} <span
+                                class="fred" ng-show="category.isSelect">({{'booking.h5selected' | translate}})</span><span class="fb">{{category.cars.length}} {{'comment.h5total' | translate}}</span>
+                        </h3>
+                        <div class="cl-block">
+                            <div class="evcard-area" ng-click="onCarCardClick(category,car)"
+                                 ng-repeat="car in category.cars">
+                                <a type="button" class="vcard-more" ng-show="car.isSelect"><i
+                                        class="fa fa-check"></i></a>
+                                <div class="evcard-block">
+                                    <div class="evhead pull-left"
+                                         style="background:#fff url({{car.img}}) no-repeat 50% 50%;background-size: contain">
+                                    </div>
+                                    <div class="evname">
+                                        <span class="fw">{{car.model}}</span>
+                                        <br/>{{car.brand}}
+                                    </div>
+                                    <div ng-class="{true:'fr-evpass',false:'evpass'}[langStyle=='fr']">
+                                <span style="display: block;white-space:nowrap;overflow: hidden;text-overflow: ellipsis"
+                                      ng-show="!car.offer || car.offer.an_offer == 0">
+                                    {{car.license_plate}}
+                                </span>
+                                        <span style="color: #ff4d00;display: block" ng-show="car.offer.an_offer == 1">
+                                    {{'booking.h5affiliate_vehicle' | translate}}
+                                </span>
+                                        <span>
+                                    {{'booking.h5max_passengers' | translate}}: {{car.seats_max}}
+                                </span>
+                                        <br/>
+                                    </div>
+                                    <div ng-class="{true:'fr-evbags',false:'evbags'}[langStyle=='fr']" style="width: 45%">
+                                        <span style="display: block;white-space:nowrap;overflow: hidden;text-overflow: ellipsis">{{'comment.h5color' | translate}}: {{car.color}}</span>
+                                        <span>{{'booking.h5max_bags' | translate}}: {{car.bags_max}}</span>
+                                    </div>
+                                    <div class="cl">
+                                    <span class="fw2">
+                                        <b style="display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 95%">
+                                        {{'comment.h5driver' | translate}}: <span ng-if="!car.isSelect">{{'booking.h5no_choice' | translate}}</span>
+                                        <span ng-if="car.isSelect">{{driverSelected.first_name}} {{driverSelected.last_name}}</span>
+                                    </b></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="bookType == 3">
+                <div class="mg-t-xl">
+                    <h4 class="fw">{{'booking.h5tax_rate' | translate}}</h4>
+                    <input class="myinput myinputhalf-fix"
+                           type="number"
+                           step="0.01"
+                           min="0"
+                           ng-model="customTva"
+                           placeholder="{{'booking.h5enter_tax' | translate}}"/>
+                    <span style="margin-left: -35px;color: #4444bf;font-size: 21px;font-weight: 400">%</span>
+                </div>
+                <div class="mg-t-xl">
+                    <h4 class="fw">{{'comment.h5price' | translate}}</h4>
+                    <input class="myinput myinputhalf-fix"
+                           type="number"
+                           step="1"
+                           min="0"
+                           ng-change="customPriceChanged()"
+                           ng-model="customCost"
+                           placeholder="{{'comment.h5enter_price' | translate}}"/>
+                    <span ng-show="priceFormat=='usd'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5dollars' | translate}}</span>
+                    <span ng-show="priceFormat=='eur'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5Euros' | translate}}</span>
+                    <span ng-show="priceFormat=='gbp'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5Pounds' | translate}}</span>
+                    <span ng-show="priceFormat=='aud'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5aud' | translate}}</span>
+                    <span ng-show="priceFormat=='dkk'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5dkk' | translate}}</span>
+                    <span ng-show="priceFormat=='cad'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5cad' | translate}}</span>
+                    <span ng-show="priceFormat=='hkd'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5hkd' | translate}}</span>
+                    <span ng-show="priceFormat=='jpy'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5jpy' | translate}}</span>
+                    <span ng-show="priceFormat=='nzd'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5nzd' | translate}}</span>
+                    <span ng-show="priceFormat=='nok'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5nok' | translate}}</span>
+                    <span ng-show="priceFormat=='sgd'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5sgd' | translate}}</span>
+                    <span ng-show="priceFormat=='sek'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5sek' | translate}}</span>
+                    <span ng-show="priceFormat=='chf'" style="margin-left: -100px;color: #4444bf;font-size: 20px;font-weight: 400;">{{'booking.h5chf' | translate}}</span>
+                    
+                </div>
+            </div>
+            <div class="mg-t-xl">
+                <h4 class="fw">{{'comment.h5client' | translate}}</h4>
+                <input class="myinput myinputhalf-fix"
+                       type="text"
+                       ng-model="customerSelected"
+                       uib-typeahead="customers as customers.first_name + ' ' + customers.last_name  for customers in searchCurrentCustomers($viewValue) "
+                       typeahead-min-length="1"
+                       typeahead-on-select="onSearchSelect($item)"
+                       placeholder="{{'comment.h5enter_client' | translate}}"/>
+            </div>
+            <div style="margin-top: 20px;">
+                <i class="fa fa-plus-circle" style="color: #ff4f20;margin-left: 9px"></i>
+                <span ng-click="onAddClientClick()"
+                      style="color:#337ab7;text-decoration:underline;font-size: 16px;margin-left: 5px;cursor:pointer">
+                {{'booking.h5add_client' | translate}}
+            </span>
+            </div>
+            <div class="mg-t-xl">
+                <h4 class="fw">{{'booking.h5passengers_number' | translate}}</h4>
+                <select class="myinput myinputhalf-fix myselect"
+                        ng-model="selectedMaxPassengers"
+                        ng-options="item for item in maxPassengers"
+                        ng-change="onChangePassengerCount()">
+                </select>
+            </div>
+            <div class="mg-t-xl" ng-show="passengers.length > 0">
+                <div class="form-group">
+                    <h4 class="fw">{{'booking.h5passenger_names' | translate}}</h4>
+                    <input ng-repeat="passenger in passengers"
+                           ng-model="passenger.name"
+                           class="myinput myinputhalf-fix"
+                           type="text"
+                           placeholder="{{'booking.h5Enter_passenger_name' | translate}}"/>
+                </div>
+                <br/>
+            </div>
+            <div class="mg-t-xl">
+                <h4 class="fw">{{'booking.h5bags_number' | translate}}</h4>
+                <select class="myinput myinputhalf-fix myselect"
+                        ng-model="selectedMaxBags"
+                        ng-options="item for item in maxBags">
+                </select>
+            </div>
+            <div ng-class="{true:'airline-book-trip-card',false:'book-trip-card'}[airLineMessage != null || airLineMessageNum != null || reAirLineMessage != null || reAirLineMessageNum != null]">
+                <div class="book-trip-up">
+                    {{'comment.h5trip_on' | translate}}
+                    <span ng-show="bookType == 1">{{bookTime.p2pPickupTime|dateFormatter:'shortDate'}}</span>
+                    <span ng-show="bookType == 2">{{bookTime.hourlyPickupTime|dateFormatter:'shortDate'}}</span>
+                    <span ng-show="bookType == 3">{{bookTime.customStartTime|dateFormatter:'shortDate'}}</span>
+                    {{'comment.h5at' | translate}}
+                    <span ng-show="bookType == 1">{{bookTime.p2pPickupTime|dateFormatter:'shortTime'}}</span>
+                    <span ng-show="bookType == 2">{{bookTime.hourlyPickupTime|dateFormatter:'shortTime'}}</span>
+                    <span ng-show="bookType == 3">{{bookTime.customStartTime|dateFormatter:'shortTime'}}</span>
+                    <div class="pull-right">
+                        <span>{{'comment.h5price' | translate}}:</span>
+                        <span style="background: #ff4f20;color: #f2f2f2" ng-show="bookType != 3">{{getOfferBookingPrice() |princeTranslateFilters:false:false:priceFormat}}</span>
+                        <span style="background: #ff4f20;color: #f2f2f2" ng-show="bookType == 3">{{finalCustomCost |princeTranslateFilters:false:false:priceFormat}}</span>
+                    </div>
+                </div>
+                <div class="book-trip-down">
+                    <div class="inline" style="float: left">
+                        <div>{{'booking.h5pickup_address' | translate}}</div>
+                        <div class="location-bg v-top" style="background: #3d41bb;margin:4px;">A</div>
+                        <div class="inline book-trip-block">
+                            <div ng-show="bookType == 1">
+                                <div class="fw"
+                                     style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: inline-block">
+                                    {{bookAddress.p2pPickup.final_address[0]}}
+                                </div>
+                                <br>
+                                <div class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                    {{bookAddress.p2pPickup.final_address[1]}}
+                                </div>
+                            </div>
+                            <div ng-show="bookType == 2">
+                                <div class="fw"
+                                     style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: inline-block">
+                                    {{bookAddress.hourlyPickup.final_address[0]}}
+                                </div>
+                                <br>
+                                <div class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                    {{bookAddress.hourlyPickup.final_address[1]}}
+                                </div>
+                            </div>
+                            <div ng-show="bookType == 3">
+                                <div class="fw"
+                                     style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: inline-block">
+                                    {{bookAddress.hourlyPickup.final_address[0]}}
+                                </div>
+                                <br>
+                                <div class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                    {{bookAddress.hourlyPickup.final_address[1]}}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="inline" ng-show="bookType == 1" style="float: left">
+                        <div>{{'booking.h5dropoff_address' | translate}}</div>
+                        <div class="location-bg v-top" style="background: #2e3180;margin:4px;">B</div>
+                        <div class="inline book-trip-block">
+                            <span class="fw"
+                                  style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: inline-block">{{bookAddress.p2pDropoff.final_address[0]}}</span>
+                            <br>
+                            <span class="fw" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{{bookAddress.p2pDropoff.final_address[1]}}</span>
+                        </div>
+
+                    </div>
+                    <div class="l-inline-s-block" ng-show="bookType == 1" style="float: left">
+                        <div>{{'booking.h5Est.Time' | translate}}</div>
+                        <div class="f-m fb">{{matrixDistance.duration/60 | TimeFormatFilter}}</div>
+                    </div>
+                    <div class="l-inline-s-block" ng-show="bookType == 1" style="float: left">
+                        <div>{{'booking.h5Est.Dist' | translate}}</div>
+                        <div class="f-m fb" style="">{{matrixDistance.distance | DistanceFormatFilter}}</div>
+                    </div>
+
+                    <div class="l-inline-s-block" ng-show="bookType == 2" style="float: left">
+                        <div>{{'booking.h5Hourly.Time' | translate}}</div>
+                        <div class="f-m fb">{{bookTime.hourlyDate | TimeFormatFilter}}</div>
+                    </div>
+                    <div class="l-inline-s-block" ng-show="bookType == 3" style="float: left">
+                        <div>{{'booking.h5End.Time' | translate}}</div>
+                        <div class="f-m fb">
+                            <span>{{bookTime.customEndTime|dateFormatter:'shortDate'}}</span>
+                            {{'comment.h5at' | translate}}
+                            <span>{{bookTime.customEndTime|dateFormatter:'shortTime'}}</span>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+                <div>
+                    <div class="inline air-width" style="width: 18%;margin-left: 5px">
+                        <div ng-show="airLineMessage != null || airLineMessageNum != null">
+                            <div>{{'booking.h5airline' | translate}}</div>
+                            <div book-trip-block style="padding-left: 5px"><span class="fw" style="font-size: 16px">{{airLineMessage}}</span>
+                            </div>
+                            <div>{{'booking.h5flight_number' | translate}}</div>
+                            <div book-trip-block style="padding-left: 5px"><span class="fw" style="font-size: 16px">{{airLineMessageNum}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inline">
+                        <div ng-show="reAirLineMessage != null || reAirLineMessageNum != null" style="width: 130px">
+                            <div>{{'booking.h5airline' | translate}}</div>
+                            <div book-trip-block style="padding-left: 5px"><span class="fw" style="font-size: 16px">{{reAirLineMessage}}</span>
+                            </div>
+                            <div>{{'booking.h5flight_number' | translate}}</div>
+                            <div book-trip-block style="padding-left: 5px"><span class="fw" style="font-size: 16px">{{reAirLineMessageNum}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="mg-t-xl" ng-show="showCoupon">
+                <h4 class="fw">{{'booking.h5coupon' | translate}}</h4>
+                <div class="row fblue" style="margin:0 10px;">
+                    <span ng-show="promo_code_shown" style="color: #3B76c9;font-size: 18px;line-height: 30px;">{{'booking.h5promo_code' | translate}}</span><span ng-click="showPromoCodeLine()" style="color: #3B76c9;font-size: 18px;line-height: 30px;cursor: pointer"
+                                                                            ng-disabled="haveVerifyCode"
+                                                                            ng-show="!promo_code_shown">{{'booking.h5have_a_code' | translate}}?</span>
+                </div>
+                <div ng-show="promo_code_shown" class="max-width">
+                    <div style="display: inline-block;width: 35%;">
+                        <input class="myinput" type="text" placeholder="{{'booking.h5enter_code' | translate}}" ng-model="couponCode"
+                               ng-disabled="haveVerifyCode"/>
+                    </div>
+                    <button ng-disabled="checkingCode"
+                            ng-show="!haveVerifyCode"
+                            ng-click="getCouponCode($event)" class="btn-blue2 pull-right btn ladda-button"
+                            style="margin: 12px 0 0 10px;outline: none;width: 100px;background: #4444bf;border:none">
+                        <span class="ladda-label">{{'comment.h5apply' | translate}}</span>
+                    </button>
+                    <div class="pull-right" style="font-size: 18px;margin-top: 16px;text-decoration: underline;cursor: pointer"
+                         ng-click="dismissPromoCodeLine()" ng-show="!haveVerifyCode">{{'comment.h5cancel' | translate}}
+                    </div>
+                </div>
+                <div class="help-block with-errors"></div>
+            </div>
+
+
+            <div class="mg-t-xl" ng-show="bookType !=3 && offer.options.length > 0">
+                <h4 class="fw add-ons-width" style="width: 80%;line-height: 100%">
+                    <span style="float: left">{{'comment.h5add-Ons' | translate}}</span>
+
+                    <span class="eb-options-price" style="float: right;font-size: 23px;font-weight: 300;color: #3c76c8">{{'booking.h5add_Ons_Price' | translate}}: <span
+
+                            style="color: #fff">{{optionsPrice*(1+offer.tva/100)| princeTranslateFilters:false:false:priceFormat}}</span></span>
+                    <div style="clear: both"></div>
+                </h4>
+                <div class="mg-t-s">
+                    <div class="layout-half inline" ng-repeat="item in options.number">
+                        <label class="pull-left dopoint">
+                            <input name="addons" type="checkbox" ng-model="item.enable"
+                                   ng-change="onEnableOption(item)" class="dopoint"/>
+                            <span class="rates-ap-tag">{{item.name}}
+                                <span class="fblack">
+                                    <!--<b>{{item.count *item.price *(1+offer.tva/100)| currency}}</b> -->
+                                    <b>{{item.price *(1+offer.tva/100)| princeTranslateFilters:false:false:priceFormat}}</b>
+                                </span>
+                            </span>
+                        </label>
+                        <div class="pull-right rates-op-num" ng-show="item.enable">
+                            <span class="fred" ng-click="onChangeOptionCount(item,false)"><i
+                                    class="fa fa-minus dopoint"></i></span>
+                            <span class="fw f-s">{{item.count}}</span>
+                            <span class="fred" ng-click="onChangeOptionCount(item,true)"><i
+                                    class="fa fa-plus dopoint"></i></span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+
+                    <div class="layout-half inline" ng-repeat="item in options.checkBox">
+                        <label class="pull-left dopoint">
+                            <input name="addons" type="checkbox" ng-model="item.enable"
+                                   ng-change="onEnableOption(item)" class="dopoint"/>
+                            <span class="rates-ap-tag">{{item.name}}
+                                <span class="fblack">
+                                    <b>{{item.price *(1+offer.tva/100)|princeTranslateFilters:false:false:priceFormat}}</b>
+                                </span>
+                            </span>
+                        </label>
+                        <div class="cl"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mg-t-xl" ng-show="customerSelected">
+                <h4 class="fw">{{'booking.h5select_payment' | translate}}</h4>
+                <div ng-class="{0:'pay-disable layout-half',1:'pay-act layout-half'}[item.check_pass]"
+                     ng-repeat="item in cards" ng-show="item.isSelect">
+                    <div class="pos-rlt">
+                        <div class="payment-logo">{{creditCardType[item.card_type]}}</div>
+                    </div>
+                    <div class="pos-rlt">
+                        <div class="payment-block">
+                            <div class="payment-list">
+                                <!--<div class="pname">{{item.first_name}} {{item.last_name}}<br></div>-->
+                                <div class="pname">
+                                    <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 40%">{{item.first_name}}</span>
+                                    <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 40%">{{item.last_name}}</span>
+                                    <div style="clear: both"></div>
+                                </div>
+                                <span class="pull-left" ng-class="{'en-lang-bill':item.check_pass==0&&langStyle=='en','un-lang-bill':item.check_pass==0&&langStyle=='fr'}">{{item.cardTypeName}}</span>
+                                <span class="pull-right">{{item.card_number}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-class="{0:'pay-disable layout-half',1:'layout-half'}[item.check_pass]" ng-repeat="item in cards"
+                     ng-show="!item.isSelect">
+                    <div class="pos-rlt">
+                        <div class="pay-act-panel">
+                            <span class="card-del-info fw">{{'booking.h5make_default' | translate}}?</span>
+                            <div>
+                                <span class="fgray card-del-cancel dopoint">{{'comment.h5cancel' | translate}}</span>
+                                <span class="fred card-del-ok dopoint" ng-click="onSelectedCard($index)">{{'comment.h5OK' | translate}}</span>
+                            </div>
+                        </div>
+                        <a type="button" class="pay-more"><i class="fa fa-ellipsis-v fblack fa-close"></i></a>
+                        <div class="payment-logo">{{creditCardType[item.card_type]}}</div>
+                        <a type="button" class="pay-pen payment-active" style="right:5px" title="{{'booking.h5Select_Card' | translate}}"><i class="fa fa-flag"></i></a>
+                    </div>
+                    <div class="pos-rlt">
+                        <div class="payment-block">
+                            <div class="payment-list">
+                                <div class="pname">
+                                    <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 40%">{{item.first_name}}</span>
+                                    <span style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 40%">{{item.last_name}}</span>
+                                    <div style="clear: both"></div>
+                                </div>
+                                <span class="pull-left" ng-class="{'en-lang-bill':item.check_pass==0&&langStyle=='en','un-lang-bill':item.check_pass==0&&langStyle=='fr'}">{{item.cardTypeName}}</span>
+                                <span class="pull-right">{{item.card_number}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="fb f-s text-uline dopoint" ng-click="onAddCardClick()">{{'booking.h5add_a_payment' | translate}}</span>
+            </div>
+            <div class="mg-t-xl">
+                <h4 class="fw">{{'comment.h5notes' | translate}}</h4>
+                <!--一定要用ng-maxlength-->
+                <div contenteditable="true" class="contenteditable"
+                     ng-model="bookingMsg.msg"
+                     ng-maxlength="999" placeholder="{{'booking.h5char_exceed_warning' | translate}}"
+                ></div>
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="mg-t-xl">
+                <button type="submit" class="btn-brown" ng-click="onBookButtonClick($event)">{{'booking.h5create_booking' | translate}}</button>
+            </div>
+        </div>
+        <div class="cl pd-b-xl"></div>
+    </div>
+</div>
+<google-analytics analytics-page='/book.html'></google-analytics>

@@ -1,0 +1,309 @@
+<face-book-pixel pixel-page='book-vehicle-edit'></face-book-pixel>
+<div class="client-detail">
+    <div style="margin: auto">
+        <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+        <h4 class="edit-book-message-font" style="font-size: 25px">
+            {{'vehicle_edit.h5scroll_vehicles' | translate}}
+        </h4>
+        <div class="dashboard-wrapper" style="margin-top: 10px">
+            <div class="edit-carImg" style="position: relative;cursor: pointer;">
+                <div class="cars-list swiper-container" style="position: static !important;" id="swiperEdit">
+                    <div class="swiper-wrapper">
+                        <div ng-click="goGetCar($index)" class="swiper-slide"
+                             style="display: block;text-align: left;color: #ffffff;"
+                             ng-repeat="cate in cars">
+                            <div class="edit-myImg" style="background: url('{{cate.img}}') no-repeat center;background-size: contain;padding:80px;text-align: center;width: 100%">
+                                <!--<img class="img-responsive center-block" src="{{cate.img}}"-->
+                                     <!--style="width: 100%">-->
+                            </div>
+                            <div class="carName"  ng-class="{true:'carsbgt',false:'carsbgf'}[cate.isSelect]"
+                                 style="padding: 5px 12px">
+                                <div>
+                                    <p class="car-edit-fs" style="font-size: 22px;margin: 0;float: left">{{cate.model}}</p>
+                                    <div class="carsListFont" style="float: right">
+                                        <i class="fa fa-user" style="color:#909090" ng-hide="showSwiper"></i>
+                                        <span style="color: white">{{cate.seats_max}}</span>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                </div>
+                                <div>
+                                    <p style="margin: 0;float: left">{{cate.brand}}</p>
+                                    <div class="carsListFont" style="float: right">
+                                        <i class="fa fa-suitcase" style="color:#909090" ng-hide="showSwiper"></i>
+                                        <span style="color:white">{{cate.bags_max}}</span>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                </div>
+                            </div>
+                            <!--<div ng-class="{true:'carsbgt',false:'carsbgf'}[cate.isSelect]"-->
+                                 <!--style="text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">-->
+                                <!--<div class="edit-car-select" style="padding:15px;font-size: 20px;color: #fff">-->
+                                    <!--{{cate.isSelect?'selected':'select'}}-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <div class="swiper-button-prev swiperl-size"></div>
+                    <div class="swiper-button-next swiperr-size"></div>
+                </div>
+            </div>
+
+            <!--===============Add ones===================-->
+            <div class="mg-t-xl xl">
+                <h4 style="font-size: 25px" class="book-message-font">{{'vehicle_edit.h5number_passengers' | translate}}</h4>
+                <select class="myinput myinputhalf-fix myselect"
+                        ng-model="selectedMaxPassengers"
+                        ng-options="item for item in maxPassengers"
+                        ng-change="onChangePassengerCount(false)" style="background-color: #161821">
+                </select>
+            </div>
+            <div class="mg-t-xl xl" ng-show="passengers.length > 0">
+                <div class="form-group">
+                    <h4 style="font-size: 25px" class="book-message-font">{{'vehicle_edit.h5passenger_names' | translate}}</h4>
+                    <input ng-repeat="passenger in passengers"
+                           ng-model="passenger.name"
+                           class="myinput myinputhalf-fix input-bottom"
+                           type="text"
+                           placeholder="{{'vehicle_edit.h5enter_passenger_name' | translate}}"/>
+                </div>
+                <br/>
+            </div>
+            <div class="mg-t-xl xl">
+                <h4 style="font-size: 25px" class="book-message-font">{{'vehicle_edit.h5number_bags' | translate}}</h4>
+                <select class="myinput myinputhalf-fix myselect"
+                        ng-model="selectedMaxBags"
+                        ng-options="item for item in maxBags" style="background-color: #161821">
+                </select>
+            </div>
+
+
+            <div class="mg-t-xl xl" ng-show="offer.options.length > 0">
+                <!--<h4 class="book-message-font">Add-Ons</h4>-->
+                <h4 class="book-message-font" style="width: 100%;line-height: 100%">
+                    <span class="book-message-font b-v-e-opp-float" style="display: block;float: left;font-size: 25px;margin: 0px">{{'vehicle_edit.h5add_ons' | translate}}</span>
+                    <span class="b-v-e-opp-float" style="display: block;float: right;font-size: 20px;font-weight: 300;color: #3c76c8">{{'vehicle_edit.h5AddOns_Price' | translate}}: <span
+                            style="color: #fff">{{optionsPrice*(1+offer.tva/100)| princeTranslateFilters:false:false:offer.ccy}}</span></span>
+                    <div style="clear: both"></div>
+                </h4>
+                <div class="mg-t-s">
+                    <div class="layout-half inline" ng-repeat="item in options.number">
+                        <label class="pull-left">
+                            <input name="addons" type="checkbox" ng-model="item.enable"
+                                   ng-change="onEnableOption(item)"/>
+                                    <span class="rates-ap-tag">{{item.name}}
+                                <span class="fblack">
+                                    <!--<b>{{item.count *item.price *(1+offer.tva/100)| PriceFormatFilter:'$'}}</b>-->
+                                    <b>{{item.price *(1+offer.tva/100)| PriceFormatFilter:true:false:offer.ccy}}</b>
+                                </span>
+                                    </span>
+                        </label>
+                        <div class="pull-right rates-op-num" ng-show="item.enable">
+                            <span class="fred" ng-click="onChangeOptionCount(item,false)"><i
+                                    class="fa fa-minus"></i></span>
+                            <span class="fw f-s">{{item.count}}</span>
+                                    <span class="fred" ng-click="onChangeOptionCount(item,true)"><i
+                                            class="fa fa-plus"></i></span>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+
+                    <div class="layout-half inline" ng-repeat="item in options.checkBox">
+                        <label class="pull-left">
+                            <input name="addons" type="checkbox" ng-model="item.enable"
+                                   ng-change="onEnableOption(item)"/>
+                                    <span class="rates-ap-tag">{{item.name}}
+                                <span class="fblack">
+                                    <!--<b>{{item.count * item.price *(1+offer.tva/100)| PriceFormatFilter:'$'}}</b>-->
+                                    <b>{{item.price *(1+offer.tva/100)| PriceFormatFilter:true:false:offer.ccy}}</b>
+                                </span>
+                            </span>
+                        </label>
+                        <div class="cl"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mg-t-xl" ng-show="showCoupon">
+                <h4 class="book-message-font">{{'vehicle_edit.h5Coupon' | translate}}</h4>
+                <div class="row fblue" style="margin:0 10px;">
+                    <span ng-show="promo_code_shown" style="color: #3B76c9;font-size: 18px;line-height: 30px;">{{'vehicle_edit.h5Promo_Code' | translate}}</span>
+                    <span ng-click="showPromoCodeLine()" style="color: #3B76c9;font-size: 18px;line-height: 30px;cursor: pointer" ng-disabled="haveVerifyCode" ng-show="!promo_code_shown">{{'vehicle_edit.h5Have_code' | translate}}</span>
+                </div>
+                <div ng-show="promo_code_shown" class="max-width">
+                    <div style="display: inline-block;width: 35%;">
+                        <input class="myinput" type="text" placeholder="{{'vehicle_edit.h5Enter_Code' | translate}}" ng-model="couponCode"
+                               ng-disabled="haveVerifyCode"/>
+                    </div>
+                    <button ng-disabled="checkingCode"
+                            ng-show="!haveVerifyCode"
+                            ng-click="getCouponCode($event)" class="btn-blue2 pull-right btn ladda-button"
+                            style="margin: 12px 0 0 10px;outline: none;">
+                        <span class="ladda-label">{{'vehicle_edit.h5Apply' | translate}}</span>
+                    </button>
+                    <div class="pull-right" style="font-size: 18px;margin-top: 16px;text-decoration: underline;cursor: pointer"
+                         ng-click="dismissPromoCodeLine()" ng-show="!haveVerifyCode">{{'vehicle_edit.h5Cancel' | translate}}
+                    </div>
+                </div>
+                <div class="help-block with-errors"></div>
+            </div>
+
+
+            <!--==============返程开关=============-->
+            <div ng-show="bookType == 1">
+                <div class="show returnCard">
+                    <h4 class="book-message-font"
+                        style="display: inline-block;vertical-align: sub;margin-right: 5px;font-size: 25px">
+                        {{'vehicle_edit.h5return_service' | translate}}
+                    </h4>
+                    <input type="checkbox" ng-checked="showReturnService" name="rsSwitchEdit">
+                    <p style="font-size: 20px;margin: 0 0 0 10px;color: #f9f9f9">
+                        {{'vehicle_edit.h5schedule_round_trip' | translate}}
+                    </p>
+                </div>
+                <div ng-show="showReturnService" style="margin-top: 20px;">
+                    <h4 style="font-size: 25px" class="book-message-font">{{'vehicle_edit.h5available_return_vehicles' | translate}}</h4>
+                    <div class="edit-carImg" style="position: relative;">
+                        <div class="cars-list swiper-container" id="rsSwiperEdit"
+                             style="position: static !important;">
+                            <div class="swiper-wrapper">
+                                <div ng-click="goGetReCar($index)" class="swiper-slide"
+                                     style="display: block;text-align: left;color: #ffffff"
+                                     ng-repeat="recate in rscars">
+                                    <div class="edit-myImg" style="background: url('{{recate.img}}') no-repeat center;background-size: contain;padding:80px;text-align: center;width: 100%">
+                                        <!--<img class="img-responsive center-block" src="{{recate.img}}"-->
+                                             <!--style="width: 100%">-->
+                                    </div>
+                                    <div class="carName" ng-class="{true:'carsbgt',false:'carsbgf'}[recate.isSelect]"
+                                         style="padding: 5px 12px">
+                                        <div>
+                                            <p class="car-edit-fs" style="font-size: 22px;margin: 0;float: left">{{recate.model}}</p>
+                                            <div class="carsListFont" style="float: right">
+                                                <i class="fa fa-user" style="color:#909090" ng-hide="showSwiper"></i>
+                                                <span style="color: white">{{recate.seats_max}}</span>
+                                            </div>
+                                            <div style="clear: both"></div>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 0;float: left">{{recate.brand}}</p>
+                                            <div class="carsListFont" style="float: right">
+                                                <i class="fa fa-suitcase" style="color:#909090" ng-hide="showSwiper"></i>
+                                                <span style="color:white">{{recate.bags_max}}</span>
+                                            </div>
+                                            <div style="clear: both"></div>
+                                        </div>
+                                    </div>
+
+                                    <!--<div ng-class="{true:'carsbgt',false:'carsbgf'}[recate.isSelect]"-->
+                                         <!--style="text-align: center; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">-->
+                                        <!--<div style="font-size: 20px;padding:15px;color: #fff">-->
+                                            <!--{{recate.isSelect?'selected':'select'}}-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                            <div class="swiper-button-prev swiperl-size"></div>
+                            <div class="swiper-button-next swiperr-size"></div>
+                        </div>
+                    </div>
+
+                        <div class="mg-t-xl xl">
+                            <h4 style="font-size: 25px" class="book-message-font">{{'vehicle_edit.h5number_passengers' | translate}}</h4>
+                            <select class="myinput myinputhalf-fix myselect"
+                                    ng-model="rsSelectedMaxPassengers"
+                                    ng-options="item for item in rsMaxPassengers"
+                                    ng-change="onChangePassengerCount(true)" style="background-color: #161821">
+                            </select>
+                        </div>
+                        <div class="mg-t-xl xl" ng-show="rsPassengers.length > 0">
+                            <div class="form-group">
+                                <h4 style="font-size: 25px" class="book-message-font">{{'vehicle_edit.h5passenger_names' | translate}}</h4>
+                                <input ng-repeat="passenger in rsPassengers"
+                                       ng-model="passenger.name"
+                                       class="myinput myinputhalf-fix input-bottom"
+                                       type="text"
+                                       placeholder="{{'vehicle_edit.h5enter_passenger_name' | translate}}"/>
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="mg-t-xl xl">
+                            <h4 style="font-size: 25px" class="book-message-font">{{'vehicle_edit.h5number_bags' | translate}}</h4>
+                            <select class="myinput myinputhalf-fix myselect"
+                                    ng-model="rsSelectedMaxBags"
+                                    ng-options="item for item in rsMaxBags" style="background-color: #161821">
+                            </select>
+                        </div>
+
+                        <div class="mg-t-xl" ng-show="rsoffer.options.length > 0">
+                            <!--<h4 class="book-message-font">Add-Ons</h4>-->
+                            <h4 style="width: 100%;line-height: 100%">
+                                <span class="book-message-font" style="display: block;float: left;font-size: 25px;margin: 0">{{'vehicle_edit.h5add_ons' | translate}}</span>
+                                <span style="display: block;float: right;font-size: 20px;font-weight: 300;color: #3c76c8">{{'vehicle_edit.h5AddOns_Price' | translate}}: <span
+                                        style="color: #fff">{{rsOptionsPrice*(1+rsoffer.tva/100)| PriceFormatFilter:true:false:rsoffer.ccy}}</span></span>
+                                <div style="clear: both"></div>
+                            </h4>
+                            <div class="mg-t-s">
+                                <div class="layout-half inline" ng-repeat="reitem in rsoptions.number">
+                                    <label class="pull-left">
+                                        <input name="addons" type="checkbox" ng-model="reitem.enable"
+                                               ng-change="onReEnableOption(reitem)"/>
+                                            <span class="rates-ap-tag">{{reitem.name}}
+                                <span class="fblack">
+                                    <!--<b>{{reitem.count *reitem.price *(1+rsoffer.tva/100)| PriceFormatFilter:'$'}}</b>-->
+                                    <b>{{reitem.price *(1+rsoffer.tva/100)| PriceFormatFilter:true:false:rsoffer.ccy}}</b>
+                                </span>
+                            </span>
+                                    </label>
+                                    <div class="pull-right rates-op-num" ng-show="reitem.enable">
+                            <span class="fred" ng-click="onReChangeOptionCount(reitem,false)"><i
+                                    class="fa fa-minus"></i></span>
+                                        <span class="fw f-s">{{reitem.count}}</span>
+                                            <span class="fred" ng-click="onReChangeOptionCount(reitem,true)"><i
+                                                    class="fa fa-plus"></i></span>
+                                    </div>
+                                    <div class="cl"></div>
+                                </div>
+
+                                <div class="layout-half inline" ng-repeat="reitem in rsoptions.checkBox">
+                                    <label class="pull-left">
+                                        <input name="addons" type="checkbox" ng-model="reitem.enable"
+                                               ng-change="onReEnableOption(reitem)"/>
+                                            <span class="rates-ap-tag">{{reitem.name}}
+                                <span class="fblack">
+                                    <!--<b>{{reitem.count * reitem.price *(1+rsoffer.tva/100)| PriceFormatFilter:'$'}}</b>-->
+                                    <b>{{reitem.price *(1+rsoffer.tva/100)| PriceFormatFilter:true:false:rsoffer.ccy}}</b>
+                                </span>
+                            </span>
+                                    </label>
+                                    <div class="cl"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                </div>
+            </div>
+            <br>
+
+            <div class="book-trip-card " id="priceCard" style="margin-top:15px;line-height: 35px;">
+                <div class="pull-right">
+                    <span style="font-size: 15px;color: #9c9c9c">{{'vehicle_edit.h5trip_total' | translate}}:</span>
+                            <span style="color: #fff;">
+                                <h2 ng-if="showReturnService&&offer.ccy==rsoffer.ccy" style="display: inline-block;margin-top: 0;font-size: 25px">{{showTotalPrice+showRsTotalPrice | PriceFormatFilter:true:false:offer.ccy}}</h2>
+                                <h2 ng-if="showReturnService&&offer.ccy!=rsoffer.ccy" style="display: inline-block;margin-top: 0;font-size: 25px">{{showTotalPrice | PriceFormatFilter:true:false:offer.ccy}}+{{showRsTotalPrice | PriceFormatFilter:true:false:rsoffer.ccy}}</h2>
+                                <h2 ng-if="!showReturnService"  style="display: inline-block;margin-top: 0;font-size: 25px">{{showTotalPrice | PriceFormatFilter:true:false:offer.ccy}}</h2>
+                                </span>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;margin-left: 15px">
+                <button type="submit" class="btn btn-primary btn-lg ladda-button btn-brown bookButton"
+                        style="border-radius:50px;margin-top:30px;padding: 0"
+                        ng-click="onContinueButtonClick()">{{'vehicle_edit.h5continue' | translate}}
+                </button>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/book-vehicle-edit.html'></google-analytics>

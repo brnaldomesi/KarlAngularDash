@@ -1,0 +1,50 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="23"></karl-header-menu>
+    <div class="title-block main-padding  navbar-collapse">
+        <h1 style="color: #fff">Set company rate level.</h1>
+        <div class="mg-t-s" ng-repeat="rate in rateRule" ng-show="rateRule.length === 1">
+            <span class="f-s fw" style="margin: 0 10px;color: #fff;font-size: 1.5em">Default Rate </span>
+            <div   style="width: 150px;display: inline-block">
+                <input class="myinput2"
+                       step="0.01"
+                       min="0"
+                       max="1.0"
+                       ng-model="rate.rate"
+                       type="number"/>
+            </div>
+        </div>
+        <div class="mg-t-s" ng-repeat="rate in rateRule" ng-show="rateRule.length > 1">
+            <span ng-if="$index == 0&&$index !== rateRule.length-1" class="f-s fgray" style="color: #fff;font-size: 1.5em">{{'rate_add.h5up_to' | translate}}</span>
+            <span ng-if="$index > 0&&$index !== rateRule.length-1" class="f-s fgray" style="color: #fff;font-size: 1.5em">{{'rate_add.h5then' | translate}}</span>
+            <div ng-if="$index !== rateRule.length-1" style="width: 150px;display: inline-block">
+                <input class="myinput2"
+                       step="1"
+                       min="0"
+                       ng-model="rate.invl_end"
+                       type="number"
+                />
+            </div>
+            <span ng-if="$index === (rateRule.length-1)" class="f-s fw" style="margin: 0 10px;color: #fff;font-size: 1.5em">Else use rate </span>
+            <span ng-if="$index < (rateRule.length-1)" class="f-s fw" style="margin: 0 10px;color: #fff;font-size: 1.5em">rides with rate </span>
+            <div style="width: 150px;display: inline-block">
+                <input class="myinput2"
+                       step="0.01"
+                       min="0"
+                       max="1.0"
+                       ng-model="rate.rate"
+                       type="number"/>
+            </div>
+
+            <i ng-show="$index > 0 && ($index < rateRule.length-1 ||rateRule.length===2 )" ng-click="removeZone($index)"
+               class="fa fa-trash fw2 f-s dopoint rates-trash"></i>
+        </div>
+        <div class="mg-t-s f-s fb dopoint" ng-click="addRule()">
+            <i class="fa fa-times-circle-o" style="transform:rotate(45deg);margin-right: 6px;"></i>Add more rule
+        </div>
+        <div class="mg-t-s f-s fb dopoint" ng-click="saveAndUpdate()">
+            <i class="fa fa-save" style="transform:rotate(45deg);margin-right: 6px;"></i>Save&Update
+        </div>
+    </div>
+
+</div>
+<google-analytics analytics-page='/super-rate-rule.html'></google-analytics>

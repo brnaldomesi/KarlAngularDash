@@ -1,0 +1,49 @@
+<!--<karl-header></karl-header>-->
+<!-- Main Container start -->
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="11"></karl-header-menu>
+    <!--卡片式-->
+    <div class="title-block main-padding navbar-collapse">
+        <div class="main-title ">
+            <span class="fw main-title-text">{{'header_menu.h5companies' | translate}}</span>
+        </div>
+    </div>
+
+    <div class="main-padding card-fix pos-rlt navbar-collapse">
+        <div class="card-area" style="height: 190px;" ng-repeat="item in listData">
+            <div class="card-block" ng-style="{background: item.sale_connect == 0 ? '#ff4b00' : ''}" style="height: 190px;" ng-click="onEditButtonClick(item.id)">
+                <div class="uhead pull-left"
+                     style="background:#fff url('{{item.img}}') no-repeat 50% 50%;background-size: cover;width: 60px !important;height: 60px !important;"></div>
+                <!--<div ng-if="item.customer_avatar != ''" class="uhead pull-left"-->
+                <!--style="background:#fff url('img/dashboard/logo.png') no-repeat 50% 50%;background-size: cover"></div>-->
+                <div class="uname f-w-500" style="color: #fff">
+                    <div style="font-size: 20px;text-overflow:ellipsis; white-space:nowrap; overflow:hidden; width: 70%;">
+                        {{item.name}}
+                    </div>
+                    <div style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden; width: 70%;">{{item.id}}
+                    </div>
+                    <!--<div style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden; width: 70%;">{{item.email}}-->
+                    <!--</div>-->
+                </div>
+                <div class="upay"
+                     style="line-height: 140%;float: none !important;text-align: left !important;margin-top: 20px !important;">
+                    <span style="color: #a7bbde !important;">{{item.address.formatted_address}}</span>
+                    <br>
+                    <span style="color: #ffffff !important; font-size: medium">  {{'companies.h5passengers_count' | translate}} : {{item.customer_count}}</span>
+                    <br>
+                    <span style="color: #ffffff !important; font-size: medium">   {{'companies.h5vehicle_count' | translate}} : {{item.car_count}}</span>
+                    <br>
+                    <span ng-show="item.sale_name" style="color: #ffffff !important; font-size: medium;width: 100%;display: block"> <span style="max-width:65%;color: #ffffff !important; font-size: medium;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">Sales Rep : {{item.sale_name}}</span> <i style="vertical-align: top"> - {{item.sale_id}}</i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <uib-pagination total-items="pageTotalItems" items-per-page="pagePreCount"
+                    ng-model="currentPage"
+                    max-size="10" ng-change="onPageChange()" class="pagenum"
+                    previous-text="{{'pagination.h5previous' | translate}}"
+                    next-text="{{'pagination.h5next' | translate}}"
+                    style="width: auto;display: table;margin-left: auto;margin-right: auto;">
+    </uib-pagination>
+</div>
+<google-analytics analytics-page='/companies.html'></google-analytics>

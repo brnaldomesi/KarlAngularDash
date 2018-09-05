@@ -1,0 +1,19 @@
+<div class="panel panel-default" style="padding: 0 0px 0 0;border: 0px">
+    <div class="panel-heading">
+        {{'location_select.h5Location_Picker' |translate}}
+        <!--<a class="btn btn-danger fa fa-close pull-right" ng-click="onCancelButtonClick()">-->
+        <!--</a>-->
+    </div>
+    <div class="panel-body">
+        <input type="text" id="asyncSelected" ng-model="asyncSelected" placeholder="{{'location_select.h5Loading' |translate}}"
+               uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+               typeahead-loading="loadingLocations"
+               typeahead-no-results="noResults" class="form-control" ng-change="select()"
+               typeahead-on-select="onSearchSelect($item, $model, $label, $event)">
+
+        <div id="selectLocationMap" class="invoice" style="height: 400px"></div>
+    </div>
+    <div class="panel-footer" style="text-align: right;width: 100%;padding-right: 14px">
+        <button class="btn btn-primary" type="button" ng-click="onOkButtonClick()">&nbsp;&nbsp;{{'comment.h5OK' |translate}} &nbsp;&nbsp;</button>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="27"></karl-header-menu>
+    <div class="title-block navbar-collapse">
+        <div class="main-title ">
+            <span class="fw main-title-text">Recent Bookings</span>
+            <span class="fw main-title-text pull-right visible-xs btn-add-text dopoint" ng-click="addSalesAssistant()"><i
+                    class="fa fa-plus"></i>  {{'super_vehicle_category.h5Add' | translate}}</span>
+        </div>
+        <div style="clear: both"></div>
+        <div class="nav-margin ">
+            <ul class="nav-slider nav-font nav-style" style="margin-top:10px;">
+                <li style="width:33%;line-height: 50px;height: 50px;display: inline-block"
+                    class="act-tab1 financeTitle " ng-click="onTabChanged(0)"><a href="">{{'comment.h5day' | translate}}</a>
+                </li>
+                <li style="width:33%;line-height: 50px;height: 50px;display: inline-block" class="financeTitle"
+                    ng-click="onTabChanged(1)"><a href="">{{'comment.h5week' | translate}}</a></li>
+                <li style="width:34%;line-height: 50px;height: 50px;display: inline-block" class="financeTitle"
+                    ng-click="onTabChanged(2)"><a href="">{{'comment.h5month' | translate}}</a>
+                </li>
+                <li class="slider" style="width:33%;"></li>
+            </ul>
+            <hr style="margin-top: -31px;color:grey">
+        </div>
+
+        <div class="stats-container" style="background: #171821">
+            <div class="stats-main-padding">
+                <!---------------Day---------------------->
+                <div class="nav-margin" ng-show="tab == 0">
+                    <div class="stats-date">
+                        <span>
+                            {{dateString}}
+                        </span>
+                        <div class="stats-inline">
+                            <span class="f-s fb hidden-xs">{{'comment.h5date' | translate}}:</span>
+                            <div class="stats-date-block" ng-click="onSelectDateButtonClick()">
+                                <span>
+                                    {{dateString}}
+                                 </span>
+                                <i class="fa fa-caret-down fw2 pull-right"></i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <table style="width: 100%">
+                        <tr style="background: #122f4e;color: white;text-align: center;font-size: 20px">
+                            <td>9.25.2017</td>
+                            <td>company one</td>
+                            <td>hashiqi</td>
+                            <td>xuenarui</td>
+                            <td>xixieqilu</td>
+                            <td>55.55$</td>
+                            <td>
+                                <a href="tel:{{1234567}}">
+                                    <div class="dispop">
+                                        <i class="fa fa-phone fw" style="color: #0a0a0a !important;"></i>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="mailto:{{2345678}}">
+                                    <div class="dispop">
+                                        <i class="fa fa-envelope fw" style="color: #0a0a0a !important;"></i>
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <!----------------Week-------------------->
+                <div class="nav-margin" ng-show="tab == 1">
+                    <div class="stats-date">
+                        <span>
+                            {{dateString}}
+                        </span>
+                        <div class="stats-inline">
+                            <span class="f-s fb hidden-xs">{{'comment.h5date' | translate}}:</span>
+                            <div class="stats-date-block" ng-click="onSelectDateButtonClick()">
+                                <span>
+                                    {{dateString}}
+                                 </span>
+                                <i class="fa fa-caret-down fw2 pull-right"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table style="width: 100%">
+                        <tr style="background: #122f4e;text-align: center">
+                            <td>9.25.2017</td>
+                            <td>company one</td>
+                            <td>hashiqi</td>
+                            <td>xuenarui</td>
+                            <td>xixieqilu</td>
+                            <td>55.55$</td>
+                            <td>phone</td>
+                            <td>message</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <!--=================Month=====================-->
+                <div class="nav-margin" ng-show="tab == 2">
+                    <div class="stats-date">
+                        <span>
+                            {{dateString}}
+                        </span>
+                        <div class="stats-inline">
+                            <span class="f-s fb hidden-xs">{{'comment.h5date' | translate}}:</span>
+                            <div class="stats-date-block" ng-click="onSelectDateButtonClick()">
+                                <span>
+                                    {{dateString}}
+                                 </span>
+                                <i class="fa fa-caret-down fw2 pull-right"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table style="width: 100%">
+                        <tr style="background: #122f4e;text-align: center">
+                            <td>9.25.2017</td>
+                            <td>company one</td>
+                            <td>hashiqi</td>
+                            <td>xuenarui</td>
+                            <td>xixieqilu</td>
+                            <td>55.55$</td>
+                            <td>phone</td>
+                            <td>message</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<google-analytics analytics-page='/super-god-view.html'></google-analytics>

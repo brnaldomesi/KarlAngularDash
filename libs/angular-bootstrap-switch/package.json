@@ -1,0 +1,105 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "angular-bootstrap-switch",
+        "scope": null,
+        "escapedName": "angular-bootstrap-switch",
+        "name": "angular-bootstrap-switch",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/home/wanghui/文档/newdesign2"
+    ]
+  ],
+  "_from": "angular-bootstrap-switch@latest",
+  "_id": "angular-bootstrap-switch@0.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/angular-bootstrap-switch",
+  "_nodeVersion": "6.1.0",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/angular-bootstrap-switch-0.5.1.tgz_1465038563035_0.12623612815514207"
+  },
+  "_npmUser": {
+    "name": "frapontillo",
+    "email": "francescopontillo@gmail.com"
+  },
+  "_npmVersion": "3.8.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "angular-bootstrap-switch",
+    "scope": null,
+    "escapedName": "angular-bootstrap-switch",
+    "name": "angular-bootstrap-switch",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-bootstrap-switch/-/angular-bootstrap-switch-0.5.1.tgz",
+  "_shasum": "b36d2e6841963b53053236296e071665fc93b1b9",
+  "_shrinkwrap": null,
+  "_spec": "angular-bootstrap-switch",
+  "_where": "/home/wanghui/文档/newdesign2",
+  "author": {
+    "name": "Francesco Pontillo",
+    "email": "francescopontillo@gmail.com",
+    "url": "https://github.com/frapontillo"
+  },
+  "bugs": {
+    "url": "https://github.com/frapontillo/angular-bootstrap-switch/issues"
+  },
+  "dependencies": {},
+  "description": "angular-bootstrap-switch ========================",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "~0.7.0",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-jshint": "~0.11.0",
+    "grunt-contrib-uglify": "~0.11.0",
+    "grunt-karma": "~0.12.1",
+    "grunt-ng-annotate": "^1.0.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.19",
+    "karma-chrome-launcher": "~0.2.2",
+    "karma-firefox-launcher": "~0.1.7",
+    "karma-jasmine": "~0.3.6",
+    "karma-phantomjs-launcher": "~1.0.0",
+    "matchdep": "~1.0.0",
+    "phantomjs-prebuilt": "^2.1.3"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "b36d2e6841963b53053236296e071665fc93b1b9",
+    "tarball": "https://registry.npmjs.org/angular-bootstrap-switch/-/angular-bootstrap-switch-0.5.1.tgz"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "gitHead": "68086720d33ccc9969c9b9222cfc1407ae2a2e34",
+  "homepage": "https://github.com/frapontillo/angular-bootstrap-switch",
+  "license": "Apache-2.0",
+  "main": "dist/angular-bootstrap-switch.js",
+  "maintainers": [
+    {
+      "name": "frapontillo",
+      "email": "francescopontillo@gmail.com"
+    }
+  ],
+  "name": "angular-bootstrap-switch",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/frapontillo/angular-bootstrap-switch.git"
+  },
+  "scripts": {
+    "test": "grunt test-travis"
+  },
+  "version": "0.5.1"
+}

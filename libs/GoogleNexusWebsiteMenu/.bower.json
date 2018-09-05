@@ -1,0 +1,14 @@
+{
+  "name": "GoogleNexusWebsiteMenu",
+  "homepage": "https://github.com/codrops/GoogleNexusWebsiteMenu",
+  "_release": "8413011b2f",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "8413011b2f220520cced4109fecd697e08373ca5"
+  },
+  "_source": "https://github.com/codrops/GoogleNexusWebsiteMenu.git",
+  "_target": "*",
+  "_originalSource": "GoogleNexusWebsiteMenu",
+  "_direct": true
+}

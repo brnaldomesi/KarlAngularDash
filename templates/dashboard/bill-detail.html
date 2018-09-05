@@ -1,0 +1,138 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4><span class="fgray">{{'invoice_detail.h5invoice_detail' | translate}}</span></h4>
+    <h4 style="font-size: 30px">{{'invoice_detail.h5contact_info' | translate}}</h4>
+    <div class="driver-card-block1" style="margin: 0 8px;padding:10px;border-radius: 8px;background: #6161fa">
+        <div class="driver-name" ng-click="onEditButtonClick(driver.driver_id)">
+            <div  class="vhead pull-left"
+                  style="background:#fff url({{customerDetail.avatar_url}}) no-repeat 50% 50%;background-size: cover"></div>
+            <!--<div ng-if="driver.avatar_url != ''" class="vhead pull-left"-->
+                 <!--style="background:#fff url({{driver.avatar_url}}) no-repeat 50% 50%;background-size: cover"></div>-->
+            <div style="overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">
+                <span class="fw f-m">{{'comment.h5client' | translate}}</span>
+                <br/>
+                <span class="fw2">  {{customerDetail.first_name}}&nbsp{{customerDetail.last_name}}</span>
+
+            </div>
+        </div>
+        <div class="driver-line"></div>
+
+        <div class="cl"></div>
+        <div class="driver-des">
+            <div class="driver-des-cont">
+                <a href="sms:{{customerDetail.mobile}}">
+                    <div class="dispop">
+                        <i class="fa fa-commenting-o fw"></i>
+                        <br/>
+                        <span class="fblack">{{'comment.h5text' | translate}}</span>
+                    </div>
+                </a>
+                <a href="tel:{{customerDetail.mobile}}">
+                    <div class="dispop">
+                        <i class="fa fa-phone fw"></i>
+                        <br/>
+                        <span class="fblack">{{'comment.h5call' | translate}}</span>
+                    </div>
+                </a>
+                <p class="cl">{{customerDetail.mobile | phoneNumFormatter:country}}</p>
+
+            </div>
+            <div class="driver-des-mail">
+                <a href="mailto:{{customerDetail.email}}">
+                    <div class="dispop">
+                        <i class="fa fa-envelope fw"></i>
+                        <br/>
+                        <span class="fblack">{{'comment.h5email' | translate}}</span>
+                    </div>
+                </a>
+                <p class="cl">{{customerDetail.email}}</p>
+            </div>
+        </div>
+        <div class="driver-line"></div>
+
+    </div>
+    <div class="driver-card-block2" style="background:#4444bf;margin: 15px 8px;padding: 10px;border-radius: 8px">
+        <div class="driver-name" ng-click="onEditButtonClick(driver.driver_id)">
+            <div class="vhead pull-left"
+                 style="background:#fff url({{driverDetail.avatar_url}}) no-repeat 50% 50%;background-size: cover"></div>
+            <!--<div ng-if="driver.avatar_url != ''" class="vhead pull-left"-->
+                 <!--style="background:#fff url({{driver.avatar_url}}) no-repeat 50% 50%;background-size: cover"></div>-->
+            <div style="width: 76%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">
+                <span class="fw f-m">{{'comment.h5driver' | translate}}</span>
+                <br/>
+                <span class="fw2">{{driverDetail.first_name}}&nbsp{{driverDetail.last_name}}</span>
+
+            </div>
+        </div>
+        <div class="driver-line"></div>
+        <div class="cl"></div>
+        <div class="driver-des">
+            <div class="driver-des-cont">
+                <a href="sms:{{driverDetail.mobile}}">
+                    <div class="dispop">
+                        <i class="fa fa-commenting-o fw"></i>
+                        <br/>
+                        <span class="fblack">{{'comment.h5text' | translate}}</span>
+                    </div>
+                </a>
+                <a href="tel:{{driverDetail.mobile}}">
+                    <div class="dispop">
+                        <i class="fa fa-phone fw"></i>
+                        <br/>
+                        <span class="fblack">{{'comment.h5call' | translate}}</span>
+                    </div>
+                </a>
+                <p class="cl">{{driverDetail.mobile | phoneNumFormatter:country}}</p>
+
+            </div>
+            <div class="driver-des-mail">
+                <a href="mailto:{{driverDetail.email}}">
+                    <div class="dispop">
+                        <i class="fa fa-envelope fw"></i>
+                        <br/>
+                        <span class="fblack">{{'comment.h5email' | translate}}</span>
+                    </div>
+                </a>
+                <p class="cl">{{driverDetail.email}}</p>
+            </div>
+        </div>
+        <div class="driver-line"></div>
+
+    </div>
+    <h4 style="font-size: 30px">{{'comment.h5invoice' | translate}}</h4>
+    <div class="invoice-block" style="background:#30264d;border-radius:8px;margin: 0 8px">
+        <div style="padding:10px 10px 5px 10px">
+            <div class="pull-left" style="font-size: 16px;color: #ffffff;">{{'invoice_detail.h5item_description' | translate}}</div>
+            <div class="pull-right">{{'comment.h5cost' | translate}}</div>
+            <div style="clear: both"></div>
+
+            <div>
+                <div class="pull-left" style="font-size: 16px;color: #ffffff;font-weight: 600">{{'finance.h5amount_paid' | translate}}</div>
+                <div class="pull-right" style="color: #00abf0">+{{listDataDetail.settle_fee|princeTranslateFilters:false:false:listDataDetail.ccy}}</div>
+                <div style="clear: both"></div>
+            </div>
+            <div>
+                <span style="font-size: 18px">{{listDataDetail.time*1000 | dateFormatter:'langsDate'}}</span>
+            </div>
+        </div>
+        <div style="padding:0 10px">
+            <div class="pull-left" style="font-size: 16px;color: #ffffff;font-weight: 600">{{'finance.h5karl_fee' | translate}}</div>
+            <div class="pull-right" style="color: #ee2a15">-{{listDataDetail.platform_income|princeTranslateFilters:false:false:listDataDetail.ccy}}</div>
+            <div style="clear: both"></div>
+        </div>
+        <div style="padding-bottom: 5px;padding:0 10px;border-bottom: 1px solid grey">
+            <span style="font-size: 18px">{{listDataDetail.time*1000 | dateFormatter:'langsDate'}}</span>
+        </div>
+
+
+        <div class="col-lg-offset-5 col-md-offset-5 col-xs-offset-5"
+             style="font-size: 16px;color: #ffffff;font-weight: 600;padding:10px"> {{'comment.h5total' | translate}}
+
+            <div class="pull-right" style="display:  inline;color:#ffffff">{{listDataDetail.com_income|princeTranslateFilters:false:false:listDataDetail.ccy}}</div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <br>
+    <down-csv></down-csv>
+</div>
+<google-analytics analytics-page='/bill-detail.html'></google-analytics>

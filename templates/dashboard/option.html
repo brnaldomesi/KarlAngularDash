@@ -1,0 +1,49 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="5"></karl-header-menu>
+    <div class="btn-add" ng-click="onAddButtonClick()" style="cursor:pointer;z-index: 990;" title="{{'option_add.h5create_add-on' | translate}}"><i
+            class="fa fa-plus"></i></div>
+    <div ng-show="showOptionsView">
+        <div class="title-block main-padding navbar-collapse">
+            <div class="main-title ">
+                <span class="fw main-title-text">{{'option.h5all_addOns' | translate}}</span>
+            </div>
+        </div>
+        <div class="main-padding card-fix pd-b-xl pos-rlt navbar-collapse">
+            <div class="addon-card-area" ng-repeat="option in listData">
+                <div class="addon-del-panel gen-panel">
+                    <span class="addon-del-info fw">{{'option.h5delete_addOns' | translate}}?</span>
+                    <div>
+                        <span class="fgray addon-del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                        <span class="fred dopoint" ng-click="onDeleteButtonClick(option.id)">{{'comment.h5delete' | translate}}</span>
+                    </div>
+                </div>
+                <a type="button" class="card-more"><i class="fa fa-ellipsis-v fd fa-close"></i></a>
+                <a type="button" class="card-del gen" title="{{'comment.h5delete'|translate}}"><i class="fa fa-trash fd"></i></a>
+                <div class="addon-card-block" ng-click="onEditButtonClick(option.id)">
+                    <div class="addon-name">
+                        <span class="fw">{{option.title}}</span>
+                    </div>
+                    <div class="addon-qu">
+                                <span>
+                                   {{'comment.h5quantity' | translate}} : {{option.add_max}}
+                                </span>
+                    </div>
+                    <div class="addon-fee">
+                        <span>{{option.price | princeTranslateFilters:false:false:companyCurrency}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cl"></div>
+    </div>
+
+    <div ng-show="showNoOptionsView" style="text-align: center;margin-top: 14%">
+        <div style="font-size: 28px;color: white">{{'option.h5no_addOns' | translate}}.</div>
+        <div style="font-size: 18px;color: grey">
+            <div>{{'option.h5button_info_options' | translate}}</div>
+            <div>{{'option.h5add-ons_info' | translate}}</div>
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/option.html'></google-analytics>

@@ -1,0 +1,294 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="8"></karl-header-menu>
+    <div class="main-padding card-fix pd-b-xl pos-rlt navbar-collapse">
+        <div ng-show="anLocked" style="padding: 10px ">
+            <h4 style="color: #fff;">{{'affiliate_network.h5Affiliate_Network_locked' | translate}}</h4>
+            <hr style="height:3px;border:none;border-top:3px double red;">
+               <p ng-show="booking_count > 0 " style="font-size: medium ; color: #fff;">{{bookingUnlock}}</p>
+            <p ng-show="booking_count <= 0 " style="font-size: medium ; color: #fff;">
+                {{'affiliate_network.h5connect_manager_KARL' | translate}}
+            </p>
+        </div>
+        <div class="mg-t-l an-switch">
+            <form class="h-m">
+                <h4 class="fw pull-left">{{'affiliate_network.h5local_network' | translate}}</h4>
+                <div class="local-switch inline" ng-show="showToggle" ng-disabled="anLocked">
+                    <input type="checkbox" ng-checked="onLn" name="ln-switch" />
+                </div>
+                <i class="icon-lock" title="AN lock"  ng-show="anLocked"
+                   style="font-size: xx-large ; color: #1913ff;"></i>
+            </form>
+            <hr style="opacity: 0.3">
+        </div>
+        <div ng-show="onLn">
+            <div style="position: relative;width: 600px">
+                <p class="f-s fw f-w-300" style="margin: auto auto 0 8px;">{{'affiliate_network.h5enterRadius' | translate}}</p>
+                <div class="an-half-mile" ng-show="distanceUnit==1">{{'comment.h5Mile' | translate}}</div>
+                <div class="an-half-mile" ng-show="distanceUnit==2">{{'comment.h5km'|translate}}</div>
+                <input class="myinput aninputhalf-fix anfont"
+                       style="margin-top: 0"
+                       type="number"
+                       max="50"
+                       min="1"
+                       ng-model="LNRadius"/>
+                <button type="submit" ng-click="updateLocalRadius()"
+                                 class="btn-blue btn">
+                <span>{{'comment.h5SAVE' | translate}}</span>
+            </button>
+            </div>
+            <div class="mg-t-l" style="display: block">
+                <div class="h-m">
+                    <h4 class="fw pull-left" style="font-size: 30px">{{'affiliate_network.h5wanted_vehicles' | translate}}</h4>
+                    <div class="input-group pull-left modify-an-search" style="margin-top: 13px" ng-show="wantedCategorys.length > 0">
+                        <input type="text"
+                               ng-model="wantedInput.searchText"
+                               class="form-control input-sm bg-light no-border rounded padder search-bg"
+                               placeholder="{{'comment.h5search' | translate}}">
+                        <span class="input-group-btn">
+                               <button ng-show="wantedInput.searchText"
+                                       ng-click="onCancelWantedSearchButtonClick()"
+                                       class="btn btn-sm bg-dark2 rounded input-search"
+                                       style="margin-top: 0">
+                                   <i class="fa fa-close fw"></i>
+                               </button>
+                               <button class="btn btn-sm bg-dark2 rounded input-search"
+                                       style="margin-top: 0">
+                                   <i class="fa fa-search fw"></i>
+                               </button>
+                           </span>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+            <br/>
+            <div class="f-s fw f-w-300 an-text-des">
+                {{'affiliate_network.h5prompt_info' | translate}}
+            </div>
+            <div id="wanted-accordion" class="basic-accordion" ng-show="showWantedAccordion">
+                <br/>
+                <div ng-repeat="category in wantedCategorys">
+                    <h3 class=" myselect">
+                        <i class="fa fa-check-square-o"
+                           ng-show="category.selectedCount == category.car_models.length"
+                           ng-click="deleteAllWantedVehicles(category);$event.stopPropagation();"></i>
+                        <i class="fa fa-square-o" ng-show="category.selectedCount != category.car_models.length"
+                           ng-click="addAllWantedVehicles(category);$event.stopPropagation();"></i>
+                        {{category.category_name}}
+                        <span class="fred">({{category.selectedCount}} {{'comment.h5selected' | translate}})</span>
+                        <span class="fb">{{category.car_models.length}} {{'comment.h5total' | translate}}</span>
+                    </h3>
+                    <div class="cl-block">
+                        <div class="vcard-area" ng-repeat="carModel in category.car_models">
+                            <a type="button" class="vcard-more" ng-click="selectWantedVehicles(carModel,category)">
+                                <i class="glyphicon glyphicon-ok-sign" ng-show="carModel.selected == 1"></i>
+                                <i class="fa fa-circle-o" ng-show="carModel.selected == 0"></i>
+                            </a>
+                            <div class="vcard-block">
+                                <div ng-if="carModel.img == ''" class="vhead pull-left"
+                                     style="background:#fff url(img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: contain"></div>
+                                <div ng-if="carModel.img != ''" class="vhead pull-left"
+                                     style="background:#fff url({{carModel.img}}) no-repeat 50% 50%;background-size: contain"></div>
+                                <div class="vname">
+                                    <span class="fw">{{carModel.model_name}}</span>
+                                    <br/>{{carModel.brand_name}}
+                                </div>
+                                <div class="vpass">
+                                    <span></span>
+                                    <br/>
+                                    <span style="font-size: 12px">
+                                    {{'comment.h5max_passengers' | translate}}: {{carModel.seats_max}}
+                                </span>
+                                </div>
+                                <div class="vbags">
+                                    <span></span>
+                                    <br/>
+                                    <span style="font-size: 12px">{{'comment.h5max_bags' | translate}}: {{carModel.bags_max}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="!showWantedAccordion">
+                <h3 class="fw" style="margin-left: 15px" ng-show="wantedSearchResult.length > 0">
+                    {{'affiliate_network.h5search_result' | translate}}
+                </h3>
+                <h3 class="fw" style="margin-left: 15px" ng-show="wantedSearchResult.length == 0">
+                    {{'affiliate_network.h5no_result' | translate}}
+                </h3>
+                <div class="cl-block">
+                    <div class="vcard-area" ng-repeat="carModel in wantedSearchResult">
+                        <a type="button" class="vcard-more" ng-click="selectWantedVehicles(carModel)">
+                            <i class="glyphicon glyphicon-ok-sign" ng-show="carModel.selected == 1"></i>
+                            <i class="fa fa-circle-o" ng-show="carModel.selected == 0"></i>
+                        </a>
+                        <div class="vcard-block">
+                            <div ng-if="carModel.img == ''" class="vhead pull-left"
+                                 style="background:#fff url(img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: contain"></div>
+                            <div ng-if="carModel.img != ''" class="vhead pull-left"
+                                 style="background:#fff url({{carModel.img}}) no-repeat 50% 50%;background-size: contain"></div>
+                            <div class="vname">
+                                <span class="fw">{{carModel.model_name}}</span>
+                                <br/>{{carModel.brand_name}}
+                            </div>
+                            <div class="vpass">
+                                <span></span>
+                                <br/>
+                                <span style="font-size: 12px">
+                                    {{'comment.h5max_passengers' | translate}}: {{carModel.seats_max}}
+                                </span>
+                            </div>
+                            <div class="vbags">
+                                <span></span>
+                                <br/>
+                                <span style="font-size: 12px">{{'comment.h5max_bags' | translate}}: {{carModel.bags_max}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mg-t-l">
+                <div class="h-m">
+                    <h4 class="fw pull-left" style="font-size: 25px">{{'affiliate_network.h5offered_vehicles' | translate}}</h4>
+                    <div class="input-group pull-left modify-an-search" style="margin-top: 13px">
+                        <input type="text"
+                               ng-model="givenInput.searchText"
+                               class="form-control input-sm bg-light no-border rounded padder search-bg"
+                               placeholder="{{'comment.h5search' | translate}}">
+                        <span class="input-group-btn">
+                               <button ng-show="givenInput.searchText"
+                                       ng-click="onCancelGivenSearchButtonClick()"
+                                       class="btn btn-sm bg-dark2 rounded input-search"
+                                       style="margin-top: 0">
+                                    <i class="fa fa-close fw"></i>
+                               </button>
+                               <button class="btn btn-sm bg-dark2 rounded input-search"
+                                       style="margin-top: 0">
+                                    <i class="fa fa-search fw"></i>
+                               </button>
+                        </span>
+                    </div>
+                </div>
+                <br/>
+                <div class="f-s fw f-w-300 an-text-des">
+                    {{'affiliate_network.h5select_info' | translate}}
+                </div>
+                <div id="given-accordion" class="basic-accordion" ng-show="showGivenAccordion">
+                    <br/>
+                    <div ng-repeat="category in givenCategorys">
+                        <h3 class=" myselect">
+                            <i class="fa fa-check-square-o" ng-show="category.selectedCount == category.cars.length"
+                               ng-click="deleteAllGivenVehicles(category);$event.stopPropagation()"></i>
+                            <i class="fa fa-square-o" ng-show="category.selectedCount != category.cars.length"
+                               ng-click="addAllGivenVehicles(category);$event.stopPropagation()"></i>
+                            {{category.category_name}}
+                            <span class="fred">({{category.selectedCount}} {{'comment.h5selected' | translate}})</span>
+                            <span class="fb">{{category.cars.length}} {{'comment.h5total' | translate}}</span></h3>
+                        <div class="cl-block">
+                            <div class="vcard-area" ng-repeat="car in category.cars">
+                                <a type="button" class="vcard-more" ng-click="selectGivenVehicles(car,category)">
+                                    <i class="glyphicon glyphicon-ok-sign" ng-show="car.selected == 1"></i>
+                                    <i class="fa fa-circle-o" ng-show="car.selected == 0"></i>
+                                </a>
+                                <div class="vcard-block">
+                                    <div ng-if="car.img == ''" class="vhead pull-left"
+                                         style="background:#fff url(img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: contain"></div>
+                                    <div ng-if="car.img != ''" class="vhead pull-left"
+                                         style="background:#fff url({{car.img}}) no-repeat 50% 50%;background-size: contain"></div>
+                                    <div class="vname">
+                                        <span class="fw">{{car.model_name}}</span>
+                                        <br/>{{car.brand_name}}
+                                    </div>
+                                    <div class="vpass">
+                                        <span style="display: block;white-space:nowrap;overflow: hidden;text-overflow: ellipsis">{{car.license_plate}}</span>
+                                        <span style="font-size: 12px">
+                                    {{'comment.h5max_passengers' | translate}}: {{car.seats_max}}
+                                </span>
+                                    </div>
+                                    <div class="vbags" style="width: 40%">
+                                        <span style="display: block;white-space:nowrap;overflow: hidden;text-overflow: ellipsis">{{'comment.h5color' | translate}}: {{car.color}}</span>
+                                        <span style="font-size: 12px">{{'comment.h5max_bags' | translate}}: {{car.bags_max}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="!showGivenAccordion">
+                <h3 class="fw" style="margin-left: 15px" ng-show="givenSearchResult.length > 0">
+                    {{'affiliate_network.h5search_result' | translate}}
+                </h3>
+                <h3 class="fw" style="margin-left: 15px" ng-show="givenSearchResult.length == 0">
+                    {{'affiliate_network.h5no_result' | translate}}
+                </h3>
+                <div class="cl-block">
+                    <div class="vcard-area" ng-repeat="car in givenSearchResult">
+                        <a type="button" class="vcard-more" ng-click="selectGivenVehicles(car)">
+                            <i class="glyphicon glyphicon-ok-sign" ng-show="car.selected == 1"></i>
+                            <i class="fa fa-circle-o" ng-show="car.selected == 0"></i>
+                        </a>
+                        <div class="vcard-block">
+                            <div ng-if="car.img == ''" class="vhead pull-left"
+                                 style="background:#fff url(img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: contain"></div>
+                            <div ng-if="car.img != ''" class="vhead pull-left"
+                                 style="background:#fff url({{car.img}}) no-repeat 50% 50%;background-size: contain"></div>
+                            <div class="vname">
+                                <span class="fw">{{car.model_name}}</span>
+                                <br/>{{car.brand_name}}
+                            </div>
+                            <div class="vpass">
+                                <span>{{car.license_plate}}</span>
+                                <br/>
+                                <span style="font-size: 12px">
+                                     {{'comment.h5max_passengers' | translate}}: {{car.seats_max}}
+                                </span>
+                            </div>
+                            <div class="vbags">
+                                <span>{{'comment.h5color' | translate}}: {{car.color}}</span>
+                                <br/>
+                                <span style="font-size: 12px">{{'comment.h5max_bags' | translate}}: {{car.bags_max}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="indent-m mg-t-l an-fleet">
+                <i class="fa fa-check-square-o fred" style="cursor: pointer" ng-show="onCombine"
+                   ng-click="enableCombine(0)"></i>
+                <i class="fa fa-square-o fred" style="cursor: pointer" ng-show="!onCombine"
+                   ng-click="enableCombine(1)"></i>
+                <span class="f-m fw f-w-300">
+              {{'affiliate_network.h5show_info' | translate}}
+           </span>
+                <br/>
+                <div class="f-s fgray f-w-300 indent-xl" style="margin-right: 5%;">
+                    {{'affiliate_network.h5turn_info' | translate}}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mg-t-l an-switch">
+            <form class="h-m">
+                <h4 class="fw pull-left">{{'affiliate_network.h5global_network' | translate}}</h4>
+                <div class="local-switch inline" ng-show="showToggle" ng-disabled="anLocked">
+                    <input type="checkbox" ng-checked="onGn" name="gn-switch" />
+                </div>
+                    <i class="icon-lock" title="AN lock"  ng-show="anLocked"
+                       style="font-size: xx-large ; color: #1913ff;"></i>
+
+            </form>
+            <br/>
+            <div class="mg-t-l">
+                <span class="fw f-s f-w-300">{{'affiliate_network.h5make_info' | translate}}</span>
+                <br/>
+                <span class="f-w-300">{{'affiliate_network.h5only_info' | translate}}</span>
+            </div>
+        </div>
+        <div class="cl pd-b-xl"></div>
+    </div>
+</div>
+<google-analytics analytics-page='/affiliate-network.html'></google-analytics>

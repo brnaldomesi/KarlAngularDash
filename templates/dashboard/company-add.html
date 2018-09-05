@@ -1,0 +1,423 @@
+<div class="widget">
+    <div class="widget-header">
+        <div class="title">
+            {{'company_add.h5add_company' | translate}}
+        </div>
+        <span class="tools">
+            <a class="btn btn-danger fa fa-close" ng-click="onCancelButtonClick()">
+            </a>
+        </span>
+    </div>
+    <div class="widget-body" style="padding: 6pt;">
+        <form id="addCompanyForm"
+              name="addCompanyForm"
+              role="form"
+              class="form-horizontal no-margin"
+              data-toggle="validator"
+              novalidate>
+            <!--company-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5company_name' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5company_name' | translate}}" ng-model="company.name" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5tax_rate' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5tax_rate' | translate}}" ng-model="company.tva" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'comment.h5GMT' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'comment.h5GMT' | translate}}" ng-model="company.gmt" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'comment.h5address' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input id="companyAddressID"
+                           type="text" class="form-control" placeholder="{{'comment.h5address' | translate}}"
+                           uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                           ng-model="company.address"
+                           typeahead-loading="loadingLocations"
+                           typeahead-no-results="noResults"
+                           typeahead-on-select="companyLocation($item, $model, $label, $event)"
+                           required>
+                    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                    <div ng-show="noResults">
+                        <i class="glyphicon glyphicon-remove"></i>
+                        {{'comment.h5no_results_found' | translate}}
+                    </div>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'comment.h5PO' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'comment.h5PO' | translate}}"
+                           ng-model="company.address_number" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'comment.h5ZIP' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder=" {{'comment.h5ZIP' | translate}}"
+                           ng-model="company.address_code_postal" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <!--TODO: lat & lng-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'comment.h5domain' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'comment.h5domain' | translate}}" ng-model="company.domain" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'comment.h5phone' | translate}} 1
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'comment.h5phone' | translate}} 1" ng-model="company.phone1" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'comment.h5phone' | translate}} 2
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'comment.h5phone' | translate}} 2" ng-model="company.phone2" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'comment.h5email' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'comment.h5email' | translate}}" ng-model="company.email" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5email_host' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5email_host' | translate}}" ng-model="company.email_host"
+                           required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5email_port' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5email_port' | translate}}" ng-model="company.email_port"
+                           required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'comment.h5email_password' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder=" {{'comment.h5email_password' | translate}}"
+                           ng-model="company.email_password" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5tax_ID' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5tax_ID' | translate}}" ng-model="company.tax_id" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5commercial_license' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5commercial_license' | translate}}"
+                           ng-model="company.commercial_license" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5trade_register_date' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder=" {{'company_add.h5trade_register_date' | translate}}"
+                           ng-model="company.trade_register_date" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5trade_register_number' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5trade_register_number' | translate}}"
+                           ng-model="company.trade_register_number" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <!--admin-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5admin_firstName' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder=" {{'company_add.h5admin_firstName' | translate}}" ng-model="admin.first_name"
+                           required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5admin_lastName' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5admin_lastName' | translate}}" ng-model="admin.last_name"
+                           required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5admin_gender' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <select class="form-control" ng-model="gender" ng-change="onGenderSelect()">
+                        <option value="1">
+                            Mrs.
+                        </option>
+                        <option value="2">
+                            Mr.
+                        </option>
+                    </select>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5admin_mobile' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5admin_mobile' | translate}}" ng-model="admin.mobile" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5admin_email' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5admin_email' | translate}}" ng-model="admin.email" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5admin_password' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5admin_password' | translate}}" ng-model="admin.password"
+                           required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <!--charge-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5PayPal_Client_ID' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5PayPal_Client_ID' | translate}}" ng-model="charge.client_id"
+                           required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5PayPal_Secret' | translate}}
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" placeholder="{{'company_add.h5PayPal_Secret' | translate}}" ng-model="charge.secret"
+                           required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <!--payment-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                    {{'company_add.h5credit_card' | translate}}
+                </label>
+                <form id="paymentForm" name="paymentForm" class="tab-pane fade row ng-pristine ng-valid" role="form"
+                      data-toggle="validator" novalidate>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label class=" pull-left" style="padding: 6px;">
+                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                                   ng-value="1" ng-model="payment.card_type">
+                                            <img src="img/dashboard/card-visa.png" width="66">
+                                        </label>
+                                        <label class=" pull-left" style="padding: 6px">
+                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                                   ng-value="2" ng-model="payment.card_type"> <img
+                                                src="img/dashboard/card-mastercard.png" width="66">
+                                        </label>
+                                        <label class=" pull-left" style="padding: 6px">
+                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio4"
+                                                   ng-value="3" ng-model="payment.card_type"> <img
+                                                src="img/dashboard/card-american-express.png" width="66">
+                                        </label>
+                                        <label class=" pull-left" style="padding: 6px">
+                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                                   ng-value="4" ng-model="payment.card_type"> <img
+                                                src="img/dashboard/card-discover.png" width="66">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label>{{'company_add.h5card_number' | translate}}</label>
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   name="cardNumber"
+                                                   placeholder="{{'company_add.h5valid_card_number' | translate}}"
+                                                   required
+                                                   ng-model="payment.card_number"/>
+                                            <!--<span class="input-group-addon">Miles</span>-->
+                                            <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                        </div>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4 col-md-4 pull-left">
+                                    <div class="form-group">
+                                        <label>{{'company_add.h5exp_month' | translate}}</label>
+                                        <input type="tel"
+                                               class="form-control"
+                                               name="cardExpiry"
+                                               placeholder="MM"
+                                               ng-model="payment.expire_month"
+                                               pattern="^0[1-9]|1[0-2]$"
+                                               required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-md-4 pull-left">
+                                    <div class="form-group">
+                                        <label>{{'company_add.h5exp_year' | translate}}</label>
+                                        <input type="tel"
+                                               class="form-control"
+                                               name="cardCVC"
+                                               placeholder="YY"
+                                               ng-model="payment.expire_year"
+                                               pattern="^\d{4}$"
+                                               required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-md-4 pull-right">
+                                    <div class="form-group">
+                                        <label>{{'company_add.h5CVV' | translate}}</label>
+                                        <input type="tel"
+                                               class="form-control"
+                                               name="cardCVC"
+                                               placeholder="CVC"
+                                               autocomplete="cc-csc"
+                                               ng-model="payment.cvv2"
+                                               pattern="^\d{3}$"
+                                               required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label>{{'comment.h5first_name' | translate}}</label>
+                                        <input type="text" class="form-control" ng-model="payment.first_name"
+                                               placeholder="{{'comment.h5first_name' | translate}}" required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label>{{'comment.h5last_name' | translate}}</label>
+                                        <input type="text" class="form-control" ng-model="payment.last_name"
+                                               placeholder="{{'comment.h5last_name' | translate}}" required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="display:none;">
+                                <div class="col-xs-12">
+                                    <p class="payment-errors"></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="pull-right" style="margin: 0 1px">
+                                    <button type="submit" class="btn btn-primary"
+                                            ng-click="onSubmitButtonClick(addCompanyForm.$valid, $event)"
+                                            style="width: 50pt;">
+                                        {{'comment.h5Save' | translate}}
+                                    </button>
+                                </div>
+                                <div class="pull-right" style="margin: 0 1px">
+                                    <button type="button" class="btn btn-danger" ng-click="onCancelButtonClick()"
+                                            style="width: 60pt;">
+                                        {{'comment.h5cancel' | translate}}
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+</div>
+<google-analytics analytics-page='/company-add.html'></google-analytics>

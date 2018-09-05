@@ -1,0 +1,75 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4><span class="fgray">{{'option_edit.h5add-On_detail' | translate}}</span></h4>
+    <form id="optionForm" name="optionForm"
+          data-toggle="validator" novalidate>
+        <div class="o-blcok fw">
+            <div class="form-group">
+                <h6>{{'option_add.h5add-On_name' | translate}}</h6>
+                <input class="myinput"
+                       type="text"
+                       maxlength="33"
+                       ng-readonly="optionData.company_id == 0"
+                       ng-model="numberData.title"
+                       placeholder="{{'option_add.h5enter_add-On_name' | translate}}" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="o-blcok fw">
+            <div class="form-group">
+                <h6>{{'option_add.h5maximum_quantity' | translate}}</h6>
+                <input class="myinput"
+                       type="number"
+                       min="0"
+                       step="1"
+                       max="100"
+                       ng-model="numberData.add_max"
+                       ng-readonly="optionData.company_id == 0"
+                       placeholder="{{'option_add.h5enter_maximum_quantity' | translate}}" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="o-blcok fw">
+            <div class="form-group pos-rlt">
+                <div style="position: absolute;right: 20px;top:47%;font-weight:400;color:#3b76c9;font-size: 20px;">
+                    <span ng-show="companyCurrency=='usd'">{{'option_add.h5dollars' | translate}}</span>
+                    <span ng-show="companyCurrency=='eur'">{{'option_add.h5Euros' | translate}}</span>
+                    <span ng-show="companyCurrency=='gbp'">{{'option_add.h5Pounds' | translate}}</span>
+                    <span ng-show="companyCurrency=='aud'">{{'option_add.h5aud' | translate}}</span>
+                    <span ng-show="companyCurrency=='dkk'">{{'option_add.h5dkk' | translate}}</span>
+                    <span ng-show="companyCurrency=='cad'">{{'option_add.h5cad' | translate}}</span>
+                    <span ng-show="companyCurrency=='hkd'">{{'option_add.h5hkd' | translate}}</span>
+                    <span ng-show="companyCurrency=='jpy'">{{'option_add.h5jpy' | translate}}</span>
+                    <span ng-show="companyCurrency=='nzd'">{{'option_add.h5nzd' | translate}}</span>
+                    <span ng-show="companyCurrency=='nok'">{{'option_add.h5nok' | translate}}</span>
+                    <span ng-show="companyCurrency=='sgd'">{{'option_add.h5sgd' | translate}}</span>
+                    <span ng-show="companyCurrency=='sek'">{{'option_add.h5sek' | translate}}</span>
+                    <span ng-show="companyCurrency=='chf'">{{'option_add.h5chf' | translate}}</span>
+                </div>
+                <h6>{{'comment.h5price' | translate}}</h6>
+                <input class="myinput"
+                       type="number"
+                       min="0"
+                       step="0.01"
+                       max="999999.99"
+                       ng-readonly="optionData.company_id ==0"
+                       ng-model="numberData.price"
+                       placeholder="{{'comment.h5enter_price' | translate}}" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="row mg-t-xl center-block area-bot">
+            <button type="submit" class="btn-blue btn center-block" ng-click="onCreateOption(optionForm.$valid,$event)">
+                <span>{{'comment.h5Save' | translate}}</span>
+            </button>
+        </div>
+    </form>
+</div>
+<google-analytics analytics-page='/option-edit.html'></google-analytics>

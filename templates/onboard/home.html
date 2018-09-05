@@ -1,0 +1,643 @@
+<div class="container">
+    <div style="position: absolute;left: 20px">
+        <select ng-model="cur_lang" ng-change="switching(cur_lang)" style="color: #fff;border: none;background: grey;height: 25px">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+        </select>
+    </div>
+    <div class="dashboard-wrapper">
+        <div class="K-obmain poisR">
+            <div class="autoclose">
+                <button ng-click="closeWindow()" type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        style="color: red;opacity: 1;font-size: 30px;text-shadow: none;outline:none;"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="row">
+                <img src="img/onboard/home-logo-s.png" class="center-block k-logo-s"/>
+            </div>
+            <div class="row obmt">
+                <h1 class="text-center">{{'board_home.h5welcome' | translate}}</h1>
+            </div>
+            <div class="row home-mg">
+                <p>
+                    {{'board_home.h5thank_you' | translate}}<br/>
+                    {{'board_home.h5help_you' | translate}}
+                </p>
+            </div>
+            <div class="k-addcompany">
+                <h1>{{'board_home.h5tell_us' | translate}}</h1>
+                <div class="k-addcompanyinfo">
+                    <form id="companyAndAdmin" class="form-horizontal no-margin ng-pristine ng-valid"
+                          name="companyAndAdmin" role="form"
+                          data-toggle="validator" novalidate>
+                        <div class="form-group" style="margin: 0">
+                            <input class="myinput" type="text"
+                                   placeholder="{{'board_home.h5company_name' | translate}}"
+                                   ng-model="companyName"
+                                   required
+                                   max="50"
+                            />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <h2>{{'board_home.h5admin' | translate}}</h2>
+                        <div class="form-group" style="margin: 0">
+                            <input class="myinput" type="text" placeholder="{{'board_home.h5first_name' | translate}}" ng-model="firstName" required/>
+                            <div class="help-block with-errors" style="margin: 0"></div>
+                        </div>
+                        <div class="form-group" style="margin: 0">
+                            <input class="myinput" type="text" placeholder="{{'board_home.h5last_name' | translate}}" ng-model="lastName" required/>
+                            <div class="help-block with-errors" style="margin: 0"></div>
+                        </div>
+                        <div class="form-group" style="margin: 0">
+                            <input class="myinput sign-mail" type="email" placeholder="{{'board_home.h5email' | translate}}" ng-model="email"
+                                   pattern="^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$"
+                                   required/>
+                            <div class="help-block with-errors" style="margin: 0"></div>
+                        </div>
+                        <div class="form-group" style="margin: 0">
+                            <input class="myinput sign-mobile" type="text" placeholder="{{'board_home.h5mobile' | translate}}" ng-model="mobile"
+                                   required/>
+                            <div class="help-block with-errors" style="margin: 0"></div>
+                        </div>
+                        <h2>{{'board_home.h5tcp' | translate}}</h2>
+                        <div class="form-group" style="margin: 0">
+                            <input class="myinput" type="text" placeholder="{{'board_home.h5tcp' | translate}}" ng-model="tcp" required/>
+                            <div class="help-block with-errors" style="margin: 0"></div>
+                        </div>
+                        <h2>{{'board_home.h5address' | translate}}</h2>
+                        <input class="myinput myinput-map"
+                               type="text"
+                               placeholder="{{'board_home.h5com_street_address' | translate}}"
+                               ng-model="formatted_address"
+                               uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                               typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                               typeahead-on-select="onAddressSelect($item, $model, $label, $event)"/>
+                        <i class="fa fa-map-marker fb f-m dopoint" ng-click="selectLocationOnMap()"></i>
+                        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                        <div ng-show="noResults" style="text-indent: 15px;color: #ff4d00">
+                            <i class="glyphicon glyphicon-remove"></i> {{'board_home.h5no_results_found' | translate}}
+                        </div>
+                        <input class="myinput" type="text" placeholder="{{'board_home.h5street_number' | translate}}" readonly="readonly"
+                               ng-model="address_number"/>
+                        <input class="myinput" type="text" placeholder="{{'board_home.h5zip' | translate}}" readonly="readonly"
+                               ng-model="address_code_postal"/>
+
+                        <div>
+                            <h2>{{'board_home.h5Currency' | translate}}</h2>
+                            <select class="currency-select" ng-model="selectCurrency" ng-options="currency.country as currency.currency for currency in currencyList"></select>
+                        </div>
+
+                        <div>
+                            <h2>{{'board_home.h5SaleRepId' | translate}}</h2>
+                            <input class="currency-select" type="text" placeholder="{{'board_home.h5SaleRepId' | translate}}" ng-model="saleId" required/>
+                        </div>
+                    </form>
+                    <br/>
+                    <div class="k-pay">
+                        <div class="row k-pay-switch">
+                            <!--<div>-->
+                                <!--<span style="color: #aa3b18;display: inline-block;font-weight: 500;font-size: 20px"><b>{{'board_home.h5Currency' | translate}}</b></span>-->
+                                <!--<select class="pull-right currency-select" ng-model="selectCurrency" ng-options="currency.country as currency.currency for currency in currencyList"></select>-->
+                           <!--<div style="clear: both"></div>-->
+                            <!--</div>-->
+                            <span><b>{{'board_home.h5karl_membership' | translate}}</b></span>
+                            <span ng-class="{false:'pull-right',true:'pull-right crossline'}[priceShow]"> {{servicePriceSuffix}}</span>
+                            <span class="pull-right"><b>{{servicePrice}}</b> </span>
+                        </div>
+                        <div class="row fblue" style="margin:0 10px;">
+                            <span ng-show="promo_code_shown">{{'board_home.h5promo_code' | translate}}</span><span class="pull-right"
+                                                                                    ng-click="showPromoCodeLine()"
+                                                                                    ng-disabled="haveVerifyCode"
+                                                                                    ng-show="!promo_code_shown && (checkPaymentInfo)">{{'board_home.h5have_code' | translate}}</span>
+                        </div>
+                        <div ng-show="promo_code_shown">
+                            <div style="display: inline-block;width: 35%;">
+                                <input class="myinput" type="text" placeholder="{{'board_home.h5enter_code' | translate}}" ng-model="couponCode"
+                                       ng-disabled="haveVerifyCode"/>
+                            </div>
+                            <button ng-disabled="checkingCode"
+                                    ng-show="!haveVerifyCode"
+                                    ng-click="getCouponCode($event)" class="btn-blue2 pull-right btn ladda-button"
+                                    style="margin: 12px 0 0 10px;outline: none;">
+                                <span class="ladda-label">{{'board_home.h5apply' | translate}}</span>
+                            </button>
+                            <div class="pull-right" style="margin-top: 12px;text-decoration: underline"
+                                 ng-click="dismissPromoCodeLine()" ng-show="!haveVerifyCode">{{'board_comment.h5cancel' | translate}}
+                            </div>
+
+                        </div>
+                        <div class="k-stripe" ng-show="checkPaymentInfo" >
+                            <form role="form" name="payment-form" method="POST" id="payment-form"
+                                  data-toggle="validator" novalidate>
+                                <span class="payment-errors"></span>
+                                <h2 style="margin-bottom: 0">{{'board_home.h5card_number' | translate}}</h2>
+                                <div class="form-group" style="margin: 0">
+                                    <input type="text" size="20" data-stripe="number" ng-model="card.number"
+                                           class="myinput2" required/>
+                                    <div class="help-block with-errors" style="margin: 0"></div>
+                                </div>
+                                <h2 style="margin-bottom: 0">{{'board_home.h5expiration' | translate}}</h2>
+                                <div class="form-group" style="margin: 0;">
+                                    <input type="text" size="2" data-stripe="exp_month" placeholder="{{'board_home.h5MM' | translate}}"
+                                           ng-model="card.exp_month" class="myinput2" style="width: 20%" required>
+                                    <div class="help-block with-errors" style="margin: 0"></div>
+                                </div>
+
+                                <div class="form-group" style="margin: 0;">
+                                    <input type="text" size="2" data-stripe="exp_year" placeholder="{{'board_home.h5YY' | translate}}"
+                                           ng-model="card.exp_year" class="myinput2" style="width: 20%" required>
+                                    <div class="help-block with-errors" style="margin: 0"></div>
+                                </div>
+                                <h2 style="margin-bottom: 0">{{'board_home.h5CVC' | translate}}</h2>
+                                <div class="form-group" style="margin: 0">
+                                    <input type="text" size="4" data-stripe="cvc" ng-model="card.cvc" class="myinput2"
+                                           style="width:45%;" required>
+                                    <div class="help-block with-errors" style="margin: 0"></div>
+                                </div>
+                                <h2 style="margin-bottom: 0">{{'board_home.h5BillingZip' | translate}}</h2>
+                                <div class="form-group" style="margin: 0">
+                                    <input type="text"
+                                           maxlength="7"
+                                           pattern="^[0-9]{5,7}$"
+                                           size="7"
+                                           data-stripe="address_zip"
+                                           ng-model="card.address_zip"
+                                           class="myinput2"
+                                           style="width:45%;">
+                                    <div class="help-block with-errors" style="margin: 0"></div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="k-legal-fnt">
+                        <span style="font-size: 18px;">
+                            <i class="fa fa-square-o fred"
+                               ng-class="{false:'fa fa-square-o fred',true:'fa fa-check-square-o fred'}[check]"
+                               ng-model="check"
+                               ng-click="check=!check" onclick="$('#buynow').toggleClass('disabled')"
+                               style="width: 15px;"></i>
+                        </span>
+                            {{'board_home.h5check_box' | translate}} <a class="fwhite" data-toggle="modal"
+                                                                     data-target="#myModal"
+                                                                     onclick="$('#k-legal').show();$('html,body').animate({scrollTop:0}, 100);$('.K-obmain').css('border','none')"
+                                                                     style="margin: 0;padding: 0;">{{'board_home.h5terms_conditions' | translate}}</a>
+                        </div>
+                        <button ng-click="submitCompanyAndAdmin($event)" ng-disabled="!canBuy"
+                                class="btn-blue center-block home-mg2 btn ladda-button disabled"
+                                data-style="expand-right" id="buynow" style="outline: none ; width: 250px">
+                            <span class="ladda-label">{{commitButtonTxt}}</span>
+                        </button>
+                    </div>
+
+                    <!--legal-->
+                    <div style="width: 100%;background: #000;z-index: 99;position: absolute;top:0;left:0;color: #fff;display: none;border: rgba(255,77,0,0.5) solid 1px;"
+                         id="k-legal">
+                        <div class="autoclose">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                    style="color: red;opacity: 1;font-size: 30px;text-shadow: none;outline:none;"
+                                    onclick="$('#k-legal').hide();$('.K-obmain').css({'border-width':'1px','border-color':'rgba(255,77,0,0.5)','border-style':'solid'})"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="autobigclose"
+                             onclick="$('#k-legal').hide();$('.K-obmain').css({'border-width':'1px','border-color':'rgba(255,77,0,0.5)','border-style':'solid'})">
+                            <span class="fblue">{{'board_comment.h5close' | translate}}</span></div>
+                        <div class="row" style="margin-top: 50px;">
+                            <img src="img/onboard/home-logo-s.png" class="center-block k-logo-s"/>
+                        </div>
+                        <div class="k-legaltext">
+                            <div class="center-block" style="text-align: center"><span
+                                    style="color: #de4405;font-size: 30px;">{{'board_home.h5agreement' | translate}}</span></div>
+                            <div style="width: 50%;" class="text-center center-block k-legal-mt">
+                            <span class="k-legal-fs">{{'board_home.h5info_1' | translate}}
+                            <br/>
+                            <br/>
+                            {{'board_comment.h5and' | translate}}</span>
+                                <br/>
+                                <br/>
+
+                            </div>
+                            <div class="text-center"> <span class="k-legal-fs">{{'board_home.h5info_2' | translate}}</span>
+                            </div>
+
+                            <div class="k-legal-mt">
+                            <span class="k-legal-fs2">
+                                {{'board_home.h5info_3' | translate}}
+                            </span>
+                            </div>
+                            <div class="text-left" style="margin-left: 0;">
+                                <h2>{{'board_home.h5info_4' | translate}}</h2>
+                            </div>
+                            <br>
+                            <div class="k-legal-fm">
+                            <span>
+                                {{'board_home.h5info_5' | translate}}<br/><br/>
+
+                             {{'board_home.h5info_6' | translate}}<br/><br/>
+                            {{'board_home.h5info_7' | translate}}<br/>
+                            {{'board_home.h5info_8' | translate}}<br/><br/>
+
+                            {{'board_home.h5info_10' | translate}}<br/><br/>
+
+                            {{'board_home.h5info_11' | translate}}<br/><br/>
+
+                            {{'board_home.h5info_12' | translate}}<br/><br/>
+
+
+                            {{'board_home.h5info_13' | translate}}<br/><br/>
+
+                             {{'board_home.h5info_14' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_15' | translate}}<br/>
+                             {{'board_home.h5info_16' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_17' | translate}}<br/>
+                            {{'board_home.h5info_18' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_19' | translate}}<br/>
+                            {{'board_home.h5info_20' | translate}}<br/>
+
+                            {{'board_home.h5info_21' | translate}}<br/><br/>
+
+                             {{'board_home.h5info_22' | translate}}<br/>
+                              {{'board_home.h5info_23' | translate}}<br/><br/>
+
+                            {{'board_home.h5info_24' | translate}}<br/>
+                            {{'board_home.h5info_25' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_26' | translate}}<br/>
+                            {{'board_home.h5info_27' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_28' | translate}}<br/>
+                            {{'board_home.h5info_29' | translate}}
+                            <br/><br/>
+
+
+                            {{'board_home.h5info_30' | translate}}<br/>
+                            {{'board_home.h5info_31' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_32' | translate}}<br/>
+                            {{'board_home.h5info_33' | translate}}
+                            (1)  {{'board_home.h5info_34' | translate}}
+                            (2) {{'board_home.h5info_35' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_36' | translate}}<br/>
+                            {{'board_home.h5info_37' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_38' | translate}}<br/>
+                            {{'board_home.h5info_39' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_40' | translate}}<br/>
+                            {{'board_home.h5info_41' | translate}}
+                            <br/><br/>
+                             {{'board_home.h5info_42' | translate}}<br/>
+                             {{'board_home.h5info_43' | translate}}
+                            <br/><br/>
+                           {{'board_home.h5info_44' | translate}}<br/>
+                             {{'board_home.h5info_45' | translate}}<br/>
+                            (1) {{'board_home.h5info_46' | translate}}
+                            (2) {{'board_home.h5info_47' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_48' | translate}}<br/>
+                            {{'board_home.h5info_49' | translate}}<br/>
+                            (1){{'board_home.h5info_50' | translate}}<br/>
+                            (2) {{'board_home.h5info_51' | translate}}
+                                <br/><br/>
+                            {{'board_home.h5info_52' | translate}}<br/>
+                           {{'board_home.h5info_53' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_54' | translate}}<br/>
+                            {{'board_home.h5info_55' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_56' | translate}}<br/>
+                             {{'board_home.h5info_57' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_58' | translate}}<br/>
+                             {{'board_home.h5info_59' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_60' | translate}}<br/>
+                             {{'board_home.h5info_61' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_62' | translate}}<br/>
+                             {{'board_home.h5info_63' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_64' | translate}}<br/>
+                            {{'board_home.h5info_65' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_66' | translate}}<br/>
+                            {{'board_home.h5info_67' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_68' | translate}}<br/>
+                            {{'board_home.h5info_69' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_70' | translate}}<br/>
+                             {{'board_home.h5info_71' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_72' | translate}}<br/>
+                            {{'board_home.h5info_73' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_74' | translate}}<br/>
+                            {{'board_home.h5info_75' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_76' | translate}}<br/>
+                            {{'board_home.h5info_77' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_78' | translate}}<br/>
+                            {{'board_home.h5info_79' | translate}}
+                            <br/>{{'board_home.h5info_80' | translate}}
+                             <br/><br/>
+                            {{'board_home.h5info_81' | translate}}<br/>
+                            {{'board_home.h5info_82' | translate}}
+                            <br/><br/>
+                            <h2>{{'board_home.h5info_83' | translate}}</h2>
+                            <br/><br/>
+                            {{'board_home.h5info_84' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_85' | translate}}
+                             <br/><br/>
+                            <h2>{{'board_home.h5info_86' | translate}}</h2>
+                            <br/><br/>
+                            {{'board_home.h5info_87' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_88' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_89' | translate}}
+                            <br/><br/>
+                             {{'board_home.h5info_90' | translate}}
+                             <br/><br/>
+                            {{'board_home.h5info_91' | translate}}
+                            <br/><br/>
+                            <h2>{{'board_home.h5info_92' | translate}}</h2>
+                             <br/><br/>
+                            <h2>{{'board_home.h5info_93' | translate}}</h2>
+                            <br/><br/>
+                            {{'board_home.h5info_94' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_95' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_96' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_97' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_98' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_99' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_100' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_101' | translate}}
+                            <br/><br/>
+                             {{'board_home.h5info_102' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_103' | translate}}
+                            <br/><br/>
+
+                            {{'board_home.h5info_104' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_105' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_106' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_107' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_108' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_109' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_110' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_111' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_112' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_113' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_114' | translate}}
+                            <br/><br/>
+
+                            {{'board_home.h5info_115' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_116' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_117' | translate}}
+                            <br/><br/>
+                             {{'board_home.h5info_118' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_119' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_120' | translate}}
+                            <br/><br/>
+                            <h2>{{'board_home.h5info_121' | translate}}</h2><br/><br/>
+                            {{'board_home.h5info_122' | translate}}
+                            <br/><br/>
+
+                            {{'board_home.h5info_123' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_124' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_125' | translate}}
+
+                            <br/><br/>
+                            {{'board_home.h5info_126' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_127' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_128' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_129' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_130' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_131' | translate}}
+
+                            <br/>
+                            <h2>{{'board_home.h5info_132' | translate}}</h2>
+                           {{'board_home.h5info_133' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_134' | translate}}<br/>
+                            {{'board_home.h5info_135' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_136' | translate}}<br/>
+                            {{'board_home.h5info_137' | translate}}
+                            <br/><br/>
+                             {{'board_home.h5info_138' | translate}}<br/>
+                            {{'board_home.h5info_139' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_140' | translate}}<br/>
+                            {{'board_home.h5info_141' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_142' | translate}}
+                            <br/><br/>
+                            <img src="img/onboard/table01.png" class="center-block"/>
+                            <br/><br/>
+                            <h2>{{'board_home.h5info_143' | translate}}</h2><br/>
+                            {{'board_home.h5info_144' | translate}}
+                            <br/><br/>
+                            {{'board_home.h5info_145' | translate}}<br/>
+                            -	{{'board_home.h5info_146' | translate}}<br/>
+                            -	{{'board_home.h5info_147' | translate}}<br/><br/>
+                            <h2>{{'board_home.h5info_148' | translate}}</h2><br/>
+                            {{'board_home.h5info_149' | translate}}
+                            <br/>
+                            {{'board_home.h5info_150' | translate}}
+                            <br/>
+                            {{'board_home.h5info_151' | translate}}
+                            <br/>
+                            {{'board_home.h5info_152' | translate}}
+                            <br/>
+                            {{'board_home.h5info_153' | translate}}
+                            <br/>
+                            {{'board_home.h5info_154' | translate}}
+                            <br/>
+                            {{'board_home.h5info_155' | translate}}
+                            <br/><br/>
+                           {{'board_home.h5info_156' | translate}}
+                            <br/>
+                            - {{'board_home.h5info_157' | translate}}<br/>
+                            - {{'board_home.h5info_158' | translate}}<br/>
+                            - {{'board_home.h5info_159' | translate}}<br/>
+                            - {{'board_home.h5info_160' | translate}}<br/>
+                            - {{'board_home.h5info_161' | translate}}<br/><br/>
+
+                            <h2>{{'board_home.h5info_162' | translate}}</h2><br/><br/>
+
+                            {{'board_home.h5info_163' | translate}}<br/>
+                            - {{'board_home.h5info_164' | translate}};<br/>
+                            - {{'board_home.h5info_165' | translate}};<br/>
+                            - {{'board_home.h5info_166' | translate}};<br/>
+                            - {{'board_home.h5info_167' | translate}};<br/>
+                            - {{'board_home.h5info_168' | translate}};<br/>
+                            - {{'board_home.h5info_169' | translate}};<br/>
+                            - {{'board_home.h5info_170' | translate}};<br/>
+                            - {{'board_home.h5info_171' | translate}};<br/>
+                            - {{'board_home.h5info_172' | translate}};<br/>
+                            - {{'board_home.h5info_173' | translate}};<br/>
+                            - {{'board_home.h5info_174' | translate}}<br/>
+                            - {{'board_home.h5info_175' | translate}}<br/>
+                            - {{'board_home.h5info_176' | translate}}<br/>
+                            <br/>
+                            {{'board_home.h5info_177' | translate}}<br/><br/>
+                            <h2>{{'board_home.h5info_178' | translate}}</h2>
+                            <br/><br/>
+
+                            {{'board_home.h5info_179' | translate}}
+                            <br/>
+                            {{'board_home.h5info_180' | translate}}
+                            <br/>
+                            {{'board_home.h5info_181' | translate}}
+                            <br/>
+                            {{'board_home.h5info_182' | translate}}
+                            <br/>
+                            {{'board_home.h5info_183' | translate}}
+                            <br/>
+                            {{'board_home.h5info_184' | translate}}
+                            <br/><br/>
+                                <h2>{{'board_home.h5info_185' | translate}}</h2><br/>
+                            <br/>
+                            {{'board_home.h5info_186' | translate}}
+                            <br/>
+                            {{'board_home.h5info_187' | translate}}
+                            <br/>
+
+                            {{'board_home.h5info_188' | translate}}
+                                <br/>
+                            {{'board_home.h5info_189' | translate}}<br/>
+                            {{'board_home.h5info_190' | translate}}<br/>
+                            {{'board_home.h5info_191' | translate}}<br/>
+                            {{'board_home.h5info_192' | translate}}<br/>
+                            {{'board_home.h5info_193' | translate}}<br/>
+                            {{'board_home.h5info_194' | translate}}<br/>
+                            {{'board_home.h5info_195' | translate}}<br/>
+                            <br/><br/><h2> {{'board_home.h5info_196' | translate}}</h2><br/><br/>
+
+                            {{'board_home.h5info_197' | translate}}<br/>
+                            <br/>
+                                <h2>{{'board_home.h5info_198' | translate}}</h2>
+                            <br/><br/>
+                            {{'board_home.h5info_199' | translate}}
+                            <br/>
+                            {{'board_home.h5info_200' | translate}}
+                            <br/><br/>
+
+                            <h2>{{'board_home.h5info_201' | translate}}</h2>
+                            {{'board_home.h5info_202' | translate}}
+                            <br/>
+
+                            {{'board_home.h5info_203' | translate}}<br/>
+                            {{'board_home.h5info_204' | translate}}
+                            <br/>
+                                {{'board_home.h5info_205' | translate}}
+                            <br/>
+                             {{'board_home.h5info_206' | translate}}
+                            <br/>
+                            {{'board_home.h5info_207' | translate}}
+                            <br/>
+                            {{'board_home.h5info_208' | translate}}
+                                <br/>
+                            {{'board_home.h5info_209' | translate}}
+                            <br/>
+                            {{'board_home.h5info_210' | translate}}
+                            <br/>
+                            {{'board_home.h5info_211' | translate}}
+                            <br/>
+                            {{'board_home.h5info_212' | translate}}
+                            <br/>
+                                {{'board_home.h5info_213' | translate}}
+                            <br/><br/>
+
+                            {{'board_home.h5info_214' | translate}}<br/>
+                            {{'board_home.h5info_215' | translate}}<br/>
+                            {{'board_home.h5info_216' | translate}}<br/>
+                            {{'board_home.h5info_217' | translate}}<br/>
+                            {{'board_home.h5info_218' | translate}}<br/>
+                            {{'board_home.h5info_219' | translate}}<br/>
+                            {{'board_home.h5info_220' | translate}}<br/>
+                            <br/><br/>
+
+                            {{'board_home.h5info_221' | translate}}<br/>
+
+                            {{'board_home.h5info_222' | translate}}<br/>
+
+
+                            {{'board_home.h5info_223' | translate}}<br/>
+
+                            {{'board_home.h5info_224' | translate}}<br/>
+
+                            {{'board_home.h5info_225' | translate}}<br/><br/>
+
+                            {{'board_home.h5info_226' | translate}}<br/>
+                            {{'board_home.h5info_227' | translate}}
+                            <br/>
+                            {{'board_home.h5info_228' | translate}}
+                            <br/>
+                            {{'board_home.h5info_229' | translate}}
+                            <br/>
+
+                            {{'board_home.h5info_230' | translate}}
+                            <br/>
+                            {{'board_home.h5info_231' | translate}}<br/>
+                                -	{{'board_home.h5info_232' | translate}}<br/>
+                                -	{{'board_home.h5info_233' | translate}}<br/>
+                                -	{{'board_home.h5info_234' | translate}}<br/>
+                                -	{{'board_home.h5info_235' | translate}}<br/><br/>
+                            {{'board_home.h5info_236' | translate}}<br/>
+
+                            {{'board_home.h5info_237' | translate}}<br/>
+                            {{'board_home.h5info_238' | translate}}<br/>
+
+                            {{'board_home.h5info_239' | translate}}<br/>
+                            {{'board_home.h5info_240' | translate}}<br/>
+
+                            {{'board_home.h5info_241' | translate}}<br/>
+                            {{'board_home.h5info_242' | translate}}<br/>
+                            </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

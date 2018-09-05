@@ -1,0 +1,663 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="10"></karl-header-menu>
+    <div class="title-block  finance-padding navbar-collapse">
+        <div class="nav-margin ">
+            <ul class="nav-slider nav-font nav-style">
+                <li style="width:25%;line-height: 50px;height: 50px;display: inline-block"
+                    class="act-tab1 financeTitle " ng-click="onTabChanged(0)"><a href="">{{'finance.h5client_invoice' | translate}}</a>
+                </li>
+                <li style="width:25%;line-height: 50px;height: 50px;display: inline-block" class="financeTitle"
+                    ng-click="onTabChanged(1)"><a href="">{{'finance.h5karl_bill' | translate}}</a>
+                </li>
+                <li style="width:25%;line-height: 50px;height: 50px;display: inline-block" class="financeTitle"
+                    ng-click="onTabChanged(2)"><a href="">{{'finance.h5affiliate_network' | translate}}</a>
+                </li>
+                <li style="width:25%;line-height: 50px;height: 50px;display: inline-block" class="financeTitle"
+                    ng-click="onTabChanged(3)"><a style="color: #404285" href="">{{'finance.h5Archive' | translate}}</a>
+                </li>
+                <li class="slider" style="width:25%;"></li>
+            </ul>
+            <hr style="margin-top: -31px;color:grey">
+        </div>
+
+
+        <!---------------------选定时间与搜索-------------------->
+        <div class="finance-block" style="background: #171821">
+            <div class="nav-margin">
+                <div style="margin-left: 0px">
+                    <div  ng-if="tab == 0 && clientInvoiceList.length > 0">
+                       <span class="timeData fw"
+                             style="font-size:30px;margin-left: 15px;">
+                    {{clientInvoiceList[0].invoiceList[0].settle_time*1000 | dateFormatter: 'langDate'}}
+                        </span>
+                        <down-csv page="invoice" style="width: 150px !important;border-radius: 7px !important;float: right !important;margin-right: 3% !important;height: 25px !important;line-height: 13px !important;margin-top: 8px !important;"></down-csv>
+                    </div>
+
+                    <div ng-if="tab == 1 && karlBillList.length > 0">
+                        <span class="timeData"
+                              style="color:white;font-size:30px;margin-left: 5px;margin-top:-20px">
+                    {{karlBillList[0].invoiceList[0].settle_time*1000 | dateFormatter: 'langDate'}}
+                        </span>
+                        <down-csv page="bill" style="width: 150px !important;border-radius: 7px !important;float: right !important;margin-right: 3% !important;height: 25px !important;line-height: 13px !important;margin-top: 8px !important;"></down-csv>
+                    </div>
+
+                    <div ng-if="tab == 2 && anList.length > 0">
+                         <span class="timeData"
+                               style="color:white;font-size:30px;margin-left: 5px;margin-top:-20px">
+                    {{anList[0].time*1000 | dateFormatter: 'langDate'}}
+                          </span>
+                        <down-csv page="an" style="width: 150px !important;border-radius: 7px !important;float: right !important;margin-right: 3% !important;height: 25px !important;line-height: 13px !important;margin-top: 8px !important;"></down-csv>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="selectAddress selectFromTime" style="float:left;">
+                <span style="color:#4a62ce;font-size:16px;">{{'comment.h5from' | translate}}:</span>
+                <input class="no-border selectInput " type="text"
+                       onfocus="this.blur();"
+                       style="padding-left: 5px"
+                       ng-value="startTime | dateFormatter: 'langDate'"
+                       ng-click="selectTimeButton(0)">
+            </div>
+            <div class="selectAddress" style="float:left">
+                <span style="color:#4a62ce;font-size: 16px;margin-left: 16px">{{'comment.h5to' | translate}}:</span>
+                <input class="no-border selectInput" type="text"
+                       ng-click="selectTimeButton(1)"
+                       onfocus="this.blur();"
+                       style="padding-left: 5px"
+                       ng-value="endTime | dateFormatter: 'langDate'">
+            </div>
+
+            <div class="input-group pull-left finance-search">
+                <input ng-model="input.searchText"
+                       type="text"
+                       class="form-control input-sm bg-light no-border rounded padder search-bg"
+                       placeholder="{{'comment.h5search' | translate}}">
+                <span class="input-group-btn">
+                    <button ng-show="input.searchText"
+                            ng-click="onCancelSearchButtonClick()"
+                            class="btn btn-sm bg-dark2 rounded input-search" style="margin-top: 0">
+                        <i class="fa fa-close fw"></i>
+                    </button>
+                    <button class="btn btn-sm bg-dark2 rounded input-search" style="margin-top: 0">
+                        <i class="fa fa-search fw"></i>
+                    </button>
+                </span>
+            </div>
+            <div>
+                <!---------------Client invoice---------------------->
+                <div class="nav-margin" ng-show="tab == 0">
+                    <form>
+                        <div class="finances " id="stepOne" style="margin-top: 100px;">
+                            <div ng-repeat="oneday in clientInvoiceList">
+                                <div style="display: inline-block;width: 100%;
+                              padding: 5px;">
+                                    <p ng-show="$index > 0" style="font-size: 20px;color:white">
+                                        {{oneday.invoiceList[0].settle_time*1000 | dateFormatter: 'langDate'}}</p>
+                                    <div class="finance-sub finance-padding dopoint"
+                                         ng-repeat="item in oneday.invoiceList"
+                                         style="display: inline;">
+
+                                        <div class="finance-del-panel gen-panel">
+                                            <span class="addon-del-info fw">{{'finance.h5Archive_invoice' | translate}}?</span>
+                                            <div>
+                                                <span class="fgray addon-del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                                                <span class="fred dopoint"
+                                                      ng-click="onArchiveButtonClick(1,item.booking_id)">{{'comment.h5Archive' | translate}}</span>
+                                            </div>
+                                        </div>
+                                        <a type="button" class="card-more"><i class="fa fa-ellipsis-v fd fa-close"></i></a>
+                                        <a type="button" class="card-del gen" title="{{'finance.h5Archive' | translate}}"><i
+                                                class="fa fa-archive fd" style="color: #91aee4"></i></a>
+
+                                        <div class="finance-list" ng-click="onInvoiceDetailClick(item)"
+                                             style="margin: 6px">
+                                            <div class="finance-name">
+                                                <h4 class="fw" style="width: 95%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">
+                                                    {{item.customer_data.first_name}} {{item.customer_data.last_name}}
+                                                </h4>
+                                                <span class="driverName pull-left" style="font-size: 16px;width: 45%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">{{'comment.h5driver' | translate}}:{{item.driver_data.first_name}} {{item.driver_data.last_name}}</span>
+                                                <span class="nowTime pull-right">{{item.settle_time*1000 | dateFormatter:'langsDate'}}</span>
+                                                <div style="border-bottom: 1px solid #5853ad;clear: both"></div>
+                                                <span class="pull-left"
+                                                      style="display:inline-block;padding-bottom: 20px;color:#ffffff;font-weight:bold;font-size: 16px">{{'finance.h5amount_paid' | translate}}</span>
+                                                <span class="pull-right financeMoney"
+                                                      style="display:inline-block;font-size: 16px"
+                                                      ng-click="">+{{(item.settle_fee).toFixed(2) |princeTranslateFilters:false:false:item.ccy}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </form>
+
+                    <uib-pagination ng-show="!showSearchResult && clientInvoiceList.length > 0"
+                                    total-items="pageTotalItems1"
+                                    items-per-page="pagePerCount"
+                                    ng-model="currentPage1"
+                                    previous-text="{{'pagination.h5previous' | translate}}"
+                                    next-text="{{'pagination.h5next' | translate}}"
+                                    max-size="10" ng-change="onPageChange()" class="pagenum mg-t-xl"
+                                    style="width: auto;display: table;margin-left: auto;margin-right: auto;">
+                    </uib-pagination>
+                    <div class="cl"></div>
+                </div>
+
+                <!----------------karl bill-------------------->
+                <div class="nav-margin" ng-show="tab == 1">
+                    <form>
+                        <div class="finances " id="stepTwo" style="margin-top: 100px;">
+                            <div ng-repeat="oneday in karlBillList">
+                                <div style="display: inline-block;width: 100%;
+                               padding: 5px 0;margin-top:10px;">
+                                    <p ng-show="$index > 0" style="font-size: 20px;color:white">
+                                        {{oneday.invoiceList[0].settle_time*1000 | dateFormatter: 'langDate'}}</p>
+                                    <!--<div ng-show="$index > 0">{{oneday.invoiceList[0].settle_time*1000 | dateFormatter: 'LL'}}</div>-->
+                                    <div class="finance-sub finance-padding" ng-repeat="item in oneday.invoiceList"
+                                         style="display: inline;height:150px;background: #4444bf;border-radius: 8px;margin-left: 10px;">
+
+                                        <div class="karlbill-del-panel gen-panel">
+                                            <span class="addon-del-info fw">{{'finance.h5Archive_invoice' | translate}}?</span>
+                                            <div>
+                                                <span class="fgray addon-del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                                                <span class="fred dopoint"
+                                                      ng-click="onArchiveButtonClick(1,item.booking_id)">{{'comment.h5Archive' | translate}}</span>
+                                            </div>
+                                        </div>
+                                        <a type="button" class="card-more"><i class="fa fa-ellipsis-v fd fa-close"></i></a>
+                                        <a type="button" class="card-del gen" title="{{'finance.h5Archive' | translate}}"><i
+                                                class="fa fa-archive fd" style="color: #91aee4"></i></a>
+
+
+                                        <div class="finance-list" ng-click="onBillDetailClick(item)">
+                                            <div class="finance-name">
+                                                <h4 class="fw" style="width: 95%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">
+                                                    {{item.customer_data.first_name}} {{item.customer_data.last_name}}
+                                                </h4>
+
+                                                <span class="driverName pull-left" style="width: 45%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">{{'comment.h5driver' | translate}}:{{item.driver_data.first_name}} {{item.driver_data.last_name}}</span>
+                                                <span class="nowTime pull-right">{{item.settle_time*1000 | dateFormatter:'langsDate'}}</span>
+                                                <div style="clear: both"></div>
+                                                <div style="border-bottom: 1px solid #5853ad;clear: both"></div>
+                                                <span class="pull-left"
+                                                      style="display:inline-block;color:#ffffff;font-weight:bold;font-size: 16px">{{'finance.h5amount_paid' | translate}}</span>
+
+                                                <span class="pull-right financeMoney"
+                                                      style="display:inline-block;font-size: 16px;color:black">
+                               +{{(item.settle_fee).toFixed(2) |princeTranslateFilters:false:false:item.ccy}}</span>
+                                                <div style="clear: both"></div>
+                                                <div>
+                                                    <div class="pull-left"
+                                                         style="font-size: 16px;color:#ffffff;font-weight:bold">
+                                                        {{'finance.h5karl_fee' | translate}}
+                                                    </div>
+                                                    <div class="pull-right financeMoney col-md-4 col-lg-4"
+                                                         style="border-bottom: 1px solid black;font-size: 16px;display: inline-block;text-align: right;padding: 0">
+                                                        -{{(item.platform_income).toFixed(2) | princeTranslateFilters:false:false:item.ccy}}
+                                                    </div>
+                                                    <div style="clear:both"></div>
+                                                </div>
+                                                <div style="margin-top: 10px">
+
+                                                    <div class="pull-right"
+                                                         style="color:black;font-size: 16px;font-weight:600">
+                                                        {{'finance.h5total_income' | translate}}：<span
+                                                            style="color: white"> {{(item.com_income).toFixed(2) |princeTranslateFilters:false:false:item.ccy}}</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </form>
+
+                    <uib-pagination ng-show="!showSearchResult && karlBillList.length > 0" total-items="pageTotalItems2"
+                                    items-per-page="pagePerCount"
+                                    ng-model="currentPage2"
+                                    previous-text="{{'pagination.h5previous' | translate}}"
+                                    next-text="{{'pagination.h5next' | translate}}"
+                                    max-size="10" ng-change="onPageChange()" class="pagenum"
+                                    style="width: auto;display: table;margin-left: auto;margin-right: auto;">
+                    </uib-pagination>
+                    <div class="cl"></div>
+                </div>
+
+                <!--=================Affiliate Network=====================-->
+                <div class="nav-margin" ng-show="tab == 2">
+                    <form>
+                        <div class="finances " id="stepThree" style="margin-top: 100px;">
+                            <br>
+                            <div ng-repeat="dayData in anList">
+                                <p ng-show="$index > 0" style="font-size: 20px ;color: white"> {{dayData.time*1000 | dateFormatter:'langDate'}}</p>
+                                <div ng-show="dayData.AInvoice.invoiceList.length>0">
+                                    <h3 style="border-bottom: 1px solid grey"><span style="color:white">{{'finance.h5farm_out' | translate}}</span>
+                                        <span style="color:#4444bf">({{dayData.AInvoice.invoiceCount}} {{'comment.h5total' | translate}})</span>
+                                    </h3>
+                                    <div ng-repeat="dayAInvoice in dayData.AInvoice.invoiceList">
+                                        <div class="finance-sub finance-padding"
+                                             style="display: inline;height:185px;background: #4444bf;border-radius: 8px;margin-right: 10px;">
+                                            <div style="display: inline-block;width: 100%;">
+                                                <div class="an-del-panel gen-panel">
+                                                    <span class="addon-del-info fw">{{'finance.h5Archive_invoice' | translate}}?</span>
+                                                    <div>
+                                                        <span class="fgray addon-del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                                                        <span class="fred dopoint"
+                                                              ng-click="onArchiveButtonClick(1,dayAInvoice.booking_id)">{{'comment.h5Archive' | translate}}</span>
+                                                    </div>
+                                                </div>
+                                                <a type="button" class="card-more"><i
+                                                        class="fa fa-ellipsis-v fd fa-close"></i></a>
+                                                <a type="button" class="card-del gen" title="{{'finance.h5Archive' | translate}}"><i
+                                                        class="fa fa-archive fd" style="color: #91aee4"></i></a>
+
+                                                <div class="finance-list" ng-click="onAnDetailClick(dayAInvoice)">
+                                                    <div class="fw" style="font-size: 18px; width: 95%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap">
+                                                        {{dayAInvoice.customer_data.first_name}}&nbsp;{{dayAInvoice.customer_data.last_name}}
+                                                    </div>
+
+                                                    <span class="driverName pull-left"
+                                                          ng-click="" style="width: 45%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">{{'comment.h5driver' | translate}}:{{dayAInvoice.driver_data.first_name}} &nbsp; {{dayAInvoice.driver_data.last_name}}</span>
+                                                    <span class="nowTime pull-right"
+                                                          ng-click="">{{dayAInvoice.settle_time*1000 | dateFormatter:'langsDate'}}</span>
+                                                    <div style="clear: both"></div>
+                                                    <div style="border-bottom: 1px solid #5853ad;clear: both"></div>
+                                                    <span class="pull-left"
+                                                          style="display:inline-block;color:#ffffff;font-weight:bold;font-size: 16px">{{'finance.h5amount_paid' | translate}}</span>
+
+                                                    <span class="pull-right"
+                                                          style="display:inline-block;font-size: 16px;color:black"
+                                                          ng-click="">
+                         +{{(dayAInvoice.settle_fee).toFixed(2) |princeTranslateFilters:false:false:dayAInvoice.ccy}}</span>
+                                                    <div style="clear: both"></div>
+                                                    <div>
+                                                        <div class="pull-left"
+                                                             style="font-size: 16px;color:#ffffff;font-weight:bold">
+                                                            {{'finance.h5affiliate_payout' | translate}}
+                                                        </div>
+                                                        <div class="pull-right financeMoney col-md-4 col-lg-4"
+                                                             style="font-size: 16px;display: inline-block;text-align: right;padding: 0">
+                                                            -{{(dayAInvoice.an_fee).toFixed(2) |princeTranslateFilters:false:false:dayAInvoice.ccy}}
+                                                        </div>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="pull-left"
+                                                             style="font-size: 16px;color:#ffffff;font-weight:bold">
+                                                            {{'finance.h5karl_fee' | translate}}
+                                                        </div>
+                                                        <div class="pull-right financeMoney col-md-4 col-lg-4"
+                                                             style="border-bottom: 1px solid black;font-size: 16px;display: inline-block;text-align: right;padding: 0">
+                                                            -{{(dayAInvoice.platform_income).toFixed(2) |princeTranslateFilters:false:false:dayAInvoice.ccy}}
+                                                        </div>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                    <div style="margin-top: 10px">
+
+                                                        <div class="pull-right"
+                                                             style="color:black;font-size: 16px;font-weight:600">
+                                                            {{'finance.h5total_income' | translate}}：<span
+                                                                style="color: white">{{(dayAInvoice.com_income).toFixed(2) |princeTranslateFilters:false:false:dayAInvoice.ccy}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="clear: both"></div>
+
+                                </div>
+
+
+                                <div ng-show="dayData.BInvoice.invoiceList.length>0"><h3
+                                        style="border-bottom: 1px solid grey"><span class="fw">{{'finance.h5farm_in' | translate}}</span>
+                                    <span style="color:#4444bf">({{dayData.BInvoice.invoiceCount}} {{'comment.h5total' | translate}})</span>
+                                </h3>
+
+                                    <div ng-repeat="dayBInvoice in dayData.BInvoice.invoiceList">
+                                        <div class="finance-sub finance-padding"
+                                             style="display: inline;height:185px;background:#4444bf ;border-radius: 8px;margin-right: 10px;">
+                                            <div style="display: inline-block;width: 100%;">
+
+
+                                                <div class="finance-list" ng-click="onAnDetailClick(dayBInvoice)">
+                                                    <!--<div class="finance-name">-->
+                                                    <div class="fw" style="font-size: 18px;width: 95%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap">
+                                                        {{dayBInvoice.customer_data.first_name}}&nbsp;{{dayBInvoice.customer_data.last_name}}
+                                                    </div>
+
+                                                    <span class="driverName pull-left"
+                                                          ng-click="" style="width: 45%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">{{'comment.h5driver' | translate}}:{{dayBInvoice.driver_data.first_name}} &nbsp; {{dayBInvoice.driver_data.last_name}}</span>
+                                                    <span class="nowTime pull-right"
+                                                          ng-click="">{{dayBInvoice.settle_time*1000 | dateFormatter:'langsDate'}}</span>
+                                                    <div style="clear: both"></div>
+                                                    <div style="border-bottom: 1px solid #5853ad;clear: both"></div>
+                                                    <span class="pull-left"
+                                                          style="display:inline-block;color:#ffffff;font-weight:bold;font-size: 16px">{{'finance.h5amount_paid' | translate}}</span>
+
+                                                    <span class="pull-right"
+                                                          style="display:inline-block;font-size: 16px;color:black"
+                                                          ng-click="">
+                         +{{(dayBInvoice.settle_fee).toFixed(2)|princeTranslateFilters:false:false:dayBInvoice.ccy}}</span>
+                                                    <div style="clear: both"></div>
+                                                    <div>
+                                                        <div class="pull-left"
+                                                             style="font-size: 16px;color:#ffffff;font-weight:bold">
+                                                            {{'finance.h5affiliate_payout' | translate}}
+                                                        </div>
+                                                        <div class="pull-right financeMoney col-md-4 col-lg-4"
+                                                             style="font-size: 16px;display: inline-block;text-align: right;padding: 0">
+                                                            -{{(dayBInvoice.com_income).toFixed(2)|princeTranslateFilters:false:false:dayBInvoice.ccy}}
+                                                        </div>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="pull-left"
+                                                             style="font-size: 16px;color:#ffffff;font-weight:bold">
+                                                            {{'finance.h5karl_fee' | translate}}
+                                                        </div>
+                                                        <div class="pull-right financeMoney col-md-4 col-lg-4"
+                                                             style="border-bottom: 1px solid black;font-size: 16px;display: inline-block;text-align: right;padding: 0">
+                                                            -{{(dayBInvoice.platform_income).toFixed(2)|princeTranslateFilters:false:false:dayBInvoice.ccy}}
+                                                        </div>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                    <div style="margin-top: 10px">
+
+                                                        <div class="pull-right"
+                                                             style="color:black;font-size: 16px;font-weight:600">
+                                                            {{'finance.h5total_income' | translate}}：<span
+                                                                style="color: white">{{(dayBInvoice.an_fee).toFixed(2)|princeTranslateFilters:false:false:dayBInvoice.ccy}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="clear: both"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <uib-pagination ng-show="!showSearchResult && anList.length > 0" total-items="pageTotalItems3"
+                                    items-per-page="pagePerCount"
+                                    ng-model="currentPage3"
+                                    previous-text="{{'pagination.h5previous' | translate}}"
+                                    next-text="{{'pagination.h5next' | translate}}"
+                                    max-size="10" ng-change="onPageChange()" class="pagenum"
+                                    style="width: auto;display: table;margin-left: auto;margin-right: auto;">
+                    </uib-pagination>
+                    <div class="cl"></div>
+                </div>
+                <!--=================archive====================-->
+
+
+                <div class="cl"></div>
+                <div class="nav-margin" ng-show="tab == 3">
+                    <div id="karl-accordion" class="basic-accordion">
+                        <div ng-repeat="archives in totleArchive">
+                            <h3 class="myselect">{{archives.name}}<span class="fb"> ({{archives.total}} {{'comment.h5total' | translate}})</span></h3>
+                            <div class="cl-block">
+                                <div ng-show="archives.id==1||archives.id==2"
+                                     ng-class="{1:'finance-sub',2:'karlbill-finance-sub'}[archives.id]"
+                                     class="finance-padding dopoint"
+                                     ng-repeat="clients in archives.transactions"
+                                     style="display: inline;">
+
+                                    <div>
+                                        <div ng-class="{1:'finance-archive-del-panel',2:'karlbill-del-panel'}[archives.id]"
+                                             class="gen-panel">
+                                            <span class="addon-del-info fw">{{'finance.h5Restore_invoice' | translate}}?</span>
+                                            <div>
+                                                <span class="fgray addon-del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                                                <span class="fred dopoint"
+                                                      ng-click="onArchiveButtonClick(0,clients.booking_id)">{{'finance.h5Restore' | translate}}</span>
+                                            </div>
+                                        </div>
+                                        <a type="button" class="card-more"><i class="fa fa-ellipsis-v fd fa-close"></i></a>
+                                        <a type="button" class="card-del gen" title="{{'finance.h5Restore_invoice' | translate}}"><i class="fa fa-archive fd" style="color: #91aee4"></i></a>
+
+                                        <div ng-class="{1:'finance-list',2:'karlbill-finance-list'}[archives.id]" ng-click="onArchiveDetailClick(clients,archives.id)"
+                                             style="">
+                                            <div class="finance-name" >
+                                                <h4 class="fw" style="width: 95%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap">
+                                                    {{clients.customer_data.first_name}}
+                                                    {{clients.customer_data.last_name}}
+                                                </h4>
+                                                <span class="driverName pull-left" style="font-size: 16px;width: 45%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">{{'comment.h5driver' | translate}}:{{clients.driver_data.first_name}} {{clients.driver_data.last_name}}</span>
+                                                <span class="nowTime pull-right">{{clients.settle_time*1000 | dateFormatter:'langsDate'}}</span>
+                                                <div style="border-bottom: 1px solid #5853ad;clear: both"></div>
+                                                <span ng-class="{1:'finnance-padding',2:'',3:''}[archives.id]"
+                                                      class="pull-left"
+                                                      style="display:inline-block;color:#ffffff;font-weight:bold;font-size: 16px">{{'finance.h5amount_paid' | translate}}</span>
+                                                <span ng-class="{1:'financeMoney',2:'archive-financeMoney',3:'archive-financeMoney'}[archives.id]"
+                                                      class="pull-right financeMoney"
+                                                      style="display:inline-block;font-size: 16px"
+                                                      ng-click="">+{{(clients.settle_fee).toFixed(2)|princeTranslateFilters:false:false:clients.ccy}}</span>
+                                                <div style="clear: both"></div>
+                                            </div>
+
+                                            <div ng-show="archives.id==2">
+                                                <div class="pull-left"
+                                                     style="font-size: 16px;color:#ffffff;font-weight:bold">
+                                                    {{'finance.h5karl_fee' | translate}}
+                                                </div>
+                                                <div class="pull-right financeMoney col-md-4 col-lg-4"
+                                                     style="border-bottom: 1px solid black;font-size: 16px;display: inline-block;text-align: right;padding: 0">
+                                                    -{{(clients.platform_income).toFixed(2)|princeTranslateFilters:false:false:clients.ccy}}
+                                                </div>
+                                                <div style="clear:both"></div>
+                                            </div>
+
+                                            <div ng-show="archives.id==2" style="margin-top: 10px">
+                                                <div class="pull-right"
+                                                     style="color:black;font-size: 16px;font-weight:600">
+                                                    {{'finance.h5total_income' | translate}}：<span
+                                                        style="color: white"> {{(clients.com_income).toFixed(2)|princeTranslateFilters:false:false:clients.ccy}}</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div ng-show="archives.id==3&&totleArchive[2].transactions[0].length>0">
+                                    <h3 style="border-bottom: 1px solid #3d3b3b;cursor: auto;margin-top: 0"><span
+                                            style="color:#6c6868;font-size: 17px">{{'finance.h5farm_out' | translate}}</span>
+                                    </h3>
+                                    <div ng-repeat="dayAInvoice in totleArchive[2].transactions[0]">
+                                        <div class="finance-sub finance-padding"
+                                             style="display: inline;height:185px;background: #4444bf;border-radius: 8px;margin-right: 10px;">
+                                            <div style="display: inline-block;width: 100%;">
+                                                <div class="an-del-panel gen-panel">
+                                                    <span class="addon-del-info fw">{{'finance.h5Archive_invoice' | translate}}?</span>
+                                                    <div>
+                                                        <span class="fgray addon-del-cancel dopoint gen-cancel">{{'comment.h5cancel' | translate}}</span>
+                                                        <span class="fred dopoint"
+                                                              ng-click="onArchiveButtonClick(0,dayAInvoice.booking_id)">{{'finance.h5Restore' | translate}}</span>
+                                                    </div>
+                                                </div>
+                                                <a type="button" class="card-more"><i
+                                                        class="fa fa-ellipsis-v fd fa-close"></i></a>
+                                                <a type="button" class="card-del gen" title="{{'finance.h5Restore_invoice' | translate}}"><i
+                                                        class="fa fa-archive fd" style="color: #91aee4"></i></a>
+
+                                                <div class="finance-list"
+                                                     ng-click="onArchiveDetailClick(dayAInvoice,3)">
+                                                    <div class="fw" style="font-size: 18px;width: 95%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap">
+                                                        {{dayAInvoice.customer_data.first_name}}&nbsp;{{dayAInvoice.customer_data.last_name}}
+                                                    </div>
+
+                                                    <span class="driverName pull-left"
+                                                          ng-click="" style="width: 45%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">{{'comment.h5driver' | translate}}:{{dayAInvoice.driver_data.first_name}} &nbsp; {{dayAInvoice.driver_data.last_name}}</span>
+                                                    <span class="nowTime pull-right"
+                                                          ng-click="">{{dayAInvoice.settle_time*1000 | dateFormatter:'langsDate'}}</span>
+                                                    <div style="clear: both"></div>
+                                                    <div style="border-bottom: 1px solid #5853ad;clear: both"></div>
+                                                    <span class="pull-left"
+                                                          style="display:inline-block;color:#ffffff;font-weight:bold;font-size: 16px">{{'finance.h5amount_paid' | translate}}</span>
+
+                                                    <span class="pull-right"
+                                                          style="display:inline-block;font-size: 16px;color:black"
+                                                          ng-click="">
+                         +{{(dayAInvoice.settle_fee).toFixed(2)|princeTranslateFilters:false:false:dayAInvoice.ccy}}</span>
+                                                    <div style="clear: both"></div>
+                                                    <div>
+                                                        <div class="pull-left"
+                                                             style="font-size: 16px;color:#ffffff;font-weight:bold">
+                                                            {{'finance.h5affiliate_payout' | translate}}
+                                                        </div>
+                                                        <div class="pull-right financeMoney col-md-4 col-lg-4"
+                                                             style="font-size: 16px;display: inline-block;text-align: right;padding: 0">
+                                                            -{{(dayAInvoice.an_fee).toFixed(2)|princeTranslateFilters:false:false:dayAInvoice.ccy}}
+                                                        </div>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="pull-left"
+                                                             style="font-size: 16px;color:#ffffff;font-weight:bold">
+                                                            {{'finance.h5karl_fee' | translate}}
+                                                        </div>
+                                                        <div class="pull-right financeMoney col-md-4 col-lg-4"
+                                                             style="border-bottom: 1px solid black;font-size: 16px;display: inline-block;text-align: right;padding: 0">
+                                                            -{{(dayAInvoice.platform_income).toFixed(2)|princeTranslateFilters:false:false:dayAInvoice.ccy}}
+                                                        </div>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                    <div style="margin-top: 10px">
+
+                                                        <div class="pull-right"
+                                                             style="color:black;font-size: 16px;font-weight:600">
+                                                            {{'finance.h5total_income' | translate}}：<span
+                                                                style="color: white">{{(dayAInvoice.com_income).toFixed(2)|princeTranslateFilters:false:false:dayAInvoice.ccy}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="clear: both"></div>
+
+                                </div>
+
+
+                                <div ng-show="archives.id==3&&totleArchive[2].transactions[1].length>0">
+                                    <h3 style="border-bottom: 1px solid #3d3b3b;cursor: auto;margin-top: 0"><span
+                                            style="color:#6c6868;font-size: 17px">{{'finance.h5farm_in' | translate}}</span>
+                                        <!--<span style="color:#4444bf">({{dayData.BInvoice.invoiceCount}} Total)</span>-->
+                                    </h3>
+
+                                    <div ng-repeat="dayBInvoice in totleArchive[2].transactions[1]">
+                                        <div class="finance-sub finance-padding"
+                                             style="display: inline;height:185px;background:#4444bf ;border-radius: 8px;margin-right: 10px;">
+                                            <div style="display: inline-block;width: 100%;">
+
+                                                <div class="finance-list"
+                                                     ng-click="onArchiveDetailClick(dayBInvoice,3)">
+                                                    <!--<div class="finance-name">-->
+                                                    <div class="fw" style="font-size: 18px;width: 95%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap">
+                                                        {{dayBInvoice.customer_data.first_name}}&nbsp;{{dayBInvoice.customer_data.last_name}}
+                                                    </div>
+
+                                                    <span class="driverName pull-left"
+                                                          ng-click="" style="width: 45%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">{{'comment.h5driver' | translate}}:{{dayBInvoice.driver_data.first_name}} &nbsp; {{dayBInvoice.driver_data.last_name}}</span>
+                                                    <span class="nowTime pull-right"
+                                                          ng-click="">{{dayBInvoice.settle_time*1000 |dateFormatter:'langsDate'}}</span>
+                                                    <div style="clear: both"></div>
+                                                    <div style="border-bottom: 1px solid #5853ad;clear: both"></div>
+                                                    <span class="pull-left"
+                                                          style="display:inline-block;color:#ffffff;font-weight:bold;font-size: 16px">{{'finance.h5amount_paid' | translate}}</span>
+
+                                                    <span class="pull-right"
+                                                          style="display:inline-block;font-size: 16px;color:black"
+                                                          ng-click="">
+                         +{{(dayBInvoice.settle_fee).toFixed(2)|princeTranslateFilters:false:false:dayBInvoice.ccy}}</span>
+                                                    <div style="clear: both"></div>
+                                                    <div>
+                                                        <div class="pull-left"
+                                                             style="font-size: 16px;color:#ffffff;font-weight:bold">
+                                                            {{'finance.h5affiliate_payout' | translate}}
+                                                        </div>
+                                                        <div class="pull-right financeMoney col-md-4 col-lg-4"
+                                                             style="font-size: 16px;display: inline-block;text-align: right;padding: 0">
+                                                            -{{(dayBInvoice.com_income).toFixed(2)|princeTranslateFilters:false:false:dayBInvoice.ccy}}
+                                                        </div>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="pull-left"
+                                                             style="font-size: 16px;color:#ffffff;font-weight:bold">
+                                                            {{'finance.h5karl_fee' | translate}}
+                                                        </div>
+                                                        <div class="pull-right financeMoney col-md-4 col-lg-4"
+                                                             style="border-bottom: 1px solid black;font-size: 16px;display: inline-block;text-align: right;padding: 0">
+                                                            -{{(dayBInvoice.platform_income).toFixed(2)|princeTranslateFilters:false:false:dayBInvoice.ccy}}
+                                                        </div>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                    <div style="margin-top: 10px">
+
+                                                        <div class="pull-right"
+                                                             style="color:black;font-size: 16px;font-weight:600">
+                                                            {{'finance.h5total_income' | translate}}：<span
+                                                                style="color: white">{{(dayBInvoice.an_fee).toFixed(2)|princeTranslateFilters:false:false:dayBInvoice.ccy}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                </div>
+
+                                <div ng-show="archives.id==1&&totleArchive[0].transactions.length>0">
+                                <uib-pagination total-items="archivePageTotalItems1"
+                                items-per-page="pagePerCount"
+                                ng-model="archivePaging.archiveCurrentPage1"
+                                previous-text="{{'pagination.h5previous' | translate}}"
+                                next-text="{{'pagination.h5next' | translate}}"
+                                max-size="10" ng-change="onArchivePageChange(1)" class="pagenum"
+                                style="width: 100%;margin: 0">
+                                </uib-pagination>
+                                </div>
+                                <div ng-show="archives.id==2&&totleArchive[1].transactions.length>0">
+                                <uib-pagination total-items="archivePageTotalItems2"
+                                items-per-page="pagePerCount"
+                                ng-model="archivePaging.archiveCurrentPage2"
+                                previous-text="{{'pagination.h5previous' | translate}}"
+                                next-text="{{'pagination.h5next' | translate}}"
+                                max-size="10" ng-change="onArchivePageChange(2)" class="pagenum"
+                                style="width: 100%;margin: 0">
+                                </uib-pagination>
+                                </div>
+                                <div ng-show="archives.id==3&&(totleArchive[2].transactions[0].length>0||totleArchive[2].transactions[1].length>0)">
+                                <uib-pagination total-items="archivePageTotalItems3"
+                                items-per-page="pagePerCount"
+                                ng-model="archivePaging.archiveCurrentPage3"
+                                previous-text="{{'pagination.h5previous' | translate}}"
+                                next-text="{{'pagination.h5next' | translate}}"
+                                max-size="10" ng-change="onArchivePageChange(3)" class="pagenum"
+                                style="width: 100%;margin: 0">
+                                </uib-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<google-analytics analytics-page='/finance.html'></google-analytics>
+

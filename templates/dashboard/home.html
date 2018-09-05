@@ -1,0 +1,426 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="0"></karl-header-menu>
+    <div class=" card-fix">
+        <div class="app-aside-folded home-panel navbar-collapse">
+            <div>
+                <div class="fw dopoint home-panel-close" style="width: 100%;margin-top: -10px;"
+                     onclick="$('.home-today').show();$('.home-panel').hide();">
+                    <i class="fa fa-chevron-down pull-right"></i>
+                    <div class="cl"></div>
+                </div>
+                <div class="line-bottom pos-rtl">
+                    <div class="f-w-300 f-l fw inline test">{{'comment.h5today' | translate}}</div>
+                    <div class="inline" title="{{'home.h5Refresh' | translate}}" style="margin-left: 15px;color: #f2f2f2;font-size: 20px;cursor: pointer"
+                         ng-click="refreshClick()">
+                        <i ng-show="!showLoading" class="fa fa-refresh" aria-hidden="true"></i>
+                        <i ng-show="showLoading" class="fa fa-spinner faa-spin animated" aria-hidden="true"></i>
+                    </div>
+                    <div class="pull-right" style="margin-top: 12px;">
+                        <div class="inline fw f-s home-sort dopoint" ng-click="showTimeStateAction()">
+                            <div class="fw2 inline">{{'home.h5sort_by' | translate}}:</div>
+                            <i class="fa fa-chevron-down pull-right fblack"></i>
+                                <span>
+                                    <b ng-show="selectedTimeState == 0">{{'home.h5all' | translate}}</b>
+                                    <b ng-show="selectedTimeState == 1">{{'home.h5on_time' | translate}}</b>
+                                    <b ng-show="selectedTimeState == 2">{{'home.h5action_required' | translate}}</b>
+                                    <b ng-show="selectedTimeState == 3">{{'home.h5late' | translate}}</b>
+                                    <b ng-show="selectedTimeState == 4">{{'home.h5idle' | translate}}</b>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="pos-abt home-sort-panel" ng-show="timeStateActionIsShow">
+                        <ul>
+                            <li class="state-0 dopoint" ng-click="onChangeTimeState(0)">{{'home.h5all' | translate}}</li>
+                            <li class="state-1 dopoint" ng-click="onChangeTimeState(1)">{{'home.h5on_time' | translate}}</li>
+                            <li class="state-3 dopoint" ng-click="onChangeTimeState(2)">{{'home.h5action_required' | translate}}</li>
+                            <li class="state-2 dopoint" ng-click="onChangeTimeState(3)">{{'home.h5late' | translate}}</li>
+                            <li class="state-4 dopoint" ng-click="onChangeTimeState(4)">{{'home.h5idle' | translate}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p class="input-group pull-left home-search">
+                <input type="text"
+                       ng-model="input.searchText"
+                       class="form-control input-sm bg-light no-border rounded padder search-bg"
+                       style="color: white"
+                       placeholder="{{'comment.h5search' | translate}}">
+                <span class="input-group-btn">
+                    <button ng-show="showSearchResult"
+                            type="submit"
+                            ng-click="onCancelSearchButtonClick()"
+                            class="btn btn-sm bg-dark2 rounded input-search"
+                            style="margin-top: 0">
+                               <i class="fa fa-close fgray"></i>
+                    </button>
+                    <button type="submit"
+                            ng-click="onSearchButtonClick()"
+                            class="btn btn-sm bg-dark2 rounded input-search"
+                            style="margin-top: 0">
+                               <i class="fa fa-arrow-right fgray"></i>
+                    </button>
+                </span>
+            </p>
+            <div class="cl"></div>
+            <div ng-repeat="bookingGroup in todayBookingGroup" ng-show="todayBookingGroup.length > 0">
+                <div class="time-booking">
+                    <span class="fw f-m"><b>{{bookingGroup.bookingList[0].appointed_at*1000 | dateFormatter:'shortHour'}}</b></span>
+                    <span ng-show="!isDisplayOneVehicleOnTrip" class="fblack f-m pull-right">{{bookingGroup.bookingCount}} {{'comment.h5bookings' | translate}}</span>
+                    <i ng-show="isDisplayOneVehicleOnTrip" ng-click="onCancelDisplayOneVehicleOnTrip()"
+                       class="fw pull-right f-s fa m-t-s fa-reply" style="margin-top: 10px;margin-right: 5px;"></i>
+                </div>
+                <div class="cl"></div>
+                <div class="home-book-area" ng-repeat="booking in bookingGroup.bookingList">
+
+                    <!--pc版小卡片头开始-->
+                    <div class="home-book-info" ng-style="{background: booking.showReject == true ? '#ff4b00' : ''}">
+                        <div>
+                            <span class="book-name fw2"  style="width:88%;float: left;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap"
+                                  ng-class="{true:'statefc',false:''}[booking.showState==2]">{{booking.c_first_name}} {{booking.c_last_name}}</span>
+                            <div ng-show="(booking.d_airline != null && booking.d_airline.toString().length > 0)||(booking.d_flight != null &&booking.d_flight.toString().length > 0 )||(booking.a_airline != null &&booking.a_airline.toString().length > 0 )||(booking.a_flight != null&&booking.a_flight.toString().length > 0)"
+                                 style="width:30px;height: 30px;border-radius: 100%;float: right;text-align: center;line-height: 160%;padding: 0;font-size: 19px">
+                                <i class="fa fa-plane" aria-hidden="true"></i>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                        <div class="f-s fblack textline-2"
+                             style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                            {{booking.d_final_address[0]}}
+                        </div>
+                        <div class="f-s fblack textline-2"
+                             style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"
+                             ng-show="booking.d_final_address[1]">
+                            {{booking.d_final_address[1]}}
+                        </div>
+                        <div class="line-blue"></div>
+                        <div style="height:50px;">
+                            <div class="pull-left" ng-show="booking.type == 1">
+                                <span class="fw" ng-show="booking.trip_state == 0">
+                                    <span ng-show="booking.time_state == 2">
+                                    {{'home.h5driver_late' | translate}}
+                                    </span>
+                                     <span ng-show="booking.time_state == 3">
+                                    {{'home.h5time_pickUp' | translate}}:
+                                    </span>
+                                </span>
+                                <span class="fblack" ng-show="booking.trip_state == 0">
+                                    <b ng-show="booking.time_state == 3">{{booking.timeToPickup | TimeFormatFilter}}</b>
+                                </span>
+
+                                <span class="fw" ng-show="booking.trip_state == 1">{{'home.h5distance_client' | translate}}:</span>
+                                <span class="fblack" ng-show="booking.trip_state == 1">
+                                    <b ng-show="distanceUnit==1">{{booking.distanceToClient}} {{'comment.h5Mi' | translate}}</b>
+                                    <b ng-show="distanceUnit==2">{{booking.distanceToClient}} {{'comment.h5km' | translate}}</b>
+                                </span>
+
+                                <span class="fw" ng-show="booking.trip_state == 2">{{'home.h5arrived_pickUp' | translate}}</span>
+
+                                <span class="fw" ng-show="booking.trip_state == 3">{{'home.h5distance_destination' | translate}}:</span>
+                                <span class="fblack" ng-show="booking.trip_state == 3">
+                                    <b ng-show="distanceUnit==1">{{booking.distanceToDes}} {{'comment.h5Mi' | translate}}</b>
+                                    <b ng-show="distanceUnit==2">{{booking.distanceToDes}} {{'comment.h5km' | translate}}</b>
+                                </span>
+
+                                <span class="fw" ng-show="booking.trip_state == 4">{{'home.h5arrived' | translate}}</span>
+                                <br/>
+
+                                <span class="fw" ng-show="booking.trip_state == 1">{{'home.h5time_client' | translate}}:</span>
+                                <span class="fblack"
+                                      ng-show="booking.trip_state == 1"><b>{{booking.timeToClient | TimeFormatFilter}}</b></span>
+
+
+                                <span class="fw" ng-show="booking.trip_state == 3">{{'home.h5time_destination' | translate}}:</span>
+                                <span class="fblack" ng-show="booking.trip_state == 3"><b>{{booking.timeToDes | TimeFormatFilter}}</b></span>
+                            </div>
+                            <div class="pull-left" ng-show="booking.type == 2 || booking.type == 3">
+                                <span class="fw" ng-show="booking.trip_state == 0">
+                                    <span ng-show="booking.time_state == 2">
+                                    {{'home.h5driver_late' | translate}}
+                                    </span>
+                                     <span ng-show="booking.time_state == 3">
+                                    {{'home.h5time_pickUp' | translate}}:
+                                    </span>
+                                </span>
+                                <span class="fblack" ng-show="booking.trip_state == 0">
+                                    <b ng-show="booking.time_state == 3">{{booking.timeToPickup | TimeFormatFilter}}</b>
+                                </span>
+
+                                <span class="fw" ng-show="booking.trip_state == 1">{{'home.h5distance_client' | translate}}:</span>
+                                <span class="fblack" ng-show="booking.trip_state == 1">
+                                    <b ng-show="distanceUnit==1">{{booking.distanceToClient}} {{'comment.h5Mi' | translate}}</b>
+                                    <b ng-show="distanceUnit==2">{{booking.distanceToClient}} {{'comment.h5km' | translate}}</b>
+                                </span>
+
+                                <span class="fw" ng-show="booking.trip_state == 2">{{'home.h5arrived_pickUp' | translate}}</span>
+
+                                <span class="fw" ng-show="booking.trip_state == 3">{{'comment.h5last' | translate}}</span>
+                                <span class="fblack"
+                                      ng-show="booking.trip_state == 3"><b>{{booking.last | TimeFormatFilter}}</b></span>
+
+
+                                <span class="fw" ng-show="booking.trip_state == 4">{{'home.h5arrived' | translate}}</span>
+                                <br/>
+                                <span class="fw" ng-show="booking.trip_state == 1">{{'home.h5time_client' | translate}}:</span>
+                                <span class="fblack"
+                                      ng-show="booking.trip_state == 1"><b>{{booking.timeToClient | TimeFormatFilter}}</b></span>
+                            </div>
+                            <div class="pull-right" style="line-height: 180%;">
+                                <span class="fw" ng-show="booking.type == 1">{{'comment.h5transfer' | translate}}</span>
+                                <span class="fw" ng-show="booking.type == 2">{{'comment.h5hourly' | translate}}</span>
+                                <span class="fw" ng-show="booking.type == 3">{{'comment.h5custom_quote' | translate}}</span>
+                                <br/>
+                                <span class="fred" style="display: block;float: right">{{booking.appointed_at*1000 | dateFormatter:'shortTime'}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--手机版小卡片头开始-->
+                    <div class="home-book-info-xs">
+                        <div style="height:60px;">
+                            <div class="pull-left" style="width: 78%">
+                                <span style="width:88%;float: left;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap" class="fw f-m" ng-class="{true:'statefc',false:''}[booking.showState==2]">{{booking.c_first_name}} {{booking.c_last_name}}</span>
+                                <br/>
+                                <div class="fw"
+                                     style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;width: 70%;margin: 0">
+                                    {{booking.d_final_address[0]}}
+                                </div>
+                                <div class="fw"
+                                     style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;width: 70%;margin: 0"
+                                     ng-show="booking.d_final_address[1]">
+                                    {{booking.d_final_address[1]}}
+                                </div>
+                            </div>
+                            <div class="pull-right" style="width: 22%">
+                                <div>
+                                    <span class="fw" ng-show="booking.showP2pState == 1"
+                                          style="display: inline-block">{{'home.h5long_haul_distance' | translate}}</span>
+                                    <span class="fw" ng-show="booking.showP2pState == 2"
+                                          style="display: inline-block">{{'comment.h5transfers' | translate}}</span>
+                                    <span class="fw" ng-show="booking.type == 2"
+                                          style="display: inline-block">{{'comment.h5hourly' | translate}}</span>
+                                    <span class="fw" ng-show="booking.type == 3"
+                                          style="display: inline-block">{{'comment.h5custom' | translate}}</span>
+                                    <div ng-show="(booking.d_airline != null && booking.d_airline.toString().length > 0)||(booking.d_flight != null &&booking.d_flight.toString().length > 0 )||(booking.a_airline != null &&booking.a_airline.toString().length > 0 )||(booking.a_flight != null&&booking.a_flight.toString().length > 0)"
+                                         style="float: right;text-align: center;padding: 0;font-size: 15px">
+                                        <i class="fa fa-plane" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+
+                                <div class="fred" style="font-size: 10px">{{booking.appointed_at*1000 | dateFormatter:'shortTime'}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / 手机版小卡片头结束-->
+                    <div class="home-book-more state-ontime dopoint" ng-show="booking.time_state == 0"
+                         ng-click="showDriverAndVehicle(booking.id)">
+                        <div class="inline" style="width: 80%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                            <span>{{'comment.h5driver' | translate}}:</span> <span class="fblack">{{booking.driver_data.first_name}} {{booking.driver_data.last_name}}</span>
+                            <i ng-show="booking.trip_state > 2" class="fa fa-check-circle pull-right"></i>
+                            <i ng-class="{true:'fa fa-user-plus pull-right',false:'fa fa-user pull-right'}[booking.trip_state > 2]"></i>
+                        </div>
+                        <i ng-class="{true:'fa fa-chevron-up pull-right',false:'fa fa-chevron-down pull-right'}[booking.isShowDriverAndVehicle]"></i>
+                    </div>
+
+                    <div class="home-book-more state-required dopoint" ng-show="booking.time_state == 1"
+                         ng-click="showDriverAndVehicle(booking.id)">
+                        <div class="inline" style="width: 80%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                            <span>{{'comment.h5driver' | translate}}:</span> <span class="fblack">{{booking.driver_data.first_name}} {{booking.driver_data.last_name}}</span>
+                            <i class="fa fa-user pull-right"></i>
+                        </div>
+                        <i ng-class="{true:'fa fa-chevron-up pull-right',false:'fa fa-chevron-down pull-right'}[booking.isShowDriverAndVehicle]"></i>
+                    </div>
+
+                    <div class="home-book-more state-late dopoint" ng-show="booking.time_state == 2"
+                         ng-click="showDriverAndVehicle(booking.id)">
+                        <div class="inline" style="width: 80%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                            <span>{{'comment.h5driver' | translate}}:</span> <span class="fblack">{{booking.driver_data.first_name}} {{booking.driver_data.last_name}}</span>
+                            <i ng-show="booking.trip_state == 1" class="fa fa-user pull-right"></i>
+                        </div>
+                        <i ng-class="{true:'fa fa-chevron-up pull-right',false:'fa fa-chevron-down pull-right'}[booking.isShowDriverAndVehicle]"></i>
+                    </div>
+
+                    <div class="home-book-more state-idle dopoint" ng-show="booking.time_state == 3"
+                         ng-click="showDriverAndVehicle(booking.id)">
+                        <div class="inline" style="width: 80%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                            <span>{{'comment.h5driver' | translate}}:</span> <span class="fblack">{{booking.driver_data.first_name}} {{booking.driver_data.last_name}}</span>
+                        </div>
+                        <i ng-class="{true:'fa fa-chevron-up pull-right',false:'fa fa-chevron-down pull-right'}[booking.isShowDriverAndVehicle]"></i>
+                    </div>
+
+                    <div class="home-book-detail" ng-show="booking.isShowDriverAndVehicle">
+                        <div class="detail-trip">
+                            <div class="c-block2  pos-rlt">
+                                <div>
+                                    <h6 class="fw" style="display: inline-block">{{'comment.h5trip' | translate}}</h6>
+                                    <!--<div ng-show="(booking.d_airline != null && booking.d_airline.length > 0)||(booking.d_flight != null &&booking.d_flight.length > 0 )||(booking.a_airline != null &&booking.a_airline.length > 0 )||(booking.a_flight != null&&booking.a_flight.length > 0)"-->
+                                    <!--style="margin-top:15px;width:30px;height: 30px;border-radius: 100%;float: right;text-align: center;line-height: 160%;padding: 0;font-size: 19px">-->
+                                    <!--<i class="fa fa-plane" aria-hidden="true"></i>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="cal-trip-card-up pos-rlt">
+                                    <div class="home-trip-card-loc">
+                                        <span class="fw">A</span>
+                                        <p class="fw textline-2">
+                                            <!--{{booking.d_address}}-->
+                                        <span class="f-s fblack textline-2"
+                                              style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: inline-block">
+                                            {{booking.d_final_address[0]}}
+                                        </span>
+                                            <br>
+                                        <span class="f-s fblack textline-2"
+                                              style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: inline-block"
+                                              ng-show="booking.d_final_address[1]">
+                                            {{booking.d_final_address[1]}}
+                                        </span>
+                                            <span class="home-airline"
+                                                  ng-hide="(booking.d_airline == null||booking.d_airline.length==0) && (booking.d_flight == null||booking.d_flight.length == 0)">
+                                                <br/>
+                                                <span class="inline">
+                                                    <span class="fblack">{{'comment.h5airline' | translate}}</span>
+                                                    <br/>
+                                                    <span class="fw2">{{booking.d_airline}}</span>
+                                                </span>
+                                                <span class="inline pull-right">
+                                                    <span class="fblack">{{'comment.h5flight_number' | translate}}</span>
+                                                    <br/>
+                                                    <span class="fw2">{{booking.d_flight}}</span>
+                                                </span>
+                                            </span>
+                                        </p>
+                                        <div class="line-ver2-long" ng-show="booking.type == 1"></div>
+                                    </div>
+                                    <div class="home-trip-card-loc" ng-show="booking.type == 1">
+                                        <span style="background: #294775" class="fw">B</span>
+                                        <p class="fw textline-2">
+                                            <span class="f-s fblack textline-2"
+                                                  style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: inline-block">
+                                            {{booking.a_final_address[0]}}
+                                        </span>
+                                            <br>
+                                            <span class="f-s fblack textline-2"
+                                                  style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display: inline-block"
+                                                  ng-show="booking.a_final_address[1]">
+                                            {{booking.a_final_address[1]}}
+                                        </span>
+                                            <span class="home-airline"
+                                                  ng-hide="(booking.a_airline == null||booking.a_airline.length==0) && (booking.a_flight == null||booking.a_flight.length == 0)">
+                                                <br/>
+                                                <span class="inline">
+                                                    <span class="fblack">{{'comment.h5airline' | translate}}</span>
+                                                    <br/>
+                                                    <span class="fw2">{{booking.a_airline}}</span>
+                                                </span>
+                                                <span class="inline pull-right">
+                                                    <span class="fblack">{{'comment.h5flight_number' | translate}}</span>
+                                                    <br/>
+                                                    <span class="fw2">{{booking.a_flight}}</span>
+                                                </span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <!--<div class="line-ver2-long" ng-show="booking.type == 1"></div>-->
+                                </div>
+                                <div class="line-blue"></div>
+                                <div class="home-trip-op-block">
+                                    <div class="home-trip-op">
+                                        <span class="fblack">{{'comment.h5total_time' | translate}}</span><br/>
+                                        <span class="f-s"><i class="fa fa-clock-o fblack"></i>{{booking.estimate_time | TimeFormatFilter}}</span>
+                                    </div>
+                                    <div class="home-trip-op" ng-show="booking.type == 1">
+                                        <span class="fblack">{{'comment.h5distance' | translate}}</span><br/>
+                                        <span class="f-s"><i class="fa fa-map fblack"></i>{{booking.estimate_distance | DistanceFormatFilter: true:booking.unit}}</span>
+                                        <!--<span ng-show="booking.unit==2" class="f-s"><i class="fa fa-map fblack"></i>{{booking.estimate_distance}}  {{'comment.h5km' | translate}}</span>-->
+                                    </div>
+                                    <div class="home-trip-op">
+                                        <span class="fblack">{{'comment.h5rate' | translate}}</span><br/>
+                                        <span class="f-s">
+                                            <i ng-show="booking.ccy.toLowerCase()=='usd'" class="fa fblack fa-dollar"></i>
+                                            {{booking.total_cost|princeTranslateFilters:false:true:booking.ccy}}
+                                            <i ng-show="booking.ccy.toLowerCase()=='eur'" class="fa fblack fa-eur"></i>
+                                            <i ng-show="booking.ccy.toLowerCase()=='gbp'" class="fa fblack fa-gbp"></i>
+                                            <span ng-show="booking.ccy.toLowerCase()=='aud'" >AUD</span>
+                                            <span ng-show="booking.ccy.toLowerCase()=='dkk'" >DKK</span>
+                                            <span ng-show="booking.ccy.toLowerCase()=='cad'" >CAD</span>
+                                            <span ng-show="booking.ccy.toLowerCase()=='hkd'" >HKD</span>
+                                            <span ng-show="booking.ccy.toLowerCase()=='jpy'" >JPY</span>
+                                            <span ng-show="booking.ccy.toLowerCase()=='nzd'" >NZD</span>
+                                            <span ng-show="booking.ccy.toLowerCase()=='nok'" >NOK</span>
+                                            <span ng-show="booking.ccy.toLowerCase()=='sgd'" >SGD</span>
+                                            <span ng-show="booking.ccy.toLowerCase()=='sek'" >SEK</span>
+                                            <span ng-show="booking.ccy.toLowerCase()=='chf'" >CHF</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="line-blue"></div>
+                                <div ng-show="booking.option_data.length>0">
+                                    <h6 class="fw">{{'comment.h5addOns' | translate}}</h6>
+                                    <div class="rates-sub" style="background: #4444bf;height: inherit">
+                                     <div style="color: white;display: inline-block;width: 50%;"
+                                           ng-repeat="option in booking.option_data">
+                                         <span style="display: inline-block;width: 70%;white-space:nowrap;overflow: hidden;text-overflow: ellipsis">
+                                             <span style="font-size: 20px;display: inline-block;vertical-align: middle;border-radius: 50%;background: #000;width: 7px;height: 7px"></span>
+                                             <span style="font-size: 20px; margin-left: 2px">{{option.option_name}}</span>
+                                         </span>I 
+                                         <sapn style="font-size: 20px;display: inline-block;vertical-align: super;margin-left: 5px">{{option.count}}</sapn>
+                                     </div>
+                                    </div>
+                                    <div class="line-blue"></div>
+                                </div>
+
+                                <h6 class="fw">{{'comment.h5driver' | translate}}</h6>
+                                <div class="rates-sub" style="background: #4444bf">
+                                    <div ng-if="booking.driver_data.avatar_url == ''" class="rates-sub-img pull-left"
+                                         style="background:#fff url(img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: cover"></div>
+                                    <div ng-if="booking.driver_data.avatar_url != ''" class="rates-sub-img pull-left"
+                                         style="background:#fff url({{booking.driver_data.avatar_url}}) no-repeat 50% 50%;background-size: cover"></div>
+                                    <div class="pull-left mg-l-s" style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 75%">
+                                        <span class="fw"><b>{{booking.driver_data.first_name}} {{booking.driver_data.last_name}}</b></span></span>
+                                        <br/>
+                                        <span class="fw2" ng-hide="booking.showState==1">{{booking.driver_data.license_number}}</span>
+                                    </div>
+                                </div>
+                                <h6 class="fw">{{'comment.h5vehicle' | translate}}</h6>
+                                <div class="rates-sub" style="background: #4444bf">
+                                    <div ng-if="booking.car_data.img == ''" class="rates-sub-img pull-left"
+                                         style="background:#fff url(img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: contain"></div>
+                                    <div ng-if="booking.car_data.img != ''" class="rates-sub-img pull-left"
+                                         style="background:#fff url({{booking.car_data.img}}) no-repeat 50% 50%;background-size: contain"></div>
+                                    <div class="pull-left mg-l-s" style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 75%">
+                                        <span class="fw"><b>{{booking.car_data.model}}</b></span> <span
+                                            class="fblack"><b>{{booking.car_data.brand}}</b></span>
+                                        <br/>
+                                        <span class="fw2" ng-hide="booking.showState==1">{{booking.car_data.license_plate}}</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-call">
+                            <a href="tel:{{booking.c_mobile}}">
+                                <button class="btn btn-line2">{{'home.h5call_client' | translate}}</button>
+                            </a>
+                            <a href="tel:{{booking.driver_data.mobile}}">
+                                <button class="btn btn-line2" ng-show="booking.showState==1">{{'home.h5call_company' | translate}}</button>
+                                <button class="btn btn-line2" ng-show="booking.showState!=1">{{'home.h5call_company' | translate}}</button>
+                            </a>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="home-today fw f-w-300 dopoint" ng-click="showHomePanel()" style="z-index: 1000"><span>{{'comment.h5today' | translate}}</span><i
+                class="fa fa-chevron-down pull-right"></i></div>
+        <div class="navbar-collapse home-map" style="z-index: 990;">
+            <div id="carMap"></div>
+        </div>
+        <div class="cl"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.home-panel').css('height', ($(window).height() - 50));
+    });
+</script>
+<google-analytics analytics-page='/home.html'></google-analytics>

@@ -1,0 +1,83 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4 style="font-size: 30px">{{'mail_chimp_pop.h5Edit_Mail_Chimp' | translate}}</h4>
+    <div class="form-group">
+        <input ng-disabled="mailState==0" class="myinput" ng-model="mailChimp.outer_key" style="margin: 12px 12px 0"
+               type="text" placeholder="{{'mail_chimp_pop.h5Mail_Chimp_KEY' | translate}}"/>
+        <p>{{tipsMsg}}</p>
+        <div style="margin: 0 12px 12px" ng-show="mailState!=0">
+            <div class="mg-t-s f-s fb dopoint pull-left" ng-click="reset()">
+                {{'mail_chimp_pop.h5Reset' | translate}}
+            </div>
+            <div class="mg-t-s f-s fb dopoint pull-right" ng-click="reloadGroup()">
+                {{'mail_chimp_pop.h5Reload' | translate}}
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+
+    <div ng-show="groupSetting">
+
+            <div ng-repeat="mailChimpGroup in mailChimpGroupList" style="background: #3b76c9;border-radius: 10px;padding: 12px;margin-top: 10px">
+                <div ng-show="$index==0" class="pull-left mailChamp-g-tittle">{{'mail_chimp_pop.h5Registered_Clients' | translate}}</div>
+                <div ng-show="$index==1" class="pull-left mailChamp-g-tittle">{{'mail_chimp_pop.h5Paying_Clients' | translate}}</div>
+                <div ng-show="$index==2" class="pull-left mailChamp-g-tittle">{{'mail_chimp_pop.h5VIP_Clients' | translate}}</div>
+                <div class="form-group rates-half pull-right">
+                    <select ng-disabled="mailState==0" class="rates-half-input" style="width: 100%" ng-model="mailChimpGroup.outer_id"
+                            ng-options="item.id as item.name for item in mailChimpList">
+                        <option value="" disabled selected>- {{'mail_chimp_pop.h5Select_List' | translate}} -
+                        </option>
+                    </select>
+                </div>
+                <div style="clear: both"></div>
+                <div ng-show="$index==2" class="rates-option" style="width: 95%;margin: 15px auto auto">
+                    <div>
+                <span style="float: left;margin: 0" ng-click="clickGropeWay(2)" class="dopoint">
+                    <i style="line-height: 40px" ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[mailChimpGroup.type == 2]"></i>
+                <span class="mailChamp-input-t">{{'mail_chimp_pop.h5spends_over' | translate}} <span style="color: black">{{unitconversion=='en'?'$':'€'}}</span></span>
+                </span>
+                        <input class="rates-half-input mailChamp-input" ng-disabled="mailState==0" placeholder="1000" ng-model="vipTypeValue.vipCost" type="number">
+                        <div style="clear: both"></div>
+                    </div>
+                    <div>
+                <span style="float: left;margin: 0" ng-click="clickGropeWay(1)" class="dopoint">
+                     <i style="line-height: 40px"  ng-class="{true:'fa fa-dot-circle-o',false:'fa fa-circle-o'}[mailChimpGroup.type == 1]"></i>
+                    <span class="mailChamp-input-t">{{'mail_chimp_pop.h5completes_over' | translate}}</span>
+                </span>
+                        <input class="rates-half-input mailChamp-input" ng-disabled="mailState==0" placeholder="7" ng-model="vipTypeValue.vipRides" type="number">
+                        <span class="mailChamp-input-t">{{'mail_chimp_pop.h5rides' | translate}}</span>
+                        <div style="clear: both"></div>
+                    </div>
+                </div>
+            </div>
+        <div ng-show="mailState==0" style="color: #ff4d00;text-align: center;margin-top: 10px">{{'mail_chimp_pop.jsSynchronizing' | translate}}</div>
+
+        <div ng-class="{true:'lang-mailchimp-lb',false:''}[langStyle=='fr']" ng-show="mailState!=0&&isAddGroup<1" class="row center-block area-bot book-detail-button"
+             style="width: 55%;float: left;margin: 0 0 0 5px">
+            <h6 ng-class="{true:'lang-mailchimp-lb-fs',false:'unlang-mailchimp-lb-fs'}[langStyle=='fr']" class="fb f-s text-uline dopoint mailsetup-exit-button"
+                ng-click="addGroupClick()">{{'mail_chimp_pop.h5Setup_email_list' | translate}}</h6>
+        </div>
+
+        <div ng-class="{true:'lang-mailchimp-lb',false:''}[langStyle=='fr']" ng-show="mailState!=0&&isAddGroup>=1" class="row center-block area-bot book-detail-button"
+             style="width: 55%;float: left;margin: 0 0 0 5px">
+            <h6 ng-class="{true:'lang-mailchimp-lb-fs',false:'unlang-mailchimp-lb-fs'}[langStyle=='fr']" class="fb f-s text-uline dopoint mailsetup-exit-button"
+                ng-click="removeGroup()">{{'mail_chimp_pop.h5Exit_email_list' | translate}}</h6>
+        </div>
+
+        <button ng-class="{true:'lang-mailchimp-rb',false:''}[langStyle=='fr']" ng-show="mailState!=0&&mailState!=1" type="submit" class="btn-blue btn mg-t-xl" style="float: right;margin-top: 27px"
+                ng-click="updateMailChimp(1)">
+            <span>{{'comment.h5SAVE' | translate}}</span>
+        </button>
+        <button ng-class="{true:'lang-mailchimp-rb',false:''}[langStyle=='fr']" ng-show="mailState==1" type="submit" class="btn-blue btn mg-t-xl" style="float: right;margin-top: 27px"
+                ng-click="updateMailChimp(2)">
+            <span>{{'comment.h5SAVE' | translate}}</span>
+        </button>
+        <!--<button ng-show="mailState==1" type="submit" class="btn-blue btn mg-t-xl" style="float: right;margin-top: 27px"-->
+                <!--ng-click="deleteMailChimp()">-->
+            <!--<span>{{'comment.h5SAVE' | translate}}</span>-->
+        <!--</button>-->
+        <div style="clear: both"></div>
+
+    </div>
+</div>
+<google-analytics analytics-page='/mail-chimp-pop.html'></google-analytics>

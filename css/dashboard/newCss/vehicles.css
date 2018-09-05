@@ -1,0 +1,922 @@
+.fb2 {
+    color: #8787cf;
+}
+
+.fw2 {
+    color: #d7d7e8;
+}
+
+.text-uline {
+    text-decoration: underline;
+}
+
+.mg-l-s {
+    margin-left: 10px;
+}
+
+.mg-l-m {
+    margin-left: 20px;
+}
+
+.mg-l-l {
+    margin-left: 30px;
+}
+
+@media screen and (max-width: 767px) {
+    /*小于767 mobile */
+
+    .f-s {
+        font-size: 14px;
+    }
+
+    .vhcard-area {
+        width: 99%;
+        height: 160px;
+        position: relative;
+        float: left;
+        margin: 7px auto;
+    }
+
+    .vhcard-area .del-panel {
+        width: 99%;
+        height: 160px;
+        background: #373c74;
+        border-radius: 10px;
+        z-index: 990;
+        position: absolute;
+        display: none;
+        padding: 20px;
+        padding-top: 35px;
+        text-align: center;
+        margin: 0 auto;
+
+    }
+
+    .vhcard-area .del-panel div {
+        margin-top: 40px;
+        font-size: 20px;
+    }
+
+    .vhcard-area .del-panel div span {
+        margin: 0 25px;
+    }
+
+    .vhcard-area .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+    .event-del .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+
+    .vhcard-block {
+        cursor: pointer;
+        width: 99%;
+        height: 160px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+        /*padding-top: 35px;*/
+        margin: 0 auto;
+    }
+
+    .vhhead {
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        background: #222 url(../../../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+        margin-right: 10px;
+
+    }
+
+    .vhtime {
+        width: 100%;
+        left: 0;
+        top: 0;
+        height: 30px;
+        line-height: 30px;
+        background: #3b76c9;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .vhname {
+        font-size: 20px
+    }
+
+    .vhpass {
+        width: 50%;
+        float: left;;
+        margin-top: 5px;
+        font-size: 15px
+    }
+
+    .vhbags {
+        float: right;
+        width: 40%;
+        margin-top: 5px;
+        text-align: right;
+        font-size: 15px;
+    }
+
+    .vhcard-line {
+        border-bottom: #36378f solid 1px;
+        height: 10px;
+    }
+
+    .card-more {
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 10px;
+        right: 2px;
+        z-index: 980;
+    }
+
+    .card-more i {
+        color: #36378f;
+    }
+
+    .searchcard-more {
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 10px;
+        right: 2px;
+        z-index: 980;
+    }
+
+    .searchcard-more i {
+        color: #36378f;
+    }
+
+    .eventcard-more {
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 10px;
+        right: 2px;
+        z-index: 980;
+    }
+
+    .eventcard-more i {
+        color: #36378f;
+    }
+
+    .card-del {
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 18px;
+        position: absolute;
+        top: 10px;
+        right: 26px;
+        display: none;
+        z-index: 980;
+    }
+
+    .vehicle-photo {
+        width: 120px;
+        height: 80px;
+        margin: 10px auto
+    }
+
+    .vehicle-photo .refresh {
+        top: 5px;
+        left: 125px;
+    }
+
+    .vehicle-photo .vehicle-photo-sm {
+        width: 50px;
+        height: 50px;
+        border: #666 solid 1px;
+        border-radius: 100%;
+        top: 35px;
+        left: 110px;
+        line-height: 50px;
+    }
+    .vehicle-photo .vehicle-photo-sm i{
+        margin-left: 18px;
+    }
+
+
+    .c-block2 {
+
+        margin: 5px;
+    }
+
+    .c-block2 h6 {
+        font-size: 26px;
+        font-weight: 300;
+        margin: 0;
+        margin-top: 15px;
+    }
+
+    .myinput2 {
+        width: 98%;
+        height: 30px;
+        border: none;
+        border-bottom: #ff4d00 1px solid;
+        padding: 4px;
+        color: #fff;
+        outline: none;
+        font-size: 16px;
+        font-weight: 300;
+        text-indent: 10px;
+        margin: 2px;
+        border-radius: 0;
+        -webkit-appearance: none;
+        background: transparent;
+    }
+    .myinput3 {
+        width: 98%;
+        /*height: 30px;*/
+        border: none;
+        border-bottom: #ff4d00 1px solid;
+        padding: 4px;
+        color: #fff;
+        outline: none;
+        font-size: 16px;
+        font-weight: 300;
+        text-indent: 10px;
+        margin: 2px;
+        border-radius: 0;
+        -webkit-appearance: none;
+        background: transparent;
+    }
+    .myinput2-map{
+        width:88%;
+    }
+
+    .search-block {
+        float: none;
+        margin-bottom:0;padding-top: 0px;
+    }
+
+    .vehicle-select {
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+
+
+    .event-del{
+
+    }
+
+    .event-del .del-panel {
+        width: 100%;
+        height: 100%;
+        background: #373c74;
+        border-radius: 10px;
+        z-index: 990;
+        position: absolute;
+        display: none;
+        padding: 25px;
+        padding-top: 35px;
+        text-align: center;
+
+    }
+
+    .event-del .del-panel div {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .event-del .del-panel div span {
+        font-size: 15px;
+    }
+
+    .vhcard-area .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+    .event-del .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    /*大于768小于991  portable */
+    .vhcard-area {
+        width: 350px;
+        height: 160px;
+        position: relative;
+        float: left;
+        margin: 7px;
+    }
+
+    .vhcard-area .del-panel {
+        width: 100%;
+        height: 160px;
+        background: #373c74;
+        border-radius: 10px;
+        z-index: 990;
+        position: absolute;
+        display: none;
+        padding: 25px;
+        padding-top: 35px;
+        text-align: center;
+
+    }
+
+    .vhcard-area .del-panel div {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .vhcard-area .del-panel div span {
+        margin: 0 25px;
+    }
+
+    .vhcard-area .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+
+    .event-del .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+
+    .vhcard-block {
+        cursor: pointer;
+        width: 350px;
+        height: 160px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+        /*padding-top: 35px;*/
+    }
+
+    .vhhead {
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        background: #222 url(../../../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+        margin-right: 10px;
+
+    }
+
+    .vhtime {
+        width: 100%;
+        left: 0;
+        top: 0;
+        height: 30px;
+        line-height: 30px;
+        background: #3b76c9;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .vhname {
+        font-size: 20px
+    }
+
+    .vhpass {
+        width: 50%;
+        float: left;;
+        margin-top: 5px;
+        font-size: 15px
+    }
+
+    .vhbags {
+        float: right;
+        width: 40%;
+        margin-top: 5px;
+        text-align: right;
+        font-size: 15px;
+    }
+
+    .vhcard-line {
+        border-bottom: #36378f solid 1px;
+        height: 10px;
+    }
+
+    .card-more {
+        width: 16px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        z-index: 980;
+    }
+
+    .card-more i {
+        color: #36378f;
+    }
+
+    .searchcard-more {
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 10px;
+        right: 2px;
+        z-index: 980;
+    }
+
+    .searchcard-more i {
+        color: #36378f;
+    }
+
+    .eventcard-more {
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 10px;
+        right: 2px;
+        z-index: 980;
+    }
+
+    .eventcard-more i {
+        color: #36378f;
+    }
+
+    .card-del {
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 18px;
+        position: absolute;
+        top: 10px;
+        right: 26px;
+        display: none;
+        z-index: 980;
+    }
+
+    .vehicle-photo {
+        width: 120px;
+        height: 80px;
+        margin: 10px auto
+    }
+
+    .vehicle-photo .refresh {
+        top: 5px;
+        left: 125px;
+    }
+
+    .vehicle-photo .vehicle-photo-sm {
+        width: 60px;
+        height: 60px;
+        border: #666 solid 1px;
+        border-radius: 100%;
+        top: 42px;
+        left: 125px;
+        line-height: 30px;
+    }
+    .vehicle-photo .vehicle-photo-sm i{
+        margin-left: 24px;
+    }
+
+    .c-block2 {
+
+        margin: 5px;
+    }
+
+    .c-block2 h6 {
+        font-size: 26px;
+        font-weight: 300;
+        margin: 0;
+        margin-top: 15px;
+    }
+
+    .myinput2 {
+        width: 98%;
+        height: 30px;
+        border: none;
+        border-bottom: #ff4d00 1px solid;
+        padding: 4px;
+        color: #fff;
+        outline: none;
+        font-size: 16px;
+        font-weight: 300;
+        text-indent: 10px;
+        margin: 2px;
+        border-radius: 0;
+        -webkit-appearance: none;
+        background: transparent;
+    }
+    .myinput3 {
+        width: 98%;
+        /*height: 30px;*/
+        border: none;
+        border-bottom: #ff4d00 1px solid;
+        padding: 4px;
+        color: #fff;
+        outline: none;
+        font-size: 16px;
+        font-weight: 300;
+        text-indent: 10px;
+        margin: 2px;
+        border-radius: 0;
+        -webkit-appearance: none;
+        background: transparent;
+    }
+    .myinput2-map{
+        width:88%;
+    }
+
+    .search-block {
+        float: left;
+        margin-bottom:0;padding-top: 10px;
+    }
+
+    .vehicle-select {
+        margin-left: 280px;
+        padding-top: 30px;
+    }
+
+
+    .event-del{
+
+    }
+
+    .event-del .del-panel {
+        width: 100%;
+        height: 100%;
+        background: #373c74;
+        border-radius: 10px;
+        z-index: 990;
+        position: absolute;
+        display: none;
+        padding: 25px;
+        padding-top: 35px;
+        text-align: center;
+
+    }
+
+    .event-del .del-panel div {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .event-del .del-panel div span {
+        font-size: 15px;
+    }
+
+    .vhcard-area .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+    .event-del .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    /*大于992  pc */
+    .vhcard-area {
+        width: 350px;
+        height: 160px;
+        position: relative;
+        float: left;
+        margin: 7px;
+    }
+
+    .vhcard-area .del-panel {
+        width: 100%;
+        height: 160px;
+        background: #373c74;
+        border-radius: 10px;
+        z-index: 990;
+        position: absolute;
+        display: none;
+        padding: 25px;
+        padding-top: 35px;
+        text-align: center;
+
+    }
+
+    .vhcard-area .del-panel div {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .vhcard-area .del-panel div span {
+        margin: 0 25px;
+    }
+
+    .vhcard-area .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+    .event-del .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+    .vhcard-block {
+        cursor: pointer;
+        width: 350px;
+        height: 160px;
+        background: #4444bf;
+        border-radius: 10px;
+        color: #a7bbde;
+        padding: 15px;
+        /*padding-top: 35px;*/
+    }
+
+    .vhhead {
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        background: #222 url(../../../img/uhead.jpg) no-repeat 50% 50%;
+        background-size: contain;
+        margin-right: 10px;
+
+    }
+
+    .vhtime {
+        width: 100%;
+        left: 0;
+        top: 0;
+        height: 30px;
+        line-height: 30px;
+        background: #3b76c9;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .vhname {
+        font-size: 20px
+    }
+
+    .vhpass {
+        width: 50%;
+        float: left;;
+        margin-top: 5px;
+        font-size: 15px
+    }
+
+    .vhbags {
+        float: right;
+        width: 45%;
+        margin-top: 5px;
+        text-align: right;
+        font-size: 15px;
+    }
+
+    .vhcard-line {
+        border-bottom: #36378f solid 1px;
+        height: 10px;
+    }
+
+    .card-more {
+        width: 16px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        z-index: 980;
+    }
+
+    .card-more i {
+        color: #36378f;
+    }
+
+    .searchcard-more {
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 10px;
+        right: 2px;
+        z-index: 980;
+    }
+
+    .searchcard-more i {
+        color: #36378f;
+    }
+
+    .eventcard-more {
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 19px;
+        position: absolute;
+        top: 10px;
+        right: 2px;
+        z-index: 980;
+    }
+
+    .eventcard-more i {
+        color: #36378f;
+    }
+
+    .card-del {
+        width: 30px;
+        height: 20px;
+        text-align: center;
+        font-size: 18px;
+        position: absolute;
+        top: 10px;
+        right: 26px;
+        display: none;
+        z-index: 980;
+    }
+
+    .vehicle-photo {
+        width: 120px;
+        height: 80px;
+        margin: 10px auto
+    }
+
+    .vehicle-photo .refresh {
+        top: 5px;
+        left: 125px;
+    }
+
+    .vehicle-photo .vehicle-photo-sm {
+        width: 60px;
+        height: 60px;
+        border: #666 solid 1px;
+        border-radius: 100%;
+        top: 42px;
+        left: 125px;
+        line-height: 60px;
+    }
+    .vehicle-photo .vehicle-photo-sm i{
+        margin-left: 24px;
+    }
+
+    .c-block2 {
+
+        margin: 5px;
+    }
+
+    .c-block2 h6 {
+        font-size: 26px;
+        font-weight: 300;
+        margin: 0;
+        margin-top: 15px;
+    }
+
+    .myinput2 {
+        width: 98%;
+        height: 30px;
+        border: none;
+        border-bottom: #ff4d00 1px solid;
+        padding: 4px;
+        color: #fff;
+        outline: none;
+        font-size: 16px;
+        font-weight: 300;
+        text-indent: 10px;
+        margin: 2px;
+        border-radius: 0;
+        -webkit-appearance: none;
+        background: transparent;
+    }
+    .myinput3 {
+        width: 98%;
+        /*height: 30px;*/
+        border: none;
+        border-bottom: #ff4d00 1px solid;
+        padding: 4px;
+        color: #fff;
+        outline: none;
+        font-size: 16px;
+        font-weight: 300;
+        text-indent: 10px;
+        margin: 2px;
+        border-radius: 0;
+        -webkit-appearance: none;
+        background: transparent;
+    }
+    .myinput2-map{
+        width:88%;
+    }
+
+    .search-block {
+        float: left;
+        margin-bottom:0;padding-top: 10px;
+    }
+
+    .vehicle-select {
+        margin-left: 280px;
+        padding-top: 50px;
+    }
+
+    .event-del{
+
+    }
+
+    .event-del .del-panel {
+        width: 100%;
+        height: 100%;
+        background: #373c74;
+        border-radius: 10px;
+        z-index: 990;
+        position: absolute;
+        display: none;
+        padding: 25px;
+        padding-top: 35px;
+        text-align: center;
+
+    }
+
+    .event-del .del-panel div {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .event-del .del-panel div span {
+        font-size: 15px;
+    }
+
+    .vhcard-area .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+    .event-del .del-panel .del-info {
+        font-size: 22px;
+        font-weight: 300;
+    }
+}
+
+.card-event {
+    min-height: 130px;
+    width: 100%;
+    background: #4444bf;
+    border-radius: 10px;
+    color: #a4a4d8;
+    padding: 10px;
+}
+
+.myselect {
+    text-indent: 5px;
+    height: 40px;
+    background:url(../../../img/dashboard/arrow-down.png) no-repeat scroll right center transparent;
+    background-color: #171821;
+}
+
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    color: #f2f2f2;
+    text-shadow: none;
+    border: none;
+    width: 100px;
+    outline: none;
+    box-shadow: none;
+
+}
+
+.bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:active {
+    background: #000;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.btn-default, .btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+    background: #000;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.proselect {
+    text-indent: 5px;
+    height: 40px;
+    background:url(../../../img/dashboard/arrow-down.png) no-repeat scroll right center transparent;
+    background-color: #3b76c9;
+    cursor: pointer;
+}
+
+.proselect option{
+    background: #2f2f2f;
+}
+
+.datepicker-days{
+    margin-top:-5px;
+}
+
+.fr-card-event-height {
+    min-height: 160px !important;
+}
+
+@media screen and (max-width: 374px){
+.delete-event-title{
+    font-size: 15px !important;
+}
+}

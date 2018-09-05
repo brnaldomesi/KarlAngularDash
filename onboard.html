@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" ng-app="OnBoard" class="mar-left">
+<head>
+    <script>
+        (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;
+s.src='https://widget.intercom.io/widget/e5bs52ge';
+var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
+
+    </script>
+    <title>Join Karl</title>
+    <!--正式-->
+    <!--<base href="/">-->
+    <!--<base href="/dashboard/">-->
+    <!--本地或者测试-->
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="img/dashboard/favicon.ico" rel="shortcut icon"/>
+    <link href="libs/angular-loading-bar/build/loading-bar.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="libs/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/angularjs-slider/dist/rzslider.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/ladda/dist/ladda-themeless.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/pnotify/dist/pnotify.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/GoogleNexusWebsiteMenu/css/component.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/GoogleNexusWebsiteMenu/css/normalize.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/datetimepicker/build/jquery.datetimepicker.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="libs/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="apple-touch-icon" href="img/onboard/apple-touch-icon.png">
+    <link href="css/onboard/bootstrap-theme.css.map" rel="stylesheet" type="text/css"/>
+    <link href="css/onboard/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/onboard/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="css/onboard/bootstrap.css.map" rel="stylesheet" type="text/css"/>
+    <link href="css/onboard/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/onboard/font-awesome.css.map" rel="stylesheet" type="text/css"/>
+    <link href="css/onboard/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/onboard/main.css" rel="stylesheet" type="text/css"/>
+    <link href="css/onboard/onboarding.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900" rel="stylesheet"
+          type="text/css">
+</head>
+<body style="background: #000;">
+<div class="view-container">
+    <div ui-view class="view-frame"></div>
+</div>
+<script>
+    // window.intercomSettings = {
+    //     app_id: 'e5bs52ge'
+    // };
+</script>
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDzfh3T2Ihm5MBWIKHHoSnLG2XzDK0_TY&amp;sensor=true&amp;libraries=places"></script>
+<!--JQuey-->
+<script type="text/javascript" src="libs/jquery/dist/jquery.min.js"></script>
+<!--AngularJS-->
+<script type="text/javascript" src="libs/angular/angular.min.js"></script>
+<!--Bootstrap-->
+<script type="text/javascript" src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<!--Angular-Bootstrap-->
+<script type="text/javascript" src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<!--Validator-->
+<script type="text/javascript" src="libs/bootstrap-validator/dist/validator.min.js"></script>
+<!--ui.router-->
+<script type="text/javascript" src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+<!--Loading-Bar-->
+<script type="text/javascript" src="libs/angular-loading-bar/build/loading-bar.min.js"></script>
+<!--translate-->
+<script type="text/javascript" src="libs/angular-translate/angular-translate.min.js"></script>
+<script type="text/javascript"
+        src="libs/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+<!--SweetAlert&ngSweetAlert-->
+<script type="text/javascript" src="libs/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="libs/ngSweetAlert/SweetAlert.min.js"></script>
+<!--file-upload-->
+<script type="text/javascript" src="libs/ng-file-upload/ng-file-upload-all.min.js"></script>
+<!--string format-->
+<script type="text/javascript" src="libs/strformat/strformat.js"></script>
+<!--Moment&FullCalendar-->
+<script type="text/javascript" src="libs/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="libs/angular-ui-calendar/src/calendar.js"></script>
+<!--<script type="text/javascript" src="libs/fullcalendar/dist/fullcalendar.min.js"></script>-->
+<script type="text/javascript" src="libs/fullcalendar/dist/gcal.js"></script>
+<!--Slider-->
+<script type="text/javascript" src="libs/angularjs-slider/dist/rzslider.min.js"></script>
+<script type="text/javascript" src="libs/spin.js/spin.js"></script>
+<!--Ladda-->
+<script type="text/javascript" src="libs/ladda/dist/ladda.min.js"></script>
+<!--PNotify-->
+<script type="text/javascript" src="libs/pnotify/dist/pnotify.js"></script>
+<!--GMenu-->
+<script type="text/javascript" src="libs/GoogleNexusWebsiteMenu/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="libs/GoogleNexusWebsiteMenu/js/classie.js"></script>
+<script type="text/javascript" src="libs/GoogleNexusWebsiteMenu/js/gnmenu.js"></script>
+<!--ScrollUp-->
+<script type="text/javascript" src="libs/scrollup/dist/jquery.scrollUp.min.js"></script>
+<!--DateTimePicker & DateFormater-->
+<script type="text/javascript" src="libs/date-format/dist/date-format.min.js"></script>
+<script type="text/javascript" src="libs/datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+<!--File-Input-->
+<script type="text/javascript" src="libs/bootstrap-fileinput/js/fileinput.min.js"></script>
+<!--Switch-->
+<script type="text/javascript" src="libs/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+<!--DateFormater-->
+<script type="text/javascript" src="libs/date-format/dist/Format.js"></script>
+<script type="text/javascript" src="libs/date-format/dist/DateFormat.js"></script>
+<script type="text/javascript" src="libs/date-format/dist/SimpleDateFormat.js"></script>
+<!-- App -->
+<script src="js/utils.js"></script>
+<script src="js/version.js"></script>
+<script src="js/api-config.js"></script>
+<script src="js/api-code.js"></script>
+<script src="js/common-services.js"></script>
+<script src="js/common-controller.js"></script>
+<script src="js/common-filters.js"></script>
+<script src="js/onboard/constants.js"></script>
+<script src="js/onboard/config.js"></script>
+<script src="js/onboard/controllers.js"></script>
+<script src="js/onboard/services.js"></script>
+<script src="js/onboard/app.js"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript" src="libs/angular-stripe/release/angular-stripe.js"></script>
+<script>
+    $(function () {
+        $(".sa-info").css("opacity", "0");
+    });
+</script>
+</body>
+</html>

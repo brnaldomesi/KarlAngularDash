@@ -1,0 +1,20 @@
+<div class="app app-header-fixed app-aside-folded">
+    <karl-header-menu active-index="25"></karl-header-menu>
+    <div class="title-block navbar-collapse">
+        <div style="color: white;font-size: 18px;margin: 70px 0 0 20px">
+            <p>{{'board_home.h5first_name' | translate}} : {{salesAssistantInfo.first_name}}</p>
+            <p>{{'board_home.h5last_name' | translate}} : {{salesAssistantInfo.last_name}}</p>
+            <p>{{'board_home.h5email' | translate}} : {{salesAssistantInfo.email}}</p>
+            <p>{{'comment.h5phone' | translate}} : {{salesAssistantInfo.mobile}}</p>
+            <p>{{'salesAssistantHome.h5assistantID' | translate}} : {{salesAssistantInfo.asst.asst_id}}</p>
+            <p>{{'salesAssistantHome.h5associateWith' | translate}} : </p>
+            <div style="max-width: 650px">
+                <p class="assis-saleslist" ng-repeat="salesRep in salesAssistantInfo.asst.sales">
+                    - {{salesRep.first_name}} {{salesRep.last_name}} #{{salesRep.sale_id}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<google-analytics analytics-page='/sales-assistant-home.html'></google-analytics>

@@ -1,0 +1,30 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <h4>{{'calendar_selectdrivers.h5select_A_Driver'|translate}}</h4>
+    <br/>
+    <form role="form"
+          id="selectDriverForm"
+          name="selectDriverForm"
+          data-toggle="validator"
+          novalidate>
+        <div class=" rates-sub-cont mg-t-xl">
+            <ul>
+                <li ng-repeat="driver in drivers">
+                    <input style="float: left" ng-model="input.selectedIndex" type="radio" name="radio" ng-value="$index" class="chbox dopoint" required>
+                    <span class="fw" style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 43%">
+                        <b>{{driver.first_name}} {{driver.last_name}} </b></span>
+                    <span class="fblack" style="float: left;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 43%" ng-show="!driver.an_offer || driver.an_offer == 0">
+                        <b>{{driver.license_number}}</b></span>
+                <div style="clear: both"></div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row mg-t-xl center-block area-bot">
+            <button type="submit" class="btn-blue btn center-block" ng-click="onSaveButtonClick(selectDriverForm.$valid)">
+                <span>OK</span>
+            </button>
+        </div>
+    </form>
+</div>
+<google-analytics analytics-page='/book-selectdriver.html'></google-analytics>

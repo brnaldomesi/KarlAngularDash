@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" ng-app="Flow">
+<head>
+    <title>Booking Flow</title>
+    <meta charset="UTF-8"/>
+    <!--正式-->
+    <!--<base href="/">-->
+    <!--本地或者测试-->
+    <!--<base href="/dashboard/">-->
+    <meta name="viewport" content="user-scalable=no,initial-scale=1">
+    <link href="img/dashboard/favicon.ico" rel="shortcut icon"/>
+    <link href="libs/angular-loading-bar/build/loading-bar.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="libs/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/angularjs-slider/dist/rzslider.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/ladda/dist/ladda-themeless.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/pnotify/dist/pnotify.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/GoogleNexusWebsiteMenu/css/component.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/GoogleNexusWebsiteMenu/css/normalize.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/datetimepicker/build/jquery.datetimepicker.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/flow/newCss/bootstrap-switch.css" type="text/css"/>
+    <link rel="stylesheet" href="css/flow/newCss/font.css">
+    <link rel="stylesheet" href="css/flow/newCss/font-awesome.min.css">
+    <link rel="stylesheet" href="css/flow/newCss/jquery.datetimepicker.css">
+    <link href="css/flow/app.css" rel="stylesheet" type="text/css"/>
+    <link href="css/flow/new.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="css/flow/newCss/profile.css">
+    <link rel="stylesheet" href="css/flow/newCss/easybook.css">
+    <link rel="stylesheet" href="css/flow/newCss/app.css">
+    <link rel="stylesheet" href="css/flow/newCss/rates.css">
+    <link rel="stylesheet" href="css/flow/newCss/widget.css">
+    <!---=============滑动查看swiper插件引包==================-->
+    <link rel="stylesheet" href="libs/Swiper-master/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="css/flow/easybook.css">
+    <link rel="stylesheet" href="css/flow/onboarding.css">
+    <link rel="stylesheet" href="css/flow/newCss/select-payment.css">
+    <link rel="stylesheet" href="css/flow/newCss/add-payment.css">
+    <link rel="stylesheet" href="css/flow/newCss/iframe-flow.css">
+    <link rel="stylesheet" href="libs/bootstrap-3-datepicker/css/bootstrap-datetimepicker.min.css"/>
+    <script src="libs/mixpanel/mixpanel.js"></script>
+</head>
+<body>
+<div class="view-container">
+    <div ui-view class="view-frame"></div>
+</div>
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDzfh3T2Ihm5MBWIKHHoSnLG2XzDK0_TY&amp;sensor=true&amp;libraries=places"></script>
+<!--JQuey-->
+<script type="text/javascript" src="libs/jquery/dist/jquery.min.js"></script>
+<!--AngularJS-->
+<script type="text/javascript" src="libs/angular/angular.min.js"></script>
+<!--Bootstrap-->
+<script type="text/javascript" src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<!--Swiper-->
+<script src="libs/Swiper-master/dist/js/swiper.js"></script>
+<!--Switch-->
+<script src="libs/new/bootstrap-switch.min.js"></script>
+<!--Angular-Bootstrap-->
+<script type="text/javascript" src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<!--translate-->
+<script type="text/javascript" src="libs/angular-translate/angular-translate.min.js"></script>
+<script type="text/javascript"
+        src="libs/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+<!--Validator-->
+<script type="text/javascript" src="libs/bootstrap-validator/dist/validator.min.js"></script>
+<!--ui.router-->
+<script type="text/javascript" src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+<!--Loading-Bar-->
+<script type="text/javascript" src="libs/angular-loading-bar/build/loading-bar.min.js"></script>
+<!--SweetAlert&ngSweetAlert-->
+<script type="text/javascript" src="libs/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="libs/ngSweetAlert/SweetAlert.min.js"></script>
+<!--file-upload-->
+<script type="text/javascript" src="libs/ng-file-upload/ng-file-upload-all.min.js"></script>
+<!--string format-->
+<script type="text/javascript" src="libs/strformat/strformat.js"></script>
+<!--Moment&FullCalendar-->
+<script type="text/javascript" src="libs/moment/min/moment.min.js"></script>
+<script src="libs/moment/min/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="libs/angular-ui-calendar/src/calendar.js"></script>
+<!--<script type="text/javascript" src="libs/fullcalendar/dist/fullcalendar.min.js"></script>-->
+<!--fullcalendar千万不能用min.js,断昶改过源码的-->
+<script type="text/javascript" src="libs/fullcalendar/dist/fullcalendar.js"></script>
+<script type="text/javascript" src="libs/fullcalendar/dist/gcal.js"></script>
+<!--Slider-->
+<script type="text/javascript" src="libs/angularjs-slider/dist/rzslider.min.js"></script>
+<script type="text/javascript" src="libs/spin.js/spin.js"></script>
+<!--Ladda-->
+<script type="text/javascript" src="libs/ladda/dist/ladda.min.js"></script>
+<!--PNotify-->
+<script type="text/javascript" src="libs/pnotify/dist/pnotify.js"></script>
+<!--GMenu-->
+<script type="text/javascript" src="libs/GoogleNexusWebsiteMenu/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="libs/GoogleNexusWebsiteMenu/js/classie.js"></script>
+<script type="text/javascript" src="libs/GoogleNexusWebsiteMenu/js/gnmenu.js"></script>
+<!--ScrollUp-->
+<script type="text/javascript" src="libs/scrollup/dist/jquery.scrollUp.min.js"></script>
+<!--DateTimePicker & DateFormater-->
+<script type="text/javascript" src="libs/date-format/dist/date-format.min.js"></script>
+<script type="text/javascript" src="libs/datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+<!--<script src="libs/new/jquery.datetimepicker.full.js"></script>-->
+<script src="libs/new/jquery.datetimepicker.full.js"></script>
+<!--File-Input-->
+<script type="text/javascript" src="libs/bootstrap-fileinput/js/fileinput.min.js"></script>
+<!--DateFormater-->
+<script type="text/javascript" src="libs/date-format/dist/Format.js"></script>
+<script type="text/javascript" src="libs/date-format/dist/DateFormat.js"></script>
+<script type="text/javascript" src="libs/date-format/dist/SimpleDateFormat.js"></script>
+<script type="text/javascript" src="libs/bootstrap-3-datepicker/js/bootstrap-datetimepicker.min.js"></script>
+<!-- App -->
+<script src="js/utils.js"></script>
+<script src="js/version.js"></script>
+<script src="js/api-config.js"></script>
+<script src="js/api-code.js"></script>
+<script src="js/common-services.js"></script>
+<script src="js/common-controller.js"></script>
+<script src="js/common-filters.js"></script>
+<script src="js/iframe/flow/constants.js"></script>
+<script src="js/iframe/flow/controllers.js"></script>
+<script src="js/iframe/flow/services.js"></script>
+<script src="js/iframe/flow/directives.js"></script>
+<script src="js/iframe/flow/app.js"></script>
+</body>
+</html>

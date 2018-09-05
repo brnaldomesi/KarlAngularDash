@@ -1,0 +1,81 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <div>
+        <span class="fgray main-title-text-l">{{'ClientAdd.h5add_client' | translate}}</span>
+    </div>
+    <div class="chead center-block mg-t-l"
+         style="background:#fff url(img/dashboard/default-avatar.png) no-repeat 50% 50%;background-size: cover"></div>
+    <div ng-show="showPaymentCustomerInput" style="align-content: center">
+        <div class="row check-act" style="cursor: pointer" ng-click="addPaymentExistCheck = !addPaymentExistCheck">
+            <i ng-class="{false:'fa fa-square-o fred',true:'fa fa-check-square-o fred'}[addPaymentExistCheck]"
+            ></i>
+            <span class="grey">{{tipsMsg}}</span>
+        </div>
+        <div class="c-block  pos-rlt"
+                   ng-show="addPaymentExistCheck">
+            <input class="myinput" ng-model="paymentExistCustomerId"
+                   type="text" placeholder="{{customerPlaceholder}}"/>
+            <p id="resultColor">{{resultMsg}}</p>
+        </div>
+            <br ng-show="addPaymentExistCheck">
+            <br ng-show="addPaymentExistCheck">
+    </div>
+    <form id="clientForm" name="clientForm"
+          data-toggle="validator" novalidate>
+        <div class="c-block  pos-rlt">
+            <select class="myinput myselect" ng-model="customer.gender"
+                    ng-options="item.value as item.name for item in genders">
+            </select>
+        </div>
+        <div class="form-group">
+            <input ng-model="customer.first_name" class="myinput" type="text" minlength="1" maxlength="50"
+                   placeholder="{{'comment.h5first_name' | translate}}" required/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <input ng-model="customer.last_name" class="myinput" type="text" minlength="1" maxlength="50"
+                   placeholder="{{'comment.h5last_name' | translate}}" required/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <!--KAR-613-->
+        <!--<div class="form-group">-->
+        <!--<input ng-model="customer.password" class="myinput" type="password" minlength="6" maxlength="16"-->
+        <!--placeholder="Password" required/>-->
+        <!--<div class="help-block with-errors"></div>-->
+        <!--</div>-->
+        <div class="form-group">
+            <input ng-model="customer.email" maxlength="100" class="myinput sign-mail" type="email"
+                   placeholder="{{'comment.h5client_email' | translate}}" required/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <input ng-model="customer.mobile"
+                   class="myinput sign-mobile"
+                   type="tel"
+                   ng-change="formatPhone()"
+                   placeholder="{{'comment.h5phone_number' | translate}}"
+                   required/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <h4>{{'comment.h5address' | translate}}</h4>
+        <div class="form-group">
+            <input ng-model="customer.formatted_address"
+                   class="myinput myinput-map"
+                   type="text"
+                   placeholder="{{'comment.h5street_address' | translate}}"
+                   uib-typeahead="place as place.name + ' ' + place.vicinity for place in getLocation($viewValue)"
+                   typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                   typeahead-on-select="onAddressSelect($item, $model, $label, $event)"/>
+            <i class="fa fa-map-marker fb f-m dopoint" ng-click="selectLocationOnMap()"></i>
+            <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+            <div ng-show="noResults" style="text-indent: 15px;color: #ff4d00">
+                <i class="glyphicon glyphicon-remove"></i> {{'comment.h5no_results_found' | translate}}
+            </div>
+        </div>
+        <button type="submit" class="btn-blue btn center-block mg-t-xl"
+                ng-click="onSaveButtonClick(clientForm.$valid)">
+            <span>{{'comment.h5SAVE' | translate}}</span>
+        </button>
+    </form>
+</div>
+<google-analytics analytics-page='/client-add.html'></google-analytics>

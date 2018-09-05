@@ -1,0 +1,118 @@
+<div class="client-detail">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <div>
+        <span class="fgray main-title-text-l">{{'vehicle_add.h5add_vehicle' | translate}}</span>
+    </div>
+    <div class="pos-rlt vehicle-photo">
+        <div class="chead center-block mg-t-l"
+             style="background:#fff url({{bigImageUrl}}) no-repeat 50% 50%;background-size: contain"></div>
+        <div class="pos-abt dopoint refresh" ng-click="onChangeImageType()"
+             title="{{'vehicle_add.h5Change_Avatar' | translate}}"><i class="fa fa-refresh fred f-s"></i></div>
+        <div class="pos-abt dopoint vehicle-photo-sm"
+             ng-if="!smallImageUrl"
+             ngf-pattern="'image/*'"
+             ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+             title="{{'comment.h5Upload_Avatar'|translate}}"
+             ngf-select="uploadImage($file,$event)">
+            <i class="fa fa-plus fb"></i>
+        </div>
+        <div class="pos-abt dopoint vehicle-photo-sm"
+             ng-if="smallImageUrl"
+             ngf-pattern="'image/*'"
+             ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+             ngf-select="uploadImage($file,$event)"
+             title="{{'comment.h5Upload_Avatar'|translate}}"
+             style="background:#fff url({{smallImageUrl}}) no-repeat 50% 50%;background-size: contain"></div>
+    </div>
+
+    <form id="vehicleForm" name="vehicleForm"
+          data-toggle="validator" novalidate>
+        <div class="c-block2  pos-rlt">
+            <h6 class="fw">{{'comment.h5year' | translate}}</h6>
+            <div class="form-group">
+                <input class="myinput2" maxlength="100" ng-model="year" type="text" placeholder="" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <h6 class="fw">{{'vehicle_add.h5vehicle_make' | translate}}</h6>
+            <div class="form-group">
+                <select class="myselect myinput2"
+                        ng-model="selectedCarBrand" ng-change="onCarBrandChange()"
+                        ng-options="item.id as item.name for item in carBrands">
+                    <option value="" disabled selected>- {{'vehicle_add.h5Choose' | translate}}...... -</option>
+                </select>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <h6 class="fw">{{'vehicle_add.h5vehicle_model' | translate}}</h6>
+            <div class="form-group">
+                <select class="myselect myinput2"
+                        ng-model="selectedCarModel"
+                        ng-change="onCarModelChange()"
+                        ng-options="item as item.name for item in carModels">
+                    <option value="" disabled selected>- {{'vehicle_add.h5Choose' | translate}}...... -</option>
+                </select>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <h6 class="fw">{{'vehicle_add.h5vehicle_color' | translate}}</h6>
+            <div class="form-group">
+                <input class="myinput2" maxlength="100" ng-model="color" type="text" placeholder="" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <div class="form-group">
+                <h6 class="fw">{{'vehicle_add.h5preparation_time' | translate}}</h6>
+                <input class="myinput2 addon-main"
+                       type="number"
+                       step="1"
+                       min="0"
+                       ng-model="preTime"
+                       max="3000"
+                       required/>
+                <span class="myinput2 addon-sub">{{'comment.h5minutes' | translate}}</span>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <h6 class="fw">{{'vehicle_add.h5license_plate' | translate}} #</h6>
+            <div class="form-group">
+                <input class="myinput2" maxlength="100" ng-model="licensePlate" type="text" placeholder="" required/>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <h6 class="fw">{{'comment.h5max_passengers' | translate}}</h6>
+            <div class="form-group">
+                <select class="myselect myinput2"
+                        ng-model="selectedMaxPassengers"
+                        ng-options="item for item in maxPassengers">
+                </select>
+            </div>
+        </div>
+        <div class="c-block2  pos-rlt">
+            <h6 class="fw">{{'comment.h5max_bags' | translate}}</h6>
+            <div class="form-group">
+                <select class="myselect myinput2"
+                        ng-model="selectedMaxBags"
+                        ng-options="item for item in maxBags">
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ng-show="false">
+            <karl-routine a4c-bg-color-class="bg-primary"
+                          a4c-is-half-time="false"
+                          a4c-routine-data="{{routineData}}">
+            </karl-routine>
+        </div>
+        <div class="mg-t-xxl">
+            <button type="submit" ng-click="onSubmitButtonClick(vehicleForm.$valid,$event)"
+                    class="btn-blue btn center-block mg-t-xl">
+                <span>{{'comment.h5SAVE' | translate}}</span>
+            </button>
+        </div>
+    </form>
+</div>
+<google-analytics analytics-page='/vehicle-add.html'></google-analytics>

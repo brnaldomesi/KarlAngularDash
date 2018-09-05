@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<center>
+    iframe Example(Dev)<br>
+    <iframe width="540" height="230" src="http://dev.karldash.com/widget.html#/widget?widget_id=2&company_id=1" frameborder="0"
+            seamless="seamless" scrolling="auto"></iframe>
+</center>
+
+<div style="width: 50%;float: left">
+    iframe Example(Tst CompanyId: 1)<br>
+    <iframe width="175" height="400" src="http://localhost:63342/dashboard/widget.html#/widget?widget_id=5&company_id=1" frameborder="0"
+            seamless="seamless" scrolling="auto"></iframe>
+</div>
+
+<div style="width: 50%;float: left">
+    iframe Example white(Tst CompanyId: 1)<br>
+    <iframe width="175" height="400" src="http://localhost:63342/dashboard/widget.html#/widget?widget_id=6&company_id=1" frameborder="0"
+            seamless="seamless" scrolling="auto"></iframe>
+</div>
+
+<center>
+    <div id="karl-iframe-flow" style="display: none;top: 0;position: fixed; background-color: rgba(0,0,0,0.5); z-index:999" onclick="hideFlowIframe()">
+        <iframe id="karl-iframe-widget"  name="karl-iframe-flow" style="border: none;margin-top: 10%" height="80%"
+                width="80%">
+        </iframe>
+        <div onclick="hideFlowIframe()" style="font-size: x-large;border-radius: 50%;background:white;color: #0e0e0e;position: absolute;top: 0;left: 0;width: 35px;height: 35px;cursor: pointer">x</div>
+    </div>
+</center>
+<script>
+    /**
+     * Created by lqh on 2017/3/1.
+     */
+    var displayFlowIframe = function (url) {
+        document.getElementById('karl-iframe-flow').style.display = 'block';
+        //框居中
+//        var winWidth;
+//        if (window.innerWidth) {
+//            winWidth = window.innerWidth;
+//        } else if ((document.body) && (document.body.clientWidth)) {
+//            winWidth = document.body.clientWidth;
+//        }
+//        var widgetWidth = document.getElementById('karl-iframe-flow').offsetWidth;
+//        if (winWidth) {
+//            document.getElementById('karl-iframe-flow').style.left = (winWidth - widgetWidth) / 2 + 'px';
+//        } else {
+//            document.getElementById('karl-iframe-flow').style.left = '0px';
+//        }
+        document.getElementById('karl-iframe-flow').style.height = window.innerHeight+"px";
+        document.getElementById('karl-iframe-flow').style.width = window.innerWidth+"px";
+        document.getElementById("karl-iframe-widget").src = url;
+    };
+
+    var hideFlowIframe = function () {
+        document.getElementById('karl-iframe-flow').style.display = 'none';
+    };
+
+    window.addEventListener('message',function(e){
+        if(e && e.data && e.data.toString().indexOf('displayFlowIframe')==0){
+            var url = e.data.toString().substr('displayFlowIframe'.length+1);
+            displayFlowIframe(url)
+        }
+
+        if(e && e.data && e.data.toString() == ('hideFlowIframe')){
+            hideFlowIframe();
+        }
+    },false);
+</script>
+
+</body>
+</html>

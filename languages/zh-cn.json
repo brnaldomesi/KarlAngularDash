@@ -1,0 +1,19 @@
+{
+  "warning": "警告",
+  "change_pay_warning": "如果修改默认支付方式，目前所存储的全部用户信用卡信息将失效，未完成的订单将无法正常支付，你确认修改吗？",
+  "determine_to_delete": "确认删除？",
+  "delete_customer": "删除前请先确认该乘客没有正在或即将执行的订单，删除该乘客同时也将清除该用户的全部用户信息（支付信息，用户信息等），您确认删除吗？",
+  "delete_passenger_fault": "删除乘客失败",
+  "delete_passenger_success": "删除乘客成功",
+  "passenger_has_booking": "删除失败，乘客有未执行的订单",
+  "vehicle_routine_not_work": "该汽车设置的工作时间为全周休息，这样会导致汽车不会被用于执行订单。确认提交?",
+  "driver_routine_not_work": "You have not created a schedule for this driver. Please go to the Drivers tab and in the Driver details section set their schedule. Do you want to save your current progress?",
+  "driver_car_not_work": "You don't have any vehicles assigned for this driver. Please go to the \"Accessible Vehicles\" section and add vehicles for your driver. Do you want to save your current progress?",
+  "driver_car_not_work_edit": "You don't have any vehicles assigned for this driver. Please go to the VEHICLE tab and add vehicles for your driver. Do you want to save your current progress?",
+  "rate_car_not_work": "Don't forget to finish adding vehicles & assigning drivers to this rate. You can go to \"Select vehicles for this rate\" section and make sure you have added vehicles and drivers. Do you want to save your current progress?",
+  "rate_car_not_work_edit": "Don't forget to finish adding vehicles & assigning drivers to this rate. You can go to VEHICLE tab and make sure you have added vehicles and drivers. Do you want to save your current progress?",
+  "rate_driver_not_work": "Don't forget to finish adding drivers to this rate. You can go to \"Select vehicles for this rate\" section and make sure you have added vehicles and drivers. Do you want to save your current progress?",
+  "rate_driver_not_work_edit": "Don't forget to finish adding drivers to this rate. You can go to VEHICLE tab and make sure you have added vehicles and drivers. Do you want to save your current progress?",
+  "rate_routine_not_work": "Your rate looks good! But you need to set a schedule for it. Go down to the \"Rate Schedule\" section to set it up. Do you want to save your current progress?",
+  "customer_select_mc": "选择分组"
+}

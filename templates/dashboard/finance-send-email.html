@@ -1,0 +1,28 @@
+<div class="client-detail" style="margin-top: 180px;min-height: inherit">
+    <a type="button" class="peyment-close" ng-click="onCancelButtonClick()"><i class="fa fa-close fb"></i></a>
+    <br/>
+    <form id="sendEmails" class="form-horizontal no-margin ng-pristine ng-valid"
+          name="sendEmails" role="form"
+          data-toggle="validator" novalidate>
+        <div class="form-group" style="margin: 0">
+            <input class="myinput sign-mail" style="text-indent: 40px;font-size: 15px;padding: 0" type="email" ng-model="email"
+                   pattern="^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$"
+                   required/>
+            <div class="help-block with-errors" style="margin: 0"></div>
+        </div>
+
+    </form>
+    <button ng-click="submitSendEmail(sendEmails.$valid)"
+            class="btn-blue center-block home-mg2 btn"
+            data-style="expand-right" style="outline: none">
+        <span>{{'finance_send_email.h5Send_Email'|translate}}</span>
+    </button>
+
+    <div style="text-align: center;color: #376bb5;margin-top: 10px">
+        <span ng-click="archiveClick()" style="cursor: pointer">
+            <i ng-class="{false:'fa fa-square-o',true:'fa fa-check-square-o'}[choiceArchive]" aria-hidden="true"></i>
+            {{'finance_send_email.h5Archive_invoice_after_email_sent'|translate}}</span>
+    </div>
+
+</div>
+<google-analytics analytics-page='/finance-send-email.html'></google-analytics>

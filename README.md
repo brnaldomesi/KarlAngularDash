@@ -26,4 +26,4 @@ This project is:
 
 ## Contact
 
-CTO of Inov.tech: heroalur@qq.com
+brnaldomesi1@gmail.com

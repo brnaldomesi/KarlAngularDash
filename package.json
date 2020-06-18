@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "angular": "^1.5.8",
+    "angular": "^1.8.0",
     "bootstrap-switch": "^3.3.2",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",

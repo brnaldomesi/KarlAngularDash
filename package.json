@@ -10,7 +10,7 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-jshint": "^2.0.1",
-    "jshint": "^2.9.2"
+    "jshint": "^2.13.6"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
